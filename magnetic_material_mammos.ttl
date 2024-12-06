@@ -52,6 +52,15 @@ email: wilfried.hortschitz@donau-uni.ac.at
     skos:prefLabel "MagnetocrystallineAnisotropyConstantK2"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The magnetocrystalline constant K2 for tetragonal or hexagonal crystals."@en .
 
+:EMMO_bbedcfff-4d9a-51b6-91bc-2fd16dedd925 a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass ns1:EMMO_0e78a4d4_b4e0_48e7_97d8_e7d41a85a54d ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
+    skos:prefLabel "ExtrinsicMagneticMaterialProperty"@en ;
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Extrinsic magnetic material Properties depend on the microstructure of the specimen."@en .
+
 :EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy"^^rdf:PlainLiteral ;
     rdfs:comment "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K1c(a1²a2²a3²) where Ea is the anisotropy energ density and a1,a2,a3 are the direction cosines of the magnetization"^^rdf:PlainLiteral ;
@@ -63,18 +72,18 @@ email: wilfried.hortschitz@donau-uni.ac.at
 :EMMO_c5ca93ce-ad27-5f4a-95ef-aca0990c6937 a owl:Class ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q11587827"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ;
-            owl:someValuesFrom ns1:EMMO_668fbd5b_6f1b_405c_9c6b_d6067bd0595a ],
-        [ a owl:Restriction ;
             owl:onClass :EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_2c96e798-57dc-5c12-ad10-f3ec261549d3 ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ;
+            owl:someValuesFrom ns1:EMMO_668fbd5b_6f1b_405c_9c6b_d6067bd0595a ],
         ns1:EMMO_4207e895_8b83_4318_996a_72cfb32acd94 ;
     skos:prefLabel "MagneticMaterial"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Magnetic material."@en .
@@ -95,7 +104,7 @@ email: wilfried.hortschitz@donau-uni.ac.at
     rdfs:subClassOf ns1:EMMO_b23e7251_a488_4732_8268_027ad76d7e37 ;
     skos:altLabel "Ms"^^rdf:PlainLiteral ;
     skos:prefLabel "SpontaneousMagnetization"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Spontaneous magnetization: The spontaneous magnetization of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Ms exists within a domain of a ferromagnet."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The spontaneous magnetization, Ms, of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Ms exists within a domain of a ferromagnet."@en .
 
 :EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395 a owl:Class ;
     rdfs:subClassOf ns1:EMMO_f1a51559_aa3d_43a0_9327_918039f0dfed ;
@@ -107,19 +116,11 @@ email: wilfried.hortschitz@donau-uni.ac.at
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Crystal_structure"^^rdf:PlainLiteral ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q895901"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_a1f03bbf-c503-5759-9a26-2562527c0db2 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onClass :EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onClass :EMMO_2ca16b3d-f83e-583c-8292-beb6473ea021 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
             owl:onClass :EMMO_a205766b-7c02-5c56-90e5-96c553c316c8 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_a1f03bbf-c503-5759-9a26-2562527c0db2 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -131,11 +132,19 @@ email: wilfried.hortschitz@donau-uni.ac.at
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_5d5fbcc0-2738-5cb8-9157-a0fbe50eebb6 ;
+            owl:onClass :EMMO_2ca16b3d-f83e-583c-8292-beb6473ea021 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:onClass :EMMO_b2a130c3-9688-5358-94ca-f226b85b3009 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_5d5fbcc0-2738-5cb8-9157-a0fbe50eebb6 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_0bb3b434_73aa_428f_b4e8_2a2468648e19 ;
@@ -151,28 +160,33 @@ email: wilfried.hortschitz@donau-uni.ac.at
 
 :EMMO_526ed2a5-a017-590e-8eb8-8a900f2b3b78 a owl:Class ;
     rdfs:subClassOf :EMMO_70f92e7c-fa16-51d5-9ca0-5ad635cb1322 ;
-    skos:prefLabel "MagnetocrystallineAnisotropy"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Exchange constant in the continuum theory of micromagnetism"@en .
+    skos:prefLabel "ExchangeStiffnessConstant"@en ;
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Exchange constant, A, in the continuum theory of micromagnetism.
+
+The exchange stiffness A is related to the Curie temperature TC: A is roughly
+k_B T_c/(2 a_0), where a_0 is the lattice parameter in a simple structure."""@en .
 
 :EMMO_57873439-dfa4-5b74-aec7-d530376ae11c a owl:Class ;
     rdfs:subClassOf ns1:EMMO_74a096dd_cc83_4c7e_b704_0541620ff18d ;
     skos:altLabel "Js"^^rdf:PlainLiteral ;
     skos:prefLabel "SpontaneousMagneticPolarisation"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Spontaneous magnetic polarisation: The spontaneous magnetic polarisation of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Js exists within a domain of a ferromagnet."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "She spontaneous magnetic polarisation, Js, of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Js exists within a domain of a ferromagnet."@en .
 
 :EMMO_5d5fbcc0-2738-5cb8-9157-a0fbe50eebb6 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Space_group"^^rdf:PlainLiteral ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q899033"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass ns1:EMMO_50ea1ec5_f157_41b0_b46b_a9032f17ca10 ;
             owl:onProperty ns1:EMMO_02face50_43a1_40ce_a909_dfe54d5e186b ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+            owl:someValuesFrom ns1:EMMO_50ea1ec5_f157_41b0_b46b_a9032f17ca10 ],
         ns1:EMMO_909415d1_7c43_4d5e_bbeb_7e1910159f66 ;
     skos:prefLabel "SpaceGroup"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """A spacegroup is the symmetry group off all symmetry operations
 that apply to a crystal structure.
 
-It is identifies by its Hermann-Mauguin symbol or space group
+The complete symmetry of a crystal, including the Bravais lattice and 
+any translational symmetry elements, is given by one of the 240 space groups.
+
+A space group is identified by its Hermann-Mauguin symbol or space group
 number (and setting) in the International tables of
 Crystallography."""@en .
 
@@ -184,22 +198,11 @@ Crystallography."""@en .
     skos:prefLabel "LineEnergy"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Energy per unit length."@en .
 
-:EMMO_8f4dc04f-d753-55b3-b405-996199149372 a owl:Class ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:hasValue "T-2 L-1 M+1 I0 Θ0 N0 J0"^^xsd:string ;
-            owl:onProperty ns1:EMMO_19d925d0_2cf1_40e5_a391_1a99d68409c9 ],
-        ns1:EMMO_cbdea88b_fef1_4c7c_b69f_ae1f0f241c4a ;
-    skos:prefLabel "EnergyDensityUnit"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Energy Density."@en .
-
 :EMMO_9977edfa-2b42-55e4-bea0-f39fadca7126 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Lattice_constant"^^rdf:PlainLiteral ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q625641"^^rdf:PlainLiteral ;
     :EMMO_eb748e96-0aee-5b55-b6be-56b8c6bdaed6 "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=561-07-13"^^rdf:PlainLiteral ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 ;
-            owl:someValuesFrom :EMMO_68845bc6-c1db-5338-bd5f-300a9e52f595 ],
-        ns1:EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac ;
+    rdfs:subClassOf ns1:EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac ;
     skos:altLabel "LatticeParameterC"@en ;
     skos:prefLabel "LatticeConstantC"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The length of lattice vectors `c`, where lattice vectors `a`, `b` and `c` defines the unit cell"@en .
@@ -208,10 +211,7 @@ Crystallography."""@en .
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Lattice_constant"^^rdf:PlainLiteral ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q625641"^^rdf:PlainLiteral ;
     :EMMO_eb748e96-0aee-5b55-b6be-56b8c6bdaed6 "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=561-07-13"^^rdf:PlainLiteral ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 ;
-            owl:someValuesFrom :EMMO_68845bc6-c1db-5338-bd5f-300a9e52f595 ],
-        ns1:EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac ;
+    rdfs:subClassOf ns1:EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac ;
     skos:altLabel "LatticeParameterB"@en ;
     skos:prefLabel "LatticeConstantB"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The length of lattice vectors `b`, where lattice vectors `a`, `b` and `c` defines the unit cell"@en .
@@ -226,21 +226,21 @@ Crystallography."""@en .
 :EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_57873439-dfa4-5b74-aec7-d530376ae11c ],
+            owl:someValuesFrom :EMMO_c0a72108-de97-5dff-a830-e4b617adaeef ],
         [ a owl:Restriction ;
             owl:onClass :EMMO_032731f8-874d-5efb-9c9d-6dafaa17ef25 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_526ed2a5-a017-590e-8eb8-8a900f2b3b78 ],
         [ a owl:Restriction ;
             owl:onClass ns1:EMMO_6b5af5a8_a2d8_4353_a1d6_54c9f778343d ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_c0a72108-de97-5dff-a830-e4b617adaeef ],
+            owl:someValuesFrom :EMMO_57873439-dfa4-5b74-aec7-d530376ae11c ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_526ed2a5-a017-590e-8eb8-8a900f2b3b78 ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "IntrinsicMagneticProperties"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Intrinsic magnetic material Properties."@en .
@@ -263,32 +263,15 @@ Crystallography."""@en .
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Lattice_constant"^^rdf:PlainLiteral ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q625641"^^rdf:PlainLiteral ;
     :EMMO_eb748e96-0aee-5b55-b6be-56b8c6bdaed6 "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=561-07-13"^^rdf:PlainLiteral ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 ;
-            owl:someValuesFrom :EMMO_68845bc6-c1db-5338-bd5f-300a9e52f595 ],
-        ns1:EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac ;
+    rdfs:subClassOf ns1:EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac ;
     skos:altLabel "LatticeParameterA"@en ;
     skos:prefLabel "LatticeConstantA"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The length of lattice vectors `a`, where lattice vectors `a`, `b` and `c` defines the unit cell"@en .
 
-:EMMO_68845bc6-c1db-5338-bd5f-300a9e52f595 a owl:Class ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:hasValue "0.0"^^xsd:string ;
-            owl:onProperty ns1:EMMO_d088a3cb_d3e3_4eb2_9897_00aef0cb00cd ],
-        [ a owl:Restriction ;
-            owl:hasValue "1.0E-10"^^xsd:string ;
-            owl:onProperty ns1:EMMO_8189b42e_0995_423a_a26c_51168b27c3cf ],
-        [ a owl:Restriction ;
-            owl:hasValue "T0 L+1 M0 I0 Θ0 N0 J0"^^xsd:string ;
-            owl:onProperty ns1:EMMO_19d925d0_2cf1_40e5_a391_1a99d68409c9 ],
-        ns1:EMMO_cbdea88b_fef1_4c7c_b69f_ae1f0f241c4a ;
-    skos:prefLabel "Angstrom"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Unit of length, equal to 10−10 metre, or 0.1 nanometre"@en .
-
 :EMMO_56258d3a-f2ee-554e-af99-499dd8620457 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 ;
-            owl:someValuesFrom :EMMO_8f4dc04f-d753-55b3-b405-996199149372 ],
+            owl:someValuesFrom ns1:JoulePerCubicMetre ],
         ns1:EMMO_02c0621e_a527_4790_8a0f_2bb51973c819 ;
     skos:prefLabel "EnergyDensity"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Energy Density."@en .

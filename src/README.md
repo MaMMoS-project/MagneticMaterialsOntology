@@ -23,3 +23,14 @@ git clone git@github.com:MaMMoS-project/MagneticMaterialsOntology.git
   This creates the file `magnetic_material_mammos.ttl`
 * Run the emmocheck `emmocheck magnetic_material_mammos.ttl`
 
+### Strategy
+
+#### Elucidation
+When possible we use the definition in a text book for the *elucidation*, which is given by the doc string of the python class. The text book used is "Magnetism and Magnetic Materials" by J.M.D Coey, Cambridge University Press, 2009.
+
+#### EMMO compatibility
+We use `EMMOntoPy v0.7.2` to describe the magnetic materials ontology. 
+
+We use `emmocheck` to check that ontologies conform to EMMO conventions.
+
+We load `magnetic_material_mammos.ttl` in `Protégé 5.6.4` and run the reasoner `HermiT 1.4.3.456`

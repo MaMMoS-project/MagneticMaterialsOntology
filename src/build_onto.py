@@ -43,23 +43,21 @@ with onto:
         pass
         
     # crystal structure
-    
-    class Angstrom(emmo.DimensionalUnit):
-        """Unit of length, equal to 10−10 metre, or 0.1 nanometre"""
-        prefLabel = en("Angstrom")
-        is_a = [emmo.hasSIConversionMultiplier.value("1.0E-10"),
-                emmo.hasSIConversionOffset.value("0.0"),
-                emmo.hasDimensionString.value("T0 L+1 M0 I0 Θ0 N0 J0")]        
         
+    ### space group and lattice constants
+    
     class SpaceGroup(emmo.NominalProperty):  # from define_ontology.py
         """A spacegroup is the symmetry group off all symmetry operations
         that apply to a crystal structure.
+        
+        The complete symmetry of a crystal, including the Bravais lattice and 
+        any translational symmetry elements, is given by one of the 240 space groups.
     
-        It is identifies by its Hermann-Mauguin symbol or space group
+        A space group is identified by its Hermann-Mauguin symbol or space group
         number (and setting) in the International tables of
         Crystallography."""
         prefLabel = en("SpaceGroup")
-        is_a = [emmo.hasStringValue.exactly(1, emmo.String)]
+        is_a = [emmo.hasStringValue.some(emmo.String)]
         wikidataReference = pl("https://www.wikidata.org/wiki/Q899033")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Space_group")
         
@@ -70,7 +68,6 @@ with onto:
         IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=561-07-13")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q625641")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Lattice_constant")
-        is_a = [emmo.hasMeasurementUnit.some(Angstrom)]
 
     class LatticeConstantB(emmo.Length):
         """The length of lattice vectors `b`, where lattice vectors `a`, `b` and `c` defines the unit cell"""
@@ -79,7 +76,6 @@ with onto:
         IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=561-07-13")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q625641")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Lattice_constant")
-        is_a = [emmo.hasMeasurementUnit.some(Angstrom)]
 
     class LatticeConstantC(emmo.Length):
         """The length of lattice vectors `c`, where lattice vectors `a`, `b` and `c` defines the unit cell"""
@@ -88,7 +84,6 @@ with onto:
         IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=561-07-13")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q625641")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Lattice_constant")
-        is_a = [emmo.hasMeasurementUnit.some(Angstrom)]
 
     class LatticeConstantAlpha(emmo.Angle):
         """The angle between lattice vectors `b` and `c`, where lattice vectors `a`, `b` and `c` defines the unit cell,"""
@@ -112,6 +107,8 @@ with onto:
         """Volume of the unit cell."""
         prefLabel = en("CellVolume")
         altLabel = en("UnitCellVolume")
+
+    #-----------------------------------------------------
         
     class CrystalStructure(emmo.Crystal):
         """Description of ordered arrangement of atoms"""
@@ -129,42 +126,41 @@ with onto:
                 emmo.hasProperty.exactly(1, CellVolume),
                 ]
 
+    #-----------------------------------------------------
         
-    # energy density
-    
-    class EnergyDensityUnit(emmo.DimensionalUnit):  
-        """Energy Density."""
-        prefLabel = en("EnergyDensityUnit")
-        is_a = [emmo.hasDimensionString.value("T-2 L-1 M+1 I0 Θ0 N0 J0"),  
-        ]
-    
+    ### energy densities
+
     class EnergyDensity(emmo.PhysicalQuantity):
         """Energy Density."""
         prefLabel = en("EnergyDensity")
-        is_a = [emmo.hasMeasurementUnit.some(EnergyDensityUnit),
+        is_a = [emmo.hasMeasurementUnit.some(emmo.JoulePerCubicMetre),
                ]
 
     class LineEnergy(emmo.PhysicalQuantity):
         """Energy per unit length."""
         prefLabel = en("LineEnergy")
         is_a = [emmo.hasMeasurementUnit.some(emmo.JoulePerMetre),
-        ]
+               ]
 
     
     # intrinisc magnetic properties
 
+    ## magnetization
+    
     class SpontaneousMagnetization(emmo.Magnetization):
-        """Spontaneous magnetization: The spontaneous magnetization of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Ms exists within a domain of a ferromagnet.""" 
+        """The spontaneous magnetization, Ms, of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Ms exists within a domain of a ferromagnet.""" 
         prefLabel = en("SpontaneousMagnetization")
         altLabel = pl("Ms")
         IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-02-41")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Spontaneous_magnetization")
         
     class SpontaneousMagneticPolarisation(emmo.MagneticPolarisation):
-        """Spontaneous magnetic polarisation: The spontaneous magnetic polarisation of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Js exists within a domain of a ferromagnet.""" 
+        """She spontaneous magnetic polarisation, Js, of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Js exists within a domain of a ferromagnet.""" 
         prefLabel = en("SpontaneousMagneticPolarisation")
         altLabel = pl("Js")
         
+    ## magnetocrystalline anisotropy
+    
     class MagnetocrystallineAnisotropyEnergy(EnergyDensity):
         """The magnetocrystalline anisotropy energy density."""
         prefLabel = en("MagnetocrystallineAnisotropyEnergy")
@@ -205,10 +201,17 @@ with onto:
         wikidataReference = pl("https://www.wikidata.org/wiki/Q6731660")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy")
 
+    ## Exchange
+    
     class ExchangeStiffnessConstant(LineEnergy):
-        """Exchange constant in the continuum theory of micromagnetism"""
-        prefLabel = en("MagnetocrystallineAnisotropy")
+        """Exchange constant, A, in the continuum theory of micromagnetism.
+        
+        The exchange stiffness A is related to the Curie temperature TC: A is roughly
+        k_B T_c/(2 a_0), where a_0 is the lattice parameter in a simple structure."""
+        prefLabel = en("ExchangeStiffnessConstant")
         altLable = en("A")
+        
+    #-----------------------------------------------------
 
     class IntrinsicMagneticProperties(onto.Property):
         """Intrinsic magnetic material Properties."""
@@ -220,6 +223,8 @@ with onto:
                 emmo.hasProperty.some(ExchangeStiffnessConstant),
                 emmo.hasProperty.exactly(1, emmo.CurieTemperature),
                 ]
+
+    #-----------------------------------------------------
 
     # Magnetic material
     
@@ -233,7 +238,23 @@ with onto:
                 emmo.hasProperty.some(CrystalStructure),              
                 emmo.hasProperty.exactly(1, IntrinsicMagneticProperties),
                ]
+               
+    # Extrinsic magnetic properties
 
+    #-----------------------------------------------------
+
+    class ExtrinsicMagneticMaterialProperty(onto.Property):
+        """Extrinsic magnetic material Properties depend on the microstructure of the specimen."""
+        prefLabel = en("ExtrinsicMagneticMaterialProperty")
+        # 
+        is_a = [emmo.hasProperty.exactly(1, emmo.Coercivity),
+                #emmo.hasProperty.exactly(1, Remanence),
+                #emmo.hasProperty.exactly(1, MagneticKneeField),
+                #emmo.hasProperty.exactly(1, SaturationMagnetization),
+                #emmo.hasProperty.exactly(1, MagnetizationTemperature),
+                #emmo.hasProperty.exactly(1, DemagnetizationFactor),    
+                ]
+                
 onto.sync_attributes(name_policy='uuid', class_docstring='elucidation',name_prefix='EMMO_')
 
 #################################################################
