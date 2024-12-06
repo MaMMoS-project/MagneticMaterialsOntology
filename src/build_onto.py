@@ -147,14 +147,14 @@ with onto:
 
     ## magnetization
     
-    class SpontaneousMagnetization(emmo.Magnetization):
+    class SpontaneousMagnetization(emmo.ElectromagneticQuantity):
         """The spontaneous magnetization, Ms, of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Ms exists within a domain of a ferromagnet.""" 
         prefLabel = en("SpontaneousMagnetization")
         altLabel = pl("Ms")
         IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-02-41")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Spontaneous_magnetization")
         
-    class SpontaneousMagneticPolarisation(emmo.MagneticPolarisation):
+    class SpontaneousMagneticPolarisation(emmo.ElectromagneticQuantity):
         """She spontaneous magnetic polarisation, Js, of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Js exists within a domain of a ferromagnet.""" 
         prefLabel = en("SpontaneousMagneticPolarisation")
         altLabel = pl("Js")
@@ -239,7 +239,61 @@ with onto:
                 emmo.hasProperty.exactly(1, IntrinsicMagneticProperties),
                ]
                
+    # Other relevant Quantities
+
+    #class ExternalField(emmo.    
+               
     # Extrinsic magnetic properties
+    
+    class CoercivityHc(emmo.Coercivity):
+        """The internal magnetic held -Hc at which the macroscopic magnetization vanishes is the coercivity or coercive force.
+        
+        Although it is not an intrinsic property in our sense of the term, the M-H loop coercivity Hc is
+        sometimes referred to as 'intrinsic' coercivity.
+        """
+        prefLabel = en("CoercivityHc")
+        altLabel = en("Coercive field, Hc")
+    
+    class CoercivityBHc(emmo.Coercivity):
+        """Defined as internal field on the B(H) loop where B = 0. It is also called flux coerciviy BHc.
+        
+        BHc depends on sample shape and has to be corrected for the demagnetizing field."""
+        prefLabel = en("CoercivityBHc")
+        altLabel = en("BHc")   
+
+    class CoercivityHcPrime(emmo.Coercivity):
+        """The external magnetic held -H'c at which the macroscopic magnetization vanishes. 
+        The coercivity on M(H') loop, where H' is the external field."""
+        prefLabel = en("CoercivityHcPrime")
+        altLabel = en("Coercive field, H'c")
+    
+    class CoercivityBHcPrime(emmo.Coercivity):
+        """Defined as external field on the B(H') loop where B = 0. H' is the external field."""
+        prefLabel = en("CoercivityBHcPrime")
+        altLabel = en("BH'c")   
+
+    class SwtichingFieldCoercivity(emmo.MagneticFieldStrength):
+        """Defined by the maximum slope of the descending branch of the M-H hysteresis loop, with H the internal field."""
+        comment = pl("This field is often used when analysing the temperature dependend coercivity for deriving the microstructural parameters")
+        prefLabel = en("SwitchingFieldCoercivity")
+        altLabel = en("Hsw")   
+
+    class SwtichingFieldCoercivityPrime(emmo.MagneticFieldStrength):
+        """Defined by the maximum slope of the descending branch of the M-H' hysteresis loop, with H' the external field."""
+        prefLabel = en("SwitchingFieldCoercivityPrime")
+        altLabel = en("H'sw")   
+
+    class KneeField(emmo.MagneticFieldStrength):
+        """The maximum working field - also named knee field H_K, is defined as the reverse internal field for which the
+        magnetization is reduced by 10%; thus it corresponds to the point on the
+        magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""
+        altLabel = en("maximum working field, Hk")
+
+    class KneeFieldPrime(emmo.MagneticFieldStrength):
+        """The maximum working field - also named knee field H_K, is defined as the reverse external field for which the
+        magnetization is reduced by 10%; thus it corresponds to the point on the magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""
+        altLabel = en("H'k")
+
 
     #-----------------------------------------------------
 
