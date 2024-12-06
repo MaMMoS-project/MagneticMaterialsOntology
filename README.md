@@ -26,6 +26,11 @@ compatibilies:
 | [EMMO](https://github.com/emmo-repo/EMMO)  | 1.0.0-RC3 compacted | https://emmo-repo.github.io/versions/1.0.0-rc3/emmo.ttl |
 
 
+Building
+--------
+MagneticMaterialsOntology is built using tools provided by EMMO. For more details see the [src directory](https://github.com/MaMMoS-project/MagneticMaterialsOntology/tree/main/src)
+
+
 Attributions and credits
 ------------------------
 ### Authors
