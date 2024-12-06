@@ -18,12 +18,12 @@ This ontology is work-in-progress (WIP).
 
 Imported ontologies
 -------------------
-This ontology builds on top of EMMO. See the following table for version
+This ontology builds on top of EMMO [1]. See the following table for version
 compatibilies:
 
 | Imported Ontologies  | Version             |      |
 | -------------------- | --------------------| --------- |
-| [EMMO][1]            | 1.0.0-RC3 compacted | https://emmo-repo.github.io/versions/1.0.0-rc3/emmo.ttl |
+| [EMMO]            | 1.0.0-RC3 compacted | https://emmo-repo.github.io/versions/1.0.0-rc3/emmo.ttl |
 
 
 Attributions and credits
@@ -34,6 +34,8 @@ Attributions and credits
 
 ### Projects
 - Created within the EU project MaMMoS [2]. Grant number 101135546 (HORIZON-CL4-2023-DIGITAL-EMERGING-01).
+
+![image info](img/mammos.png)
 
 ### Acknowledgement
 
