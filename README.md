@@ -7,8 +7,8 @@ An EMMO-based ontology for magnetic materials.
 Status
 ------
 - [X] Proposal
-- [ ] accepted, under development
-- [ ] official
+- [ ] Accepted, under development
+- [ ] Official
 
 This ontology is work-in-progress (WIP).
 
@@ -18,7 +18,7 @@ This ontology is work-in-progress (WIP).
 
 Imported ontologies
 -------------------
-This ontology builds on top of EMMO [1]. See the following table for version
+This ontology builds on top of [EMMO](https://github.com/emmo-repo/EMMO) [1]. See the following table for version
 compatibilies:
 
 | Imported Ontologies  | Version             |      |
