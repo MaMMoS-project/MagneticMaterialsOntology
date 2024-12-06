@@ -22,15 +22,6 @@ email: wilfried.hortschitz@donau-uni.ac.at
     owl:versionIRI <http://www.emmc.info/emmc-csa/0.0.1/demo_magnetic_material> ;
     owl:versionInfo "0.0.1"@en .
 
-:EMMO_0d67d6c5-a8a7-57d4-930a-e99412baa2c2 a owl:Class ;
-    rdfs:subClassOf ns1:EMMO_0e78a4d4_b4e0_48e7_97d8_e7d41a85a54d ;
-    skos:altLabel "Coercive field, Hc"@en ;
-    skos:prefLabel "CoercivityHc"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The internal magnetic held -Hc at which the macroscopic magnetization vanishes is the coercivity or coercive force.
-
-Although it is not an intrinsic property in our sense of the term, the M-H loop coercivity Hc is
-sometimes referred to as 'intrinsic' coercivity."""@en .
-
 :EMMO_2bb87117-30f9-5b3a-b406-731836a3902f a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy"^^rdf:PlainLiteral ;
     rdfs:comment "Ea = K1 sin^2(phi) + K2 sin^4(phi) where Ea is the is the anisotropy energ density and phi is the angle of the magnetization with respect to the c-axis of the crystal."^^rdf:PlainLiteral ;
@@ -61,35 +52,6 @@ sometimes referred to as 'intrinsic' coercivity."""@en .
     skos:prefLabel "MagnetocrystallineAnisotropyConstantK2"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The magnetocrystalline constant K2 for tetragonal or hexagonal crystals."@en .
 
-:EMMO_69772e86-d7fb-5b43-9cd4-2f0770c6701f a owl:Class ;
-    rdfs:subClassOf ns1:EMMO_0e78a4d4_b4e0_48e7_97d8_e7d41a85a54d ;
-    skos:altLabel "BHc"@en ;
-    skos:prefLabel "CoercivityBHc"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Defined as internal field on the B(H) loop where B = 0. It is also called flux coerciviy BHc.
-
-BHc depends on sample shape and has to be corrected for the demagnetizing field."""@en .
-
-:EMMO_8b36b60c-80a1-553b-b489-6b7e4f47b5bc a owl:Class ;
-    rdfs:subClassOf ns1:EMMO_b4895f75_41c8_4fd9_b6d6_4d5f7c99c423 ;
-    skos:altLabel "H'k"@en ;
-    skos:prefLabel "KneeFieldPrime"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The maximum working field - also named knee field H_K, is defined as the reverse external field for which the
-magnetization is reduced by 10%; thus it corresponds to the point on the magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""@en .
-
-:EMMO_8f7a225a-9760-5215-957f-7804ce296830 a owl:Class ;
-    rdfs:subClassOf ns1:EMMO_b4895f75_41c8_4fd9_b6d6_4d5f7c99c423 ;
-    skos:altLabel "H'sw"@en ;
-    skos:prefLabel "SwitchingFieldCoercivityPrime"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Defined by the maximum slope of the descending branch of the M-H' hysteresis loop, with H' the external field."@en .
-
-:EMMO_ad0c038b-a09a-560c-b149-066de8f8e307 a owl:Class ;
-    rdfs:subClassOf ns1:EMMO_b4895f75_41c8_4fd9_b6d6_4d5f7c99c423 ;
-    skos:altLabel "maximum working field, Hk"@en ;
-    skos:prefLabel "KneeField"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The maximum working field - also named knee field H_K, is defined as the reverse internal field for which the
-magnetization is reduced by 10%; thus it corresponds to the point on the
-magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""@en .
-
 :EMMO_bbedcfff-4d9a-51b6-91bc-2fd16dedd925 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onClass ns1:EMMO_0e78a4d4_b4e0_48e7_97d8_e7d41a85a54d ;
@@ -110,9 +72,6 @@ magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""@en .
 :EMMO_c5ca93ce-ad27-5f4a-95ef-aca0990c6937 a owl:Class ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q11587827"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ],
-        [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ;
             owl:someValuesFrom ns1:EMMO_668fbd5b_6f1b_405c_9c6b_d6067bd0595a ],
         [ a owl:Restriction ;
@@ -122,16 +81,12 @@ magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""@en .
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_2c96e798-57dc-5c12-ad10-f3ec261549d3 ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ],
         ns1:EMMO_4207e895_8b83_4318_996a_72cfb32acd94 ;
     skos:prefLabel "MagneticMaterial"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Magnetic material."@en .
-
-:EMMO_c9516766-04c7-51d3-9683-3ac5def44d8c a owl:Class ;
-    rdfs:comment "This field is often used when analysing the temperature dependend coercivity for deriving the microstructural parameters"^^rdf:PlainLiteral ;
-    rdfs:subClassOf ns1:EMMO_b4895f75_41c8_4fd9_b6d6_4d5f7c99c423 ;
-    skos:altLabel "Hsw"@en ;
-    skos:prefLabel "SwitchingFieldCoercivity"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Defined by the maximum slope of the descending branch of the M-H hysteresis loop, with H the internal field."@en .
 
 :EMMO_e9e3b7d2-d4fa-5140-88dc-2f0d60cf6d15 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy"^^rdf:PlainLiteral ;
@@ -140,21 +95,8 @@ magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""@en .
     skos:prefLabel "MagnetocrystallineAnisotropyEnergy"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The magnetocrystalline anisotropy energy density."@en .
 
-:EMMO_ea144b33-f676-5234-8809-bca04aaa2b36 a owl:Class ;
-    rdfs:subClassOf ns1:EMMO_0e78a4d4_b4e0_48e7_97d8_e7d41a85a54d ;
-    skos:altLabel "BH'c"@en ;
-    skos:prefLabel "CoercivityBHcPrime"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Defined as external field on the B(H') loop where B = 0. H' is the external field."@en .
-
 :EMMO_eb748e96-0aee-5b55-b6be-56b8c6bdaed6 a owl:AnnotationProperty ;
     skos:prefLabel "IECEntry"@en .
-
-:EMMO_fbd0a90d-106f-5bda-9d05-286896f74143 a owl:Class ;
-    rdfs:subClassOf ns1:EMMO_0e78a4d4_b4e0_48e7_97d8_e7d41a85a54d ;
-    skos:altLabel "Coercive field, H'c"@en ;
-    skos:prefLabel "CoercivityHcPrime"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The external magnetic held -H'c at which the macroscopic magnetization vanishes. 
-The coercivity on M(H') loop, where H' is the external field."""@en .
 
 :EMMO_032731f8-874d-5efb-9c9d-6dafaa17ef25 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Spontaneous_magnetization"^^rdf:PlainLiteral ;
@@ -178,15 +120,7 @@ The coercivity on M(H') loop, where H' is the external field."""@en .
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onClass :EMMO_a205766b-7c02-5c56-90e5-96c553c316c8 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onClass :EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955 ;
+            owl:onClass :EMMO_a1f03bbf-c503-5759-9a26-2562527c0db2 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -198,11 +132,19 @@ The coercivity on M(H') loop, where H' is the external field."""@en .
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_a1f03bbf-c503-5759-9a26-2562527c0db2 ;
+            owl:onClass :EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:onClass :EMMO_2ca16b3d-f83e-583c-8292-beb6473ea021 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_a205766b-7c02-5c56-90e5-96c553c316c8 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_0bb3b434_73aa_428f_b4e8_2a2468648e19 ;
@@ -283,22 +225,22 @@ Crystallography."""@en .
 
 :EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_032731f8-874d-5efb-9c9d-6dafaa17ef25 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_526ed2a5-a017-590e-8eb8-8a900f2b3b78 ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_c0a72108-de97-5dff-a830-e4b617adaeef ],
-        [ a owl:Restriction ;
             owl:onClass ns1:EMMO_6b5af5a8_a2d8_4353_a1d6_54c9f778343d ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_c0a72108-de97-5dff-a830-e4b617adaeef ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_57873439-dfa4-5b74-aec7-d530376ae11c ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_526ed2a5-a017-590e-8eb8-8a900f2b3b78 ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_032731f8-874d-5efb-9c9d-6dafaa17ef25 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "IntrinsicMagneticProperties"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Intrinsic magnetic material Properties."@en .

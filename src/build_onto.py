@@ -241,10 +241,11 @@ with onto:
                
     # Other relevant Quantities
 
-    #class ExternalField(emmo.    
+    # class ExternalMagneticField(emmo.    
                
     # Extrinsic magnetic properties
     
+    '''
     class CoercivityHc(emmo.Coercivity):
         """The internal magnetic held -Hc at which the macroscopic magnetization vanishes is the coercivity or coercive force.
         
@@ -294,6 +295,7 @@ with onto:
         magnetization is reduced by 10%; thus it corresponds to the point on the magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""
         altLabel = en("H'k")
 
+    '''
 
     #-----------------------------------------------------
 
