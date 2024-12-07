@@ -23,6 +23,13 @@ git clone git@github.com:MaMMoS-project/MagneticMaterialsOntology.git
   This creates the file `magnetic_material_mammos.ttl`
 * Run the emmocheck `emmocheck magnetic_material_mammos.ttl`
 
+or simply run
+```
+./create.sh
+```
+
+which builds the ontology, runs the emmocheck and creates a documentation. Please set the relevant path to `emmocheck` and `ontodoc` in the bash script `create.sh`
+
 ### Strategy
 
 #### Building a magnetic materials ontology
