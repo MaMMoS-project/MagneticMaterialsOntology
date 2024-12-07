@@ -255,7 +255,7 @@ with onto:
         """The external field H′, acting on a sample that is produced by steady electric
         currents or the stray field of magnets outside the sample volume, is often
         called the applied field."""   
-        prefLabel = en("ExternalMagneticMaterial")        
+        prefLabel = en("ExternalMagneticField")        
         altLabel = en("AppliedMagneticField, H'")
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)] 
 
@@ -270,7 +270,7 @@ with onto:
     class InternalMagneticField(emmo.ElectromagneticQuantity):
         """The internal field in the sample in our continuous medium approximation is the
         sum of the external field H′ and the demagnetizing field Hd"""   
-        prefLabel = en("InternalMagneticMaterial")        
+        prefLabel = en("InternalMagneticField")        
         altLabel = en("H")
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)] 
 
