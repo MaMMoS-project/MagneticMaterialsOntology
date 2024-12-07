@@ -33,6 +33,53 @@ AbsolutePermeability  </dd>
 
 
 
+<h3 id="EMMO_694b3915-3326-5fb2-87a1-20ccf1dc79dc">AmorphousMagneticMaterial</h3>
+  <dd><strong>IRI:</strong>
+<a href="#EMMO_694b3915-3326-5fb2-87a1-20ccf1dc79dc">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_694b3915-3326-5fb2-87a1-20ccf1dc79dc</a>  </dd>
+
+  <dd><strong>elucidation:</strong>
+Any amorphous structure entails a distribution of nearest-neighbour environments and bond lengths for a given magnetic atom, described by the radial distribution function and higher-order correlation functions. These distributions lead to a distribution of site moments, exchange interactions, dipolar and crystal fields, all of which influence the nature of the magnetic order  </dd>
+
+  <dd><strong>prefLabel:</strong>
+AmorphousMagneticMaterial  </dd>
+
+  <dd><strong>wikipediaReference:</strong>
+<a href="https://en.wikipedia.org/wiki/Amorphous_magnet">https://en.wikipedia.org/wiki/Amorphous_magnet</a>  </dd>
+
+  <dd><strong>Subclass of:</strong>
+    <ul>
+            <li>is_a <a href="#EMMO_c5ca93ce-ad27-5f4a-95ef-aca0990c6937">MagneticMaterial</a></li>
+      <li>is_a <a href="https://w3id.org/emmo#EMMO_0afc19b0_2d43_4b3d_8da0_9ffb63bc1492">AmorphousMaterial</a></li>
+
+    </ul>
+  </dd>
+
+<p>
+
+
+
+<h3 id="EMMO_d28323da-810f-5cbe-a770-eab7e7fdb493">BulkMagnet</h3>
+  <dd><strong>IRI:</strong>
+<a href="#EMMO_d28323da-810f-5cbe-a770-eab7e7fdb493">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_d28323da-810f-5cbe-a770-eab7e7fdb493</a>  </dd>
+
+  <dd><strong>elucidation:</strong>
+Piece of matter made of one or more magnetic material.  </dd>
+
+  <dd><strong>prefLabel:</strong>
+BulkMagnet  </dd>
+
+  <dd><strong>Subclass of:</strong>
+    <ul>
+            <li>is_a <a href="https://w3id.org/emmo#EMMO_479db031_b344_4488_9efa_4bc12c6c1765">WorkPiece</a></li>
+      <li>is_a <a href="https://w3id.org/emmo#EMMO_e4e80813_f379_4091_b017_ee059811f806">SizeDefinedMaterial</a></li>
+
+    </ul>
+  </dd>
+
+<p>
+
+
+
 <h3 id="EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395">CellVolume</h3>
   <dd><strong>IRI:</strong>
 <a href="#EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395</a>  </dd>
@@ -178,14 +225,37 @@ CrystalStructure  </dd>
   <dd><strong>Subclass of:</strong>
     <ul>
             <li>is_a <a href="https://w3id.org/emmo#EMMO_0bb3b434_73aa_428f_b4e8_2a2468648e19">Crystal</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395">CellVolume</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_9977edfa-2b42-55e4-bea0-f39fadca7126">LatticeConstantC</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_a205766b-7c02-5c56-90e5-96c553c316c8">LatticeConstantGamma</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955">LatticeConstantA</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_2ca16b3d-f83e-583c-8292-beb6473ea021">LatticeConstantBeta</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_a1f03bbf-c503-5759-9a26-2562527c0db2">LatticeConstantB</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_5d5fbcc0-2738-5cb8-9157-a0fbe50eebb6">SpaceGroup</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_2ca16b3d-f83e-583c-8292-beb6473ea021">LatticeConstantBeta</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395">CellVolume</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_b2a130c3-9688-5358-94ca-f226b85b3009">LatticeConstantAlpha</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955">LatticeConstantA</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_a1f03bbf-c503-5759-9a26-2562527c0db2">LatticeConstantB</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_a205766b-7c02-5c56-90e5-96c553c316c8">LatticeConstantGamma</a></li>
+
+    </ul>
+  </dd>
+
+<p>
+
+
+
+<h3 id="EMMO_aaa107b8-4dd9-5fc8-b135-a604a0cb38b1">CrystallineMagneticMaterial</h3>
+  <dd><strong>IRI:</strong>
+<a href="#EMMO_aaa107b8-4dd9-5fc8-b135-a604a0cb38b1">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_aaa107b8-4dd9-5fc8-b135-a604a0cb38b1</a>  </dd>
+
+  <dd><strong>elucidation:</strong>
+Magnetic material with crystalline structure  </dd>
+
+  <dd><strong>prefLabel:</strong>
+CrystallineMagneticMaterial  </dd>
+
+  <dd><strong>Subclass of:</strong>
+    <ul>
+            <li>is_a <a href="#EMMO_c5ca93ce-ad27-5f4a-95ef-aca0990c6937">MagneticMaterial</a></li>
+      <li>is_a <a href="https://w3id.org/emmo#EMMO_f1025834_0cd2_42a1_bfeb_13bec41c8655">CrystallineMaterial</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_dc57d998_23db_4d8e_b2cd_f346b195b846">hasSpatialPart</a> only <a href="#EMMO_2c96e798-57dc-5c12-ad10-f3ec261549d3">CrystalStructure</a></li>
 
     </ul>
   </dd>
@@ -386,23 +456,81 @@ ExternalSusceptibility  </dd>
 
 
 
-<h3 id="EMMO_97a09537-98ce-54a6-9163-65931ba81ee9">ExtrinsicMagneticMaterialProperty</h3>
+<h3 id="EMMO_8a0c8d0a-3dc7-5f3f-ab20-24b38d188827">ExtrinsicMagneticProperties</h3>
   <dd><strong>IRI:</strong>
-<a href="#EMMO_97a09537-98ce-54a6-9163-65931ba81ee9">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_97a09537-98ce-54a6-9163-65931ba81ee9</a>  </dd>
+<a href="#EMMO_8a0c8d0a-3dc7-5f3f-ab20-24b38d188827">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_8a0c8d0a-3dc7-5f3f-ab20-24b38d188827</a>  </dd>
 
   <dd><strong>elucidation:</strong>
 Extrinsic magnetic Properties depend on the microstructure.  </dd>
 
   <dd><strong>prefLabel:</strong>
-ExtrinsicMagneticMaterialProperty  </dd>
+ExtrinsicMagneticProperties  </dd>
 
   <dd><strong>Subclass of:</strong>
     <ul>
             <li>is_a <a href="https://w3id.org/emmo#EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba">Property</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e">DemagnetizingFactor</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_98f7a685-fa5a-54f1-8504-f398047f3ab6">AbsolutePermeability</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="https://w3id.org/emmo#EMMO_593ecc7c_250d_4e4d_8957_0170f3cc2154">RelativePermeability</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e">DemagnetizingFactor</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_14a12902-9845-5be6-bd0b-511dcea31985">MagneticHysteresisProperties</a></li>
+
+    </ul>
+  </dd>
+
+<p>
+
+
+
+<h3 id="EMMO_aa999d91-076f-512a-85a0-c2f751c083b1">GeometricShape</h3>
+  <dd><strong>IRI:</strong>
+<a href="#EMMO_aa999d91-076f-512a-85a0-c2f751c083b1">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_aa999d91-076f-512a-85a0-c2f751c083b1</a>  </dd>
+
+  <dd><strong>elucidation:</strong>
+Geometric shape.
+
+Two extrinsic properties, the remanence Mr
+and coercivity Hc, which depend on the sample shape  </dd>
+
+  <dd><strong>prefLabel:</strong>
+GeometricShape  </dd>
+
+  <dd><strong>wikidataReference:</strong>
+<a href="https://www.wikidata.org/wiki/Q207961">https://www.wikidata.org/wiki/Q207961</a>  </dd>
+
+  <dd><strong>wikipediaReference:</strong>
+<a href="https://en.wikipedia.org/wiki/Shape">https://en.wikipedia.org/wiki/Shape</a>  </dd>
+
+  <dd><strong>Subclass of:</strong>
+    <ul>
+            <li>is_a <a href="https://w3id.org/emmo#EMMO_b5957cef_a287_442d_a3ce_fd39f20ba1cd">Geometrical</a></li>
+      <li>is_a <a href="https://w3id.org/emmo#EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba">Property</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe">hasSpatialTile</a> some <a href="https://w3id.org/emmo#EMMO_750d42f1_c291_42ce_91b2_a079d79639fb">Cylinder</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_814b6b76_e0ca_4953_a832_d1816fb695f1">hasDirectPart</a> some <a href="#EMMO_b98abf93-8054-5955-bb06-076e22b0b4c7">RectangularCuboid</a></li>
+
+    </ul>
+  </dd>
+
+<p>
+
+
+
+<h3 id="EMMO_0213900b-ab6d-56be-82fb-4db874974de1">GeometricalSize</h3>
+  <dd><strong>IRI:</strong>
+<a href="#EMMO_0213900b-ab6d-56be-82fb-4db874974de1">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_0213900b-ab6d-56be-82fb-4db874974de1</a>  </dd>
+
+  <dd><strong>elucidation:</strong>
+Spatial extension along the princial axes.  </dd>
+
+  <dd><strong>prefLabel:</strong>
+GeometricalSize  </dd>
+
+  <dd><strong>wikipediaReference:</strong>
+<a href="https://en.wikipedia.org/wiki/Size">https://en.wikipedia.org/wiki/Size</a>  </dd>
+
+  <dd><strong>Subclass of:</strong>
+    <ul>
+            <li>is_a <a href="https://w3id.org/emmo#EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba">Property</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 3 <a href="https://w3id.org/emmo#EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac">Length</a></li>
 
     </ul>
   </dd>
@@ -450,10 +578,11 @@ IntrinsicMagneticProperties  </dd>
   <dd><strong>Subclass of:</strong>
     <ul>
             <li>is_a <a href="https://w3id.org/emmo#EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba">Property</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_57873439-dfa4-5b74-aec7-d530376ae11c">SpontaneousMagneticPolarisation</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="https://w3id.org/emmo#EMMO_f0b8bace_151e_4f54_8129_c180fd83ae44">NeelTemperature</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_526ed2a5-a017-590e-8eb8-8a900f2b3b78">ExchangeStiffnessConstant</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="https://w3id.org/emmo#EMMO_6b5af5a8_a2d8_4353_a1d6_54c9f778343d">CurieTemperature</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_c0a72108-de97-5dff-a830-e4b617adaeef">MagnetocrystallineAnisotropy</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_57873439-dfa4-5b74-aec7-d530376ae11c">SpontaneousMagneticPolarisation</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_526ed2a5-a017-590e-8eb8-8a900f2b3b78">ExchangeStiffnessConstant</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_032731f8-874d-5efb-9c9d-6dafaa17ef25">SpontaneousMagnetization</a></li>
 
     </ul>
@@ -716,6 +845,40 @@ LineEnergy  </dd>
 
 
 
+<h3 id="EMMO_099b796d-3163-56c7-bc90-3a304256ca5d">Magnet</h3>
+  <dd><strong>IRI:</strong>
+<a href="#EMMO_099b796d-3163-56c7-bc90-3a304256ca5d">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_099b796d-3163-56c7-bc90-3a304256ca5d</a>  </dd>
+
+  <dd><strong>elucidation:</strong>
+Piece of matter made of one or more magnetic material.  </dd>
+
+  <dd><strong>IECEntry:</strong>
+<a href="https://www.electropedia.org/iev/iev.nsf/display?openform&#8210;ievref=151-14-06">https://www.electropedia.org/iev/iev.nsf/display?openform&#8210;ievref=151-14-06</a>  </dd>
+
+  <dd><strong>prefLabel:</strong>
+Magnet  </dd>
+
+  <dd><strong>wikidataReference:</strong>
+<a href="https://www.wikidata.org/wiki/Q11421">https://www.wikidata.org/wiki/Q11421</a>  </dd>
+
+  <dd><strong>wikipediaReference:</strong>
+<a href="https://en.wikipedia.org/wiki/Magnet">https://en.wikipedia.org/wiki/Magnet</a>  </dd>
+
+  <dd><strong>Subclass of:</strong>
+    <ul>
+            <li>is_a <a href="https://w3id.org/emmo#EMMO_479db031_b344_4488_9efa_4bc12c6c1765">WorkPiece</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_8a0c8d0a-3dc7-5f3f-ab20-24b38d188827">ExtrinsicMagneticProperties</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="https://w3id.org/emmo#EMMO_dd4b7d81_28a9_4801_8831_4cbab217e362">WorkpieceForming</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe">hasSpatialTile</a> some <a href="#EMMO_c5ca93ce-ad27-5f4a-95ef-aca0990c6937">MagneticMaterial</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="https://w3id.org/emmo#EMMO_71d1c8f0_c6e3_44b5_a4b6_1b74ff35698a">MaterialsProcessing</a></li>
+
+    </ul>
+  </dd>
+
+<p>
+
+
+
 <h3 id="EMMO_14a12902-9845-5be6-bd0b-511dcea31985">MagneticHysteresisProperties</h3>
   <dd><strong>IRI:</strong>
 <a href="#EMMO_14a12902-9845-5be6-bd0b-511dcea31985">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_14a12902-9845-5be6-bd0b-511dcea31985</a>  </dd>
@@ -737,17 +900,17 @@ MagneticHysteresisProperties  </dd>
   <dd><strong>Subclass of:</strong>
     <ul>
             <li>is_a <a href="https://w3id.org/emmo#EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba">Property</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_a4bc4536-f381-5bcd-b6ca-34fb1a913efd">CoercivityBHcExternal</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_e1028129-c23e-57ac-9174-2f34ddbf3926">MaximumEnergyProduct</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_bc54c47f-8560-516a-b95b-cce9f1b7344f">SwitchingFieldCoercivity</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_fe101d1d-f1f7-54f8-886b-fa6d6052ce98">CoercivityHcExternal</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_69772e86-d7fb-5b43-9cd4-2f0770c6701f">CoercivityBHc</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_ad0c038b-a09a-560c-b149-066de8f8e307">KneeField</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_538226cb-bebb-53e5-bf37-0f12226228be">RemanentMagneticPolarization</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_234a6193-f057-556f-bfcd-38efde3aafc4">SwitchingFieldCoercivityExternal</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_0d67d6c5-a8a7-57d4-930a-e99412baa2c2">CoercivityHc</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_8fc78216-4859-53c2-b41e-e38062b04054">Remanence</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_45a36799-2309-5097-969f-4e5c002ae2f0">KneeFieldExternal</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_69772e86-d7fb-5b43-9cd4-2f0770c6701f">CoercivityBHc</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_fe101d1d-f1f7-54f8-886b-fa6d6052ce98">CoercivityHcExternal</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_234a6193-f057-556f-bfcd-38efde3aafc4">SwitchingFieldCoercivityExternal</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_a4bc4536-f381-5bcd-b6ca-34fb1a913efd">CoercivityBHcExternal</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_bc54c47f-8560-516a-b95b-cce9f1b7344f">SwitchingFieldCoercivity</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_8fc78216-4859-53c2-b41e-e38062b04054">Remanence</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_0d67d6c5-a8a7-57d4-930a-e99412baa2c2">CoercivityHc</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_ad0c038b-a09a-560c-b149-066de8f8e307">KneeField</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_e1028129-c23e-57ac-9174-2f34ddbf3926">MaximumEnergyProduct</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_538226cb-bebb-53e5-bf37-0f12226228be">RemanentMagneticPolarization</a></li>
 
     </ul>
   </dd>
@@ -773,10 +936,10 @@ MagneticMaterial  </dd>
   <dd><strong>Subclass of:</strong>
     <ul>
             <li>is_a <a href="https://w3id.org/emmo#EMMO_8820f251_ad36_43f4_a693_c0e86a89cc1f">FunctionallyDefinedMaterial</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_2c96e798-57dc-5c12-ad10-f3ec261549d3">CrystalStructure</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e">IntrinsicMagneticProperties</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="https://w3id.org/emmo#EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3">ChemicalComposition</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="https://w3id.org/emmo#EMMO_06448f64_8db6_4304_8b2c_e785dba82044">Density</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe">hasSpatialTile</a> some <a href="https://w3id.org/emmo#EMMO_668fbd5b_6f1b_405c_9c6b_d6067bd0595a">PhaseOfMatter</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="https://w3id.org/emmo#EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3">ChemicalComposition</a></li>
 
     </ul>
   </dd>
@@ -790,7 +953,10 @@ MagneticMaterial  </dd>
 <a href="#EMMO_c0a72108-de97-5dff-a830-e4b617adaeef">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_c0a72108-de97-5dff-a830-e4b617adaeef</a>  </dd>
 
   <dd><strong>elucidation:</strong>
-Magnetocrystalline anisotropy is an intrinsic property. The magnetization process is different when the field is applied along different crystallographic directions, and the anisotropy reflects the crystal symmetry. Its origin is in the crystal-field interaction and spin-orbit coupling, or else the interatomic dipole–dipole interaction.  </dd>
+Magnetocrystalline anisotropy is an intrinsic property. The magnetization process is different when the field is applied along different crystallographic directions, and the anisotropy reflects the crystal symmetry. Its origin is in the crystal-field interaction and spin-orbit coupling, or else the interatomic dipole–dipole interaction.
+
+Anisotropic texture can be imparted to the amorphous solid (by annealing near the glass transition in a magnetic
+field, for example).   </dd>
 
   <dd><strong>prefLabel:</strong>
 MagnetocrystallineAnisotropy  </dd>
@@ -805,11 +971,10 @@ MagnetocrystallineAnisotropy  </dd>
     <ul>
             <li>is_a <a href="https://w3id.org/emmo#EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba">Property</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234">MagnetocrystallineAnisotropyConstantK1c</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_e9e3b7d2-d4fa-5140-88dc-2f0d60cf6d15">MagnetocrystallineAnisotropyEnergy</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_2bb87117-30f9-5b3a-b406-731836a3902f">MagnetocrystallineAnisotropyConstantK1</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_527989d5-7417-5d94-83bf-4db785827a88">MagnetocrystallineAnisotropyConstantK1c</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_675fa9ea-408a-51f6-a001-2e6715568a71">MagnetocrystallineAnisotropyConstantK2</a></li>
-      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="https://w3id.org/emmo#EMMO_6b5af5a8_a2d8_4353_a1d6_54c9f778343d">CurieTemperature</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_e9e3b7d2-d4fa-5140-88dc-2f0d60cf6d15">MagnetocrystallineAnisotropyEnergy</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> some <a href="#EMMO_2bb87117-30f9-5b3a-b406-731836a3902f">MagnetocrystallineAnisotropyConstantK1</a></li>
 
     </ul>
   </dd>
@@ -848,12 +1013,12 @@ MagnetocrystallineAnisotropyConstantK1  </dd>
 
 
 
-<h3 id="EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234">MagnetocrystallineAnisotropyConstantK1c</h3>
+<h3 id="EMMO_527989d5-7417-5d94-83bf-4db785827a88">MagnetocrystallineAnisotropyConstantK1c</h3>
   <dd><strong>IRI:</strong>
-<a href="#EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234</a>  </dd>
+<a href="#EMMO_527989d5-7417-5d94-83bf-4db785827a88">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_527989d5-7417-5d94-83bf-4db785827a88</a>  </dd>
 
   <dd><strong>elucidation:</strong>
-The magnetocrystalline constant K2c for cubic crystals  </dd>
+The magnetocrystalline constant K1c for cubic crystals.  </dd>
 
   <dd><strong>altLabel:</strong>
 K1  </dd>
@@ -878,12 +1043,12 @@ MagnetocrystallineAnisotropyConstantK1c  </dd>
 
 
 
-<h3 id="EMMO_527989d5-7417-5d94-83bf-4db785827a88">MagnetocrystallineAnisotropyConstantK1c</h3>
+<h3 id="EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234">MagnetocrystallineAnisotropyConstantK1c</h3>
   <dd><strong>IRI:</strong>
-<a href="#EMMO_527989d5-7417-5d94-83bf-4db785827a88">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_527989d5-7417-5d94-83bf-4db785827a88</a>  </dd>
+<a href="#EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234</a>  </dd>
 
   <dd><strong>elucidation:</strong>
-The magnetocrystalline constant K1c for cubic crystals.  </dd>
+The magnetocrystalline constant K2c for cubic crystals  </dd>
 
   <dd><strong>altLabel:</strong>
 K1  </dd>
@@ -1000,6 +1165,56 @@ MaximumEnergyProduct  </dd>
 
 
 
+<h3 id="EMMO_4ee603fc-7a1e-51f0-bf75-8e66f9a5539b">MultilayerMagnet</h3>
+  <dd><strong>IRI:</strong>
+<a href="#EMMO_4ee603fc-7a1e-51f0-bf75-8e66f9a5539b">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_4ee603fc-7a1e-51f0-bf75-8e66f9a5539b</a>  </dd>
+
+  <dd><strong>elucidation:</strong>
+Piece of matter made of one or more magnetic material in form a multiple layers of material.  </dd>
+
+  <dd><strong>prefLabel:</strong>
+MultilayerMagnet  </dd>
+
+  <dd><strong>Subclass of:</strong>
+    <ul>
+            <li>is_a <a href="#EMMO_099b796d-3163-56c7-bc90-3a304256ca5d">Magnet</a></li>
+      <li>is_a <a href="https://w3id.org/emmo#EMMO_8944581c_64da_46a9_be29_7074f7cc8098">SpatialTiling</a></li>
+      <li>is_a <a href="https://w3id.org/emmo#EMMO_479db031_b344_4488_9efa_4bc12c6c1765">WorkPiece</a></li>
+
+    </ul>
+  </dd>
+
+<p>
+
+
+
+<h3 id="EMMO_b98abf93-8054-5955-bb06-076e22b0b4c7">RectangularCuboid</h3>
+  <dd><strong>IRI:</strong>
+<a href="#EMMO_b98abf93-8054-5955-bb06-076e22b0b4c7">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_b98abf93-8054-5955-bb06-076e22b0b4c7</a>  </dd>
+
+  <dd><strong>elucidation:</strong>
+A rectangular cuboid is a special case of a cuboid with rectangular faces in which all of its dihedral angles are right angles.  </dd>
+
+  <dd><strong>prefLabel:</strong>
+RectangularCuboid  </dd>
+
+  <dd><strong>wikidataReference:</strong>
+<a href="https://www.wikidata.org/wiki/Q262959">https://www.wikidata.org/wiki/Q262959</a>  </dd>
+
+  <dd><strong>wikipediaReference:</strong>
+<a href="https://en.wikipedia.org/wiki/Rectangular_cuboid">https://en.wikipedia.org/wiki/Rectangular_cuboid</a>  </dd>
+
+  <dd><strong>Subclass of:</strong>
+    <ul>
+            <li>is_a <a href="https://w3id.org/emmo#EMMO_5f278af9_8593_4e27_a717_ccc9e07a0ddf">EuclideanSpace</a></li>
+
+    </ul>
+  </dd>
+
+<p>
+
+
+
 <h3 id="EMMO_8fc78216-4859-53c2-b41e-e38062b04054">Remanence</h3>
   <dd><strong>IRI:</strong>
 <a href="#EMMO_8fc78216-4859-53c2-b41e-e38062b04054">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_8fc78216-4859-53c2-b41e-e38062b04054</a>  </dd>
@@ -1055,6 +1270,29 @@ RemanentMagneticPolarization  </dd>
     <ul>
             <li>is_a <a href="https://w3id.org/emmo#EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e">ElectromagneticQuantity</a></li>
       <li><a href="https://w3id.org/emmo#EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569">hasMeasurementUnit</a> some <a href="https://w3id.org/emmo#EMMO_ec903946_ddc9_464a_903c_7373e0d1eeb5">MagneticFluxDensityUnit</a></li>
+
+    </ul>
+  </dd>
+
+<p>
+
+
+
+<h3 id="EMMO_b7ebd85f-36aa-540a-b8a9-e2c1094f27f1">SampleGeometry</h3>
+  <dd><strong>IRI:</strong>
+<a href="#EMMO_b7ebd85f-36aa-540a-b8a9-e2c1094f27f1">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_b7ebd85f-36aa-540a-b8a9-e2c1094f27f1</a>  </dd>
+
+  <dd><strong>elucidation:</strong>
+The size and shape of the magnet  </dd>
+
+  <dd><strong>prefLabel:</strong>
+SampleGeometry  </dd>
+
+  <dd><strong>Subclass of:</strong>
+    <ul>
+            <li>is_a <a href="https://w3id.org/emmo#EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba">Property</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_aa999d91-076f-512a-85a0-c2f751c083b1">GeometricShape</a></li>
+      <li><a href="https://w3id.org/emmo#EMMO_e1097637_70d2_4895_973f_2396f04fa204">hasProperty</a> exactly 1 <a href="#EMMO_0213900b-ab6d-56be-82fb-4db874974de1">GeometricalSize</a></li>
 
     </ul>
   </dd>
@@ -1198,6 +1436,28 @@ SwitchingFieldCoercivityExternal  </dd>
   <dd><strong>Subclass of:</strong>
     <ul>
             <li>is_a <a href="https://w3id.org/emmo#EMMO_b4895f75_41c8_4fd9_b6d6_4d5f7c99c423">MagneticFieldStrength</a></li>
+
+    </ul>
+  </dd>
+
+<p>
+
+
+
+<h3 id="EMMO_613e4315-d58f-5b5d-82ce-8cb76bd1b0aa">ThinfilmMagnet</h3>
+  <dd><strong>IRI:</strong>
+<a href="#EMMO_613e4315-d58f-5b5d-82ce-8cb76bd1b0aa">http://www.emmc.info/emmc-csa/demo_magnetic_material#EMMO_613e4315-d58f-5b5d-82ce-8cb76bd1b0aa</a>  </dd>
+
+  <dd><strong>elucidation:</strong>
+Piece of matter made of one or more magnetic material in form a thin film.  </dd>
+
+  <dd><strong>prefLabel:</strong>
+ThinfilmMagnet  </dd>
+
+  <dd><strong>Subclass of:</strong>
+    <ul>
+            <li>is_a <a href="#EMMO_099b796d-3163-56c7-bc90-3a304256ca5d">Magnet</a></li>
+      <li>is_a <a href="https://w3id.org/emmo#EMMO_479db031_b344_4488_9efa_4bc12c6c1765">WorkPiece</a></li>
 
     </ul>
   </dd>

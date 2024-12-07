@@ -195,7 +195,11 @@ with onto:
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy") 
 
     class MagnetocrystallineAnisotropy(emmo.Property):
-        """Magnetocrystalline anisotropy is an intrinsic property. The magnetization process is different when the field is applied along different crystallographic directions, and the anisotropy reflects the crystal symmetry. Its origin is in the crystal-field interaction and spin-orbit coupling, or else the interatomic dipole–dipole interaction."""        
+        """Magnetocrystalline anisotropy is an intrinsic property. The magnetization process is different when the field is applied along different crystallographic directions, and the anisotropy reflects the crystal symmetry. Its origin is in the crystal-field interaction and spin-orbit coupling, or else the interatomic dipole–dipole interaction.
+        
+        Anisotropic texture can be imparted to the amorphous solid (by annealing near the glass transition in a magnetic
+        field, for example). 
+        """           
         prefLabel = en("MagnetocrystallineAnisotropy")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q6731660")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy")
@@ -205,7 +209,6 @@ with onto:
                 emmo.hasProperty.some(MagnetocrystallineAnisotropyConstantK2),
                 emmo.hasProperty.some(MagnetocrystallineAnisotropyConstantK1c),
                 emmo.hasProperty.some(MagnetocrystallineAnisotropyConstantK2c),
-                emmo.hasProperty.some(emmo.CurieTemperature),
                 ]
 
     ## Exchange
@@ -228,12 +231,12 @@ with onto:
                 emmo.hasProperty.some(MagnetocrystallineAnisotropy),
                 emmo.hasProperty.some(ExchangeStiffnessConstant),
                 emmo.hasProperty.some(emmo.CurieTemperature),
+                emmo.hasProperty.some(emmo.NeelTemperature)
                 ]
     #-----------------------------------------------------
 
     # Magnetic material
-
-    #-----------------------------------------------------    
+    
     class MagneticMaterial(emmo.FunctionallyDefinedMaterial):
         """Magnetically ordered solids which have atomic magnetic moments due to unpaired
         electrons."""
@@ -241,13 +244,23 @@ with onto:
         wikidataReference = pl("https://www.wikidata.org/wiki/Q11587827")
         is_a = [               
                 emmo.hasSpatialDirectPart.some(emmo.PhaseOfMatter), 
-                emmo.hasProperty.some(emmo.ChemicalComposition), 
-                emmo.hasProperty.some(CrystalStructure),              
+                emmo.hasProperty.some(emmo.ChemicalComposition),
+                emmo.hasProperty.some(emmo.Density),  
                 emmo.hasProperty.some(IntrinsicMagneticProperties),
                ]
     #-----------------------------------------------------
 
+    class AmorphousMagneticMaterial(emmo.AmorphousMaterial,MagneticMaterial):
+        """Any amorphous structure entails a distribution of nearest-neighbour environments and bond lengths for a given magnetic atom, described by the radial distribution function and higher-order correlation functions. These distributions lead to a distribution of site moments, exchange interactions, dipolar and crystal fields, all of which influence the nature of the magnetic order"""
+        prefLabel = en("AmorphousMagneticMaterial")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Amorphous_magnet")
 
+    class CrystallineMagneticMaterial(emmo.CrystallineMaterial,MagneticMaterial):
+        """Magnetic material with crystalline structure"""
+        prefLabel = en("CrystallineMagneticMaterial")
+        is_a = [               
+                emmo.hasSpatialPart.only(emmo.CrystalStructure),
+               ]
                
     # Internal and external magnetic fields
 
@@ -422,9 +435,9 @@ with onto:
                 emmo.hasProperty.some(MaximumEnergyProduct)
                ]
 
-    class ExtrinsicMagneticProperty(emmo.Property):
+    class ExtrinsicMagneticProperties(emmo.Property):
         """Extrinsic magnetic Properties depend on the microstructure."""
-        prefLabel = en("ExtrinsicMagneticMaterialProperty")
+        prefLabel = en("ExtrinsicMagneticProperties")
         is_a = [
                 emmo.hasProperty.some(MagneticHysteresisProperties),
                 emmo.hasProperty.some(DemagnetizingFactor),
@@ -434,7 +447,76 @@ with onto:
                 
     #-----------------------------------------------------
 
-    ## Magnet
+    # Magnet
+    
+    ## Microstructure
+    
+    class RectangularCuboid(emmo.EuclideanSpace):
+        """A rectangular cuboid is a special case of a cuboid with rectangular faces in which all of its dihedral angles are right angles."""
+        prefLabel = en("RectangularCuboid")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q262959")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Rectangular_cuboid")
+        
+    
+    class GeometricalSize(emmo.Property):
+        """Spatial extension along the princial axes."""    
+        prefLabel = en("GeometricalSize")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Size")
+        is_a = [emmo.hasProperty.exactly(3,emmo.Length)]
+    
+    class GeometricShape(emmo.Property,emmo.Geometrical):
+        """
+        Geometric shape.
+    
+        Two extrinsic properties, the remanence Mr
+        and coercivity Hc, which depend on the sample shape
+        """    
+        prefLabel = en("GeometricShape")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q207961")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Shape")
+        is_a = [               
+                emmo.hasSpatialDirectPart.some(emmo.Cylinder), 
+                emmo.hasDirectPart.some(RectangularCuboid), 
+               ]
+               
+    class SampleGeometry(emmo.Property):
+        """The size and shape of the magnet"""
+        prefLabel = en("SampleGeometry")
+        is_a = [               
+                emmo.hasProperty.exactly(1,GeometricalSize), 
+                emmo.hasProperty.exactly(1,GeometricShape), 
+               ]
+    
+    class Magnet(emmo.WorkPiece):
+        """Piece of matter made of one or more magnetic material."""
+        prefLabel = en("Magnet")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q11421")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnet")
+        IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=151-14-06")
+        is_a = [               
+                emmo.hasProperty.some(emmo.MaterialsProcessing),
+                emmo.hasProperty.some(emmo.WorkpieceForming),
+                emmo.hasSpatialDirectPart.some(emmo.MagneticMaterial), 
+                emmo.hasProperty.some(ExtrinsicMagneticProperties), 
+               ]
+    
+    class BulkMagnet(emmo.WorkPiece,emmo.SizeDefinedMaterial):
+        """Piece of matter made of one or more magnetic material."""
+        prefLabel = en("BulkMagnet")
+        is_a = [               
+               ]
+
+    class ThinfilmMagnet(emmo.WorkPiece,Magnet):
+        """Piece of matter made of one or more magnetic material in form a thin film."""
+        prefLabel = en("ThinfilmMagnet")
+        is_a = [               
+               ]
+             
+    class MultilayerMagnet(emmo.WorkPiece,emmo.SpatialTiling,Magnet):
+        """Piece of matter made of one or more magnetic material in form a multiple layers of material."""
+        prefLabel = en("MultilayerMagnet")
+        is_a = [               
+               ]         
 
     
 onto.sync_attributes(name_policy='uuid', class_docstring='elucidation',name_prefix='EMMO_')
@@ -464,3 +546,4 @@ onto.metadata.comment.append(en(
 # set version of ontology
 onto.set_version(str(__version__))
 onto.save("magnetic_material_mammos.ttl", overwrite=True)
+#world.save()
