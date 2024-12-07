@@ -44,7 +44,7 @@ with onto:
         
     # crystal structure
         
-    ### space group and lattice constants
+    ## space group and lattice constants
     
     class SpaceGroup(emmo.NominalProperty):  # from define_ontology.py
         """A spacegroup is the symmetry group off all symmetry operations
@@ -109,7 +109,6 @@ with onto:
         altLabel = en("UnitCellVolume")
 
     #-----------------------------------------------------
-        
     class CrystalStructure(emmo.Crystal):
         """Description of ordered arrangement of atoms"""
         prefLabel = en("CrystalStructure")
@@ -125,10 +124,9 @@ with onto:
                 emmo.hasProperty.exactly(1, LatticeConstantGamma),
                 emmo.hasProperty.exactly(1, CellVolume),
                 ]
-
     #-----------------------------------------------------
         
-    ### energy densities
+    # energy densities
 
     class EnergyDensity(emmo.PhysicalQuantity):
         """Energy Density."""
@@ -142,7 +140,6 @@ with onto:
         is_a = [emmo.hasMeasurementUnit.some(emmo.JoulePerMetre),
                ]
 
-    
     # intrinisc magnetic properties
 
     ## magnetization
@@ -202,6 +199,14 @@ with onto:
         prefLabel = en("MagnetocrystallineAnisotropy")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q6731660")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy")
+        is_a = [
+                emmo.hasProperty.some(MagnetocrystallineAnisotropyEnergy),
+                emmo.hasProperty.some(MagnetocrystallineAnisotropyConstantK1),
+                emmo.hasProperty.some(MagnetocrystallineAnisotropyConstantK2),
+                emmo.hasProperty.some(MagnetocrystallineAnisotropyConstantK1c),
+                emmo.hasProperty.some(MagnetocrystallineAnisotropyConstantK2c),
+                emmo.hasProperty.some(emmo.CurieTemperature),
+                ]
 
     ## Exchange
     
@@ -213,8 +218,7 @@ with onto:
         prefLabel = en("ExchangeStiffnessConstant")
         altLable = en("A")
         
-    #-----------------------------------------------------
-
+    #----------------------------------------------------
     class IntrinsicMagneticProperties(onto.Property):
         """Intrinsic magnetic properties refer to atomic-scale magnetism and depend on the crystal structure"""
         prefLabel = en("IntrinsicMagneticProperties") 
@@ -225,23 +229,27 @@ with onto:
                 emmo.hasProperty.some(ExchangeStiffnessConstant),
                 emmo.hasProperty.some(emmo.CurieTemperature),
                 ]
-
     #-----------------------------------------------------
 
     # Magnetic material
-    
-    class MagneticMaterial(emmo.Material):
-        """Magnetic material."""
+
+    #-----------------------------------------------------    
+    class MagneticMaterial(emmo.FunctionallyDefinedMaterial):
+        """Magnetically ordered solids which have atomic magnetic moments due to unpaired
+        electrons."""
         prefLabel = en("MagneticMaterial")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q11587827")
         is_a = [               
                 emmo.hasSpatialDirectPart.some(emmo.PhaseOfMatter), 
                 emmo.hasProperty.some(emmo.ChemicalComposition), 
                 emmo.hasProperty.some(CrystalStructure),              
-                emmo.hasProperty.exactly(1, IntrinsicMagneticProperties),
+                emmo.hasProperty.some(IntrinsicMagneticProperties),
                ]
+    #-----------------------------------------------------
+
+
                
-    # Other relevant Quantities
+    # Internal and external magnetic fields
 
     class ExternalMagneticField(emmo.ElectromagneticQuantity):
         """The external field H′, acting on a sample that is produced by steady electric
@@ -425,7 +433,10 @@ with onto:
                 ]
                 
     #-----------------------------------------------------
-                
+
+    ## Magnet
+
+    
 onto.sync_attributes(name_policy='uuid', class_docstring='elucidation',name_prefix='EMMO_')
 
 #################################################################

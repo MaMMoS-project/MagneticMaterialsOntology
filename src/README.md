@@ -25,6 +25,10 @@ git clone git@github.com:MaMMoS-project/MagneticMaterialsOntology.git
 
 ### Strategy
 
+#### Building a magnetic materials ontology
+
+The classes and attributes cover the input and output of the simulation workflow and measurement workflow of the Magnetic Multiscale Modelling Suite (MaMMoS) project. Starting point for creating the ontology are the modelling data (MODA) and characterisation data (CHADA) diagrams of MaMMoS.
+
 #### Elucidation
 When possible we use the definition in a text book for the *elucidation*, which is given by the doc string of the python class. 
 
@@ -32,8 +36,7 @@ The following text books have been used
 
 "Magnetism and Magnetic Materials" by J.M.D Coey, Cambridge University Press, 2009.  
 "Magnetism II-Materials and Applications" edited by Étienne du Trémolet Lacheisserie, Damien Gignoux, Michel Schlenker,Springer, 2002.  
-"Permanent Magnetism" by Ralph Skomski and J.M.D. Coey, Institute of Physics Publishing, 1999. 
-
+"Permanent Magnetism" by Ralph Skomski and J.M.D. Coey, Institute of Physics Publishing, 1999.  
 "Introduction to magnetic materials" by B.D. Cullity and C.D. Graham, Introduction to magnetic materials, John Wiley & Sons, Second Edition, 2009. 
 
 #### EMMO compatibility
