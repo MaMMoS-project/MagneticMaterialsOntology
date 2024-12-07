@@ -85,19 +85,6 @@ email: wilfried.hortschitz@donau-uni.ac.at
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The internal field in the sample in our continuous medium approximation is the
 sum of the external field H′ and the demagnetizing field Hd"""@en .
 
-:EMMO_b7ebd85f-36aa-540a-b8a9-e2c1094f27f1 a owl:Class ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_aa999d91-076f-512a-85a0-c2f751c083b1 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onClass :EMMO_0213900b-ab6d-56be-82fb-4db874974de1 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
-    skos:prefLabel "SampleGeometry"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The size and shape of the magnet"@en .
-
 :EMMO_d28323da-810f-5cbe-a770-eab7e7fdb493 a owl:Class ;
     rdfs:subClassOf ns1:EMMO_479db031_b344_4488_9efa_4bc12c6c1765,
         ns1:EMMO_e4e80813_f379_4091_b017_ee059811f806 ;
@@ -155,54 +142,40 @@ called the applied field."""@en .
 Although it is not an intrinsic property in our sense of the term, the M-H loop coercivity Hc is
 sometimes referred to as 'intrinsic' coercivity."""@en .
 
-:EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e a owl:Class ;
-    :EMMO_eb748e96-0aee-5b55-b6be-56b8c6bdaed6 "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-63"^^rdf:PlainLiteral ;
-    rdfs:comment "H = H' - DM, where D is the demagneting factor, M is the magnetization, and H is the internal field"^^rdf:PlainLiteral ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 ;
-            owl:someValuesFrom ns1:EMMO_3227b821_26a5_4c7c_9c01_5c24483e0bd0 ],
-        ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
-    skos:altLabel "N, D"@en ;
-    skos:prefLabel "DemagnetizingFactor"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """For a uniformly magnetized ellipsoid and the magnetization along a major axis
-the demagnetizing field is Hd = -N M.
-
-The principal components of demagnetizing tensor in diagonal form the demagnetizing factors. Only two of the three are independent because the demagnetizing tensor has unit trace Nx + Ny + Nz = 1."""@en .
-
 :EMMO_14a12902-9845-5be6-bd0b-511dcea31985 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_45a36799-2309-5097-969f-4e5c002ae2f0 ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_69772e86-d7fb-5b43-9cd4-2f0770c6701f ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_fe101d1d-f1f7-54f8-886b-fa6d6052ce98 ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_234a6193-f057-556f-bfcd-38efde3aafc4 ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_a4bc4536-f381-5bcd-b6ca-34fb1a913efd ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_bc54c47f-8560-516a-b95b-cce9f1b7344f ],
+            owl:someValuesFrom :EMMO_0d67d6c5-a8a7-57d4-930a-e99412baa2c2 ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_8fc78216-4859-53c2-b41e-e38062b04054 ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_0d67d6c5-a8a7-57d4-930a-e99412baa2c2 ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_ad0c038b-a09a-560c-b149-066de8f8e307 ],
+            owl:someValuesFrom :EMMO_45a36799-2309-5097-969f-4e5c002ae2f0 ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_e1028129-c23e-57ac-9174-2f34ddbf3926 ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_ad0c038b-a09a-560c-b149-066de8f8e307 ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_538226cb-bebb-53e5-bf37-0f12226228be ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_bc54c47f-8560-516a-b95b-cce9f1b7344f ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_69772e86-d7fb-5b43-9cd4-2f0770c6701f ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_234a6193-f057-556f-bfcd-38efde3aafc4 ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "MagneticHysteresisProperties"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The essential practical characteristic of any ferromagnetic material is the irreversible nonlinear response of magnetization M to an imposed magnetic field H. This response is given by the hysteresis loop. The charactertics of hystereis loop are known as hysteresis properties.
@@ -239,7 +212,11 @@ B(H): Magnetic flux density as function of the internal field. B(H'): Magnetic f
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Crystal_structure"^^rdf:PlainLiteral ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q895901"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_9977edfa-2b42-55e4-bea0-f39fadca7126 ;
+            owl:onClass :EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_b2a130c3-9688-5358-94ca-f226b85b3009 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -251,19 +228,15 @@ B(H): Magnetic flux density as function of the internal field. B(H'): Magnetic f
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onClass :EMMO_b2a130c3-9688-5358-94ca-f226b85b3009 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onClass :EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955 ;
+            owl:onClass :EMMO_9977edfa-2b42-55e4-bea0-f39fadca7126 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:onClass :EMMO_a1f03bbf-c503-5759-9a26-2562527c0db2 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -369,6 +342,9 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
 :EMMO_8a0c8d0a-3dc7-5f3f-ab20-24b38d188827 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_14a12902-9845-5be6-bd0b-511dcea31985 ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
@@ -376,9 +352,6 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom ns1:EMMO_593ecc7c_250d_4e4d_8957_0170f3cc2154 ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_14a12902-9845-5be6-bd0b-511dcea31985 ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "ExtrinsicMagneticProperties"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Extrinsic magnetic Properties depend on the microstructure."@en .
@@ -440,11 +413,11 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Shape"^^rdf:PlainLiteral ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q207961"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ;
-            owl:someValuesFrom ns1:EMMO_750d42f1_c291_42ce_91b2_a079d79639fb ],
-        [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_814b6b76_e0ca_4953_a832_d1816fb695f1 ;
             owl:someValuesFrom :EMMO_b98abf93-8054-5955-bb06-076e22b0b4c7 ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ;
+            owl:someValuesFrom ns1:EMMO_750d42f1_c291_42ce_91b2_a079d79639fb ],
         ns1:EMMO_b5957cef_a287_442d_a3ce_fd39f20ba1cd,
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "GeometricShape"@en ;
@@ -452,6 +425,21 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
 
 Two extrinsic properties, the remanence Mr
 and coercivity Hc, which depend on the sample shape"""@en .
+
+:EMMO_ac6edd90-c273-5203-836b-82462863f2c8 a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass :EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        :EMMO_56258d3a-f2ee-554e-af99-499dd8620457 ;
+    skos:altLabel "K1sh"@en ;
+    skos:prefLabel "ShapeAnisotropyConstant"@en ;
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The energy density of a small particle given by
+
+K1sh = (mu_0/4)(1-3D)Ms²
+
+where mu_0 is VacuumMagneticPermeability, D is the DemagnetizingFactor
+and Ms is the spontaneous magnetization """@en .
 
 :EMMO_ad0c038b-a09a-560c-b149-066de8f8e307 a owl:Class ;
     rdfs:subClassOf ns1:EMMO_b4895f75_41c8_4fd9_b6d6_4d5f7c99c423 ;
@@ -464,22 +452,22 @@ magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""@en .
 :EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_032731f8-874d-5efb-9c9d-6dafaa17ef25 ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_c0a72108-de97-5dff-a830-e4b617adaeef ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_57873439-dfa4-5b74-aec7-d530376ae11c ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom ns1:EMMO_f0b8bace_151e_4f54_8129_c180fd83ae44 ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_526ed2a5-a017-590e-8eb8-8a900f2b3b78 ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom ns1:EMMO_6b5af5a8_a2d8_4353_a1d6_54c9f778343d ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_c0a72108-de97-5dff-a830-e4b617adaeef ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_032731f8-874d-5efb-9c9d-6dafaa17ef25 ],
+            owl:someValuesFrom :EMMO_526ed2a5-a017-590e-8eb8-8a900f2b3b78 ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "IntrinsicMagneticProperties"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Intrinsic magnetic properties refer to atomic-scale magnetism and depend on the crystal structure"@en .
@@ -490,6 +478,19 @@ magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""@en .
     skos:altLabel "LatticeParameterAlpha"@en ;
     skos:prefLabel "LatticeConstantAlpha"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The angle between lattice vectors `b` and `c`, where lattice vectors `a`, `b` and `c` defines the unit cell,"@en .
+
+:EMMO_b7ebd85f-36aa-540a-b8a9-e2c1094f27f1 a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass :EMMO_0213900b-ab6d-56be-82fb-4db874974de1 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_aa999d91-076f-512a-85a0-c2f751c083b1 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
+    skos:prefLabel "SampleGeometry"@en ;
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The size and shape of the magnet"@en .
 
 :EMMO_b98abf93-8054-5955-bb06-076e22b0b4c7 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Rectangular_cuboid"^^rdf:PlainLiteral ;
@@ -510,19 +511,19 @@ magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""@en .
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q6731660"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234 ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_527989d5-7417-5d94-83bf-4db785827a88 ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_675fa9ea-408a-51f6-a001-2e6715568a71 ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_e9e3b7d2-d4fa-5140-88dc-2f0d60cf6d15 ],
+            owl:someValuesFrom :EMMO_2bb87117-30f9-5b3a-b406-731836a3902f ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_2bb87117-30f9-5b3a-b406-731836a3902f ],
+            owl:someValuesFrom :EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234 ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_e9e3b7d2-d4fa-5140-88dc-2f0d60cf6d15 ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "MagnetocrystallineAnisotropy"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Magnetocrystalline anisotropy is an intrinsic property. The magnetization process is different when the field is applied along different crystallographic directions, and the anisotropy reflects the crystal symmetry. Its origin is in the crystal-field interaction and spin-orbit coupling, or else the interatomic dipole–dipole interaction.
@@ -571,6 +572,22 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
     skos:prefLabel "LatticeConstantA"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The length of lattice vectors `a`, where lattice vectors `a`, `b` and `c` defines the unit cell"@en .
 
+:EMMO_f8f03807-d6b6-5ebf-8e0b-418311e8e1e5 a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass :EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_ac6edd90-c273-5203-836b-82462863f2c8 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
+    skos:prefLabel "ShapeAnisotropy"@en ;
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The difference in energy when a small elongated particle is magnetized along its short and long axis 
+
+Shape anisotropy is restricted to small particles,
+where the inter-atomic exchange ensures a uniform magnetization."""@en .
+
 :EMMO_fe101d1d-f1f7-54f8-886b-fa6d6052ce98 a owl:Class ;
     rdfs:subClassOf ns1:EMMO_0e78a4d4_b4e0_48e7_97d8_e7d41a85a54d ;
     skos:altLabel "H'c"@en ;
@@ -583,32 +600,53 @@ The coercivity on M(H') loop, where H' is the external field."""@en .
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q11421"^^rdf:PlainLiteral ;
     :EMMO_eb748e96-0aee-5b55-b6be-56b8c6bdaed6 "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=151-14-06"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_8a0c8d0a-3dc7-5f3f-ab20-24b38d188827 ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom ns1:EMMO_dd4b7d81_28a9_4801_8831_4cbab217e362 ],
-        [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ;
             owl:someValuesFrom :EMMO_c5ca93ce-ad27-5f4a-95ef-aca0990c6937 ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom ns1:EMMO_dd4b7d81_28a9_4801_8831_4cbab217e362 ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom ns1:EMMO_71d1c8f0_c6e3_44b5_a4b6_1b74ff35698a ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_f8f03807-d6b6-5ebf-8e0b-418311e8e1e5 ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_b7ebd85f-36aa-540a-b8a9-e2c1094f27f1 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_8a0c8d0a-3dc7-5f3f-ab20-24b38d188827 ],
         ns1:EMMO_479db031_b344_4488_9efa_4bc12c6c1765 ;
     skos:prefLabel "Magnet"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Piece of matter made of one or more magnetic material."@en .
+
+:EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e a owl:Class ;
+    :EMMO_eb748e96-0aee-5b55-b6be-56b8c6bdaed6 "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-63"^^rdf:PlainLiteral ;
+    rdfs:comment "H = H' - DM, where D is the demagneting factor, M is the magnetization, and H is the internal field"^^rdf:PlainLiteral ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 ;
+            owl:someValuesFrom ns1:EMMO_3227b821_26a5_4c7c_9c01_5c24483e0bd0 ],
+        ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
+    skos:altLabel "N, D"@en ;
+    skos:prefLabel "DemagnetizingFactor"@en ;
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """For a uniformly magnetized ellipsoid and the magnetization along a major axis
+the demagnetizing field is Hd = -N M.
+
+The principal components of demagnetizing tensor in diagonal form the demagnetizing factors. Only two of the three are independent because the demagnetizing tensor has unit trace Nx + Ny + Nz = 1."""@en .
 
 :EMMO_c5ca93ce-ad27-5f4a-95ef-aca0990c6937 a owl:Class ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q11587827"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom ns1:EMMO_06448f64_8db6_4304_8b2c_e785dba82044 ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ;
             owl:someValuesFrom ns1:EMMO_668fbd5b_6f1b_405c_9c6b_d6067bd0595a ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ],

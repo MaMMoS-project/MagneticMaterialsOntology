@@ -451,6 +451,8 @@ with onto:
     
     ## Microstructure
     
+    ### Sample Shape
+    
     class RectangularCuboid(emmo.EuclideanSpace):
         """A rectangular cuboid is a special case of a cuboid with rectangular faces in which all of its dihedral angles are right angles."""
         prefLabel = en("RectangularCuboid")
@@ -487,6 +489,32 @@ with onto:
                 emmo.hasProperty.exactly(1,GeometricShape), 
                ]
     
+    class ShapeAnisotropyConstant(EnergyDensity):
+        """
+        The energy density of a small particle given by
+        
+        K1sh = (mu_0/4)(1-3D)Ms²
+        
+        where mu_0 is VacuumMagneticPermeability, D is the DemagnetizingFactor
+        and Ms is the spontaneous magnetization 
+        """
+        prefLabel = en("ShapeAnisotropyConstant")
+        altLabel = en("K1sh")
+        is_a = [ emmo.hasProperty.exactly(1,DemagnetizingFactor) ]
+        
+    class ShapeAnisotropy(emmo.Property):
+        """
+        The difference in energy when a small elongated particle is magnetized along its short and long axis 
+        
+        Shape anisotropy is restricted to small particles,
+        where the inter-atomic exchange ensures a uniform magnetization.
+        """
+        prefLabel = en("ShapeAnisotropy")
+        is_a = [ 
+                 emmo.hasProperty.exactly(1,DemagnetizingFactor),
+                 emmo.hasProperty.exactly(1,ShapeAnisotropyConstant),
+               ]
+    
     class Magnet(emmo.WorkPiece):
         """Piece of matter made of one or more magnetic material."""
         prefLabel = en("Magnet")
@@ -496,8 +524,10 @@ with onto:
         is_a = [               
                 emmo.hasProperty.some(emmo.MaterialsProcessing),
                 emmo.hasProperty.some(emmo.WorkpieceForming),
-                emmo.hasSpatialDirectPart.some(emmo.MagneticMaterial), 
+                emmo.hasSpatialDirectPart.some(MagneticMaterial), 
                 emmo.hasProperty.some(ExtrinsicMagneticProperties), 
+                emmo.hasProperty.exactly(1,SampleGeometry),
+                emmo.hasProperty.some(ShapeAnisotropy),
                ]
     
     class BulkMagnet(emmo.WorkPiece,emmo.SizeDefinedMaterial):
