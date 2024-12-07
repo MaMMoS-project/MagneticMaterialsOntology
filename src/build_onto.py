@@ -151,6 +151,7 @@ with onto:
         """The spontaneous magnetization, Ms, of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Ms exists within a domain of a ferromagnet.""" 
         prefLabel = en("SpontaneousMagnetization")
         altLabel = pl("Ms")
+        is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)] 
         IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-02-41")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Spontaneous_magnetization")
         
@@ -158,6 +159,7 @@ with onto:
         """She spontaneous magnetic polarisation, Js, of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Js exists within a domain of a ferromagnet.""" 
         prefLabel = en("SpontaneousMagneticPolarisation")
         altLabel = pl("Js")
+        is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFluxDensityUnit)] 
         
     ## magnetocrystalline anisotropy
     
@@ -195,7 +197,7 @@ with onto:
         altLabel = en("K1")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy") 
 
-    class MagnetocrystallineAnisotropy(onto.Property):
+    class MagnetocrystallineAnisotropy(emmo.Property):
         """Magnetocrystalline anisotropy is an intrinsic property. The magnetization process is different when the field is applied along different crystallographic directions, and the anisotropy reflects the crystal symmetry. Its origin is in the crystal-field interaction and spin-orbit coupling, or else the interatomic dipole–dipole interaction."""        
         prefLabel = en("MagnetocrystallineAnisotropy")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q6731660")
@@ -214,14 +216,14 @@ with onto:
     #-----------------------------------------------------
 
     class IntrinsicMagneticProperties(onto.Property):
-        """Intrinsic magnetic material Properties."""
+        """Intrinsic magnetic properties refer to atomic-scale magnetism and depend on the crystal structure"""
         prefLabel = en("IntrinsicMagneticProperties") 
         is_a = [
-                emmo.hasProperty.exactly(1, SpontaneousMagnetization),
+                emmo.hasProperty.some(SpontaneousMagnetization),
                 emmo.hasProperty.some(SpontaneousMagneticPolarisation),
                 emmo.hasProperty.some(MagnetocrystallineAnisotropy),
                 emmo.hasProperty.some(ExchangeStiffnessConstant),
-                emmo.hasProperty.exactly(1, emmo.CurieTemperature),
+                emmo.hasProperty.some(emmo.CurieTemperature),
                 ]
 
     #-----------------------------------------------------
@@ -241,11 +243,44 @@ with onto:
                
     # Other relevant Quantities
 
-    # class ExternalMagneticField(emmo.    
-               
-    # Extrinsic magnetic properties
+    class ExternalMagneticField(emmo.ElectromagneticQuantity):
+        """The external field H′, acting on a sample that is produced by steady electric
+        currents or the stray field of magnets outside the sample volume, is often
+        called the applied field."""   
+        prefLabel = en("ExternalMagneticMaterial")        
+        altLabel = en("AppliedMagneticField, H'")
+        is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)] 
+
+    class DemagnetizingField(emmo.ElectromagneticQuantity):
+        """The magnetic field produced by the magnetization distribution of the sample itself"""   
+        prefLabel = en("DemagnetizingField")        
+        altLabel = en("Hd")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q5255001")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Demagnetizing_field")
+        is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)] 
+
+    class InternalMagneticField(emmo.ElectromagneticQuantity):
+        """The internal field in the sample in our continuous medium approximation is the
+        sum of the external field H′ and the demagnetizing field Hd"""   
+        prefLabel = en("InternalMagneticMaterial")        
+        altLabel = en("H")
+        is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)] 
+
+    class DemagnetizingFactor(emmo.ElectromagneticQuantity):
+        """ 
+        For a uniformly magnetized ellipsoid and the magnetization along a major axis
+        the demagnetizing field is Hd = -N M.
+        
+        The principal components of demagnetizing tensor in diagonal form the demagnetizing factors. Only two of the three are independent because the demagnetizing tensor has unit trace Nx + Ny + Nz = 1.
+        """
+        comment = pl("H = H' - DM, where D is the demagneting factor, M is the magnetization, and H is the internal field")
+        prefLabel = en("DemagnetizingFactor")
+        altLabel = en("N, D")
+        is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
+        IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-63")
+
+    # Hysteresis properties
     
-    '''
     class CoercivityHc(emmo.Coercivity):
         """The internal magnetic held -Hc at which the macroscopic magnetization vanishes is the coercivity or coercive force.
         
@@ -261,55 +296,135 @@ with onto:
         BHc depends on sample shape and has to be corrected for the demagnetizing field."""
         prefLabel = en("CoercivityBHc")
         altLabel = en("BHc")   
-
-    class CoercivityHcPrime(emmo.Coercivity):
+    
+    class CoercivityHcExternal(emmo.Coercivity):
         """The external magnetic held -H'c at which the macroscopic magnetization vanishes. 
         The coercivity on M(H') loop, where H' is the external field."""
-        prefLabel = en("CoercivityHcPrime")
-        altLabel = en("Coercive field, H'c")
+        prefLabel = en("CoercivityHcExternal")
+        altLabel = en("H'c")
     
-    class CoercivityBHcPrime(emmo.Coercivity):
+    class CoercivityBHcExternal(emmo.Coercivity):
         """Defined as external field on the B(H') loop where B = 0. H' is the external field."""
-        prefLabel = en("CoercivityBHcPrime")
+        prefLabel = en("CoercivityBHcExternal")
         altLabel = en("BH'c")   
-
-    class SwtichingFieldCoercivity(emmo.MagneticFieldStrength):
+    
+    class SwitchingFieldCoercivity(emmo.MagneticFieldStrength):
         """Defined by the maximum slope of the descending branch of the M-H hysteresis loop, with H the internal field."""
         comment = pl("This field is often used when analysing the temperature dependend coercivity for deriving the microstructural parameters")
         prefLabel = en("SwitchingFieldCoercivity")
         altLabel = en("Hsw")   
 
-    class SwtichingFieldCoercivityPrime(emmo.MagneticFieldStrength):
+    class SwitchingFieldCoercivityExternal(emmo.MagneticFieldStrength):
         """Defined by the maximum slope of the descending branch of the M-H' hysteresis loop, with H' the external field."""
-        prefLabel = en("SwitchingFieldCoercivityPrime")
+        prefLabel = en("SwitchingFieldCoercivityExternal")
         altLabel = en("H'sw")   
 
     class KneeField(emmo.MagneticFieldStrength):
         """The maximum working field - also named knee field H_K, is defined as the reverse internal field for which the
         magnetization is reduced by 10%; thus it corresponds to the point on the
         magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""
+        prefLabel = en("KneeField")
         altLabel = en("maximum working field, Hk")
 
-    class KneeFieldPrime(emmo.MagneticFieldStrength):
+    class KneeFieldExternal(emmo.MagneticFieldStrength):
         """The maximum working field - also named knee field H_K, is defined as the reverse external field for which the
         magnetization is reduced by 10%; thus it corresponds to the point on the magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""
+        prefLabel = en("KneeFieldExternal")
         altLabel = en("H'k")
+        
+    class Remanence(emmo.ElectromagneticQuantity):
+        """The remanence Mr which remains when the applied field is restored to zero in the hysteresis loop"""    
+        prefLabel = en("Remanence")        
+        altLabel = en("Remanent magnetization, Mr")
+        is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)] 
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q4150950")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Remanence")
+        IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-02-40")
 
-    '''
+    class RemanentMagneticPolarization(emmo.ElectromagneticQuantity):
+        """The remanent magnetic polarization Jr which remains when the applied 
+        field is restored to zero in the hysteresis loop"""    
+        prefLabel = en("RemanentMagneticPolarization")        
+        altLabel = en("Jr")
+        is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFluxDensityUnit)]         
+        IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-02-39")
+        
+    class ExternalSusceptibility(emmo.MagneticSusceptibility):
+        """Ratio of the change of magnetization and the external field: M = chi' H'"""    
+        prefLabel = en("ExternalSusceptibility")        
+        altLabel = en("chi'")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q691463")
 
+    class InternalSusceptibility(emmo.MagneticSusceptibility):
+        """Ratio of the change of magnetization and the internal field: M = chi H"""    
+        prefLabel = en("ExternalSusceptibility")        
+        altLabel = en("chi'")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q691463")
+        
+    class AbsolutePermeability(emmo.ElectromagneticQuantity):
+        """Ratio of the change of magnetic flux and the internal field: B = mu H"""    
+        prefLabel = en("AbsolutePermeability")        
+        altLabel = en("absolute permeability, mu")
+        is_a = [emmo.hasMeasurementUnit.some(emmo.PermeabilityUnit)]         
+        IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-28")
+        
+    # RelativePermability already defined in emmo    
+
+    class MaximumEnergyProduct(emmo.ElectromagneticQuantity):
+        """
+        The value of the maximum energy product (BH)max is deduced from the a plot of BH(B) for all points 
+        of the second quadrant of the B-H hysteresis loop. BH varies with B going through a maximum value (BH)max 
+        for a particular value of B.
+        
+        (BH)max equals the area of the largest second-quadrant rectangle which fits under the B-H loop.
+        
+        The maximum energy product is considered to be the best single index of quality of a permanent magnet material.
+        It is twice the energy stored in the stray field of the magnet of optimal shape.
+        """
+        prefLabel = en("MaximumEnergyProduct")        
+        altLabel = en("(BH)max")
+        is_a = [emmo.hasMeasurementUnit.some(emmo.JoulePerCubicMetre)]
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Maximum_energy_product")
+        
     #-----------------------------------------------------
 
-    class ExtrinsicMagneticMaterialProperty(onto.Property):
-        """Extrinsic magnetic material Properties depend on the microstructure of the specimen."""
+    class MagneticHysteresisProperties(emmo.Property):
+        """The essential practical characteristic of any ferromagnetic material is the irreversible nonlinear response of magnetization M to an imposed magnetic field H. This response is given by the hysteresis loop. The charactertics of hystereis loop are known as hysteresis properties.
+        
+        Instead of M(H), other quantities can be used to plot a hystereis loop. 
+        
+        M(H): Magnetization as function of the internal field. M(H'): Magnetization as function of the external field.  
+        
+        J(H): Magnetic polarization as function of the internal field. J(H'): Magnetic polarization as function of the external field.  
+        
+        B(H): Magnetic flux density as function of the internal field. B(H'): Magnetic flux density as function of the external field.  
+        """
+        prefLabel = en("MagneticHysteresisProperties")
+        is_a = [
+                emmo.hasProperty.some(CoercivityHc),
+                emmo.hasProperty.some(CoercivityBHc),
+                emmo.hasProperty.some(CoercivityHcExternal),
+                emmo.hasProperty.some(CoercivityBHcExternal),
+                emmo.hasProperty.some(SwitchingFieldCoercivity),
+                emmo.hasProperty.some(SwitchingFieldCoercivityExternal),
+                emmo.hasProperty.some(KneeField),
+                emmo.hasProperty.some(KneeFieldExternal),
+                emmo.hasProperty.some(Remanence),
+                emmo.hasProperty.some(RemanentMagneticPolarization),
+                emmo.hasProperty.some(MaximumEnergyProduct)
+               ]
+
+    class ExtrinsicMagneticProperty(emmo.Property):
+        """Extrinsic magnetic Properties depend on the microstructure."""
         prefLabel = en("ExtrinsicMagneticMaterialProperty")
-        # 
-        is_a = [emmo.hasProperty.exactly(1, emmo.Coercivity),
-                #emmo.hasProperty.exactly(1, Remanence),
-                #emmo.hasProperty.exactly(1, MagneticKneeField),
-                #emmo.hasProperty.exactly(1, SaturationMagnetization),
-                #emmo.hasProperty.exactly(1, MagnetizationTemperature),
-                #emmo.hasProperty.exactly(1, DemagnetizationFactor),    
+        is_a = [
+                emmo.hasProperty.some(MagneticHysteresisProperties),
+                emmo.hasProperty.some(DemagnetizingFactor),
+                emmo.hasProperty.some(AbsolutePermeability),
+                emmo.hasProperty.some(emmo.RelativePermeability),
                 ]
+                
+    #-----------------------------------------------------
                 
 onto.sync_attributes(name_policy='uuid', class_docstring='elucidation',name_prefix='EMMO_')
 

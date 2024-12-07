@@ -32,7 +32,9 @@ The following text books have been used
 
 "Magnetism and Magnetic Materials" by J.M.D Coey, Cambridge University Press, 2009.  
 "Magnetism II-Materials and Applications" edited by Étienne du Trémolet Lacheisserie, Damien Gignoux, Michel Schlenker,Springer, 2002.  
-"Permanent Magnetism" by Ralph Skomski and J.M.D. Coey, Institute of Physics Publishing, 1999.  
+"Permanent Magnetism" by Ralph Skomski and J.M.D. Coey, Institute of Physics Publishing, 1999. 
+
+"Introduction to magnetic materials" by B.D. Cullity and C.D. Graham, Introduction to magnetic materials, John Wiley & Sons, Second Edition, 2009. 
 
 #### EMMO compatibility
 We use `EMMOntoPy v0.7.2` to describe the magnetic materials ontology. 
