@@ -250,8 +250,30 @@ with onto:
                 emmo.hasProperty.some(emmo.NeelTemperature)
                 ]
     #-----------------------------------------------------
-
-    # Magnetic material
+    
+    # Characterisation data
+    
+    ### XRD
+    
+    class XRDTwoThetaAngles(emmo.Vector):
+        """the 2theta angles at which the counts are measured during X-ray diffraction"""
+        prefLabel = en("XRDTwoThetaAngles")
+        is_a = [ emmo.hasMeasurementUnit.some(emmo.Degree), ]
+    
+    class XRDCounts(emmo.Vector):
+        """counts as a function of 2theta angle obtained from X-ray diffraction"""
+        prefLabel = en("XRDCounts")
+        is_a = [ emmo.hasMeasurementUnit.some(emmo.CountingUnit), ]
+    
+    
+    class XrayDiffractionData(emmo.Property,emmo.Matrix):
+        """counts as a function of 2theta angle obtained from X-ray diffraction"""
+        prefLabel = en("XrayDiffractionData")
+        is_a = [
+                emmo.hasProperty.exactly(1,XRDTwoThetaAngles),
+                emmo.hasProperty.exactly(1,XRDCounts),]
+        
+    ### magnetic materials
     
     class MagneticMaterial(emmo.MaterialByStructure):
         """Magnetically ordered solids which have atomic magnetic moments due to unpaired
@@ -263,8 +285,7 @@ with onto:
                 emmo.hasProperty.exactly(1,emmo.Density),  
                 emmo.hasProperty.exactly(1,IntrinsicMagneticProperties),
                ]
-    #-----------------------------------------------------
-
+ 
     class AmorphousMagneticMaterial(emmo.AmorphousMaterial,MagneticMaterial):
         """Any amorphous structure entails a distribution of nearest-neighbour environments and bond lengths for a given magnetic atom, described by the radial distribution function and higher-order correlation functions. These distributions lead to a distribution of site moments, exchange interactions, dipolar and crystal fields, all of which influence the nature of the magnetic order"""
         prefLabel = en("AmorphousMagneticMaterial")
@@ -275,6 +296,7 @@ with onto:
         prefLabel = en("CrystallineMagneticMaterial")
         is_a = [               
                 emmo.hasProperty.exactly(1,emmo.CrystalStructure),
+                emmo.hasProperty.min(0,XrayDiffractionData),
                ]
                
     # Internal and external magnetic fields
@@ -660,6 +682,7 @@ with onto:
                 emmo.hasSpatialPart.min(0,SecondaryNonMagneticPhase),
                 emmo.hasSpatialPart.min(0,GrainboundaryPhase),
                 emmo.hasProperty.exactly(1,ExtrinsicMagneticProperties), 
+                emmo.hasProperty.min(0,XrayDiffractionData),
                ]
     
     class BulkMagnet(Magnet,emmo.SizeDefinedMaterial):
@@ -679,6 +702,23 @@ with onto:
                  emmo.hasProperty.some(emmo.Thickness),  
                ]
              
+    # Magnetic multilayers
+
+    ## Magnetotransport
+
+    class Magnetoresistance(emmo.RatioQuantity):
+        """
+        Change of the resistivity of a substance due to an applied magnetic field.
+        
+        Magnetoresistance can be defined as MR = [ϱ(B) − ϱ(0)]/ϱ(0). 
+        """        
+        prefLabel = en("Magnetoresistance")
+        altLabel = en("MR")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q58347")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnetoresistance")  
+        IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-83") 
+        is_a = [ emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit), ] 
+            
     class SpacerLayer(emmo.Material):
         """Nonmagnetic thin film materials"""
         prefLabel = en("SpacerLayer")
@@ -700,7 +740,8 @@ with onto:
                  emmo.hasSpatialTile.some(ThinfilmMagnet),
                  emmo.hasSpatialTile.min(0,SpacerLayer),
                  emmo.hasProperty.exactly(1,SampleGeometry),
-                 emmo.hasProperty.exactly(1,StackingSquence)
+                 emmo.hasProperty.exactly(1,StackingSquence),
+                 emmo.hasProperty.min(0,Magnetoresistance),
                ]         
 
 onto.sync_attributes(name_policy='uuid', class_docstring='elucidation',name_prefix='EMMO_')
