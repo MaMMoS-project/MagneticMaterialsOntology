@@ -605,7 +605,8 @@ with onto:
         is_a = [ 
                 emmo.hasProperty.exactly(1,emmo.VolumeFraction),
                 emmo.hasProperty.exactly(1,GrainSizeDistribution),
-                emmo.hasProperty.exactly(1,EasyAxisDistributionSigma)
+                emmo.hasProperty.exactly(1,EasyAxisDistributionSigma),
+                emmo.hasProperty.min(0,Grain),
                 ]
 
     class AmorphousMainMagneticPhase(AmorphousMagneticMaterial,emmo.PhaseOfMatter):
@@ -618,20 +619,33 @@ with onto:
     class MainMagneticPhase(CrystallineMagneticMaterial,emmo.PhaseOfMatter):
         """Main phase of the magnet"""
         prefLabel = en("MainMagneticPhase")
+        is_a = [
+                emmo.hasSpatialPart.exactly(1,AmorphousMainMagneticPhase|CrystallineMainMagneticPhase)
+                ]
         
     class SecondaryMagneticPhase(MagneticMaterial,emmo.PhaseOfMatter):
-        """Material phase of the magnet"""
+        """A magnetic in the magnet phase for example as soft magnetic inclusions"""
         prefLabel = en("SecondaryMagneticPhase")
-        pass
-
+        is_a = [emmo.hasSpatialPart.min(0,GrainSizeDistribution),]
+        
     class SecondaryNonMagneticPhase(emmo.Material,emmo.PhaseOfMatter):
-        """Material phase of the magnet"""
-        pass        
+        """A non-magnetic phase in the magnet for example at triple junctions"""
+        prefLabel = en("SecondaryNonMagneticPhase")        
+        is_a = [
+                emmo.hasProperty.min(0,emmo.ChemicalComposition),
+                emmo.hasSpatialPart.min(0,GrainSizeDistribution),
+               ]
         
     class GrainboundaryPhase(emmo.Material,emmo.PhaseOfMatter):
-        """Material of the grain boundary"""          
+        """Material separating grains in a microstructure"""
+        comment = en("In permanent magnets, the grain boundary phase inhibits the propagation of the magnetic reversal from grain to grain.")
+        preLabel = en("GrainboundaryPhase")        
+        is_a = [
+                emmo.hasSpatialPart.exactly(1,MagneticMaterial|emmo.Material),
+                emmo.hasProperty.min(0,emmo.ChemicalComposition),
+                emmo.hasProperty.some(emmo.Thickness),
+               ]
     
-
     class Magnet(emmo.FunctionallyDefinedMaterial):
         """Piece of matter made of one or more magnetic material."""
         prefLabel = en("Magnet")
@@ -641,25 +655,28 @@ with onto:
         is_a = [               
                 emmo.hasProperty.min(0,emmo.MaterialsProcessing),
                 emmo.hasProperty.min(0,emmo.WorkpieceForming),
-                emmo.hasProperty.exactly(1,SampleGeometry),
+                emmo.hasSpatialPart.exactly(1,MainMagneticPhase),
+                emmo.hasSpatialPart.min(0,SecondaryMagneticPhase),
+                emmo.hasSpatialPart.min(0,SecondaryNonMagneticPhase),
+                emmo.hasSpatialPart.min(0,GrainboundaryPhase),
                 emmo.hasProperty.exactly(1,ExtrinsicMagneticProperties), 
-                emmo.hasProperty.exactly(1,ShapeAnisotropy),
-                emmo.hasSpatialPart.some(MainMagneticPhase)
                ]
     
     class BulkMagnet(Magnet,emmo.SizeDefinedMaterial):
         """Piece of matter made of one or more magnetic material."""
         prefLabel = en("BulkMagnet")
         is_a = [               
-                 emmo.hasProperty.exactly(1,SampleGeometry),
+                emmo.hasProperty.exactly(1,SampleGeometry),
+                 emmo.hasProperty.exactly(1,ShapeAnisotropy),
+                 emmo.hasProperty.exactly(1,DemagnetizingFactor),
                ]
 
     class ThinfilmMagnet(Magnet,emmo.SizeDefinedMaterial):
         """Piece of matter made of one or more magnetic material in form a thin film."""
         prefLabel = en("ThinfilmMagnet")
         is_a = [
-                 emmo.hasProperty.some(emmo.Thickness),  
                  emmo.hasProperty.min(0,SampleGeometry),                 
+                 emmo.hasProperty.some(emmo.Thickness),  
                ]
              
     class SpacerLayer(emmo.Material):
@@ -686,7 +703,6 @@ with onto:
                  emmo.hasProperty.exactly(1,StackingSquence)
                ]         
 
-    
 onto.sync_attributes(name_policy='uuid', class_docstring='elucidation',name_prefix='EMMO_')
 
 #################################################################
