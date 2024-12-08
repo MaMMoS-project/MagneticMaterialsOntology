@@ -579,12 +579,10 @@ with onto:
                  emmo.hasProperty.some(emmo.Thickness)        
                ]
         
-    '''    
-    class StackingSquence(emmo.NominalProperty):
-        """Description of the squence of layers in multilayer film"""
-        preLabel = en("StackingSquence")
-        is_a = [emmo.hasStringValue.min(2,emmo.String)]
-    '''
+    class StackingSquence(emmo.NominalProperty):    
+        """Sequence of layer in a multilayer stack"""
+        prefLabel = en("StackingSquence")
+        is_a = [ emmo.hasStringValue.some(emmo.String) ]
     
     class MultilayerMagnet(emmo.SpatialTiling,Magnet):
         """Piece of matter made of one or more magnetic material in form a multiple layers of material."""
@@ -593,6 +591,7 @@ with onto:
                  emmo.hasSpatialTile.some(ThinfilmMagnet),
                  emmo.hasSpatialTile.min(0,SpacerLayer),
                  emmo.hasProperty.exactly(1,SampleGeometry),
+                 emmo.hasProperty.exactly(1,StackingSquence)
                ]         
 
     
