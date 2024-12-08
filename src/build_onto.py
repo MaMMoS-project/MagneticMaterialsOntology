@@ -274,7 +274,7 @@ with onto:
         """Magnetic material with crystalline structure"""
         prefLabel = en("CrystallineMagneticMaterial")
         is_a = [               
-                emmo.hasProperty.some(emmo.CrystalStructure),
+                emmo.hasProperty.exactly(1,emmo.CrystalStructure),
                ]
                
     # Internal and external magnetic fields
@@ -542,6 +542,24 @@ with onto:
         altLabel = en("crystal orientation")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q11799166")
         is_a = [emmo.hasProperty.exactly(1,EulerAngles)]
+
+    class GrainMisalignmentAngle(emmo.Angle):    
+        """
+        Standard deviation of the angle of the easy axis with respect to the alignment direction
+        """    
+        prefLabel = en("GrainMisalignmentAngle")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q117089304")
+        
+    class EasyAxisDistributionSigma(emmo.Angle):
+        """
+        Standard deviation of the grain misalignment angle in an ensembles of misaligned magnetic particles  
+
+        This refers not only to isotropic magnets but also to
+        partly aligned or textured magnets, where the easy-axis distribution is described
+        by a function P(theta).        
+        """
+        prefLabel = en("EasyAxisDistributionSigma")
+
     
     class Grain(emmo.Crystal):
         """A grain is a small or even microscopic crystal which forms, for example, during the cooling of many materials."""
@@ -553,22 +571,66 @@ with onto:
                 emmo.hasProperty.exactly(1,CrystalStructure),
                 emmo.hasProperty.exactly(1,emmo.ChemicalComposition),
                 emmo.hasProperty.exactly(1,emmo.Diameter),
-                emmo.hasProperty.exactly(1,CrystallographicOrientation)
+                emmo.hasProperty.exactly(1,CrystallographicOrientation | GrainMisalignmentAngle)
                ]
+    
+    
+    class MeanGrainSize(emmo.Length):
+        """The mean of the grain diameter of grains. Diameter is the diameter of a sphere with equivalent volume"""
+        prefLabel = en("MeanGrainSize")
         
-    class MainMagneticPhase(MagneticMaterial):
+    class SigmaGrainSize(emmo.Length):
+        """The standard deviation of the grain diameter of grains. Diameter is the diameter of a sphere with equivalent volume"""
+        prefLabel = en("SigmaGrainSize")
+
+    class GrainSizeDistribution(emmo.Property):
+        """
+        Function representing relative sizes of particles in a system.
+        
+        Given by its mean and standard deviation of a lognormal distribution
+        """    
+        prefLabel = en("GrainSizeDistribution")
+        altLabel = en("ParticleSizeDistribution")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Particle-size_distribution")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q2054937")
+        is_a = [
+                emmo.hasProperty.exactly(1,MeanGrainSize),
+                emmo.hasProperty.exactly(1,SigmaGrainSize),
+                ]
+        
+        
+    class CrystallineMainMagneticPhase(CrystallineMagneticMaterial,emmo.PhaseOfMatter):
+        """Main phase of the magnet when it is crystalline"""
+        prefLabel = en("CrystallineMainMagneticPhase")
+        is_a = [ 
+                emmo.hasProperty.exactly(1,emmo.VolumeFraction),
+                emmo.hasProperty.exactly(1,GrainSizeDistribution),
+                emmo.hasProperty.exactly(1,EasyAxisDistributionSigma)
+                ]
+
+    class AmorphousMainMagneticPhase(AmorphousMagneticMaterial,emmo.PhaseOfMatter):
+        """Main phase of the magnet when it is amorphous"""
+        prefLabel = en("AmorphousMainMagneticPhase")
+        is_a = [ 
+                emmo.hasProperty.min(0,emmo.VolumeFraction),
+                ]
+
+    class MainMagneticPhase(CrystallineMagneticMaterial,emmo.PhaseOfMatter):
         """Main phase of the magnet"""
         prefLabel = en("MainMagneticPhase")
-        is_a = [ emmo.hasProperty.min(0,emmo.VolumeFraction),
-                 emmo.hasSpatialPart.exactly(1,AmorphousMagneticMaterial | CrystallineMagneticMaterial)]
         
-    '''
-    class SecondaryMagneticPhase(MagneticMaterial):
+    class SecondaryMagneticPhase(MagneticMaterial,emmo.PhaseOfMatter):
+        """Material phase of the magnet"""
+        prefLabel = en("SecondaryMagneticPhase")
         pass
 
-    class SecondaryNonMagneticPhase(emmo.Phase):
+    class SecondaryNonMagneticPhase(emmo.Material,emmo.PhaseOfMatter):
+        """Material phase of the magnet"""
         pass        
-    '''
+        
+    class GrainboundaryPhase(emmo.Material,emmo.PhaseOfMatter):
+        """Material of the grain boundary"""          
+    
 
     class Magnet(emmo.FunctionallyDefinedMaterial):
         """Piece of matter made of one or more magnetic material."""
