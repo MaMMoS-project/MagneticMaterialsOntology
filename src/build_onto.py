@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from ontopy import World
-from owlready2 import Thing, DataProperty, ObjectProperty, locstr, AnnotationProperty
+from owlready2 import Thing, DataProperty, ObjectProperty, locstr, AnnotationProperty, Not
 import sys
 __version__ = "0.0.1"  # Version of this ontology
 
@@ -30,12 +30,12 @@ onto.imported_ontologies.append(emmo)
 
 # Add new classes and object/data properties needed by the use case
 with onto:
-
     # additional Annotation Properties
-    
+         
     class IECEntry(AnnotationProperty):
         pass
-        
+    
+    
     class wikipediaReference(AnnotationProperty):
         pass
 
@@ -45,7 +45,7 @@ with onto:
     # crystal structure
         
     ## space group and lattice constants
-    
+ 
     class SpaceGroup(emmo.NominalProperty):  # from define_ontology.py
         """A spacegroup is the symmetry group off all symmetry operations
         that apply to a crystal structure.
@@ -60,7 +60,8 @@ with onto:
         is_a = [emmo.hasStringValue.some(emmo.String)]
         wikidataReference = pl("https://www.wikidata.org/wiki/Q899033")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Space_group")
-        
+
+       
     class LatticeConstantA(emmo.Length):
         """The length of lattice vectors `a`, where lattice vectors `a`, `b` and `c` defines the unit cell"""
         prefLabel = en("LatticeConstantA")
@@ -109,7 +110,7 @@ with onto:
         altLabel = en("UnitCellVolume")
 
     #-----------------------------------------------------
-    class CrystalStructure(emmo.Crystal):
+    class CrystalStructure(emmo.Property):
         """Description of ordered arrangement of atoms"""
         prefLabel = en("CrystalStructure")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q895901")
@@ -125,7 +126,8 @@ with onto:
                 emmo.hasProperty.exactly(1, CellVolume),
                 ]
     #-----------------------------------------------------
-        
+
+  
     # energy densities
 
     class EnergyDensity(emmo.PhysicalQuantity):
@@ -194,6 +196,22 @@ with onto:
         altLabel = en("K1")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy") 
 
+    class UniaxialMagnetocrystallineAnistropy(emmo.Property):
+        """Uniaxial anisotropy favours alignment of the magnetization along an easy axis"""
+        prefLabel = pl("UniaxialMagnetocrystallineAnistropy")
+        is_a = [
+               emmo.hasProperty.exactly(1,MagnetocrystallineAnisotropyConstantK1),
+               emmo.hasProperty.min(0,MagnetocrystallineAnisotropyConstantK2c ) 
+               ]        
+         
+    class CubicMagnetocrystallineAnistropy(emmo.Property):
+        """Cubic crystals anisotropy"""
+        prefLabel = pl("CubicMagnetocrystallineAnistropy")
+        is_a = [
+               emmo.hasProperty.exactly(1,MagnetocrystallineAnisotropyConstantK1c),
+               emmo.hasProperty.min(0,MagnetocrystallineAnisotropyConstantK2c ) 
+               ]        
+
     class MagnetocrystallineAnisotropy(emmo.Property):
         """Magnetocrystalline anisotropy is an intrinsic property. The magnetization process is different when the field is applied along different crystallographic directions, and the anisotropy reflects the crystal symmetry. Its origin is in the crystal-field interaction and spin-orbit coupling, or else the interatomic dipole–dipole interaction.
         
@@ -204,14 +222,12 @@ with onto:
         wikidataReference = pl("https://www.wikidata.org/wiki/Q6731660")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy")
         is_a = [
-                emmo.hasProperty.some(MagnetocrystallineAnisotropyEnergy),
-                emmo.hasProperty.some(MagnetocrystallineAnisotropyConstantK1),
-                emmo.hasProperty.some(MagnetocrystallineAnisotropyConstantK2),
-                emmo.hasProperty.some(MagnetocrystallineAnisotropyConstantK1c),
-                emmo.hasProperty.some(MagnetocrystallineAnisotropyConstantK2c),
-                ]
+                emmo.hasProperty.exactly(1, MagnetocrystallineAnisotropyEnergy | UniaxialMagnetocrystallineAnistropy | CubicMagnetocrystallineAnistropy)
+                 ]
 
     ## Exchange
+    
+
     
     class ExchangeStiffnessConstant(LineEnergy):
         """Exchange constant, A, in the continuum theory of micromagnetism.
@@ -237,16 +253,15 @@ with onto:
 
     # Magnetic material
     
-    class MagneticMaterial(emmo.FunctionallyDefinedMaterial):
+    class MagneticMaterial(emmo.MaterialByStructure):
         """Magnetically ordered solids which have atomic magnetic moments due to unpaired
         electrons."""
         prefLabel = en("MagneticMaterial")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q11587827")
         is_a = [               
-                emmo.hasSpatialDirectPart.some(emmo.PhaseOfMatter), 
-                emmo.hasProperty.some(emmo.ChemicalComposition),
-                emmo.hasProperty.some(emmo.Density),  
-                emmo.hasProperty.some(IntrinsicMagneticProperties),
+                emmo.hasProperty.exactly(1,emmo.ChemicalComposition),
+                emmo.hasProperty.exactly(1,emmo.Density),  
+                emmo.hasProperty.exactly(1,IntrinsicMagneticProperties),
                ]
     #-----------------------------------------------------
 
@@ -259,7 +274,7 @@ with onto:
         """Magnetic material with crystalline structure"""
         prefLabel = en("CrystallineMagneticMaterial")
         is_a = [               
-                emmo.hasSpatialPart.only(emmo.CrystalStructure),
+                emmo.hasProperty.some(emmo.CrystalStructure),
                ]
                
     # Internal and external magnetic fields
@@ -422,27 +437,27 @@ with onto:
         """
         prefLabel = en("MagneticHysteresisProperties")
         is_a = [
-                emmo.hasProperty.some(CoercivityHc),
-                emmo.hasProperty.some(CoercivityBHc),
-                emmo.hasProperty.some(CoercivityHcExternal),
-                emmo.hasProperty.some(CoercivityBHcExternal),
-                emmo.hasProperty.some(SwitchingFieldCoercivity),
-                emmo.hasProperty.some(SwitchingFieldCoercivityExternal),
-                emmo.hasProperty.some(KneeField),
-                emmo.hasProperty.some(KneeFieldExternal),
-                emmo.hasProperty.some(Remanence),
-                emmo.hasProperty.some(RemanentMagneticPolarization),
-                emmo.hasProperty.some(MaximumEnergyProduct)
+                emmo.hasProperty.exactly(1,CoercivityHc),
+                emmo.hasProperty.min(0,CoercivityBHc),
+                emmo.hasProperty.min(0,CoercivityHcExternal),
+                emmo.hasProperty.min(0,CoercivityBHcExternal),
+                emmo.hasProperty.min(0,SwitchingFieldCoercivity),
+                emmo.hasProperty.min(0,SwitchingFieldCoercivityExternal),
+                emmo.hasProperty.min(0,KneeField),
+                emmo.hasProperty.min(0,KneeFieldExternal),
+                emmo.hasProperty.exactly(1,Remanence),
+                emmo.hasProperty.min(0,RemanentMagneticPolarization),
+                emmo.hasProperty.min(0,MaximumEnergyProduct)
                ]
 
     class ExtrinsicMagneticProperties(emmo.Property):
         """Extrinsic magnetic Properties depend on the microstructure."""
         prefLabel = en("ExtrinsicMagneticProperties")
         is_a = [
-                emmo.hasProperty.some(MagneticHysteresisProperties),
-                emmo.hasProperty.some(DemagnetizingFactor),
-                emmo.hasProperty.some(AbsolutePermeability),
-                emmo.hasProperty.some(emmo.RelativePermeability),
+                emmo.hasProperty.exactly(1,MagneticHysteresisProperties),
+                emmo.hasProperty.min(0,DemagnetizingFactor),
+                emmo.hasProperty.min(0,AbsolutePermeability),
+                emmo.hasProperty.min(0,emmo.RelativePermeability),
                 ]
                 
     #-----------------------------------------------------
@@ -477,8 +492,7 @@ with onto:
         wikidataReference = pl("https://www.wikidata.org/wiki/Q207961")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Shape")
         is_a = [               
-                emmo.hasSpatialDirectPart.some(emmo.Cylinder), 
-                emmo.hasDirectPart.some(RectangularCuboid), 
+                emmo.hasSpatialDirectPart.exactly(1,emmo.Cylinder | RectangularCuboid) 
                ]
                
     class SampleGeometry(emmo.Property):
@@ -500,7 +514,6 @@ with onto:
         """
         prefLabel = en("ShapeAnisotropyConstant")
         altLabel = en("K1sh")
-        is_a = [ emmo.hasProperty.exactly(1,DemagnetizingFactor) ]
         
     class ShapeAnisotropy(emmo.Property):
         """
@@ -515,37 +528,71 @@ with onto:
                  emmo.hasProperty.exactly(1,ShapeAnisotropyConstant),
                ]
     
-    class Magnet(emmo.WorkPiece):
+    ### Grains and granular structure
+    
+    '''    
+    class MainMagneticPhase(MagneticMaterial):
+        pass
+        
+    class SecondaryMagneticPhase(MagneticMaterial):
+        pass
+
+    class SecondaryNonMagneticPhase(emmo.Phase):
+        pass        
+    '''
+
+    class Magnet(emmo.FunctionallyDefinedMaterial):
         """Piece of matter made of one or more magnetic material."""
         prefLabel = en("Magnet")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q11421")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnet")
         IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=151-14-06")
         is_a = [               
-                emmo.hasProperty.some(emmo.MaterialsProcessing),
-                emmo.hasProperty.some(emmo.WorkpieceForming),
-                emmo.hasSpatialDirectPart.some(MagneticMaterial), 
-                emmo.hasProperty.some(ExtrinsicMagneticProperties), 
+                emmo.hasProperty.min(0,emmo.MaterialsProcessing),
+                emmo.hasProperty.min(0,emmo.WorkpieceForming),
                 emmo.hasProperty.exactly(1,SampleGeometry),
-                emmo.hasProperty.some(ShapeAnisotropy),
+                emmo.hasProperty.exactly(1,ExtrinsicMagneticProperties), 
+                emmo.hasProperty.exactly(1,ShapeAnisotropy),
                ]
     
-    class BulkMagnet(emmo.WorkPiece,emmo.SizeDefinedMaterial):
+    class BulkMagnet(Magnet,emmo.SizeDefinedMaterial):
         """Piece of matter made of one or more magnetic material."""
         prefLabel = en("BulkMagnet")
         is_a = [               
+                 emmo.hasProperty.exactly(1,SampleGeometry),
                ]
 
-    class ThinfilmMagnet(emmo.WorkPiece,Magnet):
+    class ThinfilmMagnet(Magnet,emmo.SizeDefinedMaterial):
         """Piece of matter made of one or more magnetic material in form a thin film."""
         prefLabel = en("ThinfilmMagnet")
-        is_a = [               
+        is_a = [
+                 emmo.hasProperty.some(emmo.Thickness),  
+                 emmo.hasProperty.min(0,SampleGeometry),                 
                ]
              
-    class MultilayerMagnet(emmo.WorkPiece,emmo.SpatialTiling,Magnet):
+    class SpacerLayer(emmo.Material):
+        """Nonmagnetic thin film materials"""
+        prefLabel = en("SpacerLayer")
+        is_a = [ 
+                 Not(MagneticMaterial),
+                 emmo.hasProperty.exactly(1,emmo.ChemicalComposition),
+                 emmo.hasProperty.some(emmo.Thickness)        
+               ]
+        
+    '''    
+    class StackingSquence(emmo.NominalProperty):
+        """Description of the squence of layers in multilayer film"""
+        preLabel = en("StackingSquence")
+        is_a = [emmo.hasStringValue.min(2,emmo.String)]
+    '''
+    
+    class MultilayerMagnet(emmo.SpatialTiling,Magnet):
         """Piece of matter made of one or more magnetic material in form a multiple layers of material."""
         prefLabel = en("MultilayerMagnet")
         is_a = [               
+                 emmo.hasSpatialTile.some(ThinfilmMagnet),
+                 emmo.hasSpatialTile.min(0,SpacerLayer),
+                 emmo.hasProperty.exactly(1,SampleGeometry),
                ]         
 
     

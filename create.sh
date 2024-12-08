@@ -4,6 +4,10 @@
 CHECK=../onto/emmocheck
 DOC=../onto/ontodoc
 
+echo "remove previous files ..."
+rm demo.sqlite3
+rm magnetic_material_mammos.ttl
+
 echo "building ontology ..."
 python src/build_onto.py
 ls -ls magnetic_material_mammos.ttl
