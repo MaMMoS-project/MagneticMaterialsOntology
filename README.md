@@ -26,6 +26,31 @@ compatibilies:
 | [EMMO](https://github.com/emmo-repo/EMMO)  | 1.0.0-RC3 compacted | https://emmo-repo.github.io/versions/1.0.0-rc3/emmo.ttl |
 
 
+Using
+-----
+
+You may view the ontology by browsing through the [html documentation](https://raw.githack.com/MaMMoS-project/MagneticMaterialsOntology/f8a614da5c8db8cb7da2cf03aa7812c7e3efd075/doc/magnetic_material_mammos.html)  
+
+Alternatively you can use [Protégé](https://protege.stanford.edu/)
+* Install Protégé
+* Download the file `magnetic_material_mammos.ttl`
+  Click on the file  
+  Select the icon for `Downloading raw file` 
+* Start Protégé and open the magnetic materials ontololgy
+  File --> Open magnetic_material_mammos.ttl 
+* Run the Reasoner  
+  Reasoner --> select HermiT  
+  Reasoner --> Start reasoner 
+* Navigate  
+  Open the Classes Tab (Window --> Tab: select Classes)  
+  Select Inferred at the top right pull down menu of the Classes Tab  
+  Use Ctrl-F (Edit --> Find) to search for a term for example type "Magnet"
+* Visualize the knowledge tree  
+  Open the OntoGraf Tab (Window --> Tab: select OntoGraf)  
+  Select an entity in the Classes Tab to visualize
+* Reset view (if something goes wrong)  
+  Window --> Reset selected tab to default state
+  
 Building
 --------
 MagneticMaterialsOntology is built using tools provided by EMMO. For more details see the [src directory](https://github.com/MaMMoS-project/MagneticMaterialsOntology/tree/main/src)
