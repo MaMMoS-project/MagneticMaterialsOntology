@@ -33,7 +33,7 @@ You may view the ontology by browsing through the [html documentation](https://r
 
 Alternatively you can use [Protégé](https://protege.stanford.edu/)
 * Install Protégé
-* Download the file `magnetic_material_mammos.ttl`
+* Download the file `magnetic_material_mammos.ttl`  
   Click on the file  
   Select the icon for `Downloading raw file` 
 * Start Protégé and open the magnetic materials ontololgy
