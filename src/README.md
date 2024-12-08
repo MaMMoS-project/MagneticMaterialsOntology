@@ -30,11 +30,6 @@ or simply run
 
 which builds the ontology, runs the emmocheck and creates a documentation. Please set the relevant path to `emmocheck` and `ontodoc` in the bash script `create.sh`
 
-a simple way to commit changes is to use
-```
-./commit.sh -m "your comment"
-```
-
 
 ### Strategy
 
