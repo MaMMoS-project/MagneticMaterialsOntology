@@ -7,4 +7,4 @@ We use `ontodoc` from EMMOntoPy  as follows
 
 for creating the html file
 
-[view html file](https://raw.githack.com/MaMMoS-project/MagneticMaterialsOntology/c1252fcad0b4c6f667a92a53efbccadf5251195b/doc/magnetic_material_mammos.html)
+[view html file](https://raw.githack.com/MaMMoS-project/MagneticMaterialsOntology/f8a614da5c8db8cb7da2cf03aa7812c7e3efd075/doc/magnetic_material_mammos.html)
