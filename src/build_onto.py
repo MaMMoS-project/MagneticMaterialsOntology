@@ -530,10 +530,39 @@ with onto:
     
     ### Grains and granular structure
     
-    '''    
-    class MainMagneticPhase(MagneticMaterial):
-        pass
+    class EulerAngles(emmo.Quantity):
+        """three angles introduced by Leonhard Euler to describe the orientation of a rigid body with respect to a fixed coordinate system"""
+        prefLabel = en("EulerAngles")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q751290")
+        is_a = [emmo.hasProperty.exactly(3,emmo.Angle)]
+    
+    class CrystallographicOrientation(emmo.Property):
+        """relative direction of a crystallite in space with respect to another, disregarding distance"""
+        prefLabel = en("CrystallographicOrientation")
+        altLabel = en("crystal orientation")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q11799166")
+        is_a = [emmo.hasProperty.exactly(1,EulerAngles)]
+    
+    class Grain(emmo.Crystal):
+        """A grain is a small or even microscopic crystal which forms, for example, during the cooling of many materials."""
+        prefLabel = en("Grain")
+        altLabel = en("Crystallite")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q899604")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Crystallite")
+        is_a = [
+                emmo.hasProperty.exactly(1,CrystalStructure),
+                emmo.hasProperty.exactly(1,emmo.ChemicalComposition),
+                emmo.hasProperty.exactly(1,emmo.Diameter),
+                emmo.hasProperty.exactly(1,CrystallographicOrientation)
+               ]
         
+    class MainMagneticPhase(MagneticMaterial):
+        """Main phase of the magnet"""
+        prefLabel = en("MainMagneticPhase")
+        is_a = [ emmo.hasProperty.min(0,emmo.VolumeFraction),
+                 emmo.hasSpatialPart.exactly(1,AmorphousMagneticMaterial | CrystallineMagneticMaterial)]
+        
+    '''
     class SecondaryMagneticPhase(MagneticMaterial):
         pass
 
@@ -553,6 +582,7 @@ with onto:
                 emmo.hasProperty.exactly(1,SampleGeometry),
                 emmo.hasProperty.exactly(1,ExtrinsicMagneticProperties), 
                 emmo.hasProperty.exactly(1,ShapeAnisotropy),
+                emmo.hasSpatialPart.some(MainMagneticPhase)
                ]
     
     class BulkMagnet(Magnet,emmo.SizeDefinedMaterial):
