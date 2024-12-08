@@ -160,14 +160,127 @@ with onto:
         altLabel = pl("Js")
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFluxDensityUnit)] 
         
-    ## magnetocrystalline anisotropy
+    ## anisotropy
+
+    class MagneticAnisotropy(emmo.Property):
+        """Magnetic anisotropy means that the magnetic properties depend on the direction in which they are measured."""
+        prefLabel = en("MagneticAnisotropy")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnetic_anisotropy")
+        IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-01-08")
+
+    class RectangularCuboid(emmo.EuclideanSpace):
+        """A rectangular cuboid is a special case of a cuboid with rectangular faces in which all of its dihedral angles are right angles."""
+        prefLabel = en("RectangularCuboid")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q262959")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Rectangular_cuboid")
+        
     
+    class GeometricalSize(emmo.Property):
+        """Spatial extension along the princial axes."""    
+        prefLabel = en("GeometricalSize")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Size")
+        is_a = [emmo.hasProperty.exactly(3,emmo.Length)]
+    
+    class GeometricShape(emmo.Property,emmo.Geometrical):
+        """
+        Geometric shape.
+    
+        Two extrinsic properties, the remanence Mr
+        and coercivity Hc, which depend on the sample shape
+        """    
+        prefLabel = en("GeometricShape")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q207961")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Shape")
+        is_a = [               
+                emmo.hasSpatialDirectPart.exactly(1,emmo.Cylinder | RectangularCuboid) 
+               ]
+               
+    class SampleGeometry(emmo.Property):
+        """The size and shape of the magnet"""
+        prefLabel = en("SampleGeometry")
+        is_a = [               
+                emmo.hasProperty.exactly(1,GeometricalSize), 
+                emmo.hasProperty.exactly(1,GeometricShape), 
+               ]
+    
+    class DemagnetizingFactor(emmo.ElectromagneticQuantity):
+        """ 
+        For a uniformly magnetized ellipsoid and the magnetization along a major axis
+        the demagnetizing field is Hd = -N M.
+        
+        The principal components of demagnetizing tensor in diagonal form the demagnetizing factors. Only two of the three are independent because the demagnetizing tensor has unit trace Nx + Ny + Nz = 1.
+        """
+        comment = pl("H = H' - DM, where D is the demagneting factor, M is the magnetization, and H is the internal field")
+        prefLabel = en("DemagnetizingFactor")
+        altLabel = en("N, D")
+        is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
+        IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-63")
+    
+    class ShapeAnisotropyConstant(EnergyDensity):
+        """
+        The energy density of a small particle given by
+        
+        K1sh = (mu_0/4)(1-3D)Ms²
+        
+        where mu_0 is VacuumMagneticPermeability, D is the DemagnetizingFactor
+        and Ms is the spontaneous magnetization 
+        """
+        prefLabel = en("ShapeAnisotropyConstant")
+        altLabel = en("K1sh")
+        
+    class ShapeAnisotropy(MagneticAnisotropy):
+        """
+        The difference in energy when a small elongated particle is magnetized along its short and long axis 
+        """
+        comment = en("Shape anisotropy is restricted to small particles, where the inter-atomic exchange ensures a uniform  magnetization.")
+        prefLabel = en("ShapeAnisotropy")
+        is_a = [ 
+                 emmo.hasProperty.exactly(1,DemagnetizingFactor),
+                 emmo.hasProperty.exactly(1,ShapeAnisotropyConstant),
+               ]
+               
+    ## magnetocrystalline anisotropy
+   
     class MagnetocrystallineAnisotropyEnergy(EnergyDensity):
         """The magnetocrystalline anisotropy energy density."""
         prefLabel = en("MagnetocrystallineAnisotropyEnergy")
         altLabel = en("MAE")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy")   
         
+    class AnisotropyField(emmo.MagneticFieldStrength):
+        """
+        The anisotropy field Ha is defined as the field needed to saturate the magne-
+        tization of a uniaxial crystal in a hard direction
+        Ha = 2 Ku/Js        
+        """
+        comment = en("Beware of taking the idea of anisotropy field too literally. Except at small angles, the energy variation in a field is not the same as the leading term in the anisotropy. A magnetic field defines an easy direction, not an easy axis.")
+        prefLabel = en("AnisotropyField")
+        altLabel = en("Ha")
+
+    class UniaxialAnisotropyConstant(EnergyDensity):
+        """The change of energy with angle of the magnetization from the preferred direction is expressed with the 
+        uniaxial anisotropy constant Ea = Ku sin²(theta)"""
+        preLabel = en("UniaxialAnisotropyConstant")
+        altLabel = en("Ku")
+    
+    class UniaxialMagneticAnisotropy(MagneticAnisotropy):
+        """
+        The anisotropy can be described as uniaxial when the anisotropy energy E
+        depends on only a single angle, the angle between the magnetization vector 
+        and the easy direction of magnetization.
+        """
+        prefLabel = en("UniaxialMagneticAnistropy")
+        is_a = [ 
+                 emmo.hasProperty.exactly(1,AnisotropyField),
+                 emmo.hasProperty.exactly(1,UniaxialAnisotropyConstant),
+               ]
+
+    class InducedMagneticAnistropy(UniaxialMagneticAnisotropy):
+        """
+        Induced uniaxial anisotropy by annealing in a magnetic field or by stress
+        """
+        prefLabel = en("InducedMagneticAnistropy")
+                
     class MagnetocrystallineAnisotropyConstantK1(EnergyDensity):
         """The magnetocrystalline constant K1 for tetragonal or hexagonal crystals."""
         comment = pl("Ea = K1 sin^2(phi) + K2 sin^4(phi) where Ea is the is the anisotropy energ density and phi is the angle of the magnetization with respect to the c-axis of the crystal.")
@@ -196,33 +309,32 @@ with onto:
         altLabel = en("K1")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy") 
 
-    class UniaxialMagnetocrystallineAnistropy(emmo.Property):
-        """Uniaxial anisotropy favours alignment of the magnetization along an easy axis"""
+    class UniaxialMagnetocrystallineAnistropy(UniaxialMagneticAnisotropy):
+        """
+        The uniaxial anisotropy depends on only a single angle, the angle magnetization vector and the c axis
+        """
         prefLabel = pl("UniaxialMagnetocrystallineAnistropy")
         is_a = [
                emmo.hasProperty.exactly(1,MagnetocrystallineAnisotropyConstantK1),
                emmo.hasProperty.min(0,MagnetocrystallineAnisotropyConstantK2c ) 
                ]        
          
-    class CubicMagnetocrystallineAnistropy(emmo.Property):
+    class CubicMagnetocrystallineAnistropy(MagneticAnisotropy):
         """Cubic crystals anisotropy"""
         prefLabel = pl("CubicMagnetocrystallineAnistropy")
         is_a = [
                emmo.hasProperty.exactly(1,MagnetocrystallineAnisotropyConstantK1c),
                emmo.hasProperty.min(0,MagnetocrystallineAnisotropyConstantK2c ) 
-               ]        
+               ]    
 
     class MagnetocrystallineAnisotropy(emmo.Property):
-        """Magnetocrystalline anisotropy is an intrinsic property. The magnetization process is different when the field is applied along different crystallographic directions, and the anisotropy reflects the crystal symmetry. Its origin is in the crystal-field interaction and spin-orbit coupling, or else the interatomic dipole–dipole interaction.
-        
-        Anisotropic texture can be imparted to the amorphous solid (by annealing near the glass transition in a magnetic
-        field, for example). 
+        """Magnetocrystalline anisotropy is an intrinsic property. The magnetization process is different when the field is applied along different crystallographic directions, and the anisotropy reflects the crystal symmetry. Its origin is in the crystal-field interaction and spin-orbit coupling, or else the interatomic dipole–dipole interaction.        
         """           
         prefLabel = en("MagnetocrystallineAnisotropy")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q6731660")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy")
         is_a = [
-                emmo.hasProperty.exactly(1, MagnetocrystallineAnisotropyEnergy | UniaxialMagnetocrystallineAnistropy | CubicMagnetocrystallineAnistropy)
+                emmo.hasProperty.exactly(1, UniaxialMagnetocrystallineAnistropy | CubicMagnetocrystallineAnistropy)
                  ]
 
     ## Exchange
@@ -323,19 +435,6 @@ with onto:
         prefLabel = en("InternalMagneticField")        
         altLabel = en("H")
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)] 
-
-    class DemagnetizingFactor(emmo.ElectromagneticQuantity):
-        """ 
-        For a uniformly magnetized ellipsoid and the magnetization along a major axis
-        the demagnetizing field is Hd = -N M.
-        
-        The principal components of demagnetizing tensor in diagonal form the demagnetizing factors. Only two of the three are independent because the demagnetizing tensor has unit trace Nx + Ny + Nz = 1.
-        """
-        comment = pl("H = H' - DM, where D is the demagneting factor, M is the magnetization, and H is the internal field")
-        prefLabel = en("DemagnetizingFactor")
-        altLabel = en("N, D")
-        is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
-        IECEntry = pl("https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-63")
 
     # Hysteresis properties
     
@@ -488,67 +587,7 @@ with onto:
     
     ## Microstructure
     
-    ### Sample Shape
-    
-    class RectangularCuboid(emmo.EuclideanSpace):
-        """A rectangular cuboid is a special case of a cuboid with rectangular faces in which all of its dihedral angles are right angles."""
-        prefLabel = en("RectangularCuboid")
-        wikidataReference = pl("https://www.wikidata.org/wiki/Q262959")
-        wikipediaReference = pl("https://en.wikipedia.org/wiki/Rectangular_cuboid")
-        
-    
-    class GeometricalSize(emmo.Property):
-        """Spatial extension along the princial axes."""    
-        prefLabel = en("GeometricalSize")
-        wikipediaReference = pl("https://en.wikipedia.org/wiki/Size")
-        is_a = [emmo.hasProperty.exactly(3,emmo.Length)]
-    
-    class GeometricShape(emmo.Property,emmo.Geometrical):
-        """
-        Geometric shape.
-    
-        Two extrinsic properties, the remanence Mr
-        and coercivity Hc, which depend on the sample shape
-        """    
-        prefLabel = en("GeometricShape")
-        wikidataReference = pl("https://www.wikidata.org/wiki/Q207961")
-        wikipediaReference = pl("https://en.wikipedia.org/wiki/Shape")
-        is_a = [               
-                emmo.hasSpatialDirectPart.exactly(1,emmo.Cylinder | RectangularCuboid) 
-               ]
-               
-    class SampleGeometry(emmo.Property):
-        """The size and shape of the magnet"""
-        prefLabel = en("SampleGeometry")
-        is_a = [               
-                emmo.hasProperty.exactly(1,GeometricalSize), 
-                emmo.hasProperty.exactly(1,GeometricShape), 
-               ]
-    
-    class ShapeAnisotropyConstant(EnergyDensity):
-        """
-        The energy density of a small particle given by
-        
-        K1sh = (mu_0/4)(1-3D)Ms²
-        
-        where mu_0 is VacuumMagneticPermeability, D is the DemagnetizingFactor
-        and Ms is the spontaneous magnetization 
-        """
-        prefLabel = en("ShapeAnisotropyConstant")
-        altLabel = en("K1sh")
-        
-    class ShapeAnisotropy(emmo.Property):
-        """
-        The difference in energy when a small elongated particle is magnetized along its short and long axis 
-        
-        Shape anisotropy is restricted to small particles,
-        where the inter-atomic exchange ensures a uniform magnetization.
-        """
-        prefLabel = en("ShapeAnisotropy")
-        is_a = [ 
-                 emmo.hasProperty.exactly(1,DemagnetizingFactor),
-                 emmo.hasProperty.exactly(1,ShapeAnisotropyConstant),
-               ]
+
     
     ### Grains and granular structure
     
@@ -677,11 +716,11 @@ with onto:
         is_a = [               
                 emmo.hasProperty.min(0,emmo.MaterialsProcessing),
                 emmo.hasProperty.min(0,emmo.WorkpieceForming),
-                emmo.hasSpatialPart.exactly(1,MainMagneticPhase),
+                emmo.hasSpatialPart.some(MainMagneticPhase),
                 emmo.hasSpatialPart.min(0,SecondaryMagneticPhase),
                 emmo.hasSpatialPart.min(0,SecondaryNonMagneticPhase),
                 emmo.hasSpatialPart.min(0,GrainboundaryPhase),
-                emmo.hasProperty.exactly(1,ExtrinsicMagneticProperties), 
+                emmo.hasProperty.exactly(1,ExtrinsicMagneticProperties),  
                 emmo.hasProperty.min(0,XrayDiffractionData),
                ]
     
@@ -694,12 +733,60 @@ with onto:
                  emmo.hasProperty.exactly(1,DemagnetizingFactor),
                ]
 
+    # local properties
+    
+    class Reflectivity(emmo.Property):
+        """
+        capacity of an object to reflect light
+        """
+        prefLabel = en("Reflectivity")
+        altLabel = en("Reflectance, R")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q663650")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Reflectance")
+        is_a = [ emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit), ]
+
+    class LocalReflectivity(Reflectivity):
+        """local reflectivity measured with the magneto-optic Kerr effect"""
+        prefLabel = en("LocalReflectivity")
+        is_a = [emmo.hasProperty.exactly(1,emmo.PositionVector),]
+
+    class LocalCoercivity(CoercivityHcExternal):
+        """local coercive field measured with the magneto-optic Kerr effect"""
+        prefLabel = en("LocalCoercivity")
+        is_a = [emmo.hasProperty.exactly(1,emmo.PositionVector),]
+
+    class LocalXrayDiffractionData(XrayDiffractionData):
+        """local X ray diffraction data"""
+        prefLabel = en("LocalXrayDiffractionData")
+        is_a = [emmo.hasProperty.exactly(1,emmo.PositionVector),]
+        
+    class LocalLatticeConstantA(LatticeConstantA):
+        """The length of lattice vectors `a`, where lattice vectors `a`, `b` and `c` defines the unit cell, measured locally"""
+        prefLabel = en("LocalLatticeConstantA")
+        is_a = [emmo.hasProperty.exactly(1,emmo.PositionVector),]
+
+    class LocalLatticeConstantC(LatticeConstantC):
+        """The length of lattice vectors `c`, where lattice vectors `a`, `b` and `c` defines the unit cell, measured locally"""
+        prefLabel = en("LocalLatticeConstantC")
+        is_a = [emmo.hasProperty.exactly(1,emmo.PositionVector),]
+
+    class LocalThickness(emmo.Thickness):
+        """The thickness of the film measured locally"""
+        prefLabel = en("LocalThickness")
+        is_a = [emmo.hasProperty.exactly(1,emmo.PositionVector),]
+ 
     class ThinfilmMagnet(Magnet,emmo.SizeDefinedMaterial):
         """Piece of matter made of one or more magnetic material in form a thin film."""
         prefLabel = en("ThinfilmMagnet")
         is_a = [
+                 emmo.hasProperty.min(0,InducedMagneticAnistropy),
                  emmo.hasProperty.min(0,SampleGeometry),                 
-                 emmo.hasProperty.some(emmo.Thickness),  
+                 emmo.hasProperty.min(0,LocalThickness),  
+                 emmo.hasProperty.min(0,LocalCoercivity),
+                 emmo.hasProperty.min(0,LocalReflectivity),
+                 emmo.hasProperty.min(0,LocalXrayDiffractionData),
+                 emmo.hasProperty.min(0,LocalLatticeConstantA),
+                 emmo.hasProperty.min(0,LocalLatticeConstantC),
                ]
              
     # Magnetic multilayers
@@ -710,7 +797,7 @@ with onto:
         """
         Change of the resistivity of a substance due to an applied magnetic field.
         
-        Magnetoresistance can be defined as MR = [ϱ(B) − ϱ(0)]/ϱ(0). 
+        Magnetoresistance can be defined as MR = [ϱ(B)-ϱ(0)]/ϱ(0). 
         """        
         prefLabel = en("Magnetoresistance")
         altLabel = en("MR")
