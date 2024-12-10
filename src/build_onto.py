@@ -821,7 +821,7 @@ with onto:
         ]
 
     class SecondaryPhase(emmo.Material, emmo.PhaseOfMatter):
-        """An additional phase within a magnetic for example soft inclusions or triple junctions"""
+        """An additional phase within a magnet for example soft inclusions or triple junctions"""
 
         prefLabel = en("SecondaryPhase")
         is_a = [
