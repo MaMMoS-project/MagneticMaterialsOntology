@@ -53,7 +53,10 @@ Alternatively you can use [Protégé](https://protege.stanford.edu/)
   
 Building
 --------
+
 MagneticMaterialsOntology is built using tools provided by EMMO. For more details see the [src directory](https://github.com/MaMMoS-project/MagneticMaterialsOntology/tree/main/src)
+
+Installation of required software is also explained in  [src/README.md](https://github.com/MaMMoS-project/MagneticMaterialsOntology/tree/main/src/README.md)
 
 
 Attributions and credits
