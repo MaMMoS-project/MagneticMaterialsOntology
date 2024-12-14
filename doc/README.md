@@ -48,7 +48,6 @@ You may use the following parameters:
 |ontologies='' | sequence of names of ontologies to be included
 |addnodes=1 | whether to add missing target nodes in relations (1: True, 0: False)|
 |parents=1 | Adds n levels of parents to graph|
-|----------------------------|-----------|
 
 #### pandoc-options.yaml 
 
@@ -66,14 +65,9 @@ The html template file and html style file
 
 ### Create a plot of a concept
 
-To create on or more plots you can use mammosdoc. Add multiple BRANCHFIG preprocessing directives to the markdown template file 
+Here is an example for plotting branches. To create on or more plots you can use `mammosdoc`. 
 
-### plots.md
-
-Markdown template file with examples for plots of ontology branches.
-
-### Create plots
-
+* Add multiple BRANCHFIG preprocessing directives to themarkdown template file `plots.md` 
 * Change to the directiory `MagneticMaterialsOntology/doc`
 * Run mammosdoc: 
 
@@ -81,4 +75,6 @@ Markdown template file with examples for plots of ontology branches.
 ./mammosdoc --template=plots.md --local --format=html ../magnetic_material_mammos.ttl plots.html  
 ```
 will create a html file with the plots. The plots are also stored in the directory `genfigs` as scalable vector graphic (svg) file.
+
+[view the plots](http://htmlpreview.github.io/?https://github.com/MaMMoS-project/MagneticMaterialsOntology/blob/main/doc/plots.html)
 
