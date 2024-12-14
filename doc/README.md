@@ -15,7 +15,7 @@ for creating the html file.
 ### Documentation
 
 The created documentation can be viewed here   
-[view html file](https://raw.githack.com/MaMMoS-project/MagneticMaterialsOntology/703148106c19b6e69642bad3ec1c2868ea65c25f/doc/magnetic_material_mammos.html)
+[view html file](https://mammos-project.github.io/MagneticMaterialsOntology/doc/magnetic_material_mammos.html)
 
 ### Change the content of the html file
 
@@ -87,5 +87,5 @@ The parameters after the preprocessor directive `%BRANCHFIG` in the file `plots.
 
 For readability it is recommended to switch on edge labels with `edgelabels=1` and to add a caption with `caption='Explain what we see.'`
 
-[view the plots](http://htmlpreview.github.io/?https://github.com/MaMMoS-project/MagneticMaterialsOntology/blob/main/doc/plots.html)
+[view the plots](https://mammos-project.github.io/MagneticMaterialsOntology/doc/plots.html)
 
