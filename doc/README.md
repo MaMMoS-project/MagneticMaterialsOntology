@@ -76,5 +76,16 @@ Here is an example for plotting branches. To create on or more plots you can use
 ```
 will create a html file with the plots. The plots are also stored in the directory `genfigs` as scalable vector graphic (svg) file.
 
+The parameters after the preprocessor directive `%BRANCHFIG` in the file `plots.md` define what is plotted for a branch. Here are a few tips.
+
+|-------|----|
+| problem | solution | parameter setting |
+| no childs are displayes | add missing target nodes in relations | `addnodes=1` |
+| plot has too many nodes | reduce level of shown parents | `parents=0` | 
+| plot has too many connetion | select only a few realations | `relations=isA,hasSpatialPart` | 
+| bubbles and fonts are very small | change graph direction | `rankdir='LR'` |
+
+For readability it is recommended to use `edgelabels=1` and to add a caption with `caption='Explain what we see.'`
+
 [view the plots](http://htmlpreview.github.io/?https://github.com/MaMMoS-project/MagneticMaterialsOntology/blob/main/doc/plots.html)
 
