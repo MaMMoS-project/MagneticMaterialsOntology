@@ -1,0 +1,297 @@
+#!/usr/bin/env python3
+"""
+`ontodoc` CLI tool.
+derived from ontodoc
+https://github.com/emmo-repo/EMMOntoPy/blob/de542a34fa676d75938cea62a6fb28a8f1e97de9/tools/ontodoc
+"""
+# pylint: disable=wrong-import-position,wrong-import-order
+import os
+import sys
+import argparse
+import subprocess  # nosec
+from pathlib import Path
+
+# Support running from uninstalled package by adding parent dir to sys path
+rootdir = os.path.abspath(
+    os.path.realpath((os.path.dirname(os.path.dirname(__file__))))
+)
+if rootdir not in sys.path:
+    sys.path.insert(1, rootdir)
+
+from ontopy import World, onto_path  # pylint: disable=import-error
+from mammosdoc import (  # pylint: disable=import-error
+    OntoDoc,
+    get_style,
+    get_figformat,
+    get_maxwidth,
+    get_docpp,
+)
+from ontopy.ontodoc_rst import OntologyDocumentation
+from ontopy.utils import get_format
+
+import owlready2
+
+
+def main(argv: list = None):
+    """Main run function.
+
+    Parameters:
+        argv: List of arguments, similar to `sys.argv[1:]`.
+            Mainly for testing purposes, since it allows one to invoke the tool
+            manually / through Python.
+
+    """
+    # pylint: disable=too-many-locals,too-many-statements
+    parser = argparse.ArgumentParser(
+        description="Tool for documenting ontologies.",
+        epilog=(
+            "The easiest way to generate nice-looking documentation using "
+            "pandoc is to copy the emmodoc example to the current directory "
+            "and adapt it. See "
+            "https://github.com/emmo-repo/EMMOntoPy/tree/master/examples/"
+            "emmodoc for more info."
+        ),
+    )
+    parser.add_argument(
+        "iri",
+        metavar="IRI",
+        help="File name or URI of the ontology to document.",
+    )
+    parser.add_argument("outfile", metavar="OUTFILE", help="Output file.")
+
+    parser.add_argument(
+        "--database",
+        "-d",
+        metavar="FILENAME",
+        default=":memory:",
+        help=(
+            "Load ontology from Owlready2 sqlite3 database. The `iri` argument"
+            " should in this case be the IRI of the ontology you want to "
+            "document."
+        ),
+    )
+    parser.add_argument(
+        "--local",
+        "-l",
+        action="store_true",
+        help=(
+            "Load imported ontologies locally. Their paths are specified in "
+            "Protègè catalog files or via the --path option. The IRI should "
+            "be a file name."
+        ),
+    )
+    parser.add_argument(
+        "--imported",
+        "-i",
+        action="store_true",
+        help="Whether to also include imported ontologies.",
+    )
+    parser.add_argument(
+        "--no-catalog",
+        "-n",
+        action="store_false",
+        dest="url_from_catalog",
+        default=None,
+        help="Whether to not read catalog file even if it exists.",
+    )
+    parser.add_argument(
+        "--catalog-file",
+        default="catalog-v001.xml",
+        help=(
+            "Name of Protègè catalog file in the same folder as the ontology. "
+            "This option is used together with --local and defaults to "
+            '"catalog-v001.xml".'
+        ),
+    )
+    parser.add_argument(
+        "--path",
+        action="append",
+        default=[],
+        help=(
+            "Paths where imported ontologies can be found. May be provided as "
+            "a comma-separated string and/or with multiple --path options."
+        ),
+    )
+    parser.add_argument(
+        "--reasoner",
+        nargs="?",
+        const="HermiT",
+        choices=["HermiT", "Pellet", "FaCT++"],
+        help=(
+            'Run given reasoner on the ontology. Valid reasoners are "HermiT" '
+            '(default), "Pellet" and "FaCT++".'
+        ),
+    )
+    parser.add_argument(
+        "--template",
+        "-t",
+        metavar="FILE",
+        help=(
+            "ontodoc input template. If not provided, a simple default "
+            "template will be used. Don't confuse it with the pandoc "
+            "templates."
+        ),
+    )
+    parser.add_argument(
+        "--format",
+        "-f",
+        metavar="FORMAT",
+        help=(
+            'Output format. May be "rst", "md", "simple-html" or any other '
+            "format supported by pandoc. By default the format is inferred "
+            "from OUTFILE."
+        ),
+    )
+    parser.add_argument(
+        "--figdir",
+        "-D",
+        metavar="DIR",
+        default="genfigs",
+        help=(
+            "Default directory to store generated figures. If a relative path "
+            "is given, it is relative to the template (see --template), or the"
+            " current directory, if --template is not given. Default: "
+            '"genfigs"'
+        ),
+    )
+    parser.add_argument(
+        "--figformat",
+        "-F",
+        help=(
+            "Format for generated figures. The default is inferred from "
+            '"--format."'
+        ),
+    )
+    parser.add_argument(
+        "--max-figwidth",
+        "-w",
+        help="Maximum figure width.  The default is inferred from --format.",
+    )
+    parser.add_argument(
+        "--pandoc-option",
+        "-p",
+        metavar="STRING",
+        action="append",
+        dest="pandoc_options",
+        help=(
+            "Additional pandoc long options overriding those read from "
+            '--pandoc-option-file. Use "--pandoc-option=XXX=Y" to add pandoc '
+            "option --XXX=Y. It is also possible to remove pandoc option --XXX"
+            ' with "--pandoc-option=no-XXX".  This option may be provided '
+            "multiple times."
+        ),
+    )
+    parser.add_argument(
+        "--pandoc-option-file",
+        "-P",
+        metavar="FILE",
+        action="append",
+        dest="pandoc_option_files",
+        help=(
+            "YAML file with additional pandoc options. Note, that default "
+            'pandoc options are read from the files "pandoc-options.yaml" and '
+            '"pandoc-FORMAT-options.yaml" (where FORMAT is format specified '
+            "with --format). This option allows to override the defaults and "
+            "add additional pandoc options. This option may be provided "
+            "multiple times."
+        ),
+    )
+    parser.add_argument(
+        "--keep-generated",
+        "-k",
+        metavar="FILE",
+        dest="genfile",
+        help=(
+            "Keep a copy of generated markdown input file for pandoc (for "
+            "debugging)."
+        ),
+    )
+    parser.add_argument(
+        "--iri-regex",
+        "-r",
+        metavar="REGEX",
+        help=(
+            "Regular expression matching IRIs to include in the documentation."
+        ),
+    )
+    args = parser.parse_args(args=argv)
+
+    # Append to onto_path
+    for paths in args.path:
+        for path in paths.split(","):
+            if path not in onto_path:
+                onto_path.append(path)
+
+    # Load ontology
+    iri = args.iri if args.iri[-1] in "#/" else f"{args.iri}#"
+    world = World(filename=args.database)
+    if args.database != ":memory:" and iri not in world.ontologies:
+        parser.error(
+            "The IRI argument should be one of the ontologies in the database:"
+            "\n  " + "\n  ".join(world.ontologies.keys())
+        )
+    onto = world.get_ontology(args.iri)
+    try:
+        onto.load(
+            only_local=args.local,
+            url_from_catalog=args.url_from_catalog,
+            catalog_file=args.catalog_file,
+        )
+    except owlready2.OwlReadyOntologyParsingError as exc:
+        parser.error(f"error parsing {args.iri!r}: {exc}")
+
+    # Sync reasoner
+    if args.reasoner:
+        onto.sync_reasoner(reasoner=args.reasoner)
+
+    # Get output format
+    fmt = get_format(args.outfile, default="html", fmt=args.format)
+
+    if fmt == "rst":
+        # New reStructuredText format
+        od = OntologyDocumentation(
+            onto,
+            recursive=args.imported,
+            iri_regex=args.iri_regex,
+        )
+        docfile = Path(args.outfile)
+        indexfile = docfile.with_name("index.rst")
+        conffile = docfile.with_name("conf.py")
+        od.write_refdoc(docfile=docfile)
+        if not indexfile.exists():
+            print(f"Generating index template: {indexfile}")
+            od.write_index_template(indexfile=indexfile, docfile=docfile)
+        if not conffile.exists():
+            print(f"Generating configuration template: {conffile}")
+            od.write_conf_template(conffile=conffile, docfile=docfile)
+
+    else:
+        # Instantiate old ontodoc instance
+        style = get_style(fmt)
+        figformat = args.figformat if args.figformat else get_figformat(fmt)
+        maxwidth = args.max_figwidth if args.max_figwidth else get_maxwidth(fmt)
+        ontodoc = OntoDoc(onto, style=style)
+        docpp = get_docpp(
+            ontodoc,
+            args.template,
+            figdir=args.figdir,
+            figformat=figformat,
+            maxwidth=maxwidth,
+            imported=args.imported,
+        )
+        docpp.process()
+
+        try:
+            docpp.write(
+                args.outfile,
+                fmt=args.format,
+                pandoc_option_files=args.pandoc_option_files,
+                pandoc_options=args.pandoc_options,
+                genfile=args.genfile,
+            )
+        except subprocess.CalledProcessError as exc:
+            sys.exit(exc.returncode)  # Exit without traceback on pandoc errors
+
+
+if __name__ == "__main__":
+    main()

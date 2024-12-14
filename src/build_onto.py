@@ -11,7 +11,7 @@ from owlready2 import (
 )
 import sys
 
-__version__ = "0.0.1"  # Version of this ontology
+__version__ = "0.0.2"  # Version of this ontology
 
 
 # From https://github.com/emmo-repo/domain-atomistic/blob/master/domain-atomistic.py
@@ -26,7 +26,7 @@ def pl(s):
 
 
 # Load EMMO
-world = World(filename="demo.sqlite3")
+world = World(filename="magneticmaterials.sqlite3")
 emmo = world.get_ontology(
     "data/emmo.ttl"
 ).load()  # https://emmo-repo.github.io/versions/1.0.0-rc3/emmo.ttl
@@ -37,8 +37,7 @@ emmo = world.get_ontology(
 
 # Create a new ontology with out extensions that imports EMMO
 # TODO: Change the IRI to the correct one
-# onto = world.get_ontology("http://w3id.org/emmo/domain/demo_magnetic_material#")
-onto = world.get_ontology("http://www.emmc.info/emmc-csa/demo_magnetic_material#")
+onto = world.get_ontology("http://www.emmc.info/emmc-csa/magnetic_material#")
 onto.imported_ontologies.append(emmo)
 
 # Add new classes and object/data properties needed by the use case
