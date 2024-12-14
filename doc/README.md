@@ -85,7 +85,7 @@ The parameters after the preprocessor directive `%BRANCHFIG` in the file `plots.
 | plot has too many connetion | select only a few realations | `relations=isA,hasSpatialPart` | 
 | bubbles and fonts are very small | change graph direction | `rankdir='LR'` |
 
-For readability it is recommended to use `edgelabels=1` and to add a caption with `caption='Explain what we see.'`
+For readability it is recommended to switch on edge labels with `edgelabels=1` and to add a caption with `caption='Explain what we see.'`
 
 [view the plots](http://htmlpreview.github.io/?https://github.com/MaMMoS-project/MagneticMaterialsOntology/blob/main/doc/plots.html)
 
