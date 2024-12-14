@@ -78,7 +78,7 @@ will create a html file with the plots. The plots are also stored in the directo
 
 The parameters after the preprocessor directive `%BRANCHFIG` in the file `plots.md` define what is plotted for a branch. Here are a few tips.
 
-|-------|----|
+|-------|-----|-------|
 | problem | solution | parameter setting |
 | no childs are displayes | add missing target nodes in relations | `addnodes=1` |
 | plot has too many nodes | reduce level of shown parents | `parents=0` | 
