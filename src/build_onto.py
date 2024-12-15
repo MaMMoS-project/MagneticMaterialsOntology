@@ -171,7 +171,7 @@ with onto:
             emmo.hasMeasurementUnit.some(emmo.JoulePerMetre),
         ]
 
-    # intrinisc magnetic properties
+    # intrinsic magnetic properties
 
     ## magnetization
 
@@ -266,7 +266,7 @@ with onto:
 
         K1sh = (mu_0/4)(1-3D)Ms²
 
-        where mu_0 is VacuumMagneticPermeability, D is the DemagnetizingFactor
+        where mu_0 is the vacuum magnetic permeability and D is the DemagnetizingFactor
         and Ms is the spontaneous magnetization
         """
 
@@ -315,7 +315,7 @@ with onto:
         """The change of energy with angle of the magnetization from the preferred direction is expressed with the
         uniaxial anisotropy constant Ea = Ku sin²(theta)"""
 
-        preLabel = en("UniaxialAnisotropyConstant")
+        prefLabel = en("UniaxialAnisotropyConstant")
         altLabel = en("Ku")
 
     class UniaxialMagneticAnisotropy(MagneticAnisotropy):
@@ -325,24 +325,24 @@ with onto:
         and the easy direction of magnetization.
         """
 
-        prefLabel = en("UniaxialMagneticAnistropy")
+        prefLabel = en("UniaxialMagneticAnisotropy")
         is_a = [
             emmo.hasProperty.exactly(1, AnisotropyField),
             emmo.hasProperty.exactly(1, UniaxialAnisotropyConstant),
         ]
 
-    class InducedMagneticAnistropy(UniaxialMagneticAnisotropy):
+    class InducedMagneticAnisotropy(UniaxialMagneticAnisotropy):
         """
         Induced uniaxial anisotropy by annealing in a magnetic field or by stress
         """
 
-        prefLabel = en("InducedMagneticAnistropy")
+        prefLabel = en("InducedMagneticAnisotropy")
 
     class MagnetocrystallineAnisotropyConstantK1(EnergyDensity):
         """The magnetocrystalline constant K1 for tetragonal or hexagonal crystals."""
 
         comment = pl(
-            "Ea = K1 sin^2(phi) + K2 sin^4(phi) where Ea is the is the anisotropy energ density and phi is the angle of the magnetization with respect to the c-axis of the crystal."
+            "Ea = K1 sin^2(phi) + K2 sin^4(phi) where Ea is the is the anisotropy energy density and phi is the angle of the magnetization with respect to the c-axis of the crystal."
         )
         prefLabel = en("MagnetocrystallineAnisotropyConstantK1")
         altLabel = en("K1")
@@ -354,7 +354,7 @@ with onto:
         """The magnetocrystalline constant K2 for tetragonal or hexagonal crystals."""
 
         comment = pl(
-            "Ea = K1 sin^2(phi) + K2 sin^4(phi) where Ea is the is the anisotropy energ density and phi is the angle of the magnetization with respect to the c-axis of the crystal."
+            "Ea = K1 sin^2(phi) + K2 sin^4(phi) where Ea is the is the anisotropy energy density and phi is the angle of the magnetization with respect to the c-axis of the crystal."
         )
         prefLabel = en("MagnetocrystallineAnisotropyConstantK2")
         altLabel = en("K2")
@@ -366,7 +366,7 @@ with onto:
         """The magnetocrystalline constant K1c for cubic crystals."""
 
         comment = pl(
-            "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K1c(a1²a2²a3²) where Ea is the anisotropy energ density and a1,a2,a3 are the direction cosines of the magnetization"
+            "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K1c(a1²a2²a3²) where Ea is the anisotropy energy density and a1,a2,a3 are the direction cosines of the magnetization"
         )
         prefLabel = en("MagnetocrystallineAnisotropyConstantK1c")
         altLabel = en("K1")
@@ -378,7 +378,7 @@ with onto:
         """The magnetocrystalline constant K2c for cubic crystals"""
 
         comment = pl(
-            "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K1c(a1²a2²a3²) where Ea is the anisotropy energ density and a1,a2,a3 are the direction cosines of the magnetization"
+            "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K1c(a1²a2²a3²) where Ea is the anisotropy energy density and a1,a2,a3 are the direction cosines of the magnetization"
         )
         prefLabel = en("MagnetocrystallineAnisotropyConstantK1c")
         altLabel = en("K1")
@@ -386,21 +386,21 @@ with onto:
             "https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy"
         )
 
-    class UniaxialMagnetocrystallineAnistropy(UniaxialMagneticAnisotropy):
+    class UniaxialMagnetocrystallineAnisotropy(UniaxialMagneticAnisotropy):
         """
         The uniaxial anisotropy depends on only a single angle, the angle magnetization vector and the c axis
         """
 
-        prefLabel = pl("UniaxialMagnetocrystallineAnistropy")
+        prefLabel = pl("UniaxialMagnetocrystallineAnisotropy")
         is_a = [
             emmo.hasProperty.exactly(1, MagnetocrystallineAnisotropyConstantK1),
             emmo.hasProperty.min(0, MagnetocrystallineAnisotropyConstantK2c),
         ]
 
-    class CubicMagnetocrystallineAnistropy(MagneticAnisotropy):
+    class CubicMagnetocrystallineAnisotropy(MagneticAnisotropy):
         """Cubic crystals anisotropy"""
 
-        prefLabel = pl("CubicMagnetocrystallineAnistropy")
+        prefLabel = pl("CubicMagnetocrystallineAnisotropy")
         is_a = [
             emmo.hasProperty.exactly(1, MagnetocrystallineAnisotropyConstantK1c),
             emmo.hasProperty.min(0, MagnetocrystallineAnisotropyConstantK2c),
@@ -417,7 +417,7 @@ with onto:
         is_a = [
             emmo.hasProperty.exactly(
                 1,
-                UniaxialMagnetocrystallineAnistropy | CubicMagnetocrystallineAnistropy,
+                UniaxialMagnetocrystallineAnisotropy | CubicMagnetocrystallineAnisotropy,
             )
         ]
 
@@ -430,7 +430,7 @@ with onto:
         k_B T_c/(2 a_0), where a_0 is the lattice parameter in a simple structure."""
 
         prefLabel = en("ExchangeStiffnessConstant")
-        altLable = en("A")
+        altLabel = en("A")
 
     # ----------------------------------------------------
     class IntrinsicMagneticProperties(onto.Property):
@@ -669,7 +669,7 @@ with onto:
         """Defined by the maximum slope of the descending branch of the M-H hysteresis loop, with H the internal field."""
 
         comment = pl(
-            "This field is often used when analysing the temperature dependend coercivity for deriving the microstructural parameters"
+            "This field is often used when analysing the temperature dependent coercivity for deriving the microstructural parameters"
         )
         prefLabel = en("SwitchingFieldCoercivity")
         altLabel = en("Hsw")
@@ -729,7 +729,7 @@ with onto:
     class InternalSusceptibility(emmo.MagneticSusceptibility):
         """Ratio of the change of magnetization and the internal field: M = chi H"""
 
-        prefLabel = en("ExternalSusceptibility")
+        prefLabel = en("InternalSusceptibility")
         altLabel = en("chi'")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q691463")
 
@@ -839,7 +839,7 @@ with onto:
         comment = en(
             "In permanent magnets, the grain boundary phase inhibits the propagation of the magnetic reversal from grain to grain."
         )
-        preLabel = en("GrainboundaryPhase")
+        prefLabel = en("GrainboundaryPhase")
         is_a = [
             emmo.hasProperty.some(emmo.Thickness),
         ]
@@ -949,7 +949,7 @@ with onto:
 
         prefLabel = en("ThinfilmMagnet")
         is_a = [
-            emmo.hasProperty.min(0, InducedMagneticAnistropy),
+            emmo.hasProperty.min(0, InducedMagneticAnisotropy),
             emmo.hasProperty.min(0, SampleGeometry),
             emmo.hasProperty.min(0, LocalThickness),
             emmo.hasProperty.min(0, LocalCoercivity),
