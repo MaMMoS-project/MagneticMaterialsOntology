@@ -2,7 +2,6 @@
 
 # paths to emmocheck and ontodoc (from https://github.com/emmo-repo/EMMOntoPy)
 CHECK=../onto/emmocheck
-DOC=../onto/ontodoc
 
 echo "remove previous files ..."
 rm demo.sqlite3
@@ -16,5 +15,7 @@ echo "checking ontology ..."
 $CHECK magnetic_material_mammos.ttl
 
 echo "building documentation ..."
-$DOC --format simple-html magnetic_material_mammos.ttl doc/magnetic_material_mammos.html 
+cd doc
+./mammosdoc --template=mammos.md --local --format=html ../magnetic_material_mammos.ttl magnetic_material_mammos.html
+cd ..
 ls -ls doc/magnetic_material_mammos.html
