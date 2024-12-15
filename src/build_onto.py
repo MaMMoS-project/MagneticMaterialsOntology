@@ -244,10 +244,10 @@ with onto:
 
     class DemagnetizingFactor(emmo.ElectromagneticQuantity):
         """
-        For a uniformly magnetized ellipsoid and the magnetization along a major axis
+        For a uniformly magnetized ellipsoid with magnetization along a major axis
         the demagnetizing field is Hd = -N M.
 
-        The principal components of demagnetizing tensor in diagonal form the demagnetizing factors. Only two of the three are independent because the demagnetizing tensor has unit trace Nx + Ny + Nz = 1.
+        The principal components of the diagonal demagnetizing tensor form the demagnetizing factors. Only two of the three are independent because the demagnetizing tensor has unit trace Nx + Ny + Nz = 1.
         """
 
         comment = pl(
@@ -275,7 +275,7 @@ with onto:
 
     class ShapeAnisotropy(MagneticAnisotropy):
         """
-        The difference in energy when a small elongated particle is magnetized along its short and long axis
+        The difference in magnetostatic energy when an elongated particle is magnetized along its short and long axis.
         """
 
         comment = en(
@@ -300,8 +300,7 @@ with onto:
 
     class AnisotropyField(emmo.MagneticFieldStrength):
         """
-        The anisotropy field Ha is defined as the field needed to saturate the magne-
-        tization of a uniaxial crystal in a hard direction
+        The anisotropy field Ha is defined as the field needed to saturate the magnetization of a uniaxial crystal in a hard direction
         Ha = 2 Ku/Js
         """
 
@@ -333,7 +332,7 @@ with onto:
 
     class InducedMagneticAnisotropy(UniaxialMagneticAnisotropy):
         """
-        Induced uniaxial anisotropy by annealing in a magnetic field or by stress
+        Uniaxial anisotropy induced by annealing in a magnetic field or by applying a stress
         """
 
         prefLabel = en("InducedMagneticAnisotropy")
@@ -543,7 +542,7 @@ with onto:
 
     class GrainSizeDistribution(emmo.Property):
         """
-        Function representing relative sizes of particles in a system.
+        Function representing relative sizes of grains in a system.
 
         Given by its mean and standard deviation of a lognormal distribution
         """
@@ -606,7 +605,7 @@ with onto:
     # Internal and external magnetic fields
 
     class ExternalMagneticField(emmo.ElectromagneticQuantity):
-        """The external field H′, acting on a sample that is produced by steady electric
+        """The external field H′, acting on a sample that is produced by electric
         currents or the stray field of magnets outside the sample volume, is often
         called the applied field."""
 
@@ -624,7 +623,7 @@ with onto:
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)]
 
     class InternalMagneticField(emmo.ElectromagneticQuantity):
-        """The internal field in the sample in our continuous medium approximation is the
+        """The internal field in the sample in the continuous medium approximation is the
         sum of the external field H′ and the demagnetizing field Hd"""
 
         prefLabel = en("InternalMagneticField")
@@ -644,7 +643,7 @@ with onto:
         altLabel = en("Coercive field, Hc")
 
     class CoercivityBHc(emmo.Coercivity):
-        """Defined as internal field on the B(H) loop where B = 0. It is also called flux coerciviy BHc.
+        """Defined as internal field on the B(H) loop where B = 0. It is also called flux coercivity BHc.
 
         BHc depends on sample shape and has to be corrected for the demagnetizing field.
         """
@@ -669,7 +668,7 @@ with onto:
         """Defined by the maximum slope of the descending branch of the M-H hysteresis loop, with H the internal field."""
 
         comment = pl(
-            "This field is often used when analysing the temperature dependent coercivity for deriving the microstructural parameters"
+            "This field is often used when analysing the temperature dependent coercivity for deriving microstructural parameters."
         )
         prefLabel = en("SwitchingFieldCoercivity")
         altLabel = en("Hsw")
@@ -730,7 +729,7 @@ with onto:
         """Ratio of the change of magnetization and the internal field: M = chi H"""
 
         prefLabel = en("InternalSusceptibility")
-        altLabel = en("chi'")
+        altLabel = en("chi")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q691463")
 
     class AbsolutePermeability(emmo.ElectromagneticQuantity):
@@ -747,7 +746,7 @@ with onto:
 
     class MaximumEnergyProduct(emmo.ElectromagneticQuantity):
         """
-        The value of the maximum energy product (BH)max is deduced from the a plot of BH(B) for all points
+        The value of the maximum energy product (BH)max is deduced from a plot of BH(B) for all points
         of the second quadrant of the B-H hysteresis loop. BH varies with B going through a maximum value (BH)max
         for a particular value of B.
 
@@ -820,7 +819,7 @@ with onto:
         ]
 
     class SecondaryPhase(emmo.Material, emmo.PhaseOfMatter):
-        """An additional phase within a magnet for example soft inclusions or triple junctions"""
+        """An additional phase within a magnet, for example soft inclusions or triple junctions"""
 
         prefLabel = en("SecondaryPhase")
         is_a = [
@@ -855,7 +854,7 @@ with onto:
         ]
 
     class Magnet(emmo.FunctionallyDefinedMaterial):
-        """Piece of matter made of one or more magnetic material."""
+        """Piece of matter made of one or more magnetic materials."""
 
         prefLabel = en("Magnet")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q11421")
@@ -998,7 +997,7 @@ with onto:
         is_a = [emmo.hasStringValue.some(emmo.String)]
 
     class MultilayerMagnet(emmo.SpatialTiling, Magnet):
-        """Piece of matter made of one or more magnetic material in form a multiple layers of material."""
+        """Piece of matter made of stacked layers of one or more magnetic materials."""
 
         prefLabel = en("MultilayerMagnet")
         is_a = [
