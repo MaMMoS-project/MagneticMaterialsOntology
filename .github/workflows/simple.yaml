@@ -24,14 +24,14 @@ jobs:
       run: |
         pytest --version
 
-#    - name: Install pixi
-#      uses: prefix-dev/setup-pixi@v0.8.1
-#      with:
-#        pixi-version: v0.39.2
-#        cache: true
-#        # auth-host: prefix.dev
-#        # auth-token: ${{ secrets.PREFIX_DEV_TOKEN }}
-#      run: pixi --version
+    - name: Install pixi
+      uses: prefix-dev/setup-pixi@v0.8.1
+      with:
+        pixi-version: v0.39.2
+        cache: true
+        auth-host: prefix.dev
+        auth-token: ${{ secrets.PREFIX_DEV_TOKEN }}
+      run: pixi --version
 #    - name: build all 
 #      run: |
 #        pixi run clean
