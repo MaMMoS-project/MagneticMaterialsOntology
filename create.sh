@@ -12,7 +12,7 @@ python src/build_onto.py
 ls -ls magnetic_material_mammos.ttl
 
 echo "checking ontology ..."
-$CHECK magnetic_material_mammos.ttl
+$CHECK --verbose magnetic_material_mammos.ttl
 
 echo "building documentation ..."
 cd doc
