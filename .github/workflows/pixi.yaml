@@ -5,7 +5,7 @@ on:
 
 
 jobs:
-  build:
+  build-pixi:
 
     runs-on: ubuntu-latest
 
