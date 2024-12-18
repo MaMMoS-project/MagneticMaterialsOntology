@@ -1,0 +1,33 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@v4
+    - name: Install pixi
+      uses: prefix-dev/setup-pixi@v0.8.1
+      with:
+        pixi-version: v0.39.2
+        # cache: true
+        # auth-host: prefix.dev
+        # auth-token: ${{ secrets.PREFIX_DEV_TOKEN }}
+    - name: pixi run clean
+      run: |
+        pixi run clean
+    - name: pixi run build 
+      run: |
+        pixi run build
+    - name: pixi run check
+      run: |
+        pixi run check
+    - name: pixi run docs
+      run: |
+        pixi run docs

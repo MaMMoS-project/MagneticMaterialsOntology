@@ -1,0 +1,25 @@
+[project]
+authors = ["Thomas Schrefl, DISS-UWK", "Wilfried Hortschitz, DISS-UWK", "Hans Fangohr <hans.fangohr@mpsd.mpg.de>"]
+channels = ["conda-forge"]
+description = "Add a short description here"
+name = "MagneticMaterialsOntology"
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+build = "python src/build_onto.py"
+check = "emmocheck magnetic_material_mammos.ttl"
+docs = {cmd = "python mammosdoc --template=mammos.md --local --format=html ../magnetic_material_mammos.ttl magnetic_material_mammos.html", cwd = "doc"}
+clean = "rm -f demo.sqlite3 magnetic_material_mammos.ttl doc/magnetic_material_mammos.html"
+
+# convenience target: run all steps subsequently
+all = { depends-on = ["clean", "build", "check", "docs"] }
+
+
+[dependencies]
+python = "3.13.*"
+graphviz = ">=12.0.0,<13"
+
+[pypi-dependencies]
+ontopy = ">=0.1.1, <0.2"
+emmontopy = ">=0.7.2, <0.8"
