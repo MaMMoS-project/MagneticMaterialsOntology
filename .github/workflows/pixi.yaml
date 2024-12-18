@@ -16,7 +16,7 @@ jobs:
         pixi-version: v0.39.2
         cache: true
         auth-host: prefix.dev
-        auth-token: ${{ secrets.PREFIX_DEV_TOKEN }}    ghcr.io/prefix-dev/pixi
+        auth-token: ${{ secrets.PREFIX_DEV_TOKEN }} 
     - name: Install dependencies
       run: |
         pixi --version
