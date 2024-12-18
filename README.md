@@ -23,7 +23,7 @@ compatibilies:
 
 | Imported Ontologies  | Version             |      |
 | -------------------- | --------------------| --------- |
-| [EMMO](https://github.com/emmo-repo/EMMO)  | 1.0.0-RC3 compacted | https://emmo-repo.github.io/versions/1.0.0-rc3/emmo.ttl |
+| [EMMO](https://github.com/emmo-repo/EMMO)  | 1.0.0-RC3 inferred | https://emmo-repo.github.io/versions/1.0.0-rc3/emmo-inferred.ttl |
 
 
 Using

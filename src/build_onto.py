@@ -27,9 +27,15 @@ def pl(s):
 
 # Load EMMO
 world = World(filename="magneticmaterials.sqlite3")
+
+# emmo = world.get_ontology(
+#     "data/emmo.ttl"
+# ).load()  # https://emmo-repo.github.io/versions/1.0.0-rc3/emmo.ttl
+
 emmo = world.get_ontology(
-    "data/emmo.ttl"
-).load()  # https://emmo-repo.github.io/versions/1.0.0-rc3/emmo.ttl
+    "data/emmo-inferred.ttl"
+).load()  # https://emmo-repo.github.io/versions/1.0.0-rc3/emmo-inferred.ttl
+
 
 # Examples can be found on:
 # + https://github.com/emmo-repo/domain-atomistic/blob/master/domain-atomistic.py
