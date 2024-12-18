@@ -19,7 +19,6 @@ jobs:
         cache: true
         # auth-host: prefix.dev
         # auth-token: ${{ secrets.PREFIX_DEV_TOKEN }}
-      run: pixi --version
     - name: build all 
       run: |
         pixi run clean
