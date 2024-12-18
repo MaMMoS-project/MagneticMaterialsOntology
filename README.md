@@ -83,3 +83,9 @@ This project is licensed under the [Creative Commons Attribution 4.0 Internation
 
 [^1]: https://github.com/emmo-repo/EMMO  
 [^2]: https://mammos-project.github.io/
+
+Status
+------
+
+[![build](https://github.com/MaMMoS-project/MagneticMaterialsOntology/actions/workflows/build.yaml/badge.svg)](https://github.com/MaMMoS-project/MagneticMaterialsOntology/actions/workflows/build.yaml)
+
