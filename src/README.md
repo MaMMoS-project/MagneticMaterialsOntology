@@ -37,7 +37,7 @@ which builds the ontology, runs the emmocheck and creates a documentation. Pleas
 
 2. clone this repository:
 
-   git clone https://github.com/MaMMoS-project/MagneticMaterialsOntology.git
+   `git clone https://github.com/MaMMoS-project/MagneticMaterialsOntology.git`
 
 3. Change directory into the cloned repository and run `pixi install`
    to install the required software.
