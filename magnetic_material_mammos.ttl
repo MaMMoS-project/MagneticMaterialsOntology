@@ -30,16 +30,12 @@ email: wilfried.hortschitz@donau-uni.ac.at
 
 :EMMO_4ee603fc-7a1e-51f0-bf75-8e66f9a5539b a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ;
+            owl:someValuesFrom :EMMO_613e4315-d58f-5b5d-82ce-8cb76bd1b0aa ],
+        [ a owl:Restriction ;
             owl:onClass :EMMO_d70e364c-7ab7-5329-9964-17a5e45bbb9d ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_5be2f193-36d0-5aac-90b8-52db055d8252 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ;
-            owl:someValuesFrom :EMMO_613e4315-d58f-5b5d-82ce-8cb76bd1b0aa ],
         [ a owl:Restriction ;
             owl:onClass :EMMO_b7ebd85f-36aa-540a-b8a9-e2c1094f27f1 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
@@ -48,6 +44,10 @@ email: wilfried.hortschitz@donau-uni.ac.at
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_1b980f86-4116-5af8-bc45-14b44d88eeb5 ;
             owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_5be2f193-36d0-5aac-90b8-52db055d8252 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         :EMMO_099b796d-3163-56c7-bc90-3a304256ca5d,
         ns1:EMMO_8944581c_64da_46a9_be29_7074f7cc8098 ;
     skos:prefLabel "MultilayerMagnet"@en ;
@@ -100,7 +100,7 @@ sum of the external field H′ and the demagnetizing field Hd"""@en .
 
 :EMMO_d28323da-810f-5cbe-a770-eab7e7fdb493 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_b7ebd85f-36aa-540a-b8a9-e2c1094f27f1 ;
+            owl:onClass :EMMO_f8f03807-d6b6-5ebf-8e0b-418311e8e1e5 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -108,7 +108,7 @@ sum of the external field H′ and the demagnetizing field Hd"""@en .
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_f8f03807-d6b6-5ebf-8e0b-418311e8e1e5 ;
+            owl:onClass :EMMO_b7ebd85f-36aa-540a-b8a9-e2c1094f27f1 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         :EMMO_099b796d-3163-56c7-bc90-3a304256ca5d,
@@ -177,15 +177,7 @@ sometimes referred to as 'intrinsic' coercivity."""@en .
 :EMMO_14a12902-9845-5be6-bd0b-511dcea31985 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_69772e86-d7fb-5b43-9cd4-2f0770c6701f ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_fe101d1d-f1f7-54f8-886b-fa6d6052ce98 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_a4bc4536-f381-5bcd-b6ca-34fb1a913efd ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
@@ -193,7 +185,7 @@ sometimes referred to as 'intrinsic' coercivity."""@en .
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_45a36799-2309-5097-969f-4e5c002ae2f0 ;
+            owl:onClass :EMMO_bc54c47f-8560-516a-b95b-cce9f1b7344f ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
@@ -201,24 +193,32 @@ sometimes referred to as 'intrinsic' coercivity."""@en .
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_bc54c47f-8560-516a-b95b-cce9f1b7344f ;
+            owl:onClass :EMMO_ad0c038b-a09a-560c-b149-066de8f8e307 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_0d67d6c5-a8a7-57d4-930a-e99412baa2c2 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onClass :EMMO_8fc78216-4859-53c2-b41e-e38062b04054 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_a4bc4536-f381-5bcd-b6ca-34fb1a913efd ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_538226cb-bebb-53e5-bf37-0f12226228be ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_ad0c038b-a09a-560c-b149-066de8f8e307 ;
+            owl:onClass :EMMO_69772e86-d7fb-5b43-9cd4-2f0770c6701f ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_0d67d6c5-a8a7-57d4-930a-e99412baa2c2 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_45a36799-2309-5097-969f-4e5c002ae2f0 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_8fc78216-4859-53c2-b41e-e38062b04054 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "MagneticHysteresisProperties"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The essential practical characteristic of any ferromagnetic material is the irreversible nonlinear response of magnetization M to an imposed magnetic field H. This response is given by the hysteresis loop. The charactertics of hystereis loop are known as hysteresis properties.
@@ -242,25 +242,25 @@ B(H): Magnetic flux density as function of the internal field. B(H'): Magnetic f
 
 :EMMO_1b980f86-4116-5af8-bc45-14b44d88eeb5 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom ns1:EMMO_43003c86_9d15_433b_9789_ee2940920656 ],
+        [ a owl:Restriction ;
             owl:onClass ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Class ;
             owl:complementOf :EMMO_c5ca93ce-ad27-5f4a-95ef-aca0990c6937 ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom ns1:EMMO_43003c86_9d15_433b_9789_ee2940920656 ],
         ns1:EMMO_4207e895_8b83_4318_996a_72cfb32acd94 ;
     skos:prefLabel "SpacerLayer"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Nonmagnetic thin film materials"@en .
 
 :EMMO_1bda25f0-3b11-5547-a27c-4e3a638b740a a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass ns1:EMMO_06448f64_8db6_4304_8b2c_e785dba82044 ;
+            owl:onClass ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ;
+            owl:onClass ns1:EMMO_06448f64_8db6_4304_8b2c_e785dba82044 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -437,11 +437,7 @@ Crystallography."""@en .
 :EMMO_613e4315-d58f-5b5d-82ce-8cb76bd1b0aa a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_dbb7c1bc-034f-5f4b-9329-d23ed8915961 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_17f52ffb-c461-546a-8af6-299a506c8657 ;
+            owl:onClass :EMMO_c44c0546-452e-592f-b6bc-27a64e79244c ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
@@ -449,15 +445,15 @@ Crystallography."""@en .
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_dbb7c1bc-034f-5f4b-9329-d23ed8915961 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_eac1f731-95b1-5f31-ab94-2615535ea223 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_c6ed4948-e599-5f09-aa07-b70121c41fcf ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_c44c0546-452e-592f-b6bc-27a64e79244c ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_efffe3e8-6bd8-5944-ba38-6facf656c61d ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
@@ -465,7 +461,11 @@ Crystallography."""@en .
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_eac1f731-95b1-5f31-ab94-2615535ea223 ;
+            owl:onClass :EMMO_efffe3e8-6bd8-5944-ba38-6facf656c61d ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_17f52ffb-c461-546a-8af6-299a506c8657 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         :EMMO_099b796d-3163-56c7-bc90-3a304256ca5d,
         ns1:EMMO_e4e80813_f379_4091_b017_ee059811f806 ;
@@ -491,13 +491,13 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
 
 :EMMO_70efe904-df98-5f7c-9f45-45af722dfeb7 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
             owl:onClass :EMMO_2bb87117-30f9-5b3a-b406-731836a3902f ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         :EMMO_6d90a9fe-5ff3-563b-b33b-ae5a4e1a88d8 ;
     skos:prefLabel "UniaxialMagnetocrystallineAnisotropy"^^rdf:PlainLiteral ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The uniaxial anisotropy depends on only a single angle, the angle magnetization vector and the c axis"@en .
@@ -512,20 +512,20 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
 
 :EMMO_8a0c8d0a-3dc7-5f3f-ab20-24b38d188827 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass ns1:EMMO_593ecc7c_250d_4e4d_8957_0170f3cc2154 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
             owl:onClass :EMMO_14a12902-9845-5be6-bd0b-511dcea31985 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass ns1:EMMO_593ecc7c_250d_4e4d_8957_0170f3cc2154 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_98f7a685-fa5a-54f1-8504-f398047f3ab6 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "ExtrinsicMagneticProperties"@en ;
@@ -643,13 +643,13 @@ Given by its mean and standard deviation of a lognormal distribution"""@en .
 
 :EMMO_af109e05-abbd-5964-8e39-8249b9eda7da a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
             owl:onClass :EMMO_527989d5-7417-5d94-83bf-4db785827a88 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         :EMMO_3a63baaf-4d7c-5ea5-93ce-9c8917a3290c ;
     skos:prefLabel "CubicMagnetocrystallineAnisotropy"^^rdf:PlainLiteral ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Cubic crystals anisotropy"@en .
@@ -657,7 +657,10 @@ Given by its mean and standard deviation of a lognormal distribution"""@en .
 :EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom ns1:EMMO_f0b8bace_151e_4f54_8129_c180fd83ae44 ],
+            owl:someValuesFrom :EMMO_032731f8-874d-5efb-9c9d-6dafaa17ef25 ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_c0a72108-de97-5dff-a830-e4b617adaeef ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom ns1:EMMO_6b5af5a8_a2d8_4353_a1d6_54c9f778343d ],
@@ -669,10 +672,7 @@ Given by its mean and standard deviation of a lognormal distribution"""@en .
             owl:someValuesFrom :EMMO_57873439-dfa4-5b74-aec7-d530376ae11c ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_c0a72108-de97-5dff-a830-e4b617adaeef ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_032731f8-874d-5efb-9c9d-6dafaa17ef25 ],
+            owl:someValuesFrom ns1:EMMO_f0b8bace_151e_4f54_8129_c180fd83ae44 ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "IntrinsicMagneticProperties"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Intrinsic magnetic properties refer to atomic-scale magnetism and depend on the crystal structure"@en .
@@ -681,12 +681,7 @@ Given by its mean and standard deviation of a lognormal distribution"""@en .
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Crystallite"^^rdf:PlainLiteral ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q899604"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass ns1:EMMO_c1c8ac3c_8a1c_4777_8e0b_14c1f9f9b0c6 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onClass [ a owl:Class ;
-                    owl:unionOf ( :EMMO_4f709756-86ee-5307-880a-696d08ae9732 :EMMO_5408b3d3-4971-564b-a34c-53e4e3c3f44d ) ] ;
+            owl:onClass ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -694,7 +689,12 @@ Given by its mean and standard deviation of a lognormal distribution"""@en .
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ;
+            owl:onClass ns1:EMMO_c1c8ac3c_8a1c_4777_8e0b_14c1f9f9b0c6 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass [ a owl:Class ;
+                    owl:unionOf ( :EMMO_4f709756-86ee-5307-880a-696d08ae9732 :EMMO_5408b3d3-4971-564b-a34c-53e4e3c3f44d ) ] ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_0bb3b434_73aa_428f_b4e8_2a2468648e19 ;
@@ -850,11 +850,11 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
 :EMMO_f8f03807-d6b6-5ebf-8e0b-418311e8e1e5 a owl:Class ;
     rdfs:comment "Shape anisotropy is restricted to small particles, where the inter-atomic exchange ensures a uniform  magnetization."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e ;
+            owl:onClass :EMMO_ac6edd90-c273-5203-836b-82462863f2c8 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_ac6edd90-c273-5203-836b-82462863f2c8 ;
+            owl:onClass :EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         :EMMO_3a63baaf-4d7c-5ea5-93ce-9c8917a3290c ;
@@ -865,11 +865,7 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Crystal_structure"^^rdf:PlainLiteral ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q895901"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_a205766b-7c02-5c56-90e5-96c553c316c8 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onClass :EMMO_5d5fbcc0-2738-5cb8-9157-a0fbe50eebb6 ;
+            owl:onClass :EMMO_2ca16b3d-f83e-583c-8292-beb6473ea021 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -877,7 +873,11 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955 ;
+            owl:onClass :EMMO_a205766b-7c02-5c56-90e5-96c553c316c8 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_5d5fbcc0-2738-5cb8-9157-a0fbe50eebb6 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -889,7 +889,7 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_2ca16b3d-f83e-583c-8292-beb6473ea021 ;
+            owl:onClass :EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -902,13 +902,13 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
 
 :EMMO_5394673b-027e-5afc-bc6f-f72df5ed40a1 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom ns1:EMMO_a8eb87b5_4d10_4137_a75c_e04ee59ca095 ],
-        [ a owl:Restriction ;
             owl:onClass [ a owl:Class ;
                     owl:unionOf ( :EMMO_694b3915-3326-5fb2-87a1-20ccf1dc79dc :EMMO_aaa107b8-4dd9-5fc8-b135-a604a0cb38b1 :EMMO_1bda25f0-3b11-5547-a27c-4e3a638b740a ) ] ;
             owl:onProperty ns1:EMMO_dc57d998_23db_4d8e_b2cd_f346b195b846 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom ns1:EMMO_a8eb87b5_4d10_4137_a75c_e04ee59ca095 ],
         ns1:EMMO_4207e895_8b83_4318_996a_72cfb32acd94,
         ns1:EMMO_668fbd5b_6f1b_405c_9c6b_d6067bd0595a ;
     skos:prefLabel "SecondaryPhase"@en ;
@@ -923,11 +923,11 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
 
 :EMMO_6d90a9fe-5ff3-563b-b33b-ae5a4e1a88d8 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_cd58ebab-4351-5d0d-ad45-bbddd6efead3 ;
+            owl:onClass :EMMO_49a882d1-9ce7-522b-91e7-3a460f25f5ac ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_49a882d1-9ce7-522b-91e7-3a460f25f5ac ;
+            owl:onClass :EMMO_cd58ebab-4351-5d0d-ad45-bbddd6efead3 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         :EMMO_3a63baaf-4d7c-5ea5-93ce-9c8917a3290c ;
@@ -942,6 +942,10 @@ and the easy direction of magnetization."""@en .
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
+            owl:onClass :EMMO_ada88738-c901-5d83-884b-5f84d27ce527 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_38684bd3-8137-5af1-9c0d-b32bcf58fefc ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
@@ -949,10 +953,6 @@ and the easy direction of magnetization."""@en .
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_b0f0e57e-464d-562f-80ec-b216c92d5e88 ;
             owl:onProperty ns1:EMMO_dc57d998_23db_4d8e_b2cd_f346b195b846 ],
-        [ a owl:Restriction ;
-            owl:onClass :EMMO_ada88738-c901-5d83-884b-5f84d27ce527 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_f1025834_0cd2_42a1_bfeb_13bec41c8655 ;
     skos:prefLabel "GranularStructure"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Ensemble of grains of 1 or more grains"@en .
@@ -1002,15 +1002,7 @@ The coercivity on M(H') loop, where H' is the external field."""@en .
     :EMMO_eb748e96-0aee-5b55-b6be-56b8c6bdaed6 "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=151-14-06"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass ns1:EMMO_71d1c8f0_c6e3_44b5_a4b6_1b74ff35698a ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:onClass :EMMO_8a0c8d0a-3dc7-5f3f-ab20-24b38d188827 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass ns1:EMMO_dd4b7d81_28a9_4801_8831_4cbab217e362 ;
+            owl:onClass :EMMO_38684bd3-8137-5af1-9c0d-b32bcf58fefc ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:onClass :EMMO_cf5261fe-bdab-5c7b-b6a8-f9a313687bc2 ;
@@ -1018,7 +1010,15 @@ The coercivity on M(H') loop, where H' is the external field."""@en .
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_38684bd3-8137-5af1-9c0d-b32bcf58fefc ;
+            owl:onClass ns1:EMMO_dd4b7d81_28a9_4801_8831_4cbab217e362 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_8a0c8d0a-3dc7-5f3f-ab20-24b38d188827 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass ns1:EMMO_71d1c8f0_c6e3_44b5_a4b6_1b74ff35698a ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         ns1:EMMO_8820f251_ad36_43f4_a693_c0e86a89cc1f ;
     skos:prefLabel "Magnet"@en ;
@@ -1040,11 +1040,11 @@ The principal components of the diagonal demagnetizing tensor form the demagneti
 
 :EMMO_38684bd3-8137-5af1-9c0d-b32bcf58fefc a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_368c84bc-2f5d-5d2b-a32b-9fc5a7411ee4 ;
+            owl:onClass :EMMO_90e967b9-91d4-59d3-bcdc-b6d602f734cc ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_90e967b9-91d4-59d3-bcdc-b6d602f734cc ;
+            owl:onClass :EMMO_368c84bc-2f5d-5d2b-a32b-9fc5a7411ee4 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_1cba0b27_15d0_4326_933f_379d0b3565b6,
@@ -1061,11 +1061,11 @@ The principal components of the diagonal demagnetizing tensor form the demagneti
 
 :EMMO_b7ebd85f-36aa-540a-b8a9-e2c1094f27f1 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_aa999d91-076f-512a-85a0-c2f751c083b1 ;
+            owl:onClass :EMMO_0213900b-ab6d-56be-82fb-4db874974de1 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_0213900b-ab6d-56be-82fb-4db874974de1 ;
+            owl:onClass :EMMO_aa999d91-076f-512a-85a0-c2f751c083b1 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
@@ -1079,11 +1079,11 @@ The principal components of the diagonal demagnetizing tensor form the demagneti
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e ;
+            owl:onClass ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ;
+            owl:onClass :EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_f00fb163_48c9_4c59_b6c2_4205c082aa54 ;
