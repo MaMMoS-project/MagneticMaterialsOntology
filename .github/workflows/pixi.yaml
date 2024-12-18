@@ -7,10 +7,18 @@ on:
 jobs:
   build:
 
-    runs-on: ghcr.io/prefix-dev/pixi
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+    - uses: prefix-dev/setup-pixi@v0.8.0
+      with:
+        pixi-version: v0.39.2
+        cache: true
+        auth-host: prefix.dev
+        auth-token: ${{ secrets.PREFIX_DEV_TOKEN }}    ghcr.io/prefix-dev/pixi
     - name: Install dependencies
       run: |
         pixi --version
+        pixi --version
+	
