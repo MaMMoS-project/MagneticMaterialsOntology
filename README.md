@@ -53,7 +53,10 @@ Alternatively you can use [Protégé](https://protege.stanford.edu/)
   
 Building
 --------
+
 MagneticMaterialsOntology is built using tools provided by EMMO. For more details see the [src directory](https://github.com/MaMMoS-project/MagneticMaterialsOntology/tree/main/src)
+
+Installation of required software is also explained in  [src/README.md](https://github.com/MaMMoS-project/MagneticMaterialsOntology/tree/main/src/README.md)
 
 
 Attributions and credits
@@ -80,3 +83,9 @@ This project is licensed under the [Creative Commons Attribution 4.0 Internation
 
 [^1]: https://github.com/emmo-repo/EMMO  
 [^2]: https://mammos-project.github.io/
+
+Status
+------
+
+[![build](https://github.com/MaMMoS-project/MagneticMaterialsOntology/actions/workflows/build.yaml/badge.svg)](https://github.com/MaMMoS-project/MagneticMaterialsOntology/actions/workflows/build.yaml)
+

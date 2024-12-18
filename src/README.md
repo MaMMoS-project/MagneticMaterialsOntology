@@ -3,7 +3,7 @@
 here is the source code to create the MagneticMaterialsOntology using  
 `https://github.com/emmo-repo/EMMOntoPy`  
 
-### Installation
+### Manual Installation and execution
 
 install EMMOntoPy
 ```
@@ -30,6 +30,27 @@ or simply run
 
 which builds the ontology, runs the emmocheck and creates a documentation. Please set the relevant path to `emmocheck` and `ontodoc` in the bash script `create.sh`
 
+
+### Installation and execution using pixi
+
+1. install pixi from https://pixi.sh/
+
+2. clone this repository:
+
+   `git clone https://github.com/MaMMoS-project/MagneticMaterialsOntology.git`
+
+3. Change directory into the cloned repository and run `pixi install`
+   to install the required software.
+
+Pixi has predefined tasks (in `pixi.toml`):
+
+- `pixi run build` will create the `magnetic_material_mammos.ttl` file
+- `pixi run check` will run `emmocheck`
+- `pixi run docs` will build the `doc/magnetic_material_mammos.html`
+
+Alternatively, `pixi shell` can be used to open an environment in
+which `emmodoc` and `ontodoc` are in the search path, and the relevant
+commands can be executed directly.
 
 ### Strategy
 
