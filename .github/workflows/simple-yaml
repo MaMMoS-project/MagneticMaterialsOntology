@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ghcr.io/prefix-dev/pixi
 
     steps:
     - uses: actions/checkout@v4
