@@ -1,0 +1,16 @@
+name: pixi
+
+on:
+  push:
+
+
+jobs:
+  build:
+
+    runs-on: ghcr.io/prefix-dev/pixi
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install dependencies
+      run: |
+        pixi --version
