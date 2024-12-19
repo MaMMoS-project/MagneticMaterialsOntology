@@ -59,6 +59,9 @@ Alternatively, `pixi shell` can be used to open an environment in
 which `emmodoc` and `ontodoc` are in the search path, and the relevant
 commands can be executed directly.
 
+Within this environment, `sh create.sh` will carry out all the tasks above
+subsequently.
+
 ### Strategy
 
 #### Building a magnetic materials ontology
