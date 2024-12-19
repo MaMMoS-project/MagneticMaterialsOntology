@@ -31,3 +31,10 @@ jobs:
     - name: pixi run docs
       run: |
         pixi run docs
+
+    - name: test create.sh script
+      # (this is a duplication of the tasks above, but as long as we
+      # have the duplication, we should test both versions.)
+      run: |
+        pixi run bash create.sh
+
