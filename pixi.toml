@@ -1,7 +1,7 @@
 [project]
 authors = ["Thomas Schrefl, DISS-UWK", "Wilfried Hortschitz, DISS-UWK", "Hans Fangohr <hans.fangohr@mpsd.mpg.de>"]
 channels = ["conda-forge"]
-description = "Add a short description here"
+description = "An EMMO-based ontology for magnetic materials."
 name = "MagneticMaterialsOntology"
 platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
 version = "0.1.0"
