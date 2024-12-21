@@ -181,8 +181,26 @@ with onto:
 
     ## magnetization
 
+    emmo.Magnetization.altLabel = en("VolumeMagnetization")
+    
+    class AmpereSquareMetrePerKilogram(emmo.MeasurementUnit):
+        """Unit of the magnetic moment per unit mass: Am²/kg"""
+        
+        prefLabel = en("AmpereSquareMetrePerKilogram")
+        is_a = [
+            emmo.hasDimensionString.value("T0 L+2 M-1 I+1 Θ0 N0 J0")
+        ]
+
+    class MagneticMomementPerUnitMass(emmo.ElectromagneticQuantity):
+        """Magnetic moment per unit mass, sigma"""
+        
+        comment = en("The magnetization is obtained by multiplying sigma with the density")
+        prefLabel = en("MagneticMomementPerUnitMass")
+        altLabel = pl("sigma, MassMagnetization, SpecificMagneticMoment")
+        is_a = [emmo.hasMeasurementUnit.some(AmpereSquareMetrePerKilogram)]
+
     class SpontaneousMagnetization(emmo.ElectromagneticQuantity):
-        """The spontaneous magnetization, Ms, of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Ms exists within a domain of a ferromagnet."""
+        """The spontaneous magnetization, Ms, of a ferromagnet is the result of alignment of the magnetic moments of individual atoms.. Ms exists within a domain of a ferromagnet."""
 
         prefLabel = en("SpontaneousMagnetization")
         altLabel = pl("Ms")
@@ -738,6 +756,15 @@ with onto:
         altLabel = en("chi")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q691463")
 
+    class MassSusceptibility(emmo.ElectromagneticQuantity):
+        """Ratio of the change of the magnetic moment per unit mass and the internal field: sigma = chi_m H"""
+
+        comment = en("magnetic susceptibility per mass density")
+        prefLabel = en("MassSusceptibility")
+        altLabel = en("chi_m")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q104655916")
+        is_a = [emmo.hasMeasurementUnit.some(emmo.CubicMetrePerKilogram)]
+
     class AbsolutePermeability(emmo.ElectromagneticQuantity):
         """Ratio of the change of magnetic flux and the internal field: B = mu H"""
 
@@ -871,7 +898,7 @@ with onto:
         is_a = [
             emmo.hasProperty.min(0, emmo.MaterialsProcessing),
             emmo.hasProperty.min(0, emmo.WorkpieceForming),
-            emmo.hasSpatialPart.exactly(1, GranularMicrostructure),
+            emmo.hasSpatialPart.min(0, GranularMicrostructure),
             emmo.hasProperty.exactly(1, ExtrinsicMagneticProperties),
             emmo.hasProperty.min(0, XrayDiffractionData),
         ]
