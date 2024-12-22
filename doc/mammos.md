@@ -34,6 +34,19 @@ A *crystalline magnetic material* is a *granular structure*. Properties of the g
 
 %BRANCHFIG CrystallineMagneticMaterial addnodes=1 parents=1 rankdir='LR' relations=all edgelabels=1 caption='A crystalline magnetic material.'
 
+%HEADER "Intrinsic magnetic properties" level=2  
+
+The *intrinsic magnetic properties* depend on the chemical composition and the crystal structure. They are a property of the *magnetic material*.
+
+%BRANCHFIG IntrinsicMagneticProperties addnodes=1 parents=1 rankdir='LR' relations=all edgelabels=1 caption='Intrinsic magnetic properties.'
+
+%HEADER "Extrinsic magnetic properties" level=2  
+
+Whereas the intrinsic magnetic properties are a property of a magnetic material, the *extrinsic magnetic properties* depend on the microstructure and shape of the magnet. They are a property of the magnet. An important subset of the extrinsic magnetic properties are the *magnetic hysteresis properties*.
+
+%BRANCHFIG BulkMagnet addnodes=1 parents=1 rankdir='LR' relations=all edgelabels=1 caption='A bulk magnet and its properties.'
+%BRANCHFIG ExtrinsicMagneticProperties addnodes=1 parents=1 rankdir='LR' relations=hasProperty edgelabels=1 caption='The exterinsic magnetic properties.'
+
 %% you may add options to the documentation of a branch:  
 %% (default values are listed below)  
 %% caption=''      %% will give "Granular Microstructure branch.  
@@ -50,6 +63,6 @@ A *crystalline magnetic material* is a *granular structure*. Properties of the g
 %% addnodes=1      %% whether to add missing target nodes in relations (1: True, 0: False)  
 %% parents=1       %% Adds n levels of parents to graph  
 
-%HEADER Classes level=2  
+%HEADER Classes level=1  
 %ALL classes  
 
