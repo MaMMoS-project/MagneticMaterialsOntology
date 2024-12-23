@@ -2,7 +2,7 @@
 
 %HEADER Overview 
 
-The MaMMoS magnetic materials ontology is a domain ontology which uses [EMMO](https://github.com/emmo-repo/EMMO) as top level ontology. The magnetic material ontology reflects the hierarchical structure of the magnet. It reveals its physical parts at different length scales.
+The MaMMoS magnetic materials ontology is a domain ontology which uses [EMMO](https://github.com/emmo-repo/EMMO) as top and middle level ontology. The magnetic material ontology reflects the hierarchical structure of the magnet. It reveals its physical parts at different length scales.
 
 %HEADER "Magnet" level=2  
 
@@ -16,7 +16,7 @@ A magnet may have a *granular microstructure*.
 The spatial parts of the granular microstructure are
 the *main magnetic phase*, the *grain boundary phase*, and *secondary phase*.
 
-The granular microstructure constists of a *main magnetic phase*, possible *grain boundary phases* and *secondary phases*.  
+The granular microstructure consists of a *main magnetic phase*, possible *grain boundary phases*, and *secondary phases*.  
 
 %BRANCHFIG GranularMicrostructure addnodes=1 parents=1 rankdir='LR' relations=isA,hasSpatialPart,hasSpatialTile edgelabels=1 caption='The granular microstructure of a magnet.'
 
@@ -45,11 +45,11 @@ The *intrinsic magnetic properties* depend on the chemical composition and the c
 Whereas the intrinsic magnetic properties are a property of a magnetic material, the *extrinsic magnetic properties* depend on the microstructure and shape of the magnet. They are a property of the magnet. An important subset of the extrinsic magnetic properties are the *magnetic hysteresis properties*.
 
 %BRANCHFIG BulkMagnet addnodes=1 parents=1 rankdir='LR' relations=all edgelabels=1 caption='A bulk magnet and its properties.'
-%BRANCHFIG ExtrinsicMagneticProperties addnodes=1 parents=1 rankdir='LR' relations=hasProperty edgelabels=1 caption='The exterinsic magnetic properties.'
+%BRANCHFIG ExtrinsicMagneticProperties addnodes=1 parents=1 rankdir='LR' relations=hasProperty edgelabels=1 caption='The extrinsic magnetic properties.'
 
 %% you may add options to the documentation of a branch:  
 %% (default values are listed below)  
-%% caption=''      %% will give "Granular Microstructure branch.  
+%% caption=''      %% will add a caption below the graph
 %% terminated=1    %% whether the graph should be terminated at leaf nodes  
 %% strict_leaves=1 %% whether to strictly exclude leave descendants  
 %% width=0px       %% optional figure width  

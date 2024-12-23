@@ -1,6 +1,6 @@
 ## Create documentation 
 
-### Generation html documentation
+### Generating html documentation
 
 We use `mammosdoc` which is a modified version of `ontodoc` from EMMOntoPy  as follows
 
@@ -15,7 +15,7 @@ for creating the html file.
 ### Documentation
 
 The created documentation can be viewed here   
-[view html file](https://mammos-project.github.io/MagneticMaterialsOntology/doc/magnetic_material_mammos.html)
+[view html file](https://mammos-project.github.io/MagneticMaterialsOntology/doc/magnetic_material_mammos.html) .
 
 ### Change the content of the html file
 
@@ -23,19 +23,22 @@ You may change the content of the html file by editing the following files
 
 #### mammos.md, specify graphs to be shown
 
-Gives the content of the html file. It is an markdown file that will be converted to an html file.
-With preprocessing command, which start with %, content from the ontology can be included.
+Gives the content of the html file. It is a markdown file that will be converted to an html file.
+With preprocessing commands, which start with %, content from the ontology can be included.
+Examples are:
 
+```
 %HEADER "header text" level=2  
 creates a header that is included in the table of content
 
 %BRANCHFIG name addnodes=1 parents=0 rankdir='LR' relations=isA,hasSpatialPart,hasSpatialTile edgelabels=1  
 adds a plot of the ontology branch `name`
+```
 
 You may use the following parameters:
 |parameter and default value | task |
 |----------------------------|------|  
-|caption='' | will give "Granular Microstructure branch.|
+|caption='' | will add a caption below the graph|
 |terminated=1 | whether the graph should be terminated at leaf nodes|
 |strict_leaves=1 | whether to strictly exclude leave descendants|
 |width=0px | optional figure width|
@@ -45,7 +48,7 @@ You may use the following parameters:
 |rankdir='BT' | graph direction (BT, TB, RL, LR: bottom-top, top-bottom, right-left, left-right)|
 |legend=1 | whether to add legend|
 |namespaces='' | sequence of names of namespaces to be included|
-|ontologies='' | sequence of names of ontologies to be included
+|ontologies='' | sequence of names of ontologies to be included|
 |addnodes=1 | whether to add missing target nodes in relations (1: True, 0: False)|
 |parents=1 | Adds n levels of parents to graph|
 
@@ -55,20 +58,20 @@ You may use the following parameters:
 
 Provide pandoc arguments/options via this file. These include the name of the input file for the meta data, the depth of the table of content, and the filename of the files for logo and EU flag.
 
-#### pandoc-html-options.yaml.
+#### pandoc-html-options.yaml
 
 Provide pandoc arguments for html output via this file. These include the html style file and the html template.
 
 #### pandoc-template.html, pandoc-html.css
 
-The html template file and html style file
+The html template file and html style file.
 
 ### Create a plot of a concept
 
 Here is an example for plotting branches. To create on or more plots you can use `mammosdoc`. 
 
-* Add multiple BRANCHFIG preprocessing directives to themarkdown template file `plots.md` 
-* Change to the directiory `MagneticMaterialsOntology/doc`
+* Add multiple BRANCHFIG preprocessing directives to the markdown template file `plots.md` 
+* Change to the directory `MagneticMaterialsOntology/doc`
 * Run mammosdoc: 
 
 ```
@@ -80,9 +83,9 @@ The parameters after the preprocessor directive `%BRANCHFIG` in the file `plots.
 
 | problem | solution | parameter setting |
 |---------|----------|-------------------|
-| no childs are displayes | add missing target nodes in relations | `addnodes=1` |
+| no children are displayes | add missing target nodes in relations | `addnodes=1` |
 | plot has too many nodes | reduce level of shown parents | `parents=0` | 
-| plot has too many connetion | select only a few realations | `relations=isA,hasSpatialPart` | 
+| plot has too many connection | select only a few relations | `relations=isA,hasSpatialPart` | 
 | bubbles and fonts are very small | change graph direction | `rankdir='LR'` |
 
 For readability it is recommended to switch on edge labels with `edgelabels=1` and to add a caption with `caption='Explain what we see.'`

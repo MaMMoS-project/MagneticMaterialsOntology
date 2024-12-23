@@ -12,7 +12,7 @@
 
 %% you may add options to the documentation of a branch:  
 %% (default values are listed below)  
-%% caption=''      %% will give "Granular Microstructure branch.  
+%% caption=''      %% will add a caption below the graph.  
 %% terminated=1    %% whether the graph should be terminated at leaf nodes  
 %% strict_leaves=1 %% whether to strictly exclude leave descendants  
 %% width=0px       %% optional figure width  

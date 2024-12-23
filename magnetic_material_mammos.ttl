@@ -8,11 +8,11 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://www.emmc.info/emmc-csa/magnetic_material> a owl:Ontology ;
-    dcterms:abstract "An EMMO-based ontology for magnetic materials.Created within the EU project MaMMoS. Grant number 101135546 (HORIZON-CL4-2023-DIGITAL-EMERGING-01)MagneticMaterial is released under the Creative Commons Attribution 4.0 International license (CC BY 4.0)."@en ;
+    dcterms:abstract "An EMMO-based ontology for magnetic materials.Created within the EU project MaMMoS. Grant number 101135546         (HORIZON-CL4-2023-DIGITAL-EMERGING-01).MagneticMaterial is released under the Creative Commons         Attribution 4.0 International license (CC BY 4.0)."@en ;
     dcterms:contributor "DISS-UWK"@en ;
     dcterms:creator "Wilfried Hortschitz"@en ;
     dcterms:title "Magnetic Material"@en ;
-    rdfs:comment "Created within the EU project MaMMoS. Grant number 101135546 (HORIZON-CL4-2023-DIGITAL-EMERGING-01)"^^xsd:string,
+    rdfs:comment "Created within the EU project MaMMoS. Grant number 101135546     (HORIZON-CL4-2023-DIGITAL-EMERGING-01)."^^xsd:string,
         """Contacts:
 Wilfried Hortschitz
 DISS-UWK
@@ -34,13 +34,25 @@ email: wilfried.hortschitz@donau-uni.ac.at
         ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
     skos:altLabel "chi_m"@en ;
     skos:prefLabel "MassSusceptibility"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Ratio of the change of the magnetic moment per unit mass and the internal field: sigma = chi_m H"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Ratio of the change of the magnetic moment per unit mass and
+the internal field: sigma = chi_m H."""@en .
 
 :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 a owl:AnnotationProperty ;
     skos:prefLabel "wikidataReference"@en .
 
 :EMMO_4ee603fc-7a1e-51f0-bf75-8e66f9a5539b a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_1b980f86-4116-5af8-bc45-14b44d88eeb5 ;
+            owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ],
+        [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ;
+            owl:someValuesFrom :EMMO_613e4315-d58f-5b5d-82ce-8cb76bd1b0aa ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_d70e364c-7ab7-5329-9964-17a5e45bbb9d ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
             owl:onClass :EMMO_b7ebd85f-36aa-540a-b8a9-e2c1094f27f1 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
@@ -48,46 +60,38 @@ email: wilfried.hortschitz@donau-uni.ac.at
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_5be2f193-36d0-5aac-90b8-52db055d8252 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_1b980f86-4116-5af8-bc45-14b44d88eeb5 ;
-            owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ],
-        [ a owl:Restriction ;
-            owl:onClass :EMMO_d70e364c-7ab7-5329-9964-17a5e45bbb9d ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_b2282816_b7a3_44c6_b2cb_3feff1ceb7fe ;
-            owl:someValuesFrom :EMMO_613e4315-d58f-5b5d-82ce-8cb76bd1b0aa ],
         :EMMO_099b796d-3163-56c7-bc90-3a304256ca5d,
         ns1:EMMO_8944581c_64da_46a9_be29_7074f7cc8098 ;
     skos:prefLabel "MultilayerMagnet"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Piece of matter made of stacked layers of one or more magnetic materials."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Piece of matter made of stacked layers of one or more magnetic
+materials."""@en .
 
 :EMMO_675fa9ea-408a-51f6-a001-2e6715568a71 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy"^^rdf:PlainLiteral ;
-    rdfs:comment "Ea = K1 sin^2(phi) + K2 sin^4(phi) where Ea is the is the anisotropy energy density and phi is the angle of the magnetization with respect to the c-axis of the crystal."^^rdf:PlainLiteral ;
+    rdfs:comment "Ea = K1 sin^2(phi) + K2 sin^4(phi) where Ea is the is the             anisotropy energy density and phi is the angle of the             magnetization with respect to the c-axis of the crystal."^^rdf:PlainLiteral ;
     rdfs:subClassOf :EMMO_56258d3a-f2ee-554e-af99-499dd8620457 ;
     skos:altLabel "K2"@en ;
     skos:prefLabel "MagnetocrystallineAnisotropyConstantK2"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The magnetocrystalline constant K2 for tetragonal or hexagonal crystals."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The magnetocrystalline constant K2 for tetragonal or
+hexagonal crystals."""@en .
 
 :EMMO_8ffd7d16-848a-5e89-a553-0b5bb99971c4 a owl:Class ;
-    rdfs:comment "The magnetization is obtained by multiplying sigma with the density"@en ;
+    rdfs:comment "The magnetization is obtained by multiplying sigma with                      the density"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 ;
             owl:someValuesFrom :EMMO_e838288f-b0b4-5bcb-9889-06b2a10d3ccf ],
         ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
     skos:altLabel "sigma, MassMagnetization, SpecificMagneticMoment"^^rdf:PlainLiteral ;
     skos:prefLabel "MagneticMomementPerUnitMass"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Magnetic moment per unit mass, sigma"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Magnetic moment per unit mass, sigma."@en .
 
 :EMMO_ab8a0d3e-6d0f-599e-a119-a91aa99bd881 a owl:Class ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q691463"^^rdf:PlainLiteral ;
     rdfs:subClassOf ns1:EMMO_e59eb557_3a0f_4532_9984_deed22f94952 ;
     skos:altLabel "chi"@en ;
     skos:prefLabel "InternalSusceptibility"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Ratio of the change of magnetization and the internal field: M = chi H"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Ratio of the change of magnetization and the internal
+field: M = chi H."""@en .
 
 :EMMO_ace0a9bf-0b4d-5cd2-be02-3c3b816a279b a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Demagnetizing_field"^^rdf:PlainLiteral ;
@@ -98,16 +102,18 @@ email: wilfried.hortschitz@donau-uni.ac.at
         ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
     skos:altLabel "Hd"@en ;
     skos:prefLabel "DemagnetizingField"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The magnetic field produced by the magnetization distribution of the sample itself"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The magnetic field produced by the magnetization distribution
+of the sample itself."""@en .
 
 :EMMO_af13f0cd-63c7-50f5-9f20-59d54fc09710 a owl:Class ;
     rdfs:subClassOf ns1:EMMO_f3dd74c0_f480_49e8_9764_33b78638c235 ;
     skos:prefLabel "EasyAxisDistributionSigma"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Standard deviation of the grain misalignment angle in an ensembles of misaligned magnetic particles
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Standard deviation of the grain misalignment angle in an ensembles
+of misaligned magnetic particles.
 
 This refers not only to isotropic magnets but also to
-partly aligned or textured magnets, where the easy-axis distribution is described
-by a function P(theta)."""@en .
+partly aligned or textured magnets, where the easy-axis distribution
+is described by a function P(theta)."""@en .
 
 :EMMO_b727c447-8428-56ca-9e5a-5ced008760ad a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -116,16 +122,17 @@ by a function P(theta)."""@en .
         ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
     skos:altLabel "H"@en ;
     skos:prefLabel "InternalMagneticField"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The internal field in the sample in the continuous medium approximation is the
-sum of the external field H′ and the demagnetizing field Hd"""@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The internal field in the sample in the continuous medium
+approximation is the sum of the external field H′ and the
+demagnetizing field Hd."""@en .
 
 :EMMO_d28323da-810f-5cbe-a770-eab7e7fdb493 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e ;
+            owl:onClass :EMMO_f8f03807-d6b6-5ebf-8e0b-418311e8e1e5 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_f8f03807-d6b6-5ebf-8e0b-418311e8e1e5 ;
+            owl:onClass :EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -142,7 +149,8 @@ sum of the external field H′ and the demagnetizing field Hd"""@en .
     rdfs:subClassOf ns1:EMMO_e59eb557_3a0f_4532_9984_deed22f94952 ;
     skos:altLabel "chi'"@en ;
     skos:prefLabel "ExternalSusceptibility"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Ratio of the change of magnetization and the external field: M = chi' H'"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Ratio of the change of magnetization and the external
+field: M = chi' H'."""@en .
 
 :EMMO_da08f0d3-fe19-58bc-8fb6-ecc8992d5eb3 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -151,9 +159,9 @@ sum of the external field H′ and the demagnetizing field Hd"""@en .
         ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
     skos:altLabel "AppliedMagneticField, H'"@en ;
     skos:prefLabel "ExternalMagneticField"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The external field H′, acting on a sample that is produced by electric
-currents or the stray field of magnets outside the sample volume, is often
-called the applied field."""@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The external field H′, acting on a sample that is produced by
+electric currents or the stray field of magnets outside the sample
+volume, is often called the applied field."""@en .
 
 :EMMO_e9e3b7d2-d4fa-5140-88dc-2f0d60cf6d15 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy"^^rdf:PlainLiteral ;
@@ -186,33 +194,53 @@ ns1:EMMO_b23e7251_a488_4732_8268_027ad76d7e37 skos:altLabel "VolumeMagnetization
         ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
     skos:altLabel "Ms"^^rdf:PlainLiteral ;
     skos:prefLabel "SpontaneousMagnetization"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The spontaneous magnetization, Ms, of a ferromagnet is the result of alignment of the magnetic moments of individual atoms.. Ms exists within a domain of a ferromagnet."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The spontaneous magnetization, Ms, of a ferromagnet is the result
+of alignment of the magnetic moments of individual atoms. Ms exists
+within a domain of a ferromagnet."""@en .
 
 :EMMO_0d67d6c5-a8a7-57d4-930a-e99412baa2c2 a owl:Class ;
     rdfs:subClassOf ns1:EMMO_0e78a4d4_b4e0_48e7_97d8_e7d41a85a54d ;
     skos:altLabel "Coercive field, Hc"@en ;
     skos:prefLabel "CoercivityHc"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The internal magnetic held -Hc at which the macroscopic magnetization vanishes is the coercivity or coercive force.
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The internal magnetic held -Hc at which the macroscopic
+magnetization vanishes is the coercivity or coercive force.
 
-Although it is not an intrinsic property in our sense of the term, the M-H loop coercivity Hc is
-sometimes referred to as 'intrinsic' coercivity."""@en .
+Although it is not an intrinsic property in our sense of the term,
+the M-H loop coercivity Hc is sometimes referred to as
+'intrinsic' coercivity."""@en .
 
 :EMMO_14a12902-9845-5be6-bd0b-511dcea31985 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_fe101d1d-f1f7-54f8-886b-fa6d6052ce98 ;
+            owl:onClass :EMMO_ad0c038b-a09a-560c-b149-066de8f8e307 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_0d67d6c5-a8a7-57d4-930a-e99412baa2c2 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_45a36799-2309-5097-969f-4e5c002ae2f0 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_234a6193-f057-556f-bfcd-38efde3aafc4 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_538226cb-bebb-53e5-bf37-0f12226228be ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_bc54c47f-8560-516a-b95b-cce9f1b7344f ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_45a36799-2309-5097-969f-4e5c002ae2f0 ;
+            owl:onClass :EMMO_a4bc4536-f381-5bcd-b6ca-34fb1a913efd ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_fe101d1d-f1f7-54f8-886b-fa6d6052ce98 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_e1028129-c23e-57ac-9174-2f34ddbf3926 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
@@ -223,36 +251,26 @@ sometimes referred to as 'intrinsic' coercivity."""@en .
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_538226cb-bebb-53e5-bf37-0f12226228be ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_a4bc4536-f381-5bcd-b6ca-34fb1a913efd ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_ad0c038b-a09a-560c-b149-066de8f8e307 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_234a6193-f057-556f-bfcd-38efde3aafc4 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_e1028129-c23e-57ac-9174-2f34ddbf3926 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+            owl:onClass :EMMO_0d67d6c5-a8a7-57d4-930a-e99412baa2c2 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "MagneticHysteresisProperties"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The essential practical characteristic of any ferromagnetic material is the irreversible nonlinear response of magnetization M to an imposed magnetic field H. This response is given by the hysteresis loop. The charactertics of hystereis loop are known as hysteresis properties.
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The essential practical characteristic of any ferromagnetic material
+is the irreversible nonlinear response of magnetization M to an imposed
+magnetic field H. This response is given by the hysteresis loop. The
+charactertics of hystereis loop are known as hysteresis properties.
 
 Instead of M(H), other quantities can be used to plot a hystereis loop.
 
-M(H): Magnetization as function of the internal field. M(H'): Magnetization as function of the external field.
+M(H): Magnetization as function of the internal field.
+M(H'): Magnetization as function of the external field.
 
-J(H): Magnetic polarization as function of the internal field. J(H'): Magnetic polarization as function of the external field.
+J(H): Magnetic polarization as function of the internal field.
+J(H'): Magnetic polarization as function of the external field.
 
-B(H): Magnetic flux density as function of the internal field. B(H'): Magnetic flux density as function of the external field."""@en .
+B(H): Magnetic flux density as function of the internal field.
+B(H'): Magnetic flux density as function of the external field."""@en .
 
 :EMMO_17f52ffb-c461-546a-8af6-299a506c8657 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -261,7 +279,7 @@ B(H): Magnetic flux density as function of the internal field. B(H'): Magnetic f
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         :EMMO_fe101d1d-f1f7-54f8-886b-fa6d6052ce98 ;
     skos:prefLabel "LocalCoercivity"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "local coercive field measured with the magneto-optic Kerr effect"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Local coercive field measured with the magneto-optic Kerr effect."@en .
 
 :EMMO_1b980f86-4116-5af8-bc45-14b44d88eeb5 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -275,7 +293,7 @@ B(H): Magnetic flux density as function of the internal field. B(H'): Magnetic f
             owl:complementOf :EMMO_c5ca93ce-ad27-5f4a-95ef-aca0990c6937 ],
         ns1:EMMO_4207e895_8b83_4318_996a_72cfb32acd94 ;
     skos:prefLabel "SpacerLayer"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Nonmagnetic thin film materials"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Nonmagnetic thin film materials."@en .
 
 :EMMO_1bda25f0-3b11-5547-a27c-4e3a638b740a a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -283,22 +301,23 @@ B(H): Magnetic flux density as function of the internal field. B(H'): Magnetic f
             owl:onClass :EMMO_75b995e0-2bac-5812-a7f6-f8c1731d1d5c ;
             owl:onProperty ns1:EMMO_dc57d998_23db_4d8e_b2cd_f346b195b846 ],
         [ a owl:Restriction ;
-            owl:onClass ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ;
+            owl:onClass ns1:EMMO_06448f64_8db6_4304_8b2c_e785dba82044 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass ns1:EMMO_06448f64_8db6_4304_8b2c_e785dba82044 ;
+            owl:onClass ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_4207e895_8b83_4318_996a_72cfb32acd94 ;
     skos:prefLabel "NonMagneticMaterial"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "A material which is non-magnetic"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "A material which is non-magnetic."@en .
 
 :EMMO_234a6193-f057-556f-bfcd-38efde3aafc4 a owl:Class ;
     rdfs:subClassOf ns1:EMMO_b4895f75_41c8_4fd9_b6d6_4d5f7c99c423 ;
     skos:altLabel "H'sw"@en ;
     skos:prefLabel "SwitchingFieldCoercivityExternal"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Defined by the maximum slope of the descending branch of the M-H' hysteresis loop, with H' the external field."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Defined by the maximum slope of the descending branch of
+the M-H' hysteresis loop, with H' the external field."""@en .
 
 :EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395 a owl:Class ;
     rdfs:subClassOf ns1:EMMO_f1a51559_aa3d_43a0_9327_918039f0dfed ;
@@ -308,27 +327,29 @@ B(H): Magnetic flux density as function of the internal field. B(H'): Magnetic f
 
 :EMMO_2bb87117-30f9-5b3a-b406-731836a3902f a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy"^^rdf:PlainLiteral ;
-    rdfs:comment "Ea = K1 sin^2(phi) + K2 sin^4(phi) where Ea is the is the anisotropy energy density and phi is the angle of the magnetization with respect to the c-axis of the crystal."^^rdf:PlainLiteral ;
+    rdfs:comment "Ea = K1 sin^2(phi) + K2 sin^4(phi) where Ea is the is the             anisotropy energy density and phi is the angle of the             magnetization with respect to the c-axis of the crystal."^^rdf:PlainLiteral ;
     rdfs:subClassOf :EMMO_56258d3a-f2ee-554e-af99-499dd8620457 ;
     skos:altLabel "K1"@en ;
     skos:prefLabel "MagnetocrystallineAnisotropyConstantK1"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The magnetocrystalline constant K1 for tetragonal or hexagonal crystals."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The magnetocrystalline constant K1 for tetragonal or
+hexagonal crystals."""@en .
 
 :EMMO_2ca16b3d-f83e-583c-8292-beb6473ea021 a owl:Class ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q625641"^^rdf:PlainLiteral ;
     rdfs:subClassOf ns1:EMMO_f3dd74c0_f480_49e8_9764_33b78638c235 ;
     skos:altLabel "LatticeParameterBeta"@en ;
     skos:prefLabel "LatticeConstantBeta"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The angle between lattice vectors `a` and `c`, where lattice vectors `a`, `b` and `c` defines the unit cell,"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The angle between lattice vectors `a` and `c`, where lattice
+vectors `a`, `b` and `c` defines the unit cell."""@en .
 
 :EMMO_329e0b77-853d-5615-8df9-9bee0fd1189e a owl:Class ;
-    rdfs:comment "In permanent magnets, the grain boundary phase inhibits the propagation of the magnetic reversal from grain to grain."@en ;
+    rdfs:comment "In permanent magnets, the grain boundary phase inhibits             the propagation of the magnetic reversal from grain to grain."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom ns1:EMMO_43003c86_9d15_433b_9789_ee2940920656 ],
         :EMMO_5394673b-027e-5afc-bc6f-f72df5ed40a1 ;
     skos:prefLabel "GrainboundaryPhase"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Material separating grains in a microstructure"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Material separating grains in a microstructure."@en .
 
 :EMMO_368c84bc-2f5d-5d2b-a32b-9fc5a7411ee4 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -336,21 +357,25 @@ B(H): Magnetic flux density as function of the internal field. B(H'): Magnetic f
             owl:someValuesFrom ns1:Degree ],
         ns1:EMMO_06658d8d_dcde_4fc9_aae1_17f71c0bcdec ;
     skos:prefLabel "XRDTwoThetaAngles"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "the 2theta angles at which the counts are measured during X-ray diffraction"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The 2theta angles at which the counts are measured during X-ray
+diffraction."""@en .
 
 :EMMO_45a36799-2309-5097-969f-4e5c002ae2f0 a owl:Class ;
     rdfs:subClassOf ns1:EMMO_b4895f75_41c8_4fd9_b6d6_4d5f7c99c423 ;
     skos:altLabel "H'k"@en ;
     skos:prefLabel "KneeFieldExternal"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The maximum working field - also named knee field H_K, is defined as the reverse external field for which the
-magnetization is reduced by 10%; thus it corresponds to the point on the magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The maximum working field - also named knee field H_K,
+is defined as the reverse external field for which the
+magnetization is reduced by 10%; thus it corresponds to the
+point on the magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)."""@en .
 
 :EMMO_49a882d1-9ce7-522b-91e7-3a460f25f5ac a owl:Class ;
     rdfs:subClassOf :EMMO_56258d3a-f2ee-554e-af99-499dd8620457 ;
     skos:altLabel "Ku"@en ;
     skos:prefLabel "UniaxialAnisotropyConstant"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The change of energy with angle of the magnetization from the preferred direction is expressed with the
-uniaxial anisotropy constant Ea = Ku sin²(theta)"""@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The change of energy with angle of the magnetization from
+the preferred direction is expressed with the
+uniaxial anisotropy constant Ea = Ku sin²(theta)."""@en .
 
 :EMMO_4f709756-86ee-5307-880a-696d08ae9732 a owl:Class ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q11799166"^^rdf:PlainLiteral ;
@@ -361,7 +386,8 @@ uniaxial anisotropy constant Ea = Ku sin²(theta)"""@en .
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:altLabel "crystal orientation"@en ;
     skos:prefLabel "CrystallographicOrientation"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "relative direction of a crystallite in space with respect to another, disregarding distance"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Relative direction of a crystallite in space with respect to
+another, disregarding distance."""@en .
 
 :EMMO_526ed2a5-a017-590e-8eb8-8a900f2b3b78 a owl:Class ;
     rdfs:subClassOf :EMMO_70f92e7c-fa16-51d5-9ca0-5ad635cb1322 ;
@@ -369,12 +395,13 @@ uniaxial anisotropy constant Ea = Ku sin²(theta)"""@en .
     skos:prefLabel "ExchangeStiffnessConstant"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Exchange constant, A, in the continuum theory of micromagnetism.
 
-The exchange stiffness A is related to the Curie temperature TC: A is roughly
-k_B T_c/(2 a_0), where a_0 is the lattice parameter in a simple structure."""@en .
+The exchange stiffness A is related to the Curie temperature TC:
+A is roughly k_B T_c/(2 a_0), where a_0 is the lattice parameter in
+a simple structure."""@en .
 
 :EMMO_527989d5-7417-5d94-83bf-4db785827a88 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy"^^rdf:PlainLiteral ;
-    rdfs:comment "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K1c(a1²a2²a3²) where Ea is the anisotropy energy density and a1,a2,a3 are the direction cosines of the magnetization"^^rdf:PlainLiteral ;
+    rdfs:comment "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K1c(a1²a2²a3²) where Ea is             the anisotropy energy density and a1,a2,a3 are the direction             cosines of the magnetization"^^rdf:PlainLiteral ;
     rdfs:subClassOf :EMMO_56258d3a-f2ee-554e-af99-499dd8620457 ;
     skos:altLabel "K1"@en ;
     skos:prefLabel "MagnetocrystallineAnisotropyConstantK1c"@en ;
@@ -395,7 +422,8 @@ field is restored to zero in the hysteresis loop"""@en .
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q117089304"^^rdf:PlainLiteral ;
     rdfs:subClassOf ns1:EMMO_f3dd74c0_f480_49e8_9764_33b78638c235 ;
     skos:prefLabel "GrainMisalignmentAngle"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Standard deviation of the angle of the easy axis with respect to the alignment direction"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Standard deviation of the angle of the easy axis with respect to
+the alignment direction."""@en .
 
 :EMMO_572b0885-bd40-51ad-8520-d5477c6b9990 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -418,12 +446,15 @@ field is restored to zero in the hysteresis loop"""@en .
         ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
     skos:altLabel "Js"^^rdf:PlainLiteral ;
     skos:prefLabel "SpontaneousMagneticPolarisation"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "She spontaneous magnetic polarisation, Js, of a ferromagnet is the result of alignment of the magnetic moments of  individual atoms. Js exists within a domain of a ferromagnet."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """She spontaneous magnetic polarisation, Js, of a ferromagnet is the
+result of alignment of the magnetic moments of  individual atoms.
+Js exists within a domain of a ferromagnet."""@en .
 
 :EMMO_5a48bd5a-20ee-5399-ac29-c488c1c7ad73 a owl:Class ;
     rdfs:subClassOf ns1:EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac ;
     skos:prefLabel "SigmaGrainSize"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The standard deviation of the grain diameter of grains. Diameter is the diameter of a sphere with equivalent volume"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The standard deviation of the grain diameter of grains. Diameter is
+the diameter of a sphere with equivalent volume."""@en .
 
 :EMMO_5be2f193-36d0-5aac-90b8-52db055d8252 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Magnetoresistance"^^rdf:PlainLiteral ;
@@ -435,7 +466,8 @@ field is restored to zero in the hysteresis loop"""@en .
         ns1:EMMO_faab3f84_e475_4a46_af9c_7d249f0b9aef ;
     skos:altLabel "MR"@en ;
     skos:prefLabel "Magnetoresistance"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Change of the resistivity of a substance due to an applied magnetic field.
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Change of the resistivity of a substance due to an applied
+magnetic field.
 
 Magnetoresistance can be defined as MR = [ϱ(B)-ϱ(0)]/ϱ(0)."""@en .
 
@@ -451,24 +483,17 @@ Magnetoresistance can be defined as MR = [ϱ(B)-ϱ(0)]/ϱ(0)."""@en .
 that apply to a crystal structure.
 
 The complete symmetry of a crystal, including the Bravais lattice and
-any translational symmetry elements, is given by one of the 240 space groups.
+any translational symmetry elements, is given by one of the 240 space
+groups.
 
-A space group is identified by its Hermann-Mauguin symbol or space group
-number (and setting) in the International tables of
+A space group is identified by its Hermann-Mauguin symbol or space
+group number (and setting) in the International tables of
 Crystallography."""@en .
 
 :EMMO_613e4315-d58f-5b5d-82ce-8cb76bd1b0aa a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_eac1f731-95b1-5f31-ab94-2615535ea223 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_c44c0546-452e-592f-b6bc-27a64e79244c ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_c6ed4948-e599-5f09-aa07-b70121c41fcf ;
+            owl:onClass :EMMO_dbb7c1bc-034f-5f4b-9329-d23ed8915961 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
@@ -476,7 +501,15 @@ Crystallography."""@en .
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_17f52ffb-c461-546a-8af6-299a506c8657 ;
+            owl:onClass :EMMO_efffe3e8-6bd8-5944-ba38-6facf656c61d ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_c44c0546-452e-592f-b6bc-27a64e79244c ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_eac1f731-95b1-5f31-ab94-2615535ea223 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
@@ -484,24 +517,27 @@ Crystallography."""@en .
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_efffe3e8-6bd8-5944-ba38-6facf656c61d ;
+            owl:onClass :EMMO_17f52ffb-c461-546a-8af6-299a506c8657 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_dbb7c1bc-034f-5f4b-9329-d23ed8915961 ;
+            owl:onClass :EMMO_c6ed4948-e599-5f09-aa07-b70121c41fcf ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         :EMMO_099b796d-3163-56c7-bc90-3a304256ca5d,
         ns1:EMMO_e4e80813_f379_4091_b017_ee059811f806 ;
     skos:prefLabel "ThinfilmMagnet"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Piece of matter made of one or more magnetic material in form a thin film."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Piece of matter made of one or more magnetic material
+in form a thin film."""@en .
 
 :EMMO_69772e86-d7fb-5b43-9cd4-2f0770c6701f a owl:Class ;
     rdfs:subClassOf ns1:EMMO_0e78a4d4_b4e0_48e7_97d8_e7d41a85a54d ;
     skos:altLabel "BHc"@en ;
     skos:prefLabel "CoercivityBHc"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Defined as internal field on the B(H) loop where B = 0. It is also called flux coercivity BHc.
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Defined as internal field on the B(H) loop where B = 0.
+It is also called flux coercivity BHc.
 
-BHc depends on sample shape and has to be corrected for the demagnetizing field."""@en .
+BHc depends on sample shape and has to be corrected for the
+demagnetizing field."""@en .
 
 :EMMO_6aac026a-3928-5c21-9bb6-94497607bef2 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -510,7 +546,7 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         :EMMO_38684bd3-8137-5af1-9c0d-b32bcf58fefc ;
     skos:prefLabel "LocalXrayDiffractionData"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "local X ray diffraction data"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Local X ray diffraction data."@en .
 
 :EMMO_70efe904-df98-5f7c-9f45-45af722dfeb7 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -523,7 +559,8 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         :EMMO_6d90a9fe-5ff3-563b-b33b-ae5a4e1a88d8 ;
     skos:prefLabel "UniaxialMagnetocrystallineAnisotropy"^^rdf:PlainLiteral ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The uniaxial anisotropy depends on only a single angle, the angle magnetization vector and the c axis"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The uniaxial anisotropy depends on only a single angle, the angle
+magnetization vector and the c axis."""@en .
 
 :EMMO_70f92e7c-fa16-51d5-9ca0-5ad635cb1322 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -535,16 +572,16 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
 
 :EMMO_8a0c8d0a-3dc7-5f3f-ab20-24b38d188827 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass ns1:EMMO_593ecc7c_250d_4e4d_8957_0170f3cc2154 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
             owl:onClass :EMMO_14a12902-9845-5be6-bd0b-511dcea31985 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_98f7a685-fa5a-54f1-8504-f398047f3ab6 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass ns1:EMMO_593ecc7c_250d_4e4d_8957_0170f3cc2154 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
@@ -557,7 +594,8 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
 :EMMO_8d2f8eff-85d7-5819-8dcd-a77674c40aff a owl:Class ;
     rdfs:subClassOf ns1:EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac ;
     skos:prefLabel "MeanGrainSize"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The mean of the grain diameter of grains. Diameter is the diameter of a sphere with equivalent volume"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The mean of the grain diameter of grains. Diameter is the diameter
+of a sphere with equivalent volume."""@en .
 
 :EMMO_8fc78216-4859-53c2-b41e-e38062b04054 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Remanence"^^rdf:PlainLiteral ;
@@ -569,7 +607,8 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
         ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
     skos:altLabel "Remanent magnetization, Mr"@en ;
     skos:prefLabel "Remanence"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The remanence Mr which remains when the applied field is restored to zero in the hysteresis loop"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The remanence Mr which remains when the applied field is
+restored to zero in the hysteresis loop"""@en .
 
 :EMMO_90e967b9-91d4-59d3-bcdc-b6d602f734cc a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -577,7 +616,8 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
             owl:someValuesFrom ns1:EMMO_15d62b55_38ea_4aec_b7c4_25db1a2e5a01 ],
         ns1:EMMO_06658d8d_dcde_4fc9_aae1_17f71c0bcdec ;
     skos:prefLabel "XRDCounts"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "counts as a function of 2theta angle obtained from X-ray diffraction"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Counts as a function of 2theta angle obtained from X-ray
+diffraction."""@en .
 
 :EMMO_98f7a685-fa5a-54f1-8504-f398047f3ab6 a owl:Class ;
     :EMMO_eb748e96-0aee-5b55-b6be-56b8c6bdaed6 "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-28"^^rdf:PlainLiteral ;
@@ -587,7 +627,8 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
         ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
     skos:altLabel "absolute permeability, mu"@en ;
     skos:prefLabel "AbsolutePermeability"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Ratio of the change of magnetic flux and the internal field: B = mu H"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Ratio of the change of magnetic flux and the internal
+field: B = mu H."""@en .
 
 :EMMO_a1f03bbf-c503-5759-9a26-2562527c0db2 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Lattice_constant"^^rdf:PlainLiteral ;
@@ -596,20 +637,23 @@ BHc depends on sample shape and has to be corrected for the demagnetizing field.
     rdfs:subClassOf ns1:EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac ;
     skos:altLabel "LatticeParameterB"@en ;
     skos:prefLabel "LatticeConstantB"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The length of lattice vectors `b`, where lattice vectors `a`, `b` and `c` defines the unit cell"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The length of lattice vectors `b`, where lattice vectors `a`, `b`
+and `c` defines the unit cell."""@en .
 
 :EMMO_a205766b-7c02-5c56-90e5-96c553c316c8 a owl:Class ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q625641"^^rdf:PlainLiteral ;
     rdfs:subClassOf ns1:EMMO_f3dd74c0_f480_49e8_9764_33b78638c235 ;
     skos:altLabel "LatticeParameterGamma"@en ;
     skos:prefLabel "LatticeConstantGamma"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The angle between lattice vectors `a` and `b`, where lattice vectors `a`, `b` and `c` defines the unit cell,"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The angle between lattice vectors `a` and `b`, where lattice
+vectors `a`, `b` and `c` defines the unit cell."""@en .
 
 :EMMO_a4bc4536-f381-5bcd-b6ca-34fb1a913efd a owl:Class ;
     rdfs:subClassOf ns1:EMMO_0e78a4d4_b4e0_48e7_97d8_e7d41a85a54d ;
     skos:altLabel "BH'c"@en ;
     skos:prefLabel "CoercivityBHcExternal"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Defined as external field on the B(H') loop where B = 0. H' is the external field."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Defined as external field on the B(H') loop where
+B = 0. H' is the external field."""@en .
 
 :EMMO_aa999d91-076f-512a-85a0-c2f751c083b1 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Shape"^^rdf:PlainLiteral ;
@@ -635,50 +679,53 @@ and coercivity Hc, which depend on the sample shape"""@en .
 
 K1sh = (mu_0/4)(1-3D)Ms²
 
-where mu_0 is the vacuum magnetic permeability and D is the DemagnetizingFactor
-and Ms is the spontaneous magnetization"""@en .
+where mu_0 is the vacuum magnetic permeability and D is the
+DemagnetizingFactor and Ms is the spontaneous magnetization."""@en .
 
 :EMMO_ad0c038b-a09a-560c-b149-066de8f8e307 a owl:Class ;
     rdfs:subClassOf ns1:EMMO_b4895f75_41c8_4fd9_b6d6_4d5f7c99c423 ;
     skos:altLabel "maximum working field, Hk"@en ;
     skos:prefLabel "KneeField"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The maximum working field - also named knee field H_K, is defined as the reverse internal field for which the
-magnetization is reduced by 10%; thus it corresponds to the point on the
-magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)"""@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The maximum working field - also named knee field H_K, is
+defined as the reverse internal field for which the magnetization
+is reduced by 10%; thus it corresponds to the point on the
+magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)."""@en .
 
 :EMMO_ada88738-c901-5d83-884b-5f84d27ce527 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Particle-size_distribution"^^rdf:PlainLiteral ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q2054937"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_8d2f8eff-85d7-5819-8dcd-a77674c40aff ;
+            owl:onClass :EMMO_5a48bd5a-20ee-5399-ac29-c488c1c7ad73 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_5a48bd5a-20ee-5399-ac29-c488c1c7ad73 ;
+            owl:onClass :EMMO_8d2f8eff-85d7-5819-8dcd-a77674c40aff ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:altLabel "ParticleSizeDistribution"@en ;
     skos:prefLabel "GrainSizeDistribution"@en ;
     ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Function representing relative sizes of grains in a system.
-
 Given by its mean and standard deviation of a lognormal distribution"""@en .
 
 :EMMO_af109e05-abbd-5964-8e39-8249b9eda7da a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_527989d5-7417-5d94-83bf-4db785827a88 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_527989d5-7417-5d94-83bf-4db785827a88 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         :EMMO_3a63baaf-4d7c-5ea5-93ce-9c8917a3290c ;
     skos:prefLabel "CubicMagnetocrystallineAnisotropy"^^rdf:PlainLiteral ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Cubic crystals anisotropy"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Cubic crystals anisotropy."@en .
 
 :EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:someValuesFrom :EMMO_032731f8-874d-5efb-9c9d-6dafaa17ef25 ],
+        [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_526ed2a5-a017-590e-8eb8-8a900f2b3b78 ],
         [ a owl:Restriction ;
@@ -686,24 +733,26 @@ Given by its mean and standard deviation of a lognormal distribution"""@en .
             owl:someValuesFrom ns1:EMMO_6b5af5a8_a2d8_4353_a1d6_54c9f778343d ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_57873439-dfa4-5b74-aec7-d530376ae11c ],
+            owl:someValuesFrom ns1:EMMO_f0b8bace_151e_4f54_8129_c180fd83ae44 ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:someValuesFrom :EMMO_c0a72108-de97-5dff-a830-e4b617adaeef ],
         [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom :EMMO_032731f8-874d-5efb-9c9d-6dafaa17ef25 ],
-        [ a owl:Restriction ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:someValuesFrom ns1:EMMO_f0b8bace_151e_4f54_8129_c180fd83ae44 ],
+            owl:someValuesFrom :EMMO_57873439-dfa4-5b74-aec7-d530376ae11c ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "IntrinsicMagneticProperties"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Intrinsic magnetic properties refer to atomic-scale magnetism and depend on the crystal structure"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Intrinsic magnetic properties refer to atomic-scale magnetism and
+depend on the crystal structure."""@en .
 
 :EMMO_b0f0e57e-464d-562f-80ec-b216c92d5e88 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Crystallite"^^rdf:PlainLiteral ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q899604"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
             owl:onClass :EMMO_2c96e798-57dc-5c12-ad10-f3ec261549d3 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
@@ -716,28 +765,27 @@ Given by its mean and standard deviation of a lognormal distribution"""@en .
             owl:onClass ns1:EMMO_c1c8ac3c_8a1c_4777_8e0b_14c1f9f9b0c6 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
-            owl:onClass ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_0bb3b434_73aa_428f_b4e8_2a2468648e19 ;
     skos:altLabel "Crystallite"@en ;
     skos:prefLabel "Grain"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "A grain is a small or even microscopic crystal which forms, for example, during the cooling of many materials."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """A grain is a small or even microscopic crystal which forms, for
+example, during the cooling of many materials."""@en .
 
 :EMMO_b2a130c3-9688-5358-94ca-f226b85b3009 a owl:Class ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q625641"^^rdf:PlainLiteral ;
     rdfs:subClassOf ns1:EMMO_f3dd74c0_f480_49e8_9764_33b78638c235 ;
     skos:altLabel "LatticeParameterAlpha"@en ;
     skos:prefLabel "LatticeConstantAlpha"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The angle between lattice vectors `b` and `c`, where lattice vectors `a`, `b` and `c` defines the unit cell,"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The angle between lattice vectors `b` and `c`, where lattice
+vectors `a`, `b` and `c` defines the unit cell."""@en .
 
 :EMMO_b98abf93-8054-5955-bb06-076e22b0b4c7 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Rectangular_cuboid"^^rdf:PlainLiteral ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q262959"^^rdf:PlainLiteral ;
     rdfs:subClassOf ns1:EMMO_5f278af9_8593_4e27_a717_ccc9e07a0ddf ;
     skos:prefLabel "RectangularCuboid"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "A rectangular cuboid is a special case of a cuboid with rectangular faces in which all of its dihedral angles are right angles."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """A rectangular cuboid is a special case of a cuboid with rectangular
+faces in which all of its dihedral angles are right angles."""@en .
 
 :EMMO_bc4030ff-d125-5e63-b8f8-b2ef3d08b6d5 a owl:Class ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q751290"^^rdf:PlainLiteral ;
@@ -747,14 +795,17 @@ Given by its mean and standard deviation of a lognormal distribution"""@en .
             owl:qualifiedCardinality "3"^^xsd:nonNegativeInteger ],
         ns1:EMMO_0650c031_42b6_4f0a_b62d_d88f071da6bf ;
     skos:prefLabel "EulerAngles"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "three angles introduced by Leonhard Euler to describe the orientation of a rigid body with respect to a fixed coordinate system"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Three angles introduced by Leonhard Euler to describe the
+orientation of a rigid body with respect to a fixed coordinate
+system."""@en .
 
 :EMMO_bc54c47f-8560-516a-b95b-cce9f1b7344f a owl:Class ;
-    rdfs:comment "This field is often used when analysing the temperature dependent coercivity for deriving microstructural parameters."^^rdf:PlainLiteral ;
+    rdfs:comment "This field is often used when analysing the temperature            dependent coercivity for deriving microstructural parameters."^^rdf:PlainLiteral ;
     rdfs:subClassOf ns1:EMMO_b4895f75_41c8_4fd9_b6d6_4d5f7c99c423 ;
     skos:altLabel "Hsw"@en ;
     skos:prefLabel "SwitchingFieldCoercivity"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Defined by the maximum slope of the descending branch of the M-H hysteresis loop, with H the internal field."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Defined by the maximum slope of the descending branch of
+the M-H hysteresis loop, with H the internal field."""@en .
 
 :EMMO_c0a72108-de97-5dff-a830-e4b617adaeef a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy"^^rdf:PlainLiteral ;
@@ -766,7 +817,12 @@ Given by its mean and standard deviation of a lognormal distribution"""@en .
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "MagnetocrystallineAnisotropy"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Magnetocrystalline anisotropy is an intrinsic property. The magnetization process is different when the field is applied along different crystallographic directions, and the anisotropy reflects the crystal symmetry. Its origin is in the crystal-field interaction and spin-orbit coupling, or else the interatomic dipole–dipole interaction."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Magnetocrystalline anisotropy is an intrinsic property. The
+magnetisation process is different when the field is applied along
+different crystallographic directions, and the anisotropy reflects
+the crystal symmetry. Its origin is in the crystal-field interaction
+and spin-orbit coupling, or else the interatomic dipole–dipole
+interaction."""@en .
 
 :EMMO_c44c0546-452e-592f-b6bc-27a64e79244c a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -775,7 +831,7 @@ Given by its mean and standard deviation of a lognormal distribution"""@en .
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         :EMMO_d6020727-daa9-5379-8ec4-ba1a02f7d0b6 ;
     skos:prefLabel "LocalReflectivity"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "local reflectivity measured with the magneto-optic Kerr effect"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Local reflectivity measured with the magneto-optic Kerr effect."@en .
 
 :EMMO_c6ed4948-e599-5f09-aa07-b70121c41fcf a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -784,32 +840,34 @@ Given by its mean and standard deviation of a lognormal distribution"""@en .
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         :EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955 ;
     skos:prefLabel "LocalLatticeConstantA"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The length of lattice vectors `a`, where lattice vectors `a`, `b` and `c` defines the unit cell, measured locally"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The length of lattice vectors `a`, where lattice vectors
+`a`, `b` and `c` defines the unit cell, measured locally."""@en .
 
 :EMMO_cd58ebab-4351-5d0d-ad45-bbddd6efead3 a owl:Class ;
-    rdfs:comment "Beware of taking the idea of anisotropy field too literally. Except at small angles, the energy variation in a field is not the same as the leading term in the anisotropy. A magnetic field defines an easy direction, not an easy axis."@en ;
+    rdfs:comment "Beware of taking the idea of anisotropy field too literally.             Except at small angles, the energy variation in a field is             not the same as the leading term in the anisotropy.             A magnetic field defines an easy direction, not an easy axis."@en ;
     rdfs:subClassOf ns1:EMMO_b4895f75_41c8_4fd9_b6d6_4d5f7c99c423 ;
     skos:altLabel "Ha"@en ;
     skos:prefLabel "AnisotropyField"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The anisotropy field Ha is defined as the field needed to saturate the magnetization of a uniaxial crystal in a hard direction
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The anisotropy field Ha is defined as the field needed to
+saturate the magnetization of a uniaxial crystal in a hard direction.
 Ha = 2 Ku/Js"""@en .
 
 :EMMO_cf5261fe-bdab-5c7b-b6a8-f9a313687bc2 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_5394673b-027e-5afc-bc6f-f72df5ed40a1 ;
-            owl:onProperty ns1:EMMO_dc57d998_23db_4d8e_b2cd_f346b195b846 ],
+            owl:onClass :EMMO_572b0885-bd40-51ad-8520-d5477c6b9990 ;
+            owl:onProperty ns1:EMMO_dc57d998_23db_4d8e_b2cd_f346b195b846 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_329e0b77-853d-5615-8df9-9bee0fd1189e ;
             owl:onProperty ns1:EMMO_dc57d998_23db_4d8e_b2cd_f346b195b846 ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_572b0885-bd40-51ad-8520-d5477c6b9990 ;
-            owl:onProperty ns1:EMMO_dc57d998_23db_4d8e_b2cd_f346b195b846 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_5394673b-027e-5afc-bc6f-f72df5ed40a1 ;
+            owl:onProperty ns1:EMMO_dc57d998_23db_4d8e_b2cd_f346b195b846 ],
         ns1:EMMO_4207e895_8b83_4318_996a_72cfb32acd94 ;
     skos:prefLabel "GranularMicrostructure"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The granular structure of a magnetic materials"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The granular structure of a magnetic materials."@en .
 
 :EMMO_d6020727-daa9-5379-8ec4-ba1a02f7d0b6 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Reflectance"^^rdf:PlainLiteral ;
@@ -820,7 +878,7 @@ Ha = 2 Ku/Js"""@en .
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:altLabel "Reflectance, R"@en ;
     skos:prefLabel "Reflectivity"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "capacity of an object to reflect light"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Capacity of an object to reflect light."@en .
 
 :EMMO_d70e364c-7ab7-5329-9964-17a5e45bbb9d a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -828,7 +886,7 @@ Ha = 2 Ku/Js"""@en .
             owl:someValuesFrom ns1:EMMO_50ea1ec5_f157_41b0_b46b_a9032f17ca10 ],
         ns1:EMMO_909415d1_7c43_4d5e_bbeb_7e1910159f66 ;
     skos:prefLabel "StackingSquence"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Sequence of layer in a multilayer stack"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Sequence of layer in a multilayer stack."@en .
 
 :EMMO_dbb7c1bc-034f-5f4b-9329-d23ed8915961 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -837,7 +895,8 @@ Ha = 2 Ku/Js"""@en .
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         :EMMO_9977edfa-2b42-55e4-bea0-f39fadca7126 ;
     skos:prefLabel "LocalLatticeConstantC"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The length of lattice vectors `c`, where lattice vectors `a`, `b` and `c` defines the unit cell, measured locally"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The length of lattice vectors `c`, where lattice vectors
+`a`, `b` and `c` defines the unit cell, measured locally."""@en .
 
 :EMMO_e1028129-c23e-57ac-9174-2f34ddbf3926 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Maximum_energy_product"^^rdf:PlainLiteral ;
@@ -847,14 +906,18 @@ Ha = 2 Ku/Js"""@en .
         ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
     skos:altLabel "(BH)max"@en ;
     skos:prefLabel "MaximumEnergyProduct"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The value of the maximum energy product (BH)max is deduced from a plot of BH(B) for all points
-of the second quadrant of the B-H hysteresis loop. BH varies with B going through a maximum value (BH)max
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The value of the maximum energy product (BH)max is deduced from a
+plot of BH(B) for all points of the second quadrant of the B-H
+hysteresis loop. BH varies with B going through a maximum value (BH)max
 for a particular value of B.
 
-(BH)max equals the area of the largest second-quadrant rectangle which fits under the B-H loop.
+(BH)max equals the area of the largest second-quadrant rectangle which
+fits under the B-H loop.
 
-The maximum energy product is considered to be the best single index of quality of a permanent magnet material.
-It is twice the energy stored in the stray field of the magnet of optimal shape."""@en .
+The maximum energy product is considered to be the best single index
+of quality of a permanent magnet material.
+It is twice the energy stored in the stray field of the magnet of
+optimal shape."""@en .
 
 :EMMO_e838288f-b0b4-5bcb-9889-06b2a10d3ccf a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -862,12 +925,13 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
             owl:onProperty ns1:EMMO_19d925d0_2cf1_40e5_a391_1a99d68409c9 ],
         ns1:EMMO_b081b346_7279_46ef_9a3d_2c088fcd79f4 ;
     skos:prefLabel "AmpereSquareMetrePerKilogram"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Unit of the magnetic moment per unit mass: Am²/kg"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Unit of the magnetic moment per unit mass: Am²/kg."@en .
 
 :EMMO_eac1f731-95b1-5f31-ab94-2615535ea223 a owl:Class ;
     rdfs:subClassOf :EMMO_6d90a9fe-5ff3-563b-b33b-ae5a4e1a88d8 ;
     skos:prefLabel "InducedMagneticAnisotropy"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Uniaxial anisotropy induced by annealing in a magnetic field or by applying a stress"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Uniaxial anisotropy induced by annealing in a magnetic field or
+by applying a stress."""@en .
 
 :EMMO_efffe3e8-6bd8-5944-ba38-6facf656c61d a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -876,10 +940,10 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_43003c86_9d15_433b_9789_ee2940920656 ;
     skos:prefLabel "LocalThickness"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The thickness of the film measured locally"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The thickness of the film measured locally."@en .
 
 :EMMO_f8f03807-d6b6-5ebf-8e0b-418311e8e1e5 a owl:Class ;
-    rdfs:comment "Shape anisotropy is restricted to small particles, where the inter-atomic exchange ensures a uniform  magnetization."@en ;
+    rdfs:comment "Shape anisotropy is restricted to small particles, where             the inter-atomic exchange ensures a uniform  magnetization."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onClass :EMMO_ac6edd90-c273-5203-836b-82462863f2c8 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
@@ -890,7 +954,8 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         :EMMO_3a63baaf-4d7c-5ea5-93ce-9c8917a3290c ;
     skos:prefLabel "ShapeAnisotropy"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The difference in magnetostatic energy when an elongated particle is magnetized along its short and long axis."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The difference in magnetostatic energy when an elongated particle
+is magnetized along its short and long axis."""@en .
 
 :EMMO_2c96e798-57dc-5c12-ad10-f3ec261549d3 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Crystal_structure"^^rdf:PlainLiteral ;
@@ -900,7 +965,7 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395 ;
+            owl:onClass :EMMO_a1f03bbf-c503-5759-9a26-2562527c0db2 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -916,7 +981,7 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955 ;
+            owl:onClass :EMMO_2b7f8b13-d0c3-590c-9851-ca89ce5b7395 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
@@ -924,12 +989,12 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_a1f03bbf-c503-5759-9a26-2562527c0db2 ;
+            owl:onClass :EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "CrystalStructure"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Description of ordered arrangement of atoms"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Description of ordered arrangement of atoms."@en .
 
 :EMMO_5394673b-027e-5afc-bc6f-f72df5ed40a1 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -943,14 +1008,20 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
         ns1:EMMO_4207e895_8b83_4318_996a_72cfb32acd94,
         ns1:EMMO_668fbd5b_6f1b_405c_9c6b_d6067bd0595a ;
     skos:prefLabel "SecondaryPhase"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "An additional phase within a magnet, for example soft inclusions or triple junctions"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """An additional phase within a magnet, for example soft inclusions
+or triple junctions."""@en .
 
 :EMMO_694b3915-3326-5fb2-87a1-20ccf1dc79dc a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Amorphous_magnet"^^rdf:PlainLiteral ;
     rdfs:subClassOf :EMMO_c5ca93ce-ad27-5f4a-95ef-aca0990c6937,
         ns1:EMMO_0afc19b0_2d43_4b3d_8da0_9ffb63bc1492 ;
     skos:prefLabel "AmorphousMagneticMaterial"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Any amorphous structure entails a distribution of nearest-neighbour environments and bond lengths for a given magnetic atom, described by the radial distribution function and higher-order correlation functions. These distributions lead to a distribution of site moments, exchange interactions, dipolar and crystal fields, all of which influence the nature of the magnetic order"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Any amorphous structure entails a distribution of nearest-neighbour
+environments and bond lengths for a given magnetic atom, described by
+the radial distribution function and higher-order correlation
+functions. These distributions lead to a distribution of site moments,
+exchange interactions, dipolar and crystal fields, all of which
+influence the nature of the magnetic order."""@en .
 
 :EMMO_6d90a9fe-5ff3-563b-b33b-ae5a4e1a88d8 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -963,30 +1034,30 @@ It is twice the energy stored in the stray field of the magnet of optimal shape.
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         :EMMO_3a63baaf-4d7c-5ea5-93ce-9c8917a3290c ;
     skos:prefLabel "UniaxialMagneticAnisotropy"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The anisotropy can be described as uniaxial when the anisotropy energy E
-depends on only a single angle, the angle between the magnetization vector
-and the easy direction of magnetization."""@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The anisotropy can be described as uniaxial when the anisotropy
+energy E depends on only a single angle, the angle between the
+magnetization vector and the easy direction of magnetization."""@en .
 
 :EMMO_75b995e0-2bac-5812-a7f6-f8c1731d1d5c a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass :EMMO_2c96e798-57dc-5c12-ad10-f3ec261549d3 ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
             owl:onClass :EMMO_ada88738-c901-5d83-884b-5f84d27ce527 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass :EMMO_38684bd3-8137-5af1-9c0d-b32bcf58fefc ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_b0f0e57e-464d-562f-80ec-b216c92d5e88 ;
             owl:onProperty ns1:EMMO_dc57d998_23db_4d8e_b2cd_f346b195b846 ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_2c96e798-57dc-5c12-ad10-f3ec261549d3 ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass :EMMO_38684bd3-8137-5af1-9c0d-b32bcf58fefc ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         ns1:EMMO_f1025834_0cd2_42a1_bfeb_13bec41c8655 ;
     skos:prefLabel "GranularStructure"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Ensemble of grains of 1 or more grains"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Ensemble of grains of 1 or more grains."@en .
 
 :EMMO_9977edfa-2b42-55e4-bea0-f39fadca7126 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Lattice_constant"^^rdf:PlainLiteral ;
@@ -995,21 +1066,22 @@ and the easy direction of magnetization."""@en .
     rdfs:subClassOf ns1:EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac ;
     skos:altLabel "LatticeParameterC"@en ;
     skos:prefLabel "LatticeConstantC"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The length of lattice vectors `c`, where lattice vectors `a`, `b` and `c` defines the unit cell"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The length of lattice vectors `c`, where lattice vectors `a`, `b`
+and `c` defines the unit cell."""@en .
 
 :EMMO_aaa107b8-4dd9-5fc8-b135-a604a0cb38b1 a owl:Class ;
     rdfs:subClassOf :EMMO_75b995e0-2bac-5812-a7f6-f8c1731d1d5c,
         :EMMO_c5ca93ce-ad27-5f4a-95ef-aca0990c6937 ;
     skos:prefLabel "CrystallineMagneticMaterial"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Magnetic material with crystalline structure"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Magnetic material with crystalline structure."@en .
 
 :EMMO_c4aefa50-a3d0-548d-96ea-dd863ba27234 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy"^^rdf:PlainLiteral ;
-    rdfs:comment "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K1c(a1²a2²a3²) where Ea is the anisotropy energy density and a1,a2,a3 are the direction cosines of the magnetization"^^rdf:PlainLiteral ;
+    rdfs:comment "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K1c(a1²a2²a3²) where Ea is the             anisotropy energy density and a1,a2,a3 are the direction             cosines of the magnetization"^^rdf:PlainLiteral ;
     rdfs:subClassOf :EMMO_56258d3a-f2ee-554e-af99-499dd8620457 ;
     skos:altLabel "K1"@en ;
     skos:prefLabel "MagnetocrystallineAnisotropyConstantK1c"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The magnetocrystalline constant K2c for cubic crystals"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The magnetocrystalline constant K2c for cubic crystals."@en .
 
 :EMMO_ef314f95-f3b5-5cb7-ac56-7bfc54f0d955 a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Lattice_constant"^^rdf:PlainLiteral ;
@@ -1018,13 +1090,15 @@ and the easy direction of magnetization."""@en .
     rdfs:subClassOf ns1:EMMO_cd2cd0de_e0cc_4ef1_b27e_2e88db027bac ;
     skos:altLabel "LatticeParameterA"@en ;
     skos:prefLabel "LatticeConstantA"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "The length of lattice vectors `a`, where lattice vectors `a`, `b` and `c` defines the unit cell"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The length of lattice vectors `a`, where lattice vectors
+`a`, `b` and `c` defines the unit cell."""@en .
 
 :EMMO_fe101d1d-f1f7-54f8-886b-fa6d6052ce98 a owl:Class ;
     rdfs:subClassOf ns1:EMMO_0e78a4d4_b4e0_48e7_97d8_e7d41a85a54d ;
     skos:altLabel "H'c"@en ;
     skos:prefLabel "CoercivityHcExternal"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The external magnetic held -H'c at which the macroscopic magnetization vanishes.
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """The external magnetic held -H'c at which the macroscopic
+magnetization vanishes.
 The coercivity on M(H') loop, where H' is the external field."""@en .
 
 :EMMO_099b796d-3163-56c7-bc90-3a304256ca5d a owl:Class ;
@@ -1032,10 +1106,6 @@ The coercivity on M(H') loop, where H' is the external field."""@en .
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q11421"^^rdf:PlainLiteral ;
     :EMMO_eb748e96-0aee-5b55-b6be-56b8c6bdaed6 "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=151-14-06"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-            owl:onClass ns1:EMMO_71d1c8f0_c6e3_44b5_a4b6_1b74ff35698a ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
-        [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_cf5261fe-bdab-5c7b-b6a8-f9a313687bc2 ;
             owl:onProperty ns1:EMMO_dc57d998_23db_4d8e_b2cd_f346b195b846 ],
@@ -1049,6 +1119,10 @@ The coercivity on M(H') loop, where H' is the external field."""@en .
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+            owl:onClass ns1:EMMO_71d1c8f0_c6e3_44b5_a4b6_1b74ff35698a ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
+        [ a owl:Restriction ;
+            owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
             owl:onClass :EMMO_38684bd3-8137-5af1-9c0d-b32bcf58fefc ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ],
         ns1:EMMO_8820f251_ad36_43f4_a693_c0e86a89cc1f ;
@@ -1057,38 +1131,42 @@ The coercivity on M(H') loop, where H' is the external field."""@en .
 
 :EMMO_0f2b5cc9-d00a-5030-8448-99ba6b7dfd1e a owl:Class ;
     :EMMO_eb748e96-0aee-5b55-b6be-56b8c6bdaed6 "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-63"^^rdf:PlainLiteral ;
-    rdfs:comment "H = H' - DM, where D is the demagneting factor, M is the magnetization, and H is the internal field"^^rdf:PlainLiteral ;
+    rdfs:comment "H = H' - DM, where D is the demagneting factor, M is the             magnetization, and H is the internal field."^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onProperty ns1:EMMO_bed1d005_b04e_4a90_94cf_02bc678a8569 ;
             owl:someValuesFrom ns1:EMMO_3227b821_26a5_4c7c_9c01_5c24483e0bd0 ],
         ns1:EMMO_af794e9d_dc7d_4756_83e1_2cd0e2ec864e ;
     skos:altLabel "N, D"@en ;
     skos:prefLabel "DemagnetizingFactor"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """For a uniformly magnetized ellipsoid with magnetization along a major axis
-the demagnetizing field is Hd = -N M.
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """For a uniformly magnetized ellipsoid with magnetization along a
+major axis the demagnetizing field is Hd = -N M.
 
-The principal components of the diagonal demagnetizing tensor form the demagnetizing factors. Only two of the three are independent because the demagnetizing tensor has unit trace Nx + Ny + Nz = 1."""@en .
+The principal components of the diagonal demagnetizing tensor form
+the demagnetizing factors. Only two of the three are independent
+because the demagnetizing tensor has unit trace Nx + Ny + Nz = 1."""@en .
 
 :EMMO_38684bd3-8137-5af1-9c0d-b32bcf58fefc a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_90e967b9-91d4-59d3-bcdc-b6d602f734cc ;
+            owl:onClass :EMMO_368c84bc-2f5d-5d2b-a32b-9fc5a7411ee4 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
-            owl:onClass :EMMO_368c84bc-2f5d-5d2b-a32b-9fc5a7411ee4 ;
+            owl:onClass :EMMO_90e967b9-91d4-59d3-bcdc-b6d602f734cc ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_1cba0b27_15d0_4326_933f_379d0b3565b6,
         ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "XrayDiffractionData"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "counts as a function of 2theta angle obtained from X-ray diffraction"@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Counts as a function of 2theta angle obtained from X-ray
+diffraction."""@en .
 
 :EMMO_3a63baaf-4d7c-5ea5-93ce-9c8917a3290c a owl:Class ;
     :EMMO_405ae501-8898-59c0-b2db-0afa09d561f9 "https://en.wikipedia.org/wiki/Magnetic_anisotropy"^^rdf:PlainLiteral ;
     :EMMO_eb748e96-0aee-5b55-b6be-56b8c6bdaed6 "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-01-08"^^rdf:PlainLiteral ;
     rdfs:subClassOf ns1:EMMO_b7bcff25_ffc3_474e_9ab5_01b1664bd4ba ;
     skos:prefLabel "MagneticAnisotropy"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 "Magnetic anisotropy means that the magnetic properties depend on the direction in which they are measured."@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Magnetic anisotropy means that the magnetic properties depend on
+the direction in which they are measured."""@en .
 
 :EMMO_b7ebd85f-36aa-540a-b8a9-e2c1094f27f1 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -1106,10 +1184,6 @@ The principal components of the diagonal demagnetizing tensor form the demagneti
 :EMMO_c5ca93ce-ad27-5f4a-95ef-aca0990c6937 a owl:Class ;
     :EMMO_4d45da04-cf90-5d4a-bc11-f76fbd5b5036 "https://www.wikidata.org/wiki/Q11587827"^^rdf:PlainLiteral ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass :EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e ;
-            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        [ a owl:Restriction ;
             owl:onClass ns1:EMMO_7efd64d1_05a1_49cd_a7f0_783ca050d4f3 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
@@ -1117,10 +1191,14 @@ The principal components of the diagonal demagnetizing tensor form the demagneti
             owl:onClass ns1:EMMO_06448f64_8db6_4304_8b2c_e785dba82044 ;
             owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onClass :EMMO_af8d3fb8-20fe-5f9f-9f85-fd298e26ad7e ;
+            owl:onProperty ns1:EMMO_e1097637_70d2_4895_973f_2396f04fa204 ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         ns1:EMMO_f00fb163_48c9_4c59_b6c2_4205c082aa54 ;
     skos:prefLabel "MagneticMaterial"@en ;
-    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Magnetically ordered solids which have atomic magnetic moments due to unpaired
-electrons."""@en .
+    ns1:EMMO_967080e5_2f42_4eb2_a3a9_c58143e835f9 """Magnetically ordered solids which have atomic magnetic moments due
+to unpaired electrons."""@en .
 
 :EMMO_56258d3a-f2ee-554e-af99-499dd8620457 a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
