@@ -426,8 +426,8 @@ with onto:
             anisotropy energy density and a1,a2,a3 are the direction \
             cosines of the magnetization"
         )
-        prefLabel = en("MagnetocrystallineAnisotropyConstantK1c")
-        altLabel = en("K1")
+        prefLabel = en("MagnetocrystallineAnisotropyConstantK2c")
+        altLabel = en("K2")
         wikipediaReference = pl(
             "https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy"
         )
