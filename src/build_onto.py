@@ -408,7 +408,7 @@ with onto:
         """The magnetocrystalline constant K1c for cubic crystals."""
 
         comment = pl(
-            "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K1c(a1²a2²a3²) where Ea is \
+            "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K2c(a1²a2²a3²) where Ea is \
             the anisotropy energy density and a1,a2,a3 are the direction \
             cosines of the magnetization"
         )
@@ -422,7 +422,7 @@ with onto:
         """The magnetocrystalline constant K2c for cubic crystals."""
 
         comment = pl(
-            "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K1c(a1²a2²a3²) where Ea is the \
+            "Ea = K1c(a1²a2²+a2²a3²+a1²a3²)+K2c(a1²a2²a3²) where Ea is the \
             anisotropy energy density and a1,a2,a3 are the direction \
             cosines of the magnetization"
         )
