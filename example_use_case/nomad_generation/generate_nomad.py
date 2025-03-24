@@ -27,24 +27,43 @@ def generateQuantityStatement(name,type):
     )
 
 
-k1 = ast.ClassDef(
-            name="MagnetocrystallineAnisotropyConstantK1",
+def generateClassDef(name,attrname,type):
+  return ast.ClassDef(
+            name=name,
             bases=[ast.Name(id="ArchiveSection", ctx=ast.Load())],
             keywords=[],
             body=[
-              generateMDef(['k1']),
-              generateQuantityStatement('k1','EnergyDensity')],
+              generateMDef([attrname]),
+              generateQuantityStatement(attrname,type)],
             decorator_list=[]
-)
+  )
 
+
+# Load ontology
+import build_onto
 
 # Either append the definition to 'nomad_base.py' code
 module = ast.parse(open("example_use_case/nomad_generation/nomad_base.py",'r').read())
-module.body.append(k1)
+# module.body.append(k1)
+
+
+for entry in dir(build_onto):
+  # TODO: this is a very stupid workaround! Shame on you Martin
+  if entry == "__builtins__":
+    break
+  # and the stupid workarounds continue
+  if entry in ['Not','AnnotationProperty','World']:
+    continue
+
+  # Create an instance of the object from the onotolgy
+  obj = eval(f'build_onto.{entry}')
+  quantName = obj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
+  
+  module.body.append(generateClassDef(entry, quantName, 'EnergyDensity'))
+  # print(entry, supers)
 
 # Or create standalone code
 # module = ast.Module(body=[k1],type_ignores=[])
-
 
 
 ast.fix_missing_locations(module)
