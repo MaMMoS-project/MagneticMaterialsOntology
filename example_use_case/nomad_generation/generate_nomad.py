@@ -38,6 +38,15 @@ def generateClassDef(name,attrname,type):
             decorator_list=[]
   )
 
+def generateForName(entry):
+  # Create an instance of the object from the onotolgy
+  obj = eval(f'build_onto.{entry}')
+  quantName = obj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
+  
+  ret = generateClassDef(entry, quantName, 'EnergyDensity')
+
+  return ret
+
 
 # Load ontology
 import build_onto
@@ -55,12 +64,7 @@ for entry in dir(build_onto):
   if entry in ['Not','AnnotationProperty','World']:
     continue
 
-  # Create an instance of the object from the onotolgy
-  obj = eval(f'build_onto.{entry}')
-  quantName = obj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
-  
-  module.body.append(generateClassDef(entry, quantName, 'EnergyDensity'))
-  # print(entry, supers)
+  module.body.append(generateForName(entry))
 
 # Or create standalone code
 # module = ast.Module(body=[k1],type_ignores=[])
