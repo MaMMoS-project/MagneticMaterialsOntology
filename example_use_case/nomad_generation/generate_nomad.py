@@ -23,21 +23,24 @@ def generateMDef(props=['k1']):
                                                                                            ast.keyword(arg='order',
                                                                                                        value=actual_properties)]))]))]))
 
-def generateQuantityStatement(name,type):
+def generateQuantityStatement(name,unit):
   return ast.Assign(
     targets=[ast.Name(id=name, ctx=ast.Store())],
-    value=ast.Call(func=ast.Name(id=type, ctx=ast.Load()), args=[], keywords=[])
-    )
+    value=ast.Call(func=ast.Name(id='Quantity', ctx=ast.Load()), args=[], keywords=[
+      ast.keyword(arg='type', value=ast.Attribute(value=ast.Name(id='np', ctx=ast.Load()), attr='float64', ctx=ast.Load())), 
+      ast.keyword(arg='a_eln', value=ast.Dict(keys=[ast.Constant(value='component')], 
+                                              values=[ast.Constant(value='NumberEditQuantity')])),
+      ast.keyword(arg='unit', value=ast.Constant(value=unit.to_string('vounit', fraction=True)))])
+  )
 
-
-def generateClassDef(name,attrname,type):
+def generateClassDef(name,attrname,unit=None):
   return ast.ClassDef(
             name=name,
             bases=[ast.Name(id="ArchiveSection", ctx=ast.Load())],
             keywords=[],
             body=[
               generateMDef([attrname]),
-              generateQuantityStatement(attrname,type)],
+              generateQuantityStatement(attrname,unit)],
             decorator_list=[]
   )
 
@@ -104,7 +107,6 @@ def generateForName(entry):
   obj = eval(f'build_onto.{entry}')
   quantName = obj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
   
-  ret = generateClassDef(entry, quantName, 'EnergyDensity')
   supers = inspect.getmro(eval('build_onto.' + entry))
   # print(entry, 'emmo-inferred.NominalProperty' in supers, magnetic_material.EnergyDensity in supers, supers, type(supers[0]), supers[1])
   # print(entry, supers)
@@ -125,6 +127,8 @@ def generateForName(entry):
   else:
     print(obj, "has no unit")
 
+  ret = generateClassDef(entry, quantName, unit)
+  # ret = None
   return ret
 
 
