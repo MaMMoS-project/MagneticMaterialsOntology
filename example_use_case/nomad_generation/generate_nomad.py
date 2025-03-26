@@ -23,24 +23,35 @@ def generateMDef(props=['k1']):
                                                                                            ast.keyword(arg='order',
                                                                                                        value=actual_properties)]))]))]))
 
-def generateQuantityStatement(name,unit):
-  return ast.Assign(
-    targets=[ast.Name(id=name, ctx=ast.Store())],
-    value=ast.Call(func=ast.Name(id='Quantity', ctx=ast.Load()), args=[], keywords=[
-      ast.keyword(arg='type', value=ast.Attribute(value=ast.Name(id='np', ctx=ast.Load()), attr='float64', ctx=ast.Load())), 
+def generateQuantityStatement(name,unit,isString):
+  if unit is not None:
+    keywords = [
+      ast.keyword(arg='type', value=ast.Attribute(value=ast.Name(id='np', ctx=ast.Load()), attr='float64', ctx=ast.Load())),
       ast.keyword(arg='a_eln', value=ast.Dict(keys=[ast.Constant(value='component')], 
                                               values=[ast.Constant(value='NumberEditQuantity')])),
-      ast.keyword(arg='unit', value=ast.Constant(value=unit.to_string('vounit', fraction=True)))])
+      ast.keyword(arg='unit', value=ast.Constant(value=unit.to_string('vounit', fraction=True)))
+    ]
+  elif isString:
+    keywords = [
+      ast.keyword(arg='type', value=ast.Name(id='str', ctx=ast.Load())),
+      ast.keyword(arg='a_eln', value=ast.Dict(keys=[ast.Constant(value='component')],
+                                              values=[ast.Constant(value='StringEditQuantity')]))
+    ]
+  else:
+    keywords = []
+  return ast.Assign(
+    targets=[ast.Name(id=name, ctx=ast.Store())],
+    value=ast.Call(func=ast.Name(id='Quantity', ctx=ast.Load()), args=[], keywords=keywords)
   )
 
-def generateClassDef(name,attrname,unit=None):
+def generateClassDef(name,attrname,unit=None,isString=False):
   return ast.ClassDef(
             name=name,
             bases=[ast.Name(id="ArchiveSection", ctx=ast.Load())],
             keywords=[],
             body=[
               generateMDef([attrname]),
-              generateQuantityStatement(attrname,unit)],
+              generateQuantityStatement(attrname,unit,isString)],
             decorator_list=[]
   )
 
@@ -81,6 +92,7 @@ def getUnit(entity):
   print(class_prop)
   if build_onto.emmo.hasMeasurementUnit in list(class_prop):
     print('Measurement unit property found for class ')
+    return u.Unit(entity.hasMeasurementUnit[0])
   else:
     # print(f'Measurement unit property not found for class {entity}. Unit for {entity} is inherited.')
     C_emmo = list(entity.get_parents())[0]
@@ -107,27 +119,32 @@ def generateForName(entry):
   obj = eval(f'build_onto.{entry}')
   quantName = obj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
   
-  supers = inspect.getmro(eval('build_onto.' + entry))
+  # supers = inspect.getmro(eval('build_onto.' + entry))
   # print(entry, 'emmo-inferred.NominalProperty' in supers, magnetic_material.EnergyDensity in supers, supers, type(supers[0]), supers[1])
   # print(entry, supers)
 
-  obj = eval('build_onto.' + entry)
+  # obj = eval('build_onto.' + entry)
+  isString = False
   if hasattr(obj, 'is_a'):
     attr = getattr(obj, 'is_a')
     # print(obj, type(attr[0]), attr)
     if len(attr) > 1:
-      print(obj, 'is complex')
+      print(obj, 'is complex', attr, type(attr[0]))
+      for x in attr:
+        if hasattr(x, 'type') and x.type == 24:
+          isString = True
   else:
     # print(obj, 'has no is_a')
     pass
 
   unit = getUnit(obj)
-  if unit is not None:
-    print(obj, unit)
-  else:
-    print(obj, "has no unit")
+  # if unit is not None:
+  #   print(obj, unit)
+  # else:
+  #   print(obj, "has no unit")
+  print(obj, unit, isString)
 
-  ret = generateClassDef(entry, quantName, unit)
+  ret = generateClassDef(entry, quantName, unit, isString)
   # ret = None
   return ret
 
