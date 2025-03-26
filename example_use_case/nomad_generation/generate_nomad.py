@@ -2,6 +2,10 @@ import ast
 import inspect
 import re
 from astropy import units as u
+import owlready2
+
+# TODO: entitites direkt aus dem emmo. Brauchen wir fuer IntrinsicMagneticProperties, dort gibt es bei is_a emmo.hasProperty.some(emmo.CurieTemperature)
+# TODO: 'zusammengesetzte Entities' wie CrystalStructure
 
 def generateMDef(props=['k1']):
   # create what is inside of 'properties'
@@ -52,6 +56,38 @@ def generateClassDef(name,attrname,unit=None,isString=False):
             body=[
               generateMDef([attrname]),
               generateQuantityStatement(attrname,unit,isString)],
+            decorator_list=[]
+  )
+
+def generateNameMe(name, type):
+  funct = ast.Call(func = ast.Name(id='SubSection', ctx=ast.Load()), args=[],
+                   keywords=[ast.keyword(arg='section_def', value=ast.Name(id=type, ctx=ast.Load())),
+                             ast.keyword(arg='repeats', value=ast.Constant(value=False))])
+  return ast.Assign(targets=[
+    ast.Name(id=name, ctx=ast.Store())],
+    value=funct)
+
+def generateClassDefComplex(name,attrname,obj):
+  body = [generateMDef([attrname])]
+
+  attr = getattr(obj, 'is_a')
+
+  # TODO damit es irgendwer verstehen kann muss erklaert werden wieso ab 1. 0 ist emmo-inferred.Property und muss ignoriert werden
+  for x in attr[1:]:
+    namestr = str(x.value)
+    # eval('build_onto.' + namestr.split('.')[-1])
+    print('You are amazing !!!!', namestr)
+    typeT = namestr.split('.')[-1]
+    # TODO geht nur wenn magneti_material. und nicht emmo-inferred ist
+    subobj = eval('build_onto.' + typeT)
+    quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
+    body.append(generateNameMe(quantName, typeT))
+
+  return ast.ClassDef(
+            name=name,
+            bases=[ast.Name(id="ArchiveSection", ctx=ast.Load())],
+            keywords=[],
+            body=body,
             decorator_list=[]
   )
 
@@ -125,16 +161,26 @@ def generateForName(entry):
 
   # obj = eval('build_onto.' + entry)
   isString = False
+  isComplex = False
   if hasattr(obj, 'is_a'):
     attr = getattr(obj, 'is_a')
-    # print(obj, type(attr[0]), attr)
+    print(obj, type(attr[0]), attr)
     if len(attr) > 1:
-      print(obj, 'is complex', attr, type(attr[0]))
+      print(obj, 'is complex', attr, type(attr[1]), type(attr[1]) is owlready2.class_construct.Restriction)
       for x in attr:
+        # Die folgende Zeile koennte den x.type == 24 hack ersetzen. (Der Funktioniert aber eh fuer was wir bisher getestet haben)
+        # ACHTUNG: unterscheidung ob magnetic_material oder emmo. Wenn emmo dann gleich wie oben bei Hack
+        # type(eval('build_onto.' + str(x.value).split('.')[-1] + '.hasStringValue')) is not NoneType
         if hasattr(x, 'type') and x.type == 24:
           isString = True
+      if not isString:
+        print(len(attr))
+      isComplex = True
+      # x = attr[1]
+      # namestr = str(x.value)
+      # eval('build_onto.' + namestr.split('.')[-1])
   else:
-    # print(obj, 'has no is_a')
+    print(obj, 'has no is_a')
     pass
 
   unit = getUnit(obj)
@@ -142,9 +188,12 @@ def generateForName(entry):
   #   print(obj, unit)
   # else:
   #   print(obj, "has no unit")
-  print(obj, unit, isString)
+  print(f"obj {obj} unit:{unit}, string:{isString}")
 
-  ret = generateClassDef(entry, quantName, unit, isString)
+  if isComplex:
+    ret = generateClassDefComplex(entry, quantName, obj)
+  else:
+    ret = generateClassDef(entry, quantName, unit, isString)
   # ret = None
   return ret
 
