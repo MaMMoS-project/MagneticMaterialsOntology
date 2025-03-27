@@ -112,7 +112,7 @@ def convert_to_iso_unit(unit_string):
     }
 
     # Parse the unit string into a list of (base_unit, exponent) tuples
-    units = re.findall(r'([TLMINJ])([+-]?\d+)', unit_string)
+    units = re.findall(r'([TLMIΘNJ])([+-]?\d+)', unit_string)
 
     # Create the astropy unit
     astropy_unit = 1
