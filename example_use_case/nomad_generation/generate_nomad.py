@@ -69,23 +69,36 @@ def generateNameMe(name, type):
 
 def generateClassDefComplex(name,attrname,obj):
   body = [generateMDef([attrname])]
+  bases = [ast.Name(id="ArchiveSection", ctx=ast.Load())]
 
   attr = getattr(obj, 'is_a')
 
-  # TODO damit es irgendwer verstehen kann muss erklaert werden wieso ab 1. 0 ist emmo-inferred.Property und muss ignoriert werden
+  # TODO damit es irgendwer verstehen kann muss erklaert werden wieso ab 1.
+  # --> 0 ist normal emmo-inferred.Property und muss ignoriert werden (aber weshalb?)
+
+  ## Der code geht schief, wenn es keine restriction ist, sondern eine direkte Referenz auf eine Klasse
   for x in attr[1:]:
-    namestr = str(x.value)
-    # eval('build_onto.' + namestr.split('.')[-1])
-    print('You are amazing !!!!', namestr)
-    typeT = namestr.split('.')[-1]
-    # TODO geht nur wenn magneti_material. und nicht emmo-inferred ist
-    subobj = eval('build_onto.' + typeT)
-    quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
-    body.append(generateNameMe(quantName, typeT))
+    # print(f'x: {x} {str(x)} {attr} hasAttr(value):{hasattr(x, "value")} isRestriction:{type(attr[1]) is owlready2.class_construct.Restriction}')
+    
+    if type(attr[1]) is owlready2.class_construct.Restriction:
+      namestr = str(x.value)
+      # eval('build_onto.' + namestr.split('.')[-1])
+      print(f'Parsing restriction to {namestr}')
+      typeT = namestr.split('.')[-1]
+      # TODO geht nur wenn magneti_material. und nicht emmo-inferred ist
+      if namestr.split('.')[0] == 'magnetic_material':
+        subobj = eval('build_onto.' + typeT)
+      else: # TODO assumes everyting else is emmo-inferred
+        subobj = eval(f'build_onto.emmo.{typeT}')
+      quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
+      body.append(generateNameMe(quantName, typeT))
+    else:
+      # TODO: der name muss noch korrekt werden --> x = magnetic_material.MagneticMaterial
+      bases.append(ast.Name(id=str(x), ctx=ast.Load()))
 
   return ast.ClassDef(
             name=name,
-            bases=[ast.Name(id="ArchiveSection", ctx=ast.Load())],
+            bases=bases,
             keywords=[],
             body=body,
             decorator_list=[]
@@ -125,10 +138,14 @@ def convert_to_iso_unit(unit_string):
 
 def getUnit(entity):
   class_prop = entity.get_class_properties()
-  print(class_prop)
+  # print(class_prop)
   if build_onto.emmo.hasMeasurementUnit in list(class_prop):
-    print('Measurement unit property found for class ')
-    return u.Unit(entity.hasMeasurementUnit[0])
+    print('Measurement unit property found for class', entity.hasMeasurementUnit[0])
+    try:
+      return u.Unit(entity.hasMeasurementUnit[0])
+    except Exception as e:
+      print(f'Error: {e}')
+      return None
   else:
     # print(f'Measurement unit property not found for class {entity}. Unit for {entity} is inherited.')
     C_emmo = list(entity.get_parents())[0]
