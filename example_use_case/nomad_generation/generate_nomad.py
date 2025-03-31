@@ -59,10 +59,10 @@ def generateClassDef(name,attrname,unit=None,isString=False):
             decorator_list=[]
   )
 
-def generateNameMe(name, type):
+def generateSubsectionStatement(name, type,repeats=False):
   funct = ast.Call(func = ast.Name(id='SubSection', ctx=ast.Load()), args=[],
                    keywords=[ast.keyword(arg='section_def', value=ast.Name(id=type, ctx=ast.Load())),
-                             ast.keyword(arg='repeats', value=ast.Constant(value=False))])
+                             ast.keyword(arg='repeats', value=ast.Constant(value=repeats))])
   return ast.Assign(targets=[
     ast.Name(id=name, ctx=ast.Store())],
     value=funct)
@@ -76,22 +76,37 @@ def generateClassDefComplex(name,attrname,obj):
   # TODO damit es irgendwer verstehen kann muss erklaert werden wieso ab 1.
   # --> 0 ist normal emmo-inferred.Property und muss ignoriert werden (aber weshalb?)
 
-  ## Der code geht schief, wenn es keine restriction ist, sondern eine direkte Referenz auf eine Klasse
   for x in attr[1:]:
     # print(f'x: {x} {str(x)} {attr} hasAttr(value):{hasattr(x, "value")} isRestriction:{type(attr[1]) is owlready2.class_construct.Restriction}')
     
     if type(attr[1]) is owlready2.class_construct.Restriction:
       namestr = str(x.value)
       # eval('build_onto.' + namestr.split('.')[-1])
-      print(f'Parsing restriction to {namestr}')
       typeT = namestr.split('.')[-1]
-      # TODO geht nur wenn magneti_material. und nicht emmo-inferred ist
-      if namestr.split('.')[0] == 'magnetic_material':
-        subobj = eval('build_onto.' + typeT)
-      else: # TODO assumes everyting else is emmo-inferred
-        subobj = eval(f'build_onto.emmo.{typeT}')
-      quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
-      body.append(generateNameMe(quantName, typeT))
+      strProp = str(x.property).replace('emmo-inferred.','')
+      print(f'Parsing restriction to {namestr}. typeT {typeT} strProp {strProp} classes {hasattr(x.value,"Classes")}')
+      if strProp == 'hasDimensionString':
+        unit = convert_to_iso_unit(typeT)
+        print('attrname', attrname)
+        print('converted to unit', unit, unit.to_string('vounit', fraction=True))
+
+        # print(ast.unparse(code))
+        body.append(generateQuantityStatement(attrname,convert_to_iso_unit(typeT),isString=False))
+      else:
+        # Check if this restriction is a restriction to a single class or to multiple classes
+        # if it does not have classes, it is to a single class.
+        # if it has classes, it is to multiple classes. --> In Nomad we cannot do this, so we create a SubSection for each class
+        if not hasattr(x.value, 'Classes'):
+          subobj = build_onto.onto.get_by_label(typeT)
+          quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
+          body.append(generateSubsectionStatement(quantName, typeT))
+        else:
+          for alternative in x.value.Classes:
+            print('y', alternative)
+            typeT = str(alternative).split('.')[-1]
+            subobj = build_onto.onto.get_by_label(typeT)
+            quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
+            body.append(generateSubsectionStatement(quantName, typeT))
     else:
       # TODO: der name muss noch korrekt werden --> x = magnetic_material.MagneticMaterial
       bases.append(ast.Name(id=str(x), ctx=ast.Load()))
@@ -169,7 +184,8 @@ def getUnit(entity):
 
 def generateForName(entry):
   # Create an instance of the object from the onotolgy
-  obj = eval(f'build_onto.{entry}')
+  obj = eval(f'build_onto.{entry}') # TODO: move to `obj = build_onto.emmo.get_(entry)`
+  # but this does currently not work for 'MainPhase`.
   quantName = obj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
   
   # supers = inspect.getmro(eval('build_onto.' + entry))
@@ -229,6 +245,9 @@ for entry in dir(build_onto):
     break
   # and the stupid workarounds continue
   if entry in ['Not','AnnotationProperty','World']:
+    continue
+  # TODO code should be aware that all of these are AnnotationProperty and thus ignore it (instead of black listing)
+  if entry in ['IECEntry', 'wikipediaReference','wikidataReference']:
     continue
 
   module.body.append(generateForName(entry))
