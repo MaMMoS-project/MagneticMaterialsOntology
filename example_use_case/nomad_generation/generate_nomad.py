@@ -92,20 +92,24 @@ def generateClassDefComplex(name,attrname,obj):
         # print(ast.unparse(code))
         body.append(generateQuantityStatement(attrname,convert_to_iso_unit(typeT),isString=False))
       else:
+        # Now we need to check if this is a hasProperty.TYPE restriction
+        #  if it is hasProperty.min, then type == 27. We need to have this option to treat min(0,....) as repeats=True
+        repeats = True if hasattr(x, 'cardinality') and x.cardinality is not None and (x.cardinality > 1 or x.type == 27) else False
+
         # Check if this restriction is a restriction to a single class or to multiple classes
         # if it does not have classes, it is to a single class.
         # if it has classes, it is to multiple classes. --> In Nomad we cannot do this, so we create a SubSection for each class
         if not hasattr(x.value, 'Classes'):
           subobj = build_onto.onto.get_by_label(typeT)
           quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
-          body.append(generateSubsectionStatement(quantName, typeT))
+          body.append(generateSubsectionStatement(quantName, typeT, repeats=repeats))
         else:
           for alternative in x.value.Classes:
             print('y', alternative)
             typeT = str(alternative).split('.')[-1]
             subobj = build_onto.onto.get_by_label(typeT)
             quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
-            body.append(generateSubsectionStatement(quantName, typeT))
+            body.append(generateSubsectionStatement(quantName, typeT, repeats=repeats))
     else:
       # TODO: der name muss noch korrekt werden --> x = magnetic_material.MagneticMaterial
       bases.append(ast.Name(id=str(x), ctx=ast.Load()))
