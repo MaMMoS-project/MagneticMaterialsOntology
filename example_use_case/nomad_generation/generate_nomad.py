@@ -78,8 +78,8 @@ def generateClassDefComplex(name,attrname,obj):
 
   for x in attr[1:]:
     # print(f'x: {x} {str(x)} {attr} hasAttr(value):{hasattr(x, "value")} isRestriction:{type(attr[1]) is owlready2.class_construct.Restriction}')
-    
-    if type(attr[1]) is owlready2.class_construct.Restriction:
+
+    if type(x) is owlready2.class_construct.Restriction:
       namestr = str(x.value)
       # eval('build_onto.' + namestr.split('.')[-1])
       typeT = namestr.split('.')[-1]
