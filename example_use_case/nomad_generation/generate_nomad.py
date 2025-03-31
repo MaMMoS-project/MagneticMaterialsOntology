@@ -73,10 +73,9 @@ def generateClassDefComplex(name,attrname,obj):
 
   attr = getattr(obj, 'is_a')
 
-  # TODO damit es irgendwer verstehen kann muss erklaert werden wieso ab 1.
-  # --> 0 ist normal emmo-inferred.Property und muss ignoriert werden (aber weshalb?)
-
-  for x in attr[1:]:
+  for x in attr:
+    if hasattr(x, 'label') and len(x.label) > 0 and x.label[0][:] == 'Property':
+      continue
     # print(f'x: {x} {str(x)} {attr} hasAttr(value):{hasattr(x, "value")} isRestriction:{type(attr[1]) is owlready2.class_construct.Restriction}')
 
     if type(x) is owlready2.class_construct.Restriction:
