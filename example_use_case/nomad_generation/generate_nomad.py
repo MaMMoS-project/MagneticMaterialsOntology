@@ -118,7 +118,7 @@ def generateClassDefComplex(name,attrname,obj):
       else:
         # Now we need to check if this is a hasProperty.TYPE restriction
         #  if it is hasProperty.min, then type == 27. We need to have this option to treat min(0,....) as repeats=True
-        repeats = True if hasattr(x, 'cardinality') and x.cardinality is not None and (x.cardinality > 1 or x.type == 27) else False
+        repeats = True if hasattr(x, 'cardinality') and x.cardinality is not None and (x.cardinality > 1 or x.get_typename() == 'min') else False
 
         # Check if this restriction is a restriction to a single class or to multiple classes
         # if it does not have classes, it is to a single class.
