@@ -98,11 +98,15 @@ def generateClassDefComplex(name,attrname,obj):
   dependencies = []
 
   for x in attr:
-    if hasattr(x, 'label') and len(x.label) > 0 and x.label[0][:] == 'Property':
+    if hasattr(x, 'label') and len(x.label) > 0 and x.label[0][:] == 'Property' or str(x).find('.hasSIConversionMultiplier') != -1 or str(x).find('.hasSIConversionOffset') != -1 or str(x).find('.unitSymbolValue') != -1: 
       continue
     # print(f'x: {x} {str(x)} {attr} hasAttr(value):{hasattr(x, "value")} isRestriction:{type(attr[1]) is owlready2.class_construct.Restriction}')
 
     if type(x) is owlready2.class_construct.Restriction:
+      ss = str(x)
+      if ss.find('.hasSIConversionMultiplier') != -1:
+        print('hasSIConversionMultiplier')
+        continue
       namestr = str(x.value)
       # eval('build_onto.' + namestr.split('.')[-1])
       typeT = namestr.split('.')[-1]
