@@ -5,7 +5,28 @@ from astropy import units as u
 import owlready2
 
 # TODO: entitites direkt aus dem emmo. Brauchen wir fuer IntrinsicMagneticProperties, dort gibt es bei is_a emmo.hasProperty.some(emmo.CurieTemperature)
-# TODO: 'zusammengesetzte Entities' wie CrystalStructure
+
+def auto_str(cls):
+  def __str__(self):
+    return '%s(%s)' % (
+        type(self).__name__,
+        ', '.join('%s=%s' % item for item in vars(self).items())
+    )
+  cls.__str__ = __str__
+  return cls
+
+@auto_str
+class GeneratedClass:
+  def __init__(self):
+    self.dependencies = []
+
+@auto_str
+class DepencencyGraph:
+  def __init__(self):
+    self.dependencies = {}
+    self.generated = []
+
+graph = DepencencyGraph()
 
 def generateMDef(props=['k1']):
   # create what is inside of 'properties'
@@ -28,6 +49,7 @@ def generateMDef(props=['k1']):
                                                                                                        value=actual_properties)]))]))]))
 
 def generateQuantityStatement(name,unit,isString):
+  # TODO: hasMeterologicalReference only MeasurementUnit is not treated correctly. ISO80000 (CondencesMatterPhysicsQuantity) is not treated correctly
   if unit is not None:
     keywords = [
       ast.keyword(arg='type', value=ast.Attribute(value=ast.Name(id='np', ctx=ast.Load()), attr='float64', ctx=ast.Load())),
@@ -73,6 +95,8 @@ def generateClassDefComplex(name,attrname,obj):
 
   attr = getattr(obj, 'is_a')
 
+  dependencies = []
+
   for x in attr:
     if hasattr(x, 'label') and len(x.label) > 0 and x.label[0][:] == 'Property':
       continue
@@ -103,6 +127,7 @@ def generateClassDefComplex(name,attrname,obj):
           subobj = build_onto.onto.get_by_label(typeT)
           quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
           body.append(generateSubsectionStatement(quantName, typeT, repeats=repeats))
+          dependencies.append(typeT)
         else:
           for alternative in x.value.Classes:
             print('y', alternative)
@@ -110,9 +135,14 @@ def generateClassDefComplex(name,attrname,obj):
             subobj = build_onto.onto.get_by_label(typeT)
             quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
             body.append(generateSubsectionStatement(quantName, typeT, repeats=repeats))
+          dependencies.append(typeT)
     else:
       # TODO: der name muss noch korrekt werden --> x = magnetic_material.MagneticMaterial
+      dependencies = [str(x)]
       bases.append(ast.Name(id=str(x), ctx=ast.Load()))
+
+  graph.dependencies[name] = GeneratedClass()
+  graph.dependencies[name].dependencies = dependencies
 
   return ast.ClassDef(
             name=name,
@@ -185,10 +215,19 @@ def getUnit(entity):
 
 
 
-def generateForName(entry):
+def generateForName(entry, hack=False):
   # Create an instance of the object from the onotolgy
-  obj = eval(f'build_onto.{entry}') # TODO: move to `obj = build_onto.emmo.get_(entry)`
+  # obj = eval(f'build_onto.{entry}') # TODO: move to `obj = build_onto.emmo.get_(entry)`
   # but this does currently not work for 'MainPhase`.
+  if hack:
+    # import emmo
+    obj = eval(f'build_onto.emmo.{entry}')
+  else:
+    obj = eval(f'build_onto.{entry}')
+  
+  return generateForObject(obj, entry)
+
+def generateForObject(obj, entry):
   quantName = obj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
   
   # supers = inspect.getmro(eval('build_onto.' + entry))
@@ -231,8 +270,29 @@ def generateForName(entry):
   else:
     ret = generateClassDef(entry, quantName, unit, isString)
   # ret = None
+
+  graph.generated.append(entry)
+
   return ret
 
+def generateMissing(module, depth=0):
+  entries = set(list(graph.dependencies.keys()))
+  generateMissing2(module, entries)
+  print('\nDiff', list(set(list(graph.dependencies.keys())) - entries))
+  if list(set(list(graph.dependencies.keys())) - entries) != []:
+    print('\n\n\n\n\nStupid recursion', depth)
+    generateMissing(module, depth=depth+1)
+
+def generateMissing2(module, entries):
+  for entry in entries:
+    for depencency in graph.dependencies[entry].dependencies:
+      if depencency not in graph.generated:
+        print('Generating missing', depencency)
+        if depencency.startswith('emmo-inferred.'):
+          depencency = depencency[14:]
+        elif depencency.startswith('magnetic_material.'):
+          depencency = depencency[18:]
+        module.body.append(generateForObject(build_onto.emmo.get_by_label(depencency), depencency))
 
 # Load ontology
 import build_onto
