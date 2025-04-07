@@ -50,6 +50,7 @@ def generateMDef(props=['k1']):
 
 def generateQuantityStatement(name,unit,isString):
   # TODO: hasMeterologicalReference only MeasurementUnit is not treated correctly. ISO80000 (CondencesMatterPhysicsQuantity) is not treated correctly
+  # TODO: some Quantities are generated empty
   if unit is not None:
     keywords = [
       ast.keyword(arg='type', value=ast.Attribute(value=ast.Name(id='np', ctx=ast.Load()), attr='float64', ctx=ast.Load())),
@@ -98,6 +99,7 @@ def generateClassDefComplex(name,attrname,obj):
   dependencies = []
 
   for x in attr:
+    # TODO: use whitelist instead of manually blacklisting entry types
     if hasattr(x, 'label') and len(x.label) > 0 and x.label[0][:] == 'Property' or str(x).find('.hasSIConversionMultiplier') != -1 or str(x).find('.hasSIConversionOffset') != -1 or str(x).find('.unitSymbolValue') != -1: 
       continue
     # print(f'x: {x} {str(x)} {attr} hasAttr(value):{hasattr(x, "value")} isRestriction:{type(attr[1]) is owlready2.class_construct.Restriction}')
@@ -140,10 +142,11 @@ def generateClassDefComplex(name,attrname,obj):
             quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
             body.append(generateSubsectionStatement(quantName, typeT, repeats=repeats))
           dependencies.append(typeT)
-    else:
-      # TODO: der name muss noch korrekt werden --> x = magnetic_material.MagneticMaterial
-      dependencies = [str(x)]
-      bases.append(ast.Name(id=str(x), ctx=ast.Load()))
+    elif type(x) is owlready2.entity.ThingClass:
+      # TODO: hier waere es gut, wenn gecheckt werden kann, ob die einzelnen dependencies nicht leer sind.
+      dependencies = [str(x)] # TODO: wieso hier [str(x)] und nicht .append()?
+      className = str(x).split('.')[-1]
+      bases.append(ast.Name(id=className, ctx=ast.Load()))
 
   graph.dependencies[name] = GeneratedClass()
   graph.dependencies[name].dependencies = dependencies
@@ -317,12 +320,16 @@ for entry in dir(build_onto):
   if entry in ['IECEntry', 'wikipediaReference','wikidataReference']:
     continue
 
+  print('Processing', entry)
   module.body.append(generateForName(entry))
 
 # Or create standalone code
 # module = ast.Module(body=[k1],type_ignores=[])
 
+generateMissing(module)
 
 ast.fix_missing_locations(module)
 code = compile(module, filename="<ast>", mode="exec")
 print(ast.unparse(module))
+
+print(graph)
