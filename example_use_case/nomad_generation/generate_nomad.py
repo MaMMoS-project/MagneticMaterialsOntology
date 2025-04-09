@@ -122,9 +122,24 @@ def generateClassDefComplex(name,attrname,obj):
 
   for x in attr:
     # TODO: use whitelist instead of manually blacklisting entry types
-    if hasattr(x, 'label') and len(x.label) > 0 and x.label[0][:] == 'Property' or str(x).find('.hasSIConversionMultiplier') != -1 or str(x).find('.hasSIConversionOffset') != -1 or str(x).find('.unitSymbolValue') != -1: 
-      continue
+    # if hasattr(x, 'label') and len(x.label) > 0 and x.label[0][:] == 'Property' or str(x).find('.hasSIConversionMultiplier') != -1 or str(x).find('.hasSIConversionOffset') != -1 or str(x).find('.unitSymbolValue') != -1: 
+    #   continue
     # print(f'x: {x} {str(x)} {attr} hasAttr(value):{hasattr(x, "value")} isRestriction:{type(attr[1]) is owlready2.class_construct.Restriction}')
+
+    whiteList = [
+      # entry is a restriction , and
+      type(x) is owlready2.class_construct.Restriction and (
+          # either a dimension string i.e. it tells us which unit it is
+          str(x.property).find('hasDimensionString') != -1 or
+          str(x.property).find('hasMeasurementUnit') != -1 or 
+          str(x.property).find('hasProperty') != -1
+        ),
+      type(x) is owlready2.entity.ThingClass
+    ]
+
+    if not any(whiteList):
+      print(x, 'is not white listed')
+      continue
 
     if type(x) is owlready2.class_construct.Restriction:
       ss = str(x)
@@ -166,7 +181,7 @@ def generateClassDefComplex(name,attrname,obj):
           dependencies.append(typeT)
     elif type(x) is owlready2.entity.ThingClass:
       # TODO: hier waere es gut, wenn gecheckt werden kann, ob die einzelnen dependencies nicht leer sind.
-      dependencies = [str(x)] # TODO: wieso hier [str(x)] und nicht .append()?
+      dependencies.append(str(x))
       className = str(x).split('.')[-1]
       bases.append(ast.Name(id=className, ctx=ast.Load()))
 
@@ -251,12 +266,14 @@ def generateForName(entry, emmo=False):
   if emmo:
     # import emmo
     obj = eval(f'build_onto.emmo.{entry}')
+    fullName = 'emmo.' + entry
   else:
     obj = eval(f'build_onto.{entry}')
+    fullName = entry
   
-  return generateForObject(obj, entry)
+  return generateForObject(obj, entry, fullName)
 
-def generateForObject(obj, entry):
+def generateForObject(obj, entry, fullName):
   quantName = obj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
   
   # supers = inspect.getmro(eval('build_onto.' + entry))
@@ -300,7 +317,7 @@ def generateForObject(obj, entry):
     ret = generateClassDef(entry, quantName, unit, isString)
   # ret = None
 
-  graph.generated.append(entry)
+  graph.generated.append(fullName)
 
   return ret
 
@@ -320,12 +337,17 @@ def generateMissingEntries(module, entries):
   for entry in entries:
     for depencency in graph.dependencies[entry].dependencies:
       if depencency not in graph.generated:
-        print('Generating missing', depencency)
+        print('Generating missing', depencency, graph.generated)
         if depencency.startswith('emmo-inferred.'):
-          depencency = depencency[14:]
+          className = depencency[14:]
         elif depencency.startswith('magnetic_material.'):
-          depencency = depencency[18:]
-        module.body.append(generateForObject(build_onto.emmo.get_by_label(depencency), depencency))
+          className = depencency[18:]
+        elif depencency.startswith('emmo.'):
+          className = depencency[5:]
+        else:
+          className = depencency
+        module.body.insert(generateForObject(build_onto.emmo.get_by_label(className), className, depencency))
+      # TODO: else rank this up
 
 def main(output, baseFile=None):
   if baseFile is not None:
