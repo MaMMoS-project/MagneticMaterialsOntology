@@ -29,6 +29,16 @@ class DepencencyGraph:
 graph = DepencencyGraph()
 
 def generateMDef(props=['k1']):
+  """Generate the m_def statement for a nomad entry.
+  
+  This entry usually has the following structure:
+  `m_def = Section(
+    a_eln=dict(
+      properties=dict(order=[
+        'spaceGroup'
+      ])
+    )
+  )`"""
   # create what is inside of 'properties'
   actual_properties = ast.List(elts=[ast.Constant(value=props[0])], ctx=ast.Load())
   # create the assign statment
@@ -49,8 +59,15 @@ def generateMDef(props=['k1']):
                                                                                                        value=actual_properties)]))]))]))
 
 def generateQuantityStatement(name,unit,isString):
+  """Generate the quantity statement for a nomad entry.
+  @param name: The name of the quantity
+  @param unit: The unit of the quantity. If None, then isString is supposed to be True
+  @param isString: If the quantity is a string. If true unit is supposed to be None"""
+
   # TODO: hasMeterologicalReference only MeasurementUnit is not treated correctly. ISO80000 (CondencesMatterPhysicsQuantity) is not treated correctly
   # TODO: some Quantities are generated empty
+
+  # Unit is supposed to be not none and an astropy unit
   if unit is not None:
     keywords = [
       ast.keyword(arg='type', value=ast.Attribute(value=ast.Name(id='np', ctx=ast.Load()), attr='float64', ctx=ast.Load())),
@@ -283,14 +300,18 @@ def generateForObject(obj, entry):
   return ret
 
 def generateMissing(module, depth=0):
+  """Generate all entries which are missing (as some already generated entries depend on it)
+  
+  @param depth can be ignored by users. Is might be used to limit the recursion depth (during testing it was not necessary)"""
   entries = set(list(graph.dependencies.keys()))
-  generateMissing2(module, entries)
+  generateMissingEntries(module, entries)
   print('\nDiff', list(set(list(graph.dependencies.keys())) - entries))
   if list(set(list(graph.dependencies.keys())) - entries) != []:
     print('\n\n\n\n\nStupid recursion', depth)
     generateMissing(module, depth=depth+1)
 
-def generateMissing2(module, entries):
+def generateMissingEntries(module, entries):
+  """Helper-function to actually generate the entries. Users should not call this function."""
   for entry in entries:
     for depencency in graph.dependencies[entry].dependencies:
       if depencency not in graph.generated:
