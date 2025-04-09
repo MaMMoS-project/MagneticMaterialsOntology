@@ -1,8 +1,13 @@
+import argparse
 import ast
 import inspect
 import re
 from astropy import units as u
 import owlready2
+
+
+# Load ontology
+import build_onto
 
 # TODO: entitites direkt aus dem emmo. Brauchen wir fuer IntrinsicMagneticProperties, dort gibt es bei is_a emmo.hasProperty.some(emmo.CurieTemperature)
 
@@ -322,35 +327,69 @@ def generateMissingEntries(module, entries):
           depencency = depencency[18:]
         module.body.append(generateForObject(build_onto.emmo.get_by_label(depencency), depencency))
 
-# Load ontology
-import build_onto
-
-# Either append the definition to 'nomad_base.py' code
-module = ast.parse(open("example_use_case/nomad_generation/nomad_base.py",'r').read())
-# module.body.append(k1)
+def main(output):
+  # Either append the definition to 'nomad_base.py' code
+  module = ast.parse(open("example_use_case/nomad_generation/nomad_base.py",'r').read())
+  # module.body.append(k1)
 
 
-for entry in dir(build_onto):
-  # TODO: this is a very stupid workaround! Shame on you Martin
-  if entry == "__builtins__":
-    break
-  # and the stupid workarounds continue
-  if entry in ['Not','AnnotationProperty','World']:
-    continue
-  # TODO code should be aware that all of these are AnnotationProperty and thus ignore it (instead of black listing)
-  if entry in ['IECEntry', 'wikipediaReference','wikidataReference']:
-    continue
+  # TODO: 2 Module eines fuer Nomad, eines fuer mammos-entity
 
-  print('Processing', entry)
-  module.body.append(generateForName(entry))
+  for entry in dir(build_onto):
+    # TODO: this is a very stupid workaround! Shame on you Martin
+    if entry == "__builtins__":
+      break
+    # and the stupid workarounds continue
+    if entry in ['Not','AnnotationProperty','World']:
+      continue
+    # TODO code should be aware that all of these are AnnotationProperty and thus ignore it (instead of black listing)
+    if entry in ['IECEntry', 'wikipediaReference','wikidataReference']:
+      continue
 
-# Or create standalone code
-# module = ast.Module(body=[k1],type_ignores=[])
+    print('Processing', entry)
+    # module.body.append(generateForName(entry))
 
-generateMissing(module)
+  # Or create standalone code
+  # module = ast.Module(body=[k1],type_ignores=[])
 
-ast.fix_missing_locations(module)
-code = compile(module, filename="<ast>", mode="exec")
-print(ast.unparse(module))
+  # module.body.append(generateForName('MagnetocrystallineAnisotropyConstantK1'))
+  # module.body.append(generateForName('SpaceGroup'))
+  # module.body.append(generateForName('CoercivityHc'))
+  # module.body.append(generateForName('CrystalStructure'))
+  module.body.append(generateForName('IntrinsicMagneticProperties'))
+  # module.body.append(generateForName('CurieTemperature', hack=True))
+  # module.body.append(generateForName('CriticalTemperature', hack=True))
+  # module.body.append(generateForName('CondensedMatterPhysicsQuantity', hack=True))
+  # module.body.append(generateForName('CurieTemperature'))
 
-print(graph)
+  # module.body.append(generateForName("ExchangeStiffnessConstant"))
+  # module.body.append(generateForName('AbsolutePermeability'))
+  # module.body.append(generateForName('AmpereSquareMetrePerKilogram'))
+  # module.body.append(generateForName('AmorphousMagneticMaterial'))
+  module.body.append(generateForName('GranularStructure'))
+  module.body.append(generateForName('MagnetocrystallineAnisotropy'))
+  module.body.append(generateForName('MainPhase'))
+  module.body.append(generateForName('KneeField'))
+  module.body.append(generateForName('MagneticPolarisation', emmo=True))
+
+  generateMissing(module)
+
+  ast.fix_missing_locations(module)
+  _ = compile(module, filename="<ast>", mode="exec")
+  print(ast.unparse(module))
+
+  print(graph)
+
+  with open(output, 'w') as f:
+    f.write(ast.unparse(module))
+    f.close()
+
+
+if __name__ == "__main__":
+  # Parse options
+  parser = argparse.ArgumentParser()
+  parser.add_argument('output', help='Output file', default='generated.py')
+
+  args = parser.parse_args()
+
+  main(args.output)
