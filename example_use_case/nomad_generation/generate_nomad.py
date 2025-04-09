@@ -222,11 +222,11 @@ def getUnit(entity):
 
 
 
-def generateForName(entry, hack=False):
+def generateForName(entry, emmo=False):
   # Create an instance of the object from the onotolgy
   # obj = eval(f'build_onto.{entry}') # TODO: move to `obj = build_onto.emmo.get_(entry)`
   # but this does currently not work for 'MainPhase`.
-  if hack:
+  if emmo:
     # import emmo
     obj = eval(f'build_onto.emmo.{entry}')
   else:
