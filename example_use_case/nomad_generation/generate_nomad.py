@@ -65,7 +65,7 @@ def generateQuantityStatement(name,unit,isString):
   @param isString: If the quantity is a string. If true unit is supposed to be None"""
 
   # TODO: hasMeterologicalReference only MeasurementUnit is not treated correctly. ISO80000 (CondencesMatterPhysicsQuantity) is not treated correctly
-  # TODO: some Quantities are generated empty
+  # TODO: some Quantities are generated empty - is this a problem?
 
   # Unit is supposed to be not none and an astropy unit
   if unit is not None:
