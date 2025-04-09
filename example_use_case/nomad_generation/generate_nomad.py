@@ -327,13 +327,12 @@ def generateMissingEntries(module, entries):
           depencency = depencency[18:]
         module.body.append(generateForObject(build_onto.emmo.get_by_label(depencency), depencency))
 
-def main(output):
-  # Either append the definition to 'nomad_base.py' code
-  module = ast.parse(open("example_use_case/nomad_generation/nomad_base.py",'r').read())
-  # module.body.append(k1)
-
-
-  # TODO: 2 Module eines fuer Nomad, eines fuer mammos-entity
+def main(output, baseFile=None):
+  if baseFile is not None:
+    # Either append the definition to 'nomad_base.py' code
+    module = ast.parse(open(baseFile,'r').read())
+  else:
+    module = ast.Module(body=[], type_ignores=[])
 
   for entry in dir(build_onto):
     # TODO: this is a very stupid workaround! Shame on you Martin
@@ -388,8 +387,9 @@ def main(output):
 if __name__ == "__main__":
   # Parse options
   parser = argparse.ArgumentParser()
-  parser.add_argument('output', help='Output file', default='generated.py')
+  parser.add_argument('--output', help='Output file', default='generated.py')
+  parser.add_argument('--base', help='Base file to include in the generated code', default=None)
 
   args = parser.parse_args()
 
-  main(args.output)
+  main(args.output, args.base)
