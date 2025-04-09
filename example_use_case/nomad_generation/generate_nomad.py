@@ -1,5 +1,6 @@
 import argparse
 import ast
+from graphlib import TopologicalSorter
 import inspect
 import re
 from astropy import units as u
@@ -178,14 +179,16 @@ def generateClassDefComplex(name,attrname,obj):
             subobj = build_onto.onto.get_by_label(typeT)
             quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
             body.append(generateSubsectionStatement(quantName, typeT, repeats=repeats))
-          dependencies.append(typeT)
+            dependencies.append(typeT)
     elif type(x) is owlready2.entity.ThingClass:
       # TODO: hier waere es gut, wenn gecheckt werden kann, ob die einzelnen dependencies nicht leer sind.
       dependencies.append(str(x))
       className = str(x).split('.')[-1]
       bases.append(ast.Name(id=className, ctx=ast.Load()))
 
-  graph.dependencies[name] = GeneratedClass()
+  if name not in graph.dependencies:
+    graph.dependencies[name] = GeneratedClass()
+  print('  Adding dependencies for', name, dependencies)
   graph.dependencies[name].dependencies = dependencies
 
   return ast.ClassDef(
@@ -318,6 +321,9 @@ def generateForObject(obj, entry, fullName):
   # ret = None
 
   graph.generated.append(fullName)
+  if fullName not in graph.dependencies:
+    graph.dependencies[fullName] = GeneratedClass()
+  graph.dependencies[fullName].code = ret
 
   return ret
 
@@ -335,18 +341,21 @@ def generateMissing(module, depth=0):
 def generateMissingEntries(module, entries):
   """Helper-function to actually generate the entries. Users should not call this function."""
   for entry in entries:
-    for depencency in graph.dependencies[entry].dependencies:
-      if depencency not in graph.generated:
-        print('Generating missing', depencency, graph.generated)
-        if depencency.startswith('emmo-inferred.'):
-          className = depencency[14:]
-        elif depencency.startswith('magnetic_material.'):
-          className = depencency[18:]
-        elif depencency.startswith('emmo.'):
-          className = depencency[5:]
+    for dependency in graph.dependencies[entry].dependencies:
+      if dependency not in graph.dependencies:
+        graph.dependencies[dependency] = GeneratedClass()
+      graph.dependencies[dependency].requiredFrom += 1
+      if dependency not in graph.generated:
+        print('Generating missing', dependency, graph.generated)
+        if dependency.startswith('emmo-inferred.'):
+          className = dependency[14:]
+        elif dependency.startswith('magnetic_material.'):
+          className = dependency[18:]
+        elif dependency.startswith('emmo.'):
+          className = dependency[5:]
         else:
-          className = depencency
-        module.body.insert(generateForObject(build_onto.emmo.get_by_label(className), className, depencency))
+          className = dependency
+        module.body.append(generateForObject(build_onto.emmo.get_by_label(className), className, dependency))
       # TODO: else rank this up
 
 def main(output, baseFile=None):
@@ -400,6 +409,32 @@ def main(output, baseFile=None):
   print(ast.unparse(module))
 
   print(graph)
+
+  with open(output, 'w') as f:
+    f.write(ast.unparse(module))
+    f.close()
+
+
+  # sort graph by requiredFrom in descending order
+  # sorted_graph = sorted(graph.dependencies.items(), key=lambda x: x[1].requiredFrom, reverse=True)
+  # print('Sorted graph:', sorted_graph)
+
+  if baseFile is not None:
+    # Either append the definition to 'nomad_base.py' code
+    module = ast.parse(open(baseFile,'r').read())
+  else:
+    module = ast.Module(body=[], type_ignores=[])
+
+  # for (key,obj) in graph.dependencies.items():
+  #   module.body.append(obj.code)
+
+  # turn graph into dict
+  dict_graph = {k: v.dependencies for k, v in graph.dependencies.items()}
+  print(dict_graph)
+  ts = TopologicalSorter(dict_graph)
+  sorted_entries = tuple(ts.static_order())
+  for entry in sorted_entries:
+    module.body.append(graph.dependencies[entry].code)
 
   with open(output, 'w') as f:
     f.write(ast.unparse(module))
