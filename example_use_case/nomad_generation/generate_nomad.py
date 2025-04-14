@@ -26,13 +26,31 @@ class GeneratedClass:
   def __init__(self):
     self.dependencies = []
 
-@auto_str
+  def __repr__(self):
+    return self.__str__()
+
 class DepencencyGraph:
   def __init__(self):
     self.dependencies = {}
     self.generated = []
+  def __str__(self):
+    return "DepencencyGraph(dependencies={" + "\n".join([""] + [
+        f"  '{k}': {v}" for k, v in self.dependencies.items()
+    ]) + "}" + f", generated = {self.generated})"
 
 graph = DepencencyGraph()
+
+def dependencyToClassName(dependency:str) -> str:
+  if dependency.startswith('emmo-inferred.'):
+    className = dependency[14:]
+  elif dependency.startswith('magnetic_material.'):
+    className = dependency[18:]
+  elif dependency.startswith('emmo.'):
+    className = dependency[5:]
+  else:
+    className = dependency
+
+  return className
 
 def generateMDef(props=['k1']):
   """Generate the m_def statement for a nomad entry.
@@ -122,11 +140,6 @@ def generateClassDefComplex(name,attrname,obj):
   dependencies = []
 
   for x in attr:
-    # TODO: use whitelist instead of manually blacklisting entry types
-    # if hasattr(x, 'label') and len(x.label) > 0 and x.label[0][:] == 'Property' or str(x).find('.hasSIConversionMultiplier') != -1 or str(x).find('.hasSIConversionOffset') != -1 or str(x).find('.unitSymbolValue') != -1: 
-    #   continue
-    # print(f'x: {x} {str(x)} {attr} hasAttr(value):{hasattr(x, "value")} isRestriction:{type(attr[1]) is owlready2.class_construct.Restriction}')
-
     whiteList = [
       # entry is a restriction , and
       type(x) is owlready2.class_construct.Restriction and (
@@ -143,10 +156,6 @@ def generateClassDefComplex(name,attrname,obj):
       continue
 
     if type(x) is owlready2.class_construct.Restriction:
-      ss = str(x)
-      if ss.find('.hasSIConversionMultiplier') != -1:
-        print('hasSIConversionMultiplier')
-        continue
       namestr = str(x.value)
       # eval('build_onto.' + namestr.split('.')[-1])
       typeT = namestr.split('.')[-1]
@@ -154,8 +163,8 @@ def generateClassDefComplex(name,attrname,obj):
       print(f'Parsing restriction to {namestr}. typeT {typeT} strProp {strProp} classes {hasattr(x.value,"Classes")}')
       if strProp == 'hasDimensionString':
         unit = convert_to_iso_unit(typeT)
-        print('attrname', attrname)
-        print('converted to unit', unit, unit.to_string('vounit', fraction=True))
+        # print('attrname', attrname)
+        print(attrname, 'converted to unit', unit, unit.to_string('vounit', fraction=True))
 
         # print(ast.unparse(code))
         body.append(generateQuantityStatement(attrname,convert_to_iso_unit(typeT),isString=False))
@@ -174,30 +183,25 @@ def generateClassDefComplex(name,attrname,obj):
           dependencies.append(typeT)
         else:
           for alternative in x.value.Classes:
-            print('y', alternative)
+            # print('y', alternative)
             typeT = str(alternative).split('.')[-1]
             subobj = build_onto.onto.get_by_label(typeT)
             quantName = subobj.get_preferred_label()[:] if hasattr(obj,'altLabel') else 'value'
             body.append(generateSubsectionStatement(quantName, typeT, repeats=repeats))
-            dependencies.append(typeT)
+            dependencies.append(str(alternative))
     elif type(x) is owlready2.entity.ThingClass:
-      # TODO: hier waere es gut, wenn gecheckt werden kann, ob die einzelnen dependencies nicht leer sind.
+      # TODO: hier waere es gut, wenn gecheckt werden kann, ob die einzelnen dependencies nicht leer sind - also keinen weiteren Informationsgehalt bieten
       dependencies.append(str(x))
       className = str(x).split('.')[-1]
       bases.append(ast.Name(id=className, ctx=ast.Load()))
 
-  if name not in graph.dependencies:
-    graph.dependencies[name] = GeneratedClass()
-  print('  Adding dependencies for', name, dependencies)
-  graph.dependencies[name].dependencies = dependencies
-
-  return ast.ClassDef(
+  return (ast.ClassDef(
             name=name,
             bases=bases,
             keywords=[],
             body=body,
             decorator_list=[]
-  )
+  ), dependencies)
 
 def convert_to_iso_unit(unit_string):
     """Converts a string representation of ISQ base quantities to its ISO unit symbols using astropy.
@@ -307,22 +311,27 @@ def generateForObject(obj, entry, fullName):
     print(obj, 'has no is_a')
     pass
 
+  # print(f"My current test {entry} {str(entry)} {str(entry).startswith('magnetic_material')} complex {isComplex} string {isString}")
+
   unit = getUnit(obj)
   # if unit is not None:
   #   print(obj, unit)
   # else:
   #   print(obj, "has no unit")
-  print(f"obj {obj} unit:{unit}, string:{isString}")
+  print(f"obj {obj}, entry {entry} unit:{unit}, string:{isString} complex {isComplex}")
 
   if isComplex:
-    ret = generateClassDefComplex(entry, quantName, obj)
+    ret, dependencies = generateClassDefComplex(entry, quantName, obj)
   else:
     ret = generateClassDef(entry, quantName, unit, isString)
+    dependencies = []
   # ret = None
 
   graph.generated.append(fullName)
   if fullName not in graph.dependencies:
     graph.dependencies[fullName] = GeneratedClass()
+  print('  Adding dependencies for', fullName, dependencies)
+  graph.dependencies[fullName].dependencies = dependencies
   graph.dependencies[fullName].code = ret
 
   return ret
@@ -342,21 +351,19 @@ def generateMissingEntries(module, entries):
   """Helper-function to actually generate the entries. Users should not call this function."""
   for entry in entries:
     for dependency in graph.dependencies[entry].dependencies:
-      if dependency not in graph.dependencies:
-        graph.dependencies[dependency] = GeneratedClass()
-      graph.dependencies[dependency].requiredFrom += 1
-      if dependency not in graph.generated:
-        print('Generating missing', dependency, graph.generated)
-        if dependency.startswith('emmo-inferred.'):
-          className = dependency[14:]
-        elif dependency.startswith('magnetic_material.'):
-          className = dependency[18:]
-        elif dependency.startswith('emmo.'):
-          className = dependency[5:]
-        else:
-          className = dependency
-        module.body.append(generateForObject(build_onto.emmo.get_by_label(className), className, dependency))
-      # TODO: else rank this up
+      # dependency is a fullName
+      if dependency not in graph.generated and dependencyToClassName(dependency) not in graph.dependencies:
+        print(f'Generating missing class {dependency} generated: {graph.generated}, graphkeys:{graph.dependencies.keys()}')
+        className = dependencyToClassName(dependency)
+        module.body.append(generateForObject(build_onto.emmo.get_by_label(className), className, fullName=dependency))
+
+def cleanGraphEmmoInferred(graph):
+  entries = list(graph.dependencies.items())
+  for (name,entry) in entries:
+    if name.startswith('emmo-inferred'):
+      del graph.dependencies[name]
+      graph.dependencies[name.replace('emmo-inferred','emmo')] = entry
+    entry.dependencies = [dependency if not dependency.startswith('emmo-inferred') else dependency.replace('emmo-inferred','emmo') for dependency in entry.dependencies]
 
 def main(output, baseFile=None):
   if baseFile is not None:
@@ -377,7 +384,7 @@ def main(output, baseFile=None):
       continue
 
     print('Processing', entry)
-    # module.body.append(generateForName(entry))
+    module.body.append(generateForName(entry))
 
   # Or create standalone code
   # module = ast.Module(body=[k1],type_ignores=[])
@@ -386,33 +393,32 @@ def main(output, baseFile=None):
   # module.body.append(generateForName('SpaceGroup'))
   # module.body.append(generateForName('CoercivityHc'))
   # module.body.append(generateForName('CrystalStructure'))
-  module.body.append(generateForName('IntrinsicMagneticProperties'))
-  # module.body.append(generateForName('CurieTemperature', hack=True))
-  # module.body.append(generateForName('CriticalTemperature', hack=True))
-  # module.body.append(generateForName('CondensedMatterPhysicsQuantity', hack=True))
-  # module.body.append(generateForName('CurieTemperature'))
+  # module.body.append(generateForName('IntrinsicMagneticProperties'))
+  # module.body.append(generateForName('CurieTemperature', emmo=True))
+  # module.body.append(generateForName('CriticalTemperature', emmo=True))
+  # module.body.append(generateForName('CondensedMatterPhysicsQuantity', emmo=True))
 
   # module.body.append(generateForName("ExchangeStiffnessConstant"))
   # module.body.append(generateForName('AbsolutePermeability'))
   # module.body.append(generateForName('AmpereSquareMetrePerKilogram'))
   # module.body.append(generateForName('AmorphousMagneticMaterial'))
-  module.body.append(generateForName('GranularStructure'))
-  module.body.append(generateForName('MagnetocrystallineAnisotropy'))
-  module.body.append(generateForName('MainPhase'))
-  module.body.append(generateForName('KneeField'))
-  module.body.append(generateForName('MagneticPolarisation', emmo=True))
+  # module.body.append(generateForName('GranularStructure'))
+  # module.body.append(generateForName('MagnetocrystallineAnisotropy'))
+  # module.body.append(generateForName('MainPhase'))
+  # module.body.append(generateForName('KneeField'))
+  # module.body.append(generateForName('MagneticPolarisation', emmo=True))
 
   generateMissing(module)
 
-  ast.fix_missing_locations(module)
-  _ = compile(module, filename="<ast>", mode="exec")
-  print(ast.unparse(module))
+  # ast.fix_missing_locations(module)
+  # _ = compile(module, filename="<ast>", mode="exec")
+  # print(ast.unparse(module))
 
   print(graph)
 
-  with open(output, 'w') as f:
-    f.write(ast.unparse(module))
-    f.close()
+  # with open(output, 'w') as f:
+  #   f.write(ast.unparse(module))
+  #   f.close()
 
 
   # sort graph by requiredFrom in descending order
@@ -428,13 +434,62 @@ def main(output, baseFile=None):
   # for (key,obj) in graph.dependencies.items():
   #   module.body.append(obj.code)
 
+  # clean the graph
+  # entries = list(graph.dependencies.items())
+  # for (name,entry) in entries:
+  #   className = dependencyToClassName(name)
+  #   if name != className and className in graph.dependencies:
+  #     print(f'Found {name} and {className} in the graph. Removing {name} {hasattr(graph.dependencies[name], "code")} {hasattr(graph.dependencies[className],"code")}')
+  #     # del graph.dependencies[name]
+  cleanGraphEmmoInferred(graph)
+
+  # check graph
+  print('')
+  entries = list(graph.dependencies.items())
+  for (name,entry) in entries:
+    className = dependencyToClassName(name)
+    if name != className and className in graph.dependencies:
+      print(f'Found {name} and {className} in the graph.')
+  print('')
+
   # turn graph into dict
-  dict_graph = {k: v.dependencies for k, v in graph.dependencies.items()}
-  print(dict_graph)
+  dict_graph = {dependencyToClassName(k): [dependencyToClassName(name) for name in v.dependencies] for k, v in graph.dependencies.items()}
+  # dict_graph = {k: [name for name in v.dependencies] for k, v in graph.dependencies.items()}
+  mapping = {}
+  for k, v in graph.dependencies.items():
+    for name in v.dependencies:
+      mapping[dependencyToClassName(name)] = name
+    mapping[dependencyToClassName(k)] = k
+  
+  print(f'Dict graph {dict_graph}')
+  print(f'Mapping: {mapping}')
+
   ts = TopologicalSorter(dict_graph)
   sorted_entries = tuple(ts.static_order())
+  print(f'Sorted entries {sorted_entries}')
   for entry in sorted_entries:
-    module.body.append(graph.dependencies[entry].code)
+    # if entry not in graph.dependencies:
+    #   print(f'Why is {entry} not in the graph????')
+    #   continue
+    # if not hasattr(graph.dependencies[entry],'code'):
+    #   print(f'Why does {entry} have no code???')
+    #   continue
+    # module.body.append(graph.dependencies[entry].code)
+    ee = mapping[entry]
+    if ee not in graph.dependencies:
+      if entry not in graph.dependencies:
+        print(f'Why is {ee}/{entry} not in the graph????')
+        continue
+      else:
+        ee = entry # In some cases it does not exist in the 'qualified' version but in the plain
+          # if this is the case, we can use it.
+    if not hasattr(graph.dependencies[ee],'code'):
+      print(f'Why does {ee}/{entry} have no code???')
+      continue
+    module.body.append(graph.dependencies[ee].code)
+
+  ast.fix_missing_locations(module)
+  _ = compile(module, filename="<ast>", mode="exec")
 
   with open(output, 'w') as f:
     f.write(ast.unparse(module))
