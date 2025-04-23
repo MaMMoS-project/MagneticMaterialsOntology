@@ -1,0 +1,137 @@
+from astropy import units as u
+import owlready2
+from ontopy import ontology
+import owlready2.entity
+import re
+import build_onto
+import traceback
+from onto_parser import parseObject, OntoObject, canReduce, reduce
+import ast
+
+def generateQuantityStatement(name,unit):
+  """Generate the quantity statement for a nomad entry.
+  @param name: The name of the quantity
+  @param unit: The unit of the quantity"""
+
+  keywords = [
+      ast.keyword(arg='type', value=ast.Attribute(value=ast.Name(id='np', ctx=ast.Load()), attr='float64', ctx=ast.Load())),
+      ast.keyword(arg='a_eln', value=ast.Dict(keys=[ast.Constant(value='component')], 
+                                              values=[ast.Constant(value='NumberEditQuantity')])),
+      ast.keyword(arg='unit', value=ast.Constant(value=unit.to_string('vounit', fraction=True)))
+    ]
+  
+  return ast.Assign(
+    targets=[ast.Name(id=name, ctx=ast.Store())],
+    value=ast.Call(func=ast.Name(id='Quantity', ctx=ast.Load()), args=[], keywords=keywords)
+  )
+
+def generateClassDef(object: OntoObject):
+    body = []
+    if object.unit is not None:
+        body.append(generateQuantityStatement(object.label, object.unit))
+
+    if body == []:
+        body.append(ast.Pass())
+
+    name = object.name.split('.')[-1]
+    print(name, body)
+    return ast.ClassDef(
+            name=name,
+            bases=[ast.Name(id="ArchiveSection", ctx=ast.Load())],
+            keywords=[],
+            body=body,
+            decorator_list=[]
+    )
+
+def test(ontology, label):
+    obj = ontology.get_by_label(label)
+    # print(obj, type(obj))
+    obb = parseObject(obj)
+
+    module = ast.Module(body=[], type_ignores=[])
+    module.body.append(generateClassDef(obb))
+
+    ast.fix_missing_locations(module)
+    _ = compile(module, filename="<ast>", mode="exec")
+
+    print(ast.unparse(module))
+
+    print(canReduce(obb))
+    if canReduce(obb):
+        reducedObb = reduce(obb)
+        print('\nReduced', reducedObb, "reduced unit = '%s'" % reducedObb.unit.to_string('vounit', fraction=True) if 
+              reducedObb.unit is not None else 'None')
+    else:
+        print('\nNot Reduced', obb.name, obb.parents)
+
+def test2(entry):
+    obb = parseObject(entry)
+
+    module = ast.Module(body=[], type_ignores=[])
+    module.body.append(generateClassDef(obb))
+
+    ast.fix_missing_locations(module)
+    _ = compile(module, filename="<ast>", mode="exec")
+
+    print(ast.unparse(module))
+
+    print(canReduce(obb))
+    if canReduce(obb):
+        reducedObb = reduce(obb)
+        print('\nReduced', reducedObb, "reduced unit = '%s'" % reducedObb.unit.to_string('vounit', fraction=True) if 
+              reducedObb.unit is not None else 'None')
+    else:
+        print('\nNot Reduced', obb.name, obb.parents)
+
+
+# Load the local stored ontology file
+hugo = ontology.get_ontology('./magnetic_material_mammos.ttl')
+hugo.load()
+
+# # obj = hugo.get_by_label('ISQDimensionlessQuantity')
+# obj = hugo.get_by_label('LatticeConstantAlpha')
+# # print(obj, type(obj))
+# obb = parseObject(obj)
+
+# module = ast.Module(body=[], type_ignores=[])
+# module.body.append(generateClassDef(obb))
+
+# ast.fix_missing_locations(module)
+# _ = compile(module, filename="<ast>", mode="exec")
+
+# print(ast.unparse(module))
+
+# print(canReduce(obb))
+# if canReduce(obb):
+#     reducedObb = reduce(obb)
+    # print('Reduced', reducedObb, "reduced unit = '%s'" % reducedObb.unit.to_string('vounit', fraction=True))
+
+test(hugo, 'LatticeConstantAlpha')
+test(hugo, 'Magnetization')
+test(hugo, 'SpontaneousMagneticPolarisation')
+test(hugo, 'MagneticPolarisation')
+
+test(hugo, 'KneeField')
+test(hugo, 'CrystalStructure')
+
+test(hugo, 'IntrinsicMagneticProperties')
+test(hugo, 'MagnetocrystallineAnisotropy')
+
+test(hugo, 'AbsolutePermeability')
+test(hugo, 'MagneticMaterial')
+
+
+# for entry in dir(build_onto):
+#   # TODO: this is a very stupid workaround! Shame on you Martin
+#   if entry == "__builtins__":
+#     break
+#   # and the stupid workarounds continue
+#   if entry in ['Not','AnnotationProperty','World']:
+#     continue
+#   # TODO code should be aware that all of these are AnnotationProperty and thus ignore it (instead of black listing)
+#   if entry in ['IECEntry', 'wikipediaReference','wikidataReference']:
+#     continue
+
+#   print('Processing', entry)
+#   test2(entry)
+

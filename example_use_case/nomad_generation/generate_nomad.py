@@ -139,6 +139,9 @@ def generateClassDefComplex(name,attrname,obj):
 
   dependencies = []
 
+  # Things for which we do not want to generate something
+  filter = ['owl.Thing', 'Thing']
+
   for x in attr:
     whiteList = [
       # entry is a restriction , and
@@ -191,9 +194,14 @@ def generateClassDefComplex(name,attrname,obj):
             dependencies.append(str(alternative))
     elif type(x) is owlready2.entity.ThingClass:
       # TODO: hier waere es gut, wenn gecheckt werden kann, ob die einzelnen dependencies nicht leer sind - also keinen weiteren Informationsgehalt bieten
-      dependencies.append(str(x))
-      className = str(x).split('.')[-1]
-      bases.append(ast.Name(id=className, ctx=ast.Load()))
+
+      dep = str(x)
+      if dep not in filter:
+        dependencies.append(str(x))
+        className = str(x).split('.')[-1]
+        bases.append(ast.Name(id=className, ctx=ast.Load()))
+
+  dependencies = [d for d in dependencies if d not in filter]
 
   return (ast.ClassDef(
             name=name,
@@ -293,8 +301,9 @@ def generateForObject(obj, entry, fullName):
   if hasattr(obj, 'is_a'):
     attr = getattr(obj, 'is_a')
     print(obj, type(attr[0]), attr)
-    if len(attr) > 1:
-      print(obj, 'is complex', attr, type(attr[1]), type(attr[1]) is owlready2.class_construct.Restriction)
+    if len(attr) >= 1:
+      if len(attr) > 1:
+        print(obj, 'is complex', attr, type(attr[1]), type(attr[1]) is owlready2.class_construct.Restriction)
       for x in attr:
         # Die folgende Zeile koennte den x.type == 24 hack ersetzen. (Der Funktioniert aber eh fuer was wir bisher getestet haben)
         # ACHTUNG: unterscheidung ob magnetic_material oder emmo. Wenn emmo dann gleich wie oben bei Hack
