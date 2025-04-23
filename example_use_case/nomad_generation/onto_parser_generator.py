@@ -1,8 +1,7 @@
+from graphlib import TopologicalSorter
 from astropy import units as u
 import owlready2
 from ontopy import ontology
-import owlready2.entity
-import re
 import build_onto
 import traceback
 from onto_parser import parseObject, OntoObject, canReduce, reduce
@@ -25,19 +24,37 @@ def generateQuantityStatement(name,unit):
     value=ast.Call(func=ast.Name(id='Quantity', ctx=ast.Load()), args=[], keywords=keywords)
   )
 
+def generateSectionStatement(object: OntoObject):
+  name = object.name.split('.')[-1]
+  funct = ast.Call(func = ast.Name(id='SubSection', ctx=ast.Load()), args=[],
+                   keywords=[ast.keyword(arg='section_def', value=ast.Name(id=name, ctx=ast.Load())),
+                             ast.keyword(arg='repeats', value=ast.Constant(value=object.repeats))])
+  return ast.Assign(targets=[
+    ast.Name(id=object.label, ctx=ast.Store())],
+    value=funct)
+
 def generateClassDef(object: OntoObject):
     body = []
     if object.unit is not None:
         body.append(generateQuantityStatement(object.label, object.unit))
 
+    if object.components != []:
+        for component in object.components:
+            body.append(generateSectionStatement(component))
+
     if body == []:
         body.append(ast.Pass())
 
+    bases = [ast.Name(id="ArchiveSection", ctx=ast.Load())]
+    for parent in object.parents:
+        name = parent.name.split('.')[-1]
+        bases.append(name)
+
     name = object.name.split('.')[-1]
-    print(name, body)
+    # print(name, body)
     return ast.ClassDef(
             name=name,
-            bases=[ast.Name(id="ArchiveSection", ctx=ast.Load())],
+            bases=bases,
             keywords=[],
             body=body,
             decorator_list=[]
@@ -84,6 +101,91 @@ def test2(entry):
         print('\nNot Reduced', obb.name, obb.parents)
 
 
+def flatten(obj: OntoObject) -> list[OntoObject]:
+    if obj.parents == [] and obj.components == []:
+        return [obj.name]
+    else:
+        ret = [obj.name]
+        for parent in obj.parents:
+            ret.extend(flatten(parent))
+        for component in obj.components:
+            ret.extend(flatten(component))
+        return ret
+
+class Generator:
+    def __init__(self, ontology):
+        self.ontology = ontology
+        self.entries = []
+        self.entryMap = {}
+    
+    def addObject(self, label):
+        entry = self.ontology.get_by_label(label)
+        obb = parseObject(entry)
+
+        if canReduce(obb):
+          reducedObb = reduce(obb)
+          print('\nReduced', reducedObb, "reduced unit = '%s'" % reducedObb.unit.to_string('vounit', fraction=True) if 
+                reducedObb.unit is not None else 'None')
+          self.entries.append(reducedObb)
+        else:
+            print('\nNot Reduced', obb.name, obb.parents)
+            self.entries.append(obb)
+
+    def generate(self):
+        entities = set()
+        for entry in self.entries:
+            for e in flatten(entry):
+              print(e)
+              entities.add(e)
+
+        print('Entities', entities)
+
+        self.buildEntryMap()
+        sorted_entries = self.buildDependencyGraph()
+        
+        module = ast.Module(body=[], type_ignores=[])
+        for name in sorted_entries:
+            module.body.append(generateClassDef(self.entryMap[name]))
+
+        ast.fix_missing_locations(module)
+        _ = compile(module, filename="<ast>", mode="exec")
+
+        print(ast.unparse(module))
+
+    def buildEntryMap(self):
+        def entryToMap(entryMap: dict, entry: OntoObject):
+            for parent in entry.parents:
+                entryToMap(entryMap, parent)
+            for component in entry.components:
+                entryToMap(entryMap, component)
+            entryMap[entry.name] = entry
+
+        for entry in self.entries:
+            entryToMap(self.entryMap, entry)
+    
+    def buildDependencyGraph(self):
+        def depencenciesToGraph(graph, entry: OntoObject):
+            for parent in entry.parents:
+                depencenciesToGraph(graph, parent)
+            for component in entry.components:
+                depencenciesToGraph(graph, component)
+            dependencies = []
+            dependencies.extend([parent.name for parent in entry.parents])
+            dependencies.extend([component.name for component in entry.components])
+            graph[entry.name] = dependencies
+
+        graph = {}
+        for entry in self.entries:
+            depencenciesToGraph(graph, entry)
+
+        ts = TopologicalSorter(graph)
+        sorted_entries = tuple(ts.static_order())
+        print(f'Sorted entries {sorted_entries}')
+
+        return sorted_entries
+  
+
+
 # Load the local stored ontology file
 hugo = ontology.get_ontology('./magnetic_material_mammos.ttl')
 hugo.load()
@@ -106,19 +208,36 @@ hugo.load()
 #     reducedObb = reduce(obb)
     # print('Reduced', reducedObb, "reduced unit = '%s'" % reducedObb.unit.to_string('vounit', fraction=True))
 
-test(hugo, 'LatticeConstantAlpha')
-test(hugo, 'Magnetization')
-test(hugo, 'SpontaneousMagneticPolarisation')
-test(hugo, 'MagneticPolarisation')
+# test(hugo, 'LatticeConstantAlpha')
+# test(hugo, 'Magnetization')
+# test(hugo, 'SpontaneousMagneticPolarisation')
+# test(hugo, 'MagneticPolarisation')
 
-test(hugo, 'KneeField')
-test(hugo, 'CrystalStructure')
+# test(hugo, 'KneeField')
+# test(hugo, 'CrystalStructure')
 
-test(hugo, 'IntrinsicMagneticProperties')
-test(hugo, 'MagnetocrystallineAnisotropy')
+# test(hugo, 'IntrinsicMagneticProperties')
+# test(hugo, 'MagnetocrystallineAnisotropy')
 
-test(hugo, 'AbsolutePermeability')
-test(hugo, 'MagneticMaterial')
+# test(hugo, 'AbsolutePermeability')
+# test(hugo, 'MagneticMaterial')
+
+generator = Generator(hugo)
+generator.addObject('LatticeConstantAlpha')
+generator.addObject('Magnetization')
+generator.addObject('SpontaneousMagneticPolarisation')
+generator.addObject('MagneticPolarisation')
+
+generator.addObject('KneeField')
+generator.addObject('CrystalStructure')
+
+generator.addObject('IntrinsicMagneticProperties')
+generator.addObject('MagnetocrystallineAnisotropy')
+
+generator.addObject('AbsolutePermeability')
+generator.addObject('MagneticMaterial')
+
+generator.generate()
 
 
 # for entry in dir(build_onto):
