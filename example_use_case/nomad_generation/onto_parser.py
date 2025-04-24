@@ -33,6 +33,7 @@ class OntoObject:
         self.parents = []
         self.components = []
         self.repeats = False
+        self.isString = False
 
 def convert_to_iso_unit(unit_string):
     """Converts a string representation of ISQ base quantities to its ISO unit symbols using astropy.
@@ -110,6 +111,10 @@ def parseObject(object):
                 ),
             type(component) is owlready2.entity.ThingClass
         ]
+
+        if type(component) is owlready2.class_construct.Restriction and str(component.property).find('hasStringValue') != -1:
+            print(component, "hasStringValue")
+            ret.isString = True
 
         if not any(whiteList):
             print(component, 'is not white listed')

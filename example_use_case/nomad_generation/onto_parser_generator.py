@@ -24,6 +24,28 @@ def generateQuantityStatement(name,unit):
     value=ast.Call(func=ast.Name(id='Quantity', ctx=ast.Load()), args=[], keywords=keywords)
   )
 
+# Quantity(
+#       type=str,
+#       a_eln={
+#           "component": "StringEditQuantity"
+#       }
+
+def generateQuantityStatementString(name):
+  """Generate the quantity statement for a nomad entry for a String Quanitity.
+  @param name: The name of the quantity"""
+
+  keywords = [
+      ast.keyword(arg='type', value=ast.Constant(value='str')),
+      ast.keyword(arg='a_eln', value=ast.Dict(keys=[ast.Constant(value='component')], 
+                                              values=[ast.Constant(value='StringEditQuantity')]))
+    ]
+  
+  return ast.Assign(
+    targets=[ast.Name(id=name, ctx=ast.Store())],
+    value=ast.Call(func=ast.Name(id='Quantity', ctx=ast.Load()), args=[], keywords=keywords)
+  )
+
+
 def generateSectionStatement(object: OntoObject):
   name = object.name.split('.')[-1]
   funct = ast.Call(func = ast.Name(id='SubSection', ctx=ast.Load()), args=[],
@@ -37,6 +59,8 @@ def generateClassDef(object: OntoObject):
     body = []
     if object.unit is not None:
         body.append(generateQuantityStatement(object.label, object.unit))
+    elif object.isString:
+        body.append(generateQuantityStatementString(object.label))
 
     if object.components != []:
         for component in object.components:
