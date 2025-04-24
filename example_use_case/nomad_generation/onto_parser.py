@@ -163,9 +163,6 @@ def parseObject(object):
                             raise Exception(ret.name + ' cannot have two different units')
                     ret.unit = reducedMeasurementUnit.unit
             elif strProp == 'hasProperty':
-                # raise Exception('hasProperty not implemented')
-            
-
                 # Now we need to check if this is a hasProperty.TYPE restriction
                 #  if it is hasProperty.min, then type == 27. We need to have this option to treat min(0,....) as repeats=True
                 repeats = True if hasattr(component, 'cardinality') and component.cardinality is not None and (component.cardinality > 1 or component.get_typename() == 'min') else False
