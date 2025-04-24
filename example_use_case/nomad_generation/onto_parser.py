@@ -100,15 +100,15 @@ def parseObject(object):
 
     for component in attr:
         whiteList = [
-        # entry is a restriction , and
-        type(component) is owlready2.class_construct.Restriction and (
-            # either a dimension string i.e. it tells us which unit it is
-            str(component.property).find('hasDimensionString') != -1 or
-            str(component.property).find('hasMeasurementUnit') != -1 or 
-            str(component.property).find('hasMetrologicalReference') != -1 or 
-            str(component.property).find('hasProperty') != -1
-            ),
-        type(component) is owlready2.entity.ThingClass
+            # entry is a restriction , and
+            type(component) is owlready2.class_construct.Restriction and (
+                # either a dimension string i.e. it tells us which unit it is
+                str(component.property).find('hasDimensionString') != -1 or
+                str(component.property).find('hasMeasurementUnit') != -1 or
+                str(component.property).find('hasMetrologicalReference') != -1 or
+                str(component.property).find('hasProperty') != -1
+                ),
+            type(component) is owlready2.entity.ThingClass
         ]
 
         if not any(whiteList):
