@@ -46,6 +46,41 @@ def generateQuantityStatementString(name):
   )
 
 
+def generateMDef(object: OntoObject) -> ast.Assign:
+    """Generate the m_def statement for a nomad entry.
+
+    This entry usually has the following structure:
+    `m_def = Section(
+        a_eln=dict(
+        properties=dict(order=[
+            'spaceGroup'
+        ])
+        )
+    )`"""
+    props = []
+    # create what is inside of 'properties'
+    if object.unit is not None or object.isString:
+        props.append(ast.Constant(value=object.label))
+    for component in object.components:
+        props.append(ast.Constant(value=component.label))
+    actual_properties = ast.List(elts=props, ctx=ast.Load())
+    # create the assign statment
+    return ast.Assign(
+        targets=[ast.Name(id='m_def', ctx=ast.Store())],
+        # it is a call to 'Seciton'
+        value=ast.Call(func=ast.Name(id='Section', ctx=ast.Load()),
+                   args=[],
+                   keywords=[ast.keyword(arg='a_eln',
+                                         value=ast.Call(func=ast.Name(id='dict', ctx=ast.Load()),
+                                                        args=[],
+                                                        keywords=[
+                                                            ast.keyword(arg='properties',
+                                                                        value=ast.Call(func=ast.Name(id='dict', ctx=ast.Load()),
+                                                                                       args=[],
+                                                                                       keywords=[
+                                                                                           ast.keyword(arg='order',
+                                                                                                       value=actual_properties)]))]))]))
+
 def generateSectionStatement(object: OntoObject):
   name = object.name.split('.')[-1]
   funct = ast.Call(func = ast.Name(id='SubSection', ctx=ast.Load()), args=[],
@@ -56,7 +91,7 @@ def generateSectionStatement(object: OntoObject):
     value=funct)
 
 def generateClassDef(object: OntoObject):
-    body = []
+    body = [generateMDef(object)]
     if object.unit is not None:
         body.append(generateQuantityStatement(object.label, object.unit))
     elif object.isString:
