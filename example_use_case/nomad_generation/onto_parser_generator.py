@@ -7,15 +7,26 @@ import traceback
 from onto_parser import parseObject, OntoObject, canReduce, reduce
 import ast
 
+distplayUnits = {
+    'MagnetocrystallineAnisotropyConstantK1': 'MJ/m**3'
+}
+
 def generateQuantityStatement(name,unit):
   """Generate the quantity statement for a nomad entry.
   @param name: The name of the quantity
   @param unit: The unit of the quantity"""
 
+  keys = [ast.Constant(value='component')]
+  values = [ast.Constant(value='NumberEditQuantity')]
+
+  if name in distplayUnits:
+    keys.append(ast.Constant(value='defaultDisplayUnit'))
+    values.append(ast.Constant(value=distplayUnits[name]))
+
   keywords = [
       ast.keyword(arg='type', value=ast.Attribute(value=ast.Name(id='np', ctx=ast.Load()), attr='float64', ctx=ast.Load())),
-      ast.keyword(arg='a_eln', value=ast.Dict(keys=[ast.Constant(value='component')], 
-                                              values=[ast.Constant(value='NumberEditQuantity')])),
+      ast.keyword(arg='a_eln', value=ast.Dict(keys=keys, 
+                                              values=values)),
       ast.keyword(arg='unit', value=ast.Constant(value=unit.to_string('vounit', fraction=True)))
     ]
   
