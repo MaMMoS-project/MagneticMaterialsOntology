@@ -910,7 +910,7 @@ with onto:
 
     ## Microstructure
 
-    class MainPhase(MagneticMaterial, emmo.PhaseOfMatter):
+    class MainMagneticPhase(MagneticMaterial, emmo.PhaseOfMatter):
         """Main phase of the magnet"""
 
         prefLabel = en("MainMagneticPhase")
@@ -953,7 +953,7 @@ with onto:
 
         prefLabel = en("GranularMicrostructure")
         is_a = [
-            emmo.hasSpatialPart.exactly(1, MainPhase),
+            emmo.hasSpatialPart.exactly(1, MainMagneticPhase),
             emmo.hasSpatialPart.min(0, SecondaryPhase),
             emmo.hasSpatialPart.min(0, GrainboundaryPhase),
         ]
