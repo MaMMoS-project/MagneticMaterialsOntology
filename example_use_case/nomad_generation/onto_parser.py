@@ -1,4 +1,5 @@
 from astropy import units as u
+import astropy
 import owlready2
 from ontopy import ontology
 import owlready2.entity
