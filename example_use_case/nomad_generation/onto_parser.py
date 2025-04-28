@@ -93,6 +93,10 @@ def parseObject(object):
         ret.label = 'ChemicalComposition'
         ret.isString = True
         return ret
+    elif str(object) == 'magnetic_material_mammos.XRDTwoThetaAngles':
+        ret.label = 'XRDTwoThetaAngles'
+        ret.unit = u.Unit('deg')
+        return ret
 
     if hasattr(object, '__prefLabel'):
         ret.label = object.__prefLabel[0][:]
