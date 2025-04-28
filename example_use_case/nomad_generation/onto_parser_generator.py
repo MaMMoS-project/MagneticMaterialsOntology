@@ -1,9 +1,6 @@
 from graphlib import TopologicalSorter
 from astropy import units as u
-import owlready2
 from ontopy import ontology
-import build_onto
-import traceback
 from onto_parser import parseObject, OntoObject, canReduce, reduce
 import ast
 
@@ -35,12 +32,6 @@ def generateQuantityStatement(name,unit):
     value=ast.Call(func=ast.Name(id='Quantity', ctx=ast.Load()), args=[], keywords=keywords)
   )
 
-# Quantity(
-#       type=str,
-#       a_eln={
-#           "component": "StringEditQuantity"
-#       }
-
 def generateQuantityStatementString(name):
   """Generate the quantity statement for a nomad entry for a String Quanitity.
   @param name: The name of the quantity"""
@@ -50,7 +41,7 @@ def generateQuantityStatementString(name):
       ast.keyword(arg='a_eln', value=ast.Dict(keys=[ast.Constant(value='component')], 
                                               values=[ast.Constant(value='StringEditQuantity')]))
     ]
-  
+
   return ast.Assign(
     targets=[ast.Name(id=name, ctx=ast.Store())],
     value=ast.Call(func=ast.Name(id='Quantity', ctx=ast.Load()), args=[], keywords=keywords)
@@ -183,8 +174,10 @@ def flatten(obj: OntoObject) -> list[OntoObject]:
         return ret
 
 class Generator:
-    def __init__(self, ontology):
+    def __init__(self, ontology, output=None, base=None):
         self.ontology = ontology
+        self.output = output
+        self.baseFile = base
         self.entries = []
         self.entryMap = {}
     
@@ -213,6 +206,11 @@ class Generator:
         self.buildEntryMap()
         sorted_entries = self.buildDependencyGraph()
         
+        if self.baseFile is not None:
+            # Either append the definition to 'nomad_base.py' code
+            module = ast.parse(open(self.baseFile,'r').read())
+        else:
+            module = ast.Module(body=[], type_ignores=[])
         module = ast.Module(body=[], type_ignores=[])
         for name in sorted_entries:
             module.body.append(generateClassDef(self.entryMap[name]))
@@ -220,7 +218,13 @@ class Generator:
         ast.fix_missing_locations(module)
         _ = compile(module, filename="<ast>", mode="exec")
 
-        print(ast.unparse(module))
+        out = ast.unparse(module)
+        print(out)
+
+        if self.output is not None:
+            with open(self.output, 'w') as f:
+                f.write(out)
+                f.close()
 
     def buildEntryMap(self):
         def entryToMap(entryMap: dict, entry: OntoObject):
@@ -253,74 +257,65 @@ class Generator:
         print(f'Sorted entries {sorted_entries}')
 
         return sorted_entries
-  
+
+def generateClasses(output: str, base: str, classes: list[str]):
+    """Generate the classes for the given classes.
+
+    @param output: The output file
+    @param base: The base file to include in the generated code
+    @param classes: The classes to generate"""
+
+    # Load the local stored ontology file
+    hugo = ontology.get_ontology('./magnetic_material_mammos.ttl')
+    hugo.load()
+
+    generator = Generator(hugo,output, base)
+    for clasz in classes:
+        generator.addObject(clasz)
+
+    generator.generate()
+
+def generateOnto(output: str, base: str):
+    """Generate the classes for the given ontology.
+
+    @param output: The output file
+    @param base: The base file to include in the generated code"""
+
+    import build_onto
+
+    # Load the local stored ontology file
+    hugo = ontology.get_ontology('./magnetic_material_mammos.ttl')
+    hugo.load()
+
+    generator = Generator(hugo,output,str)
+
+    for entry in dir(build_onto):
+        # TODO: this is a very stupid workaround! Shame on you Martin
+        if entry == "__builtins__":
+            break
+        # and the stupid workarounds continue
+        if entry in ['Not','AnnotationProperty','World']:
+            continue
+        # TODO code should be aware that all of these are AnnotationProperty and thus ignore it (instead of black listing)
+        if entry in ['IECEntry', 'wikipediaReference','wikidataReference']:
+            continue
+
+        print('Processing', entry)
+        generator.addObject(entry)
+    generator.generate()
 
 
-# Load the local stored ontology file
-hugo = ontology.get_ontology('./magnetic_material_mammos.ttl')
-hugo.load()
+if __name__ == "__main__":
+    import argparse
 
-# # obj = hugo.get_by_label('ISQDimensionlessQuantity')
-# obj = hugo.get_by_label('LatticeConstantAlpha')
-# # print(obj, type(obj))
-# obb = parseObject(obj)
+    # Parse options
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--output', help='Output file', default='generated.py')
+    parser.add_argument('--base', help='Base file to include in the generated code', default=None)
+    #optional list for classes to generate
+    parser.add_argument('--classes', help='Classes to generate', nargs='+', default=None)
 
-# module = ast.Module(body=[], type_ignores=[])
-# module.body.append(generateClassDef(obb))
+    args = parser.parse_args()
 
-# ast.fix_missing_locations(module)
-# _ = compile(module, filename="<ast>", mode="exec")
-
-# print(ast.unparse(module))
-
-# print(canReduce(obb))
-# if canReduce(obb):
-#     reducedObb = reduce(obb)
-    # print('Reduced', reducedObb, "reduced unit = '%s'" % reducedObb.unit.to_string('vounit', fraction=True))
-
-# test(hugo, 'LatticeConstantAlpha')
-# test(hugo, 'Magnetization')
-# test(hugo, 'SpontaneousMagneticPolarisation')
-# test(hugo, 'MagneticPolarisation')
-
-# test(hugo, 'KneeField')
-# test(hugo, 'CrystalStructure')
-
-# test(hugo, 'IntrinsicMagneticProperties')
-# test(hugo, 'MagnetocrystallineAnisotropy')
-
-# test(hugo, 'AbsolutePermeability')
-# test(hugo, 'MagneticMaterial')
-
-generator = Generator(hugo)
-generator.addObject('LatticeConstantAlpha')
-generator.addObject('Magnetization')
-generator.addObject('SpontaneousMagneticPolarisation')
-generator.addObject('MagneticPolarisation')
-
-generator.addObject('KneeField')
-generator.addObject('CrystalStructure')
-
-generator.addObject('IntrinsicMagneticProperties')
-generator.addObject('MagnetocrystallineAnisotropy')
-
-generator.addObject('AbsolutePermeability')
-generator.addObject('MagneticMaterial')
-
-generator.generate()
-
-
-# for entry in dir(build_onto):
-#   # TODO: this is a very stupid workaround! Shame on you Martin
-#   if entry == "__builtins__":
-#     break
-#   # and the stupid workarounds continue
-#   if entry in ['Not','AnnotationProperty','World']:
-#     continue
-#   # TODO code should be aware that all of these are AnnotationProperty and thus ignore it (instead of black listing)
-#   if entry in ['IECEntry', 'wikipediaReference','wikidataReference']:
-#     continue
-
-#   print('Processing', entry)
-#   test2(entry)
-
+    if args.classes != []:
+        generateClasses(args.output, args.base, args.classes)
