@@ -88,6 +88,12 @@ def getUnit(entity):
 
 def parseObject(object):
     ret = OntoObject(str(object))
+
+    if str(object) == 'emmo.ChemicalComposition':
+        ret.label = 'ChemicalComposition'
+        ret.isString = True
+        return ret
+
     if hasattr(object, '__prefLabel'):
         ret.label = object.__prefLabel[0][:]
 
@@ -96,7 +102,7 @@ def parseObject(object):
     # Parse components / is_a
     attr = getattr(object, 'is_a')
 
-    print(object, [str(a) for a in attr])
+    print('parseObject', object, [str(a) for a in attr])
     attr = [a for a in attr if str(a).replace('emmo-inferred', 'emmo') != str(object)]
 
     for component in attr:
