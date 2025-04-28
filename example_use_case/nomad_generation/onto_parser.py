@@ -162,11 +162,15 @@ def parseObject(object):
                 else:
                     reducedMeasurementUnit = reduce(measurementUnit)
                     if ret.unit is not None:
-                        # if ret.unit.to_string('vounit', fraction=True) != reducedMeasurementUnit.unit.to_string('vounit', fraction=True):
-                        if not u.allclose(ret.unit * 3.1415, reducedMeasurementUnit.unit * 3.1415):
-                            print(ret.unit.to_string('vounit', fraction=True))
-                            print(reducedMeasurementUnit.unit.to_string('vounit', fraction=True))
-                            raise Exception(ret.name + ' cannot have two different units')
+                        try:
+                            if not u.allclose(ret.unit * 3.1415, reducedMeasurementUnit.unit * 3.1415):
+                                print(ret.unit.to_string('vounit', fraction=True))
+                                print(reducedMeasurementUnit.unit.to_string('vounit', fraction=True))
+                                raise Exception(ret.name + ' cannot have two different units')
+                        except astropy.units.core.UnitsError as e:
+                            print('Units are not compatible', e)
+                            print(ret.parents, ret.components)
+                            raise Exception('Units are not compatible for ' + ret.name + ' ' + str(ret.unit) + ' vs ' + str(measurementUnit) + '=' + str(reducedMeasurementUnit.unit))
                     ret.unit = reducedMeasurementUnit.unit
             elif strProp == 'hasProperty':
                 # Now we need to check if this is a hasProperty.TYPE restriction
@@ -225,23 +229,38 @@ def reduce(object: OntoObject) -> OntoObject:
 
     ret = copy.deepcopy(object)
     components = []
-    if len(object.parents) == 1:
-        parent = reduce(object.parents[0])
-        ret = copy.deepcopy(object)
+    if len(ret.parents) == 1:
+        parent = reduce(ret.parents[0])
         if parent.unit is not None:
-            if object.unit is not None:
-                raise Exception('Cannot have two units')
+            if ret.unit is not None:
+                try:
+                    if not u.allclose(ret.unit * 3.1415, parent.unit * 3.1415):
+                        print(f"Our unit {ret.unit.to_string('vounit', fraction=True)}")
+                        print(f"Parent unit {parent.unit.to_string('vounit', fraction=True)}")
+                        raise Exception(ret.name + ' cannot have two units')
+                except astropy.units.core.UnitsError as e:
+                    print('Units are not compatible', e)
+                    print(ret.parents, ret.components)
+                    raise Exception('Units are not compatible for ' + ret.name + ' ' + str(ret.unit) + ' vs ' + parent.name + '=' + str(parent.unit))
             ret.unit = parent.unit
 
         ret.parents = []
         components.extend(parent.components)    
-    elif len(object.parents) > 1:
-        print(object.label, 'has multiple parents', object.parents)
-        parents = [reduce(parent) for parent in object.parents]
+    elif len(ret.parents) > 1:
+        print(object.label, 'has multiple parents', ret.parents)
+        parents = [reduce(parent) for parent in ret.parents]
         for parent in parents:
             if parent.unit is not None:
                 if object.unit is not None:
-                    raise Exception('Cannot have two units')
+                    try:
+                        if not u.allclose(ret.unit * 3.1415, parent.unit * 3.1415):
+                            print(f"Our unit {ret.unit.to_string('vounit', fraction=True)}")
+                            print(f"Parent unit {parent.unit.to_string('vounit', fraction=True)}")
+                            raise Exception(ret.name + ' cannot have two units')
+                    except astropy.units.core.UnitsError as e:
+                        print('Units are not compatible', e)
+                        print(ret.parents, ret.components)
+                        raise Exception('Units are not compatible for ' + ret.name + ' ' + str(ret.unit) + ' vs ' + parent.name + '=' + str(parent.unit))
                 ret.unit = parent.unit
             components.extend(parent.components)
         ret.parents = []
