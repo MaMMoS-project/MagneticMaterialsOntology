@@ -287,7 +287,7 @@ def generateOnto(output: str, base: str):
     hugo = ontology.get_ontology('./magnetic_material_mammos.ttl')
     hugo.load()
 
-    generator = Generator(hugo,output,str)
+    generator = Generator(hugo,output,base)
 
     for entry in dir(build_onto):
         # TODO: this is a very stupid workaround! Shame on you Martin
@@ -313,9 +313,11 @@ if __name__ == "__main__":
     parser.add_argument('--output', help='Output file', default='generated.py')
     parser.add_argument('--base', help='Base file to include in the generated code', default=None)
     #optional list for classes to generate
-    parser.add_argument('--classes', help='Classes to generate', nargs='+', default=None)
+    parser.add_argument('--classes', help='Classes to generate (list). When empty all clases from build_onoto are generated', nargs='+', default=None)
 
     args = parser.parse_args()
 
-    if args.classes != []:
+    if args.classes is not None and args.classes != []:
         generateClasses(args.output, args.base, args.classes)
+    else:
+        generateOnto(args.output, args.base)
