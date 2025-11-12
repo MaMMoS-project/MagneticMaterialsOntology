@@ -28,10 +28,12 @@ world = World(filename="magneticmaterials.sqlite3")
 #     "data/emmo.ttl"
 # ).load()  # https://emmo-repo.github.io/versions/1.0.0-rc3/emmo.ttl
 
+# emmo = world.get_ontology(
+#     "data/emmo-inferred.ttl"
+# ).load()  # https://emmo-repo.github.io/versions/1.0.0-rc3/emmo-inferred.ttl
 emmo = world.get_ontology(
-    "data/emmo-inferred.ttl"
-).load()  # https://emmo-repo.github.io/versions/1.0.0-rc3/emmo-inferred.ttl
-
+    "data/emmo-inferred_v1p0p2.ttl"
+).load()  # https://emmo-repo.github.io/versions/1.0.2/emmo-inferred.ttl
 
 # Examples can be found on:
 # + https://github.com/emmo-repo/domain-atomistic/blob/master/domain-atomistic.py
@@ -958,7 +960,7 @@ with onto:
             emmo.hasSpatialPart.min(0, GrainboundaryPhase),
         ]
 
-    class Magnet(emmo.FunctionallyDefinedMaterial):
+    class Magnet(emmo.FunctionalMaterial):
         """Piece of matter made of one or more magnetic materials."""
 
         prefLabel = en("Magnet")
@@ -975,7 +977,7 @@ with onto:
             emmo.hasProperty.min(0, XrayDiffractionData),
         ]
 
-    class BulkMagnet(Magnet, emmo.SizeDefinedMaterial):
+    class BulkMagnet(Magnet, emmo.MaterialBySize):
         """Piece of matter made of one or more magnetic material."""
 
         prefLabel = en("BulkMagnet")
@@ -1048,7 +1050,7 @@ with onto:
             emmo.hasProperty.exactly(1, emmo.PositionVector),
         ]
 
-    class ThinfilmMagnet(Magnet, emmo.SizeDefinedMaterial):
+    class ThinfilmMagnet(Magnet, emmo.MaterialBySize):
         """Piece of matter made of one or more magnetic material
         in form a thin film."""
 
