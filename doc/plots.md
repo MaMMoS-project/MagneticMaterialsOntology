@@ -5,7 +5,7 @@
 %BRANCHFIG Magnet addnodes=1 parents=0 rankdir='LR' relations=isA,hasSpatialPart,hasSpatialTile edgelabels=1 caption='A Magnet and its parts.'
 
 %HEADER GranularStructure level=2  
-%BRANCHFIG GranularStructure addnodes=1 parents=0 rankdir='LR' relations='all' edgelabels=1 caption='A granular stuctures and its parts.'
+%BRANCHFIG GranularStructure addnodes=1 parents=0 rankdir='LR' relations='all' edgelabels=1 caption='A granular structures and its parts.'
 
 %HEADER CoercivityHc level=2  
 %BRANCHFIG CoercivityHc addnodes=1 parents=1 rankdir='LR' relations='all' edgelabels=1 caption='Coercivity.'

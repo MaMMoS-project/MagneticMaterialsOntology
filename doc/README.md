@@ -4,7 +4,7 @@
 
 We use `mammosdoc` which is a modified version of `ontodoc` from EMMOntoPy  as follows
 
-* Change to the directiory `MagneticMaterialsOntology/doc`
+* Change to the directory `MagneticMaterialsOntology/doc`
 * Run mammosdoc: 
 
 ```
@@ -83,7 +83,7 @@ The parameters after the preprocessor directive `%BRANCHFIG` in the file `plots.
 
 | problem | solution | parameter setting |
 |---------|----------|-------------------|
-| no children are displayes | add missing target nodes in relations | `addnodes=1` |
+| no children are displayed | add missing target nodes in relations | `addnodes=1` |
 | plot has too many nodes | reduce level of shown parents | `parents=0` | 
 | plot has too many connection | select only a few relations | `relations=isA,hasSpatialPart` | 
 | bubbles and fonts are very small | change graph direction | `rankdir='LR'` |
