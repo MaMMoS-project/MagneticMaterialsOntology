@@ -812,8 +812,8 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
             edgelabels=edgelabels,
             included_namespaces=included_namespaces,
             included_ontologies=included_ontologies,
-            addnodes=addnodes,  # tom: 14.12.24
-            include_parents=parents,  # tom: 14.12.14
+            addnodes=addnodes,  # TS: 14.12.24
+            include_parents=parents,  # TS: 14.12.24
         )
         if legend:
             graph.add_legend()
