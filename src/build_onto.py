@@ -7,7 +7,7 @@ from owlready2 import (
     Not,
 )
 
-__version__ = "0.0.3"  # Version of this ontology
+__version__ = "0.0.4"  # Version of this ontology
 
 
 # From https://github.com/emmo-repo/domain-atomistic/blob/master/domain-atomistic.py
@@ -192,15 +192,15 @@ with onto:
         """Unit of the magnetic moment per unit mass: Am²/kg."""
 
         prefLabel = en("AmpereSquareMetrePerKilogram")
-        is_a = [
-            emmo.hasDimensionString.value("T0 L+2 M-1 I+1 Θ0 N0 J0")
-        ]
+        is_a = [emmo.hasDimensionString.value("T0 L+2 M-1 I+1 Θ0 N0 J0")]
 
     class MagneticMomementPerUnitMass(emmo.ElectromagneticQuantity):
         """Magnetic moment per unit mass, sigma."""
 
-        comment = en("The magnetization is obtained by multiplying sigma with \
-                     the density")
+        comment = en(
+            "The magnetization is obtained by multiplying sigma with \
+                     the density"
+        )
         prefLabel = en("MagneticMomementPerUnitMass")
         altLabel = pl("sigma, MassMagnetization, SpecificMagneticMoment")
         is_a = [emmo.hasMeasurementUnit.some(AmpereSquareMetrePerKilogram)]
@@ -470,7 +470,8 @@ with onto:
         is_a = [
             emmo.hasProperty.exactly(
                 1,
-                UniaxialMagnetocrystallineAnisotropy | CubicMagnetocrystallineAnisotropy,
+                UniaxialMagnetocrystallineAnisotropy
+                | CubicMagnetocrystallineAnisotropy,
             )
         ]
 
