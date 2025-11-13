@@ -4,8 +4,9 @@
 input-files:
   - mammosdoc-meta.yaml
 
-standalone: False
-self-contained: True
+# self-contained: True # Deprecated: --self-contained is deprecated, use --embed-resources --standalone instead
+standalone: True
+embed-resources: True
 toc: True
 toc-depth: 2
 variables:
