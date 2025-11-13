@@ -4,48 +4,64 @@ from ontopy import ontology
 from onto_parser import parseObject, OntoObject, canReduce, reduce
 import ast
 
-distplayUnits = {
-    'MagnetocrystallineAnisotropyConstantK1': 'MJ/m**3'
-}
+distplayUnits = {"MagnetocrystallineAnisotropyConstantK1": "MJ/m**3"}
 
-def generateQuantityStatement(name,unit):
-  """Generate the quantity statement for a nomad entry.
-  @param name: The name of the quantity
-  @param unit: The unit of the quantity"""
 
-  keys = [ast.Constant(value='component')]
-  values = [ast.Constant(value='NumberEditQuantity')]
+def generateQuantityStatement(name, unit):
+    """Generate the quantity statement for a nomad entry.
+    @param name: The name of the quantity
+    @param unit: The unit of the quantity"""
 
-  if name in distplayUnits:
-    keys.append(ast.Constant(value='defaultDisplayUnit'))
-    values.append(ast.Constant(value=distplayUnits[name]))
+    keys = [ast.Constant(value="component")]
+    values = [ast.Constant(value="NumberEditQuantity")]
 
-  keywords = [
-      ast.keyword(arg='type', value=ast.Attribute(value=ast.Name(id='np', ctx=ast.Load()), attr='float64', ctx=ast.Load())),
-      ast.keyword(arg='a_eln', value=ast.Dict(keys=keys, 
-                                              values=values)),
-      ast.keyword(arg='unit', value=ast.Constant(value=unit.to_string('vounit', fraction=True)))
+    if name in distplayUnits:
+        keys.append(ast.Constant(value="defaultDisplayUnit"))
+        values.append(ast.Constant(value=distplayUnits[name]))
+
+    keywords = [
+        ast.keyword(
+            arg="type",
+            value=ast.Attribute(
+                value=ast.Name(id="np", ctx=ast.Load()), attr="float64", ctx=ast.Load()
+            ),
+        ),
+        ast.keyword(arg="a_eln", value=ast.Dict(keys=keys, values=values)),
+        ast.keyword(
+            arg="unit",
+            value=ast.Constant(value=unit.to_string("vounit", fraction=True)),
+        ),
     ]
-  
-  return ast.Assign(
-    targets=[ast.Name(id=name, ctx=ast.Store())],
-    value=ast.Call(func=ast.Name(id='Quantity', ctx=ast.Load()), args=[], keywords=keywords)
-  )
+
+    return ast.Assign(
+        targets=[ast.Name(id=name, ctx=ast.Store())],
+        value=ast.Call(
+            func=ast.Name(id="Quantity", ctx=ast.Load()), args=[], keywords=keywords
+        ),
+    )
+
 
 def generateQuantityStatementString(name):
-  """Generate the quantity statement for a nomad entry for a String Quanitity.
-  @param name: The name of the quantity"""
+    """Generate the quantity statement for a nomad entry for a String Quantity.
+    @param name: The name of the quantity"""
 
-  keywords = [
-      ast.keyword(arg='type', value=ast.Constant(value='str')),
-      ast.keyword(arg='a_eln', value=ast.Dict(keys=[ast.Constant(value='component')], 
-                                              values=[ast.Constant(value='StringEditQuantity')]))
+    keywords = [
+        ast.keyword(arg="type", value=ast.Constant(value="str")),
+        ast.keyword(
+            arg="a_eln",
+            value=ast.Dict(
+                keys=[ast.Constant(value="component")],
+                values=[ast.Constant(value="StringEditQuantity")],
+            ),
+        ),
     ]
 
-  return ast.Assign(
-    targets=[ast.Name(id=name, ctx=ast.Store())],
-    value=ast.Call(func=ast.Name(id='Quantity', ctx=ast.Load()), args=[], keywords=keywords)
-  )
+    return ast.Assign(
+        targets=[ast.Name(id=name, ctx=ast.Store())],
+        value=ast.Call(
+            func=ast.Name(id="Quantity", ctx=ast.Load()), args=[], keywords=keywords
+        ),
+    )
 
 
 def generateMDef(object: OntoObject) -> ast.Assign:
@@ -66,31 +82,52 @@ def generateMDef(object: OntoObject) -> ast.Assign:
     for component in object.components:
         props.append(ast.Constant(value=component.label))
     actual_properties = ast.List(elts=props, ctx=ast.Load())
-    # create the assign statment
+    # create the assign statement
     return ast.Assign(
-        targets=[ast.Name(id='m_def', ctx=ast.Store())],
-        # it is a call to 'Seciton'
-        value=ast.Call(func=ast.Name(id='Section', ctx=ast.Load()),
-                   args=[],
-                   keywords=[ast.keyword(arg='a_eln',
-                                         value=ast.Call(func=ast.Name(id='dict', ctx=ast.Load()),
-                                                        args=[],
-                                                        keywords=[
-                                                            ast.keyword(arg='properties',
-                                                                        value=ast.Call(func=ast.Name(id='dict', ctx=ast.Load()),
-                                                                                       args=[],
-                                                                                       keywords=[
-                                                                                           ast.keyword(arg='order',
-                                                                                                       value=actual_properties)]))]))]))
+        targets=[ast.Name(id="m_def", ctx=ast.Store())],
+        # it is a call to 'Section'
+        value=ast.Call(
+            func=ast.Name(id="Section", ctx=ast.Load()),
+            args=[],
+            keywords=[
+                ast.keyword(
+                    arg="a_eln",
+                    value=ast.Call(
+                        func=ast.Name(id="dict", ctx=ast.Load()),
+                        args=[],
+                        keywords=[
+                            ast.keyword(
+                                arg="properties",
+                                value=ast.Call(
+                                    func=ast.Name(id="dict", ctx=ast.Load()),
+                                    args=[],
+                                    keywords=[
+                                        ast.keyword(
+                                            arg="order", value=actual_properties
+                                        )
+                                    ],
+                                ),
+                            )
+                        ],
+                    ),
+                )
+            ],
+        ),
+    )
+
 
 def generateSectionStatement(object: OntoObject):
-  name = object.name.split('.')[-1]
-  funct = ast.Call(func = ast.Name(id='SubSection', ctx=ast.Load()), args=[],
-                   keywords=[ast.keyword(arg='section_def', value=ast.Name(id=name, ctx=ast.Load())),
-                             ast.keyword(arg='repeats', value=ast.Constant(value=object.repeats))])
-  return ast.Assign(targets=[
-    ast.Name(id=object.label, ctx=ast.Store())],
-    value=funct)
+    name = object.name.split(".")[-1]
+    funct = ast.Call(
+        func=ast.Name(id="SubSection", ctx=ast.Load()),
+        args=[],
+        keywords=[
+            ast.keyword(arg="section_def", value=ast.Name(id=name, ctx=ast.Load())),
+            ast.keyword(arg="repeats", value=ast.Constant(value=object.repeats)),
+        ],
+    )
+    return ast.Assign(targets=[ast.Name(id=object.label, ctx=ast.Store())], value=funct)
+
 
 def generateClassDef(object: OntoObject):
     body = [generateMDef(object)]
@@ -108,18 +145,15 @@ def generateClassDef(object: OntoObject):
 
     bases = [ast.Name(id="ArchiveSection", ctx=ast.Load())]
     for parent in object.parents:
-        name = parent.name.split('.')[-1]
+        name = parent.name.split(".")[-1]
         bases.append(name)
 
-    name = object.name.split('.')[-1]
+    name = object.name.split(".")[-1]
     # print(name, body)
     return ast.ClassDef(
-            name=name,
-            bases=bases,
-            keywords=[],
-            body=body,
-            decorator_list=[]
+        name=name, bases=bases, keywords=[], body=body, decorator_list=[]
     )
+
 
 def test(ontology, label):
     obj = ontology.get_by_label(label)
@@ -137,10 +171,16 @@ def test(ontology, label):
     print(canReduce(obb))
     if canReduce(obb):
         reducedObb = reduce(obb)
-        print('\nReduced', reducedObb, "reduced unit = '%s'" % reducedObb.unit.to_string('vounit', fraction=True) if 
-              reducedObb.unit is not None else 'None')
+        print(
+            "\nReduced",
+            reducedObb,
+            "reduced unit = '%s'" % reducedObb.unit.to_string("vounit", fraction=True)
+            if reducedObb.unit is not None
+            else "None",
+        )
     else:
-        print('\nNot Reduced', obb.name, obb.parents)
+        print("\nNot Reduced", obb.name, obb.parents)
+
 
 def test2(entry):
     obb = parseObject(entry)
@@ -156,10 +196,15 @@ def test2(entry):
     print(canReduce(obb))
     if canReduce(obb):
         reducedObb = reduce(obb)
-        print('\nReduced', reducedObb, "reduced unit = '%s'" % reducedObb.unit.to_string('vounit', fraction=True) if 
-              reducedObb.unit is not None else 'None')
+        print(
+            "\nReduced",
+            reducedObb,
+            "reduced unit = '%s'" % reducedObb.unit.to_string("vounit", fraction=True)
+            if reducedObb.unit is not None
+            else "None",
+        )
     else:
-        print('\nNot Reduced', obb.name, obb.parents)
+        print("\nNot Reduced", obb.name, obb.parents)
 
 
 def flatten(obj: OntoObject) -> list[OntoObject]:
@@ -173,6 +218,7 @@ def flatten(obj: OntoObject) -> list[OntoObject]:
             ret.extend(flatten(component))
         return ret
 
+
 class Generator:
     def __init__(self, ontology, output=None, base=None):
         self.ontology = ontology
@@ -180,35 +226,41 @@ class Generator:
         self.baseFile = base
         self.entries = []
         self.entryMap = {}
-    
+
     def addObject(self, label):
         entry = self.ontology.get_by_label(label)
         obb = parseObject(entry)
 
         if canReduce(obb):
-          reducedObb = reduce(obb)
-          print('\nReduced', reducedObb, "reduced unit = '%s'" % reducedObb.unit.to_string('vounit', fraction=True) if 
-                reducedObb.unit is not None else 'None')
-          self.entries.append(reducedObb)
+            reducedObb = reduce(obb)
+            print(
+                "\nReduced",
+                reducedObb,
+                "reduced unit = '%s'"
+                % reducedObb.unit.to_string("vounit", fraction=True)
+                if reducedObb.unit is not None
+                else "None",
+            )
+            self.entries.append(reducedObb)
         else:
-            print('\nNot Reduced', obb.name, obb.parents)
+            print("\nNot Reduced", obb.name, obb.parents)
             self.entries.append(obb)
 
     def generate(self):
         entities = set()
         for entry in self.entries:
             for e in flatten(entry):
-              print(e)
-              entities.add(e)
+                print(e)
+                entities.add(e)
 
-        print('Entities', entities)
+        print("Entities", entities)
 
         self.buildEntryMap()
         sorted_entries = self.buildDependencyGraph()
-        
+
         if self.baseFile is not None:
             # Either append the definition to 'nomad_base.py' code
-            module = ast.parse(open(self.baseFile,'r').read())
+            module = ast.parse(open(self.baseFile, "r").read())
         else:
             module = ast.Module(body=[], type_ignores=[])
         module = ast.Module(body=[], type_ignores=[])
@@ -222,7 +274,7 @@ class Generator:
         print(out)
 
         if self.output is not None:
-            with open(self.output, 'w') as f:
+            with open(self.output, "w") as f:
                 f.write(out)
                 f.close()
 
@@ -236,7 +288,7 @@ class Generator:
 
         for entry in self.entries:
             entryToMap(self.entryMap, entry)
-    
+
     def buildDependencyGraph(self):
         def depencenciesToGraph(graph, entry: OntoObject):
             for parent in entry.parents:
@@ -254,9 +306,10 @@ class Generator:
 
         ts = TopologicalSorter(graph)
         sorted_entries = tuple(ts.static_order())
-        print(f'Sorted entries {sorted_entries}')
+        print(f"Sorted entries {sorted_entries}")
 
         return sorted_entries
+
 
 def generateClasses(output: str, base: str, classes: list[str]):
     """Generate the classes for the given classes.
@@ -266,14 +319,15 @@ def generateClasses(output: str, base: str, classes: list[str]):
     @param classes: The classes to generate"""
 
     # Load the local stored ontology file
-    hugo = ontology.get_ontology('./magnetic_material_mammos.ttl')
+    hugo = ontology.get_ontology("./magnetic_material_mammos.ttl")
     hugo.load()
 
-    generator = Generator(hugo,output, base)
+    generator = Generator(hugo, output, base)
     for clasz in classes:
         generator.addObject(clasz)
 
     generator.generate()
+
 
 def generateOnto(output: str, base: str):
     """Generate the classes for the given ontology.
@@ -284,23 +338,23 @@ def generateOnto(output: str, base: str):
     import build_onto
 
     # Load the local stored ontology file
-    hugo = ontology.get_ontology('./magnetic_material_mammos.ttl')
+    hugo = ontology.get_ontology("./magnetic_material_mammos.ttl")
     hugo.load()
 
-    generator = Generator(hugo,output,base)
+    generator = Generator(hugo, output, base)
 
     for entry in dir(build_onto):
         # TODO: this is a very stupid workaround! Shame on you Martin
         if entry == "__builtins__":
             break
         # and the stupid workarounds continue
-        if entry in ['Not','AnnotationProperty','World']:
+        if entry in ["Not", "AnnotationProperty", "World"]:
             continue
         # TODO code should be aware that all of these are AnnotationProperty and thus ignore it (instead of black listing)
-        if entry in ['IECEntry', 'wikipediaReference','wikidataReference']:
+        if entry in ["IECEntry", "wikipediaReference", "wikidataReference"]:
             continue
 
-        print('Processing', entry)
+        print("Processing", entry)
         generator.addObject(entry)
     generator.generate()
 
@@ -310,10 +364,17 @@ if __name__ == "__main__":
 
     # Parse options
     parser = argparse.ArgumentParser()
-    parser.add_argument('--output', help='Output file', default='generated.py')
-    parser.add_argument('--base', help='Base file to include in the generated code', default=None)
-    #optional list for classes to generate
-    parser.add_argument('--classes', help='Classes to generate (list). When empty all clases from build_onoto are generated', nargs='+', default=None)
+    parser.add_argument("--output", help="Output file", default="generated.py")
+    parser.add_argument(
+        "--base", help="Base file to include in the generated code", default=None
+    )
+    # optional list for classes to generate
+    parser.add_argument(
+        "--classes",
+        help="Classes to generate (list). When empty all classes from build_onoto are generated",
+        nargs="+",
+        default=None,
+    )
 
     args = parser.parse_args()
 

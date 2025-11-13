@@ -24,7 +24,7 @@ to create the documentation you need
 
 ### Build or update the ontology
 
-* Change to the directiory `MagneticMaterialsOntology`
+* Change to the directory `MagneticMaterialsOntology`
 * Edit the file `src/build_onto.py`
 * Run the command `python src/build_onto.py`  
   This creates the file `magnetic_material_mammos.ttl`
