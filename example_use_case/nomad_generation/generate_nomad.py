@@ -76,10 +76,10 @@ def generateMDef(props=["k1"]):
     )`"""
     # create what is inside of 'properties'
     actual_properties = ast.List(elts=[ast.Constant(value=props[0])], ctx=ast.Load())
-    # create the assign statment
+    # create the assign statement
     return ast.Assign(
         targets=[ast.Name(id="m_def", ctx=ast.Store())],
-        # it is a call to 'Seciton'
+        # it is a call to 'Section'
         value=ast.Call(
             func=ast.Name(id="Section", ctx=ast.Load()),
             args=[],
