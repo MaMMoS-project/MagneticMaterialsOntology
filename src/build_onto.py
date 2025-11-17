@@ -16,6 +16,11 @@ def en(s):
     return locstr(s, lang="en")
 
 
+def enGB(s):
+    """Returns `s` as an British-English location string."""
+    return locstr(s, lang="en-GB")
+
+
 def pl(s):
     """Returns `s` as a plain literal string."""
     return locstr(s, lang="")
@@ -187,6 +192,9 @@ with onto:
     ## magnetization
 
     emmo.Magnetization.altLabel = en("VolumeMagnetization")
+    emmo.Magnetization.altLabel = enGB("VolumeMagnetisation")
+    emmo.Magnetization.altLabel = en("Magnetisation")
+    emmo.Magnetization.altLabel = enGB("Magnetisation")
 
     class AmpereSquareMetrePerKilogram(emmo.MeasurementUnit):
         """Unit of the magnetic moment per unit mass: Am²/kg."""
