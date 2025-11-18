@@ -171,12 +171,23 @@ with onto:
 
     # energy densities
 
+    class EnergyDensityUnit(emmo.SIDimensionalUnit, emmo.PrefixedUnit):
+        """Unit of energy density."""
+
+        prefLabel = en("EnergyDensityUnit")
+        is_a = [emmo.hasDimensionString.value("T-2 L-1 M+1 I0 Θ0 N0 J0")]
+
+    # assert JoulePerCubicMetre as child of EnergyDensityUnit
+    emmo.JoulePerCubicMetre.is_a.append(EnergyDensityUnit)
+    # assert MegaJoulePerCubicMetre as child of EnergyDensityUnit
+    emmo.MegaJoulePerCubicMetre.is_a.append(EnergyDensityUnit)
+
     class EnergyDensity(emmo.PhysicalQuantity):
         """Energy Density."""
 
         prefLabel = en("EnergyDensity")
         is_a = [
-            emmo.hasMeasurementUnit.some(emmo.JoulePerCubicMetre),
+            emmo.hasMeasurementUnit.some(EnergyDensityUnit),
         ]
 
     class LineEnergy(emmo.PhysicalQuantity):
