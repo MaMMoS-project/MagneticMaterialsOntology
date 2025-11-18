@@ -171,7 +171,7 @@ with onto:
 
     # energy densities
 
-    class EnergyDensityUnit(emmo.SIDimensionalUnit, emmo.PrefixedUnit):
+    class EnergyDensityUnit(emmo.SIDimensionalUnit):
         """Unit of energy density."""
 
         prefLabel = en("EnergyDensityUnit")
