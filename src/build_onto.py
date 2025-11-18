@@ -179,8 +179,10 @@ with onto:
 
     # assert JoulePerCubicMetre as child of EnergyDensityUnit
     emmo.JoulePerCubicMetre.is_a.append(EnergyDensityUnit)
+    emmo.JoulePerCubicMetre.altLabel = en("JoulePerCubicMeter")
     # assert MegaJoulePerCubicMetre as child of EnergyDensityUnit
     emmo.MegaJoulePerCubicMetre.is_a.append(EnergyDensityUnit)
+    emmo.MegaJoulePerCubicMetre.altLabel = en("MegaJoulePerCubicMeter")
 
     class EnergyDensity(emmo.PhysicalQuantity):
         """Energy Density."""
@@ -190,12 +192,24 @@ with onto:
             emmo.hasMeasurementUnit.some(EnergyDensityUnit),
         ]
 
+    class LineEnergyUnit(emmo.SIDimensionalUnit):
+        """Unit of energy per unit length."""
+
+        prefLabel = en("LineEnergyUnit")
+        is_a = [emmo.hasDimensionString.value("T-2 L+1 M+1 I0 Θ0 N0 J0")]
+
+    # assert JoulePerMetre as child of LineEnergyUnit
+    emmo.JoulePerMetre.is_a.append(LineEnergyUnit)
+    emmo.JoulePerMetre.altLabel = en("JoulePerMeter")
+
     class LineEnergy(emmo.PhysicalQuantity):
         """Energy per unit length."""
 
         prefLabel = en("LineEnergy")
+        altLabel = en("EnergyPerUnitLength")
+        altLabel = en("EnergyPerLength")
         is_a = [
-            emmo.hasMeasurementUnit.some(emmo.JoulePerMetre),
+            emmo.hasMeasurementUnit.some(LineEnergyUnit),
         ]
 
     # intrinsic magnetic properties
