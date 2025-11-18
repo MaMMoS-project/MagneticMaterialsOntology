@@ -21,6 +21,11 @@ def enGB(s):
     return locstr(s, lang="en-GB")
 
 
+def enUS(s):
+    """Returns `s` as an American-English location string."""
+    return locstr(s, lang="en-US")
+
+
 def pl(s):
     """Returns `s` as a plain literal string."""
     return locstr(s, lang="")
@@ -179,10 +184,12 @@ with onto:
 
     # assert JoulePerCubicMetre as child of EnergyDensityUnit
     emmo.JoulePerCubicMetre.is_a.append(EnergyDensityUnit)
-    emmo.JoulePerCubicMetre.altLabel = en("JoulePerCubicMeter")
+    emmo.JoulePerCubicMetre.altLabel.append(enUS("JoulePerCubicMeter"))
+    emmo.JoulePerCubicMetre.altLabel.append(enGB("JoulePerCubicMetre"))
     # assert MegaJoulePerCubicMetre as child of EnergyDensityUnit
     emmo.MegaJoulePerCubicMetre.is_a.append(EnergyDensityUnit)
-    emmo.MegaJoulePerCubicMetre.altLabel = en("MegaJoulePerCubicMeter")
+    emmo.MegaJoulePerCubicMetre.altLabel.append(enGB("MegaJoulePerCubicMetre"))
+    emmo.MegaJoulePerCubicMetre.altLabel.append(enUS("MegaJoulePerCubicMeter"))
 
     class EnergyDensity(emmo.PhysicalQuantity):
         """Energy Density."""
@@ -218,13 +225,14 @@ with onto:
 
     emmo.Magnetization.altLabel = en("VolumeMagnetization")
     emmo.Magnetization.altLabel = enGB("VolumeMagnetisation")
-    emmo.Magnetization.altLabel = en("Magnetisation")
+    emmo.Magnetization.altLabel = en("Magnetization")
     emmo.Magnetization.altLabel = enGB("Magnetisation")
 
     class AmpereSquareMetrePerKilogram(emmo.MeasurementUnit):
         """Unit of the magnetic moment per unit mass: Am²/kg."""
 
-        prefLabel = en("AmpereSquareMetrePerKilogram")
+        prefLabel = enGB("AmpereSquareMetrePerKilogram")
+        altLabel = en("AmpereSquareMeterPerKilogram")
         is_a = [emmo.hasDimensionString.value("T0 L+2 M-1 I+1 Θ0 N0 J0")]
 
     class MagneticMomementPerUnitMass(emmo.ElectromagneticQuantity):
@@ -235,7 +243,10 @@ with onto:
                      the density"
         )
         prefLabel = en("MagneticMomementPerUnitMass")
-        altLabel = pl("sigma, MassMagnetization, SpecificMagneticMoment")
+        altLabel = pl("sigma, SpecificMagneticMoment")
+        altLabel = en("MassMagnetization")
+        altLabel = enGB("MassMagnetisation")
+
         is_a = [emmo.hasMeasurementUnit.some(AmpereSquareMetrePerKilogram)]
 
     class SpontaneousMagnetization(emmo.ElectromagneticQuantity):
@@ -244,6 +255,7 @@ with onto:
         within a domain of a ferromagnet."""
 
         prefLabel = en("SpontaneousMagnetization")
+        altLabel = enGB("SpontaneousMagnetisation")
         altLabel = pl("Ms")
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)]
         IECEntry = pl(
@@ -258,7 +270,8 @@ with onto:
         result of alignment of the magnetic moments of  individual atoms.
         Js exists within a domain of a ferromagnet."""
 
-        prefLabel = en("SpontaneousMagneticPolarisation")
+        prefLabel = en("SpontaneousMagneticPolarization")
+        altLabel = enGB("SpontaneousMagneticPolarisation")
         altLabel = pl("Js")
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFluxDensityUnit)]
 
@@ -324,6 +337,7 @@ with onto:
             magnetization, and H is the internal field."
         )
         prefLabel = en("DemagnetizingFactor")
+        altLabel = enGB("DemagnetisingFactor")
         altLabel = en("N, D")
         is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
         IECEntry = pl(
@@ -818,6 +832,7 @@ with onto:
 
         prefLabel = en("Remanence")
         altLabel = en("Remanent magnetization, Mr")
+        altLabel = enGB("Remanent magnetisation, Mr")
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)]
         wikidataReference = pl("https://www.wikidata.org/wiki/Q4150950")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Remanence")
@@ -830,6 +845,7 @@ with onto:
         field is restored to zero in the hysteresis loop"""
 
         prefLabel = en("RemanentMagneticPolarization")
+        altLabel = enGB("RemanentMagneticPolarisation")
         altLabel = en("Jr")
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFluxDensityUnit)]
         IECEntry = pl(
