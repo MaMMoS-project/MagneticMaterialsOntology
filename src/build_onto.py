@@ -905,7 +905,7 @@ with onto:
         prefLabel = en("MassSusceptibility")
         altLabel = en("chi_m")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q104655916")
-        is_a = [emmo.hasMeasurementUnit.some(emmo.CubicMetrePerKilogram)]
+        is_a = [emmo.hasMeasurementUnit.some(emmo.VolumePerMassUnit)]
 
     class AbsolutePermeability(emmo.ElectromagneticQuantity):
         """Ratio of the change of magnetic flux and the internal
