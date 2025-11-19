@@ -246,6 +246,8 @@ with onto:
             enUS("AmpereSquareMeterPerKilogram"),
             enGB("AmpereSquareMetrePerKilogram"),
         ]
+        unitSymbol = en("A⋅m²/kg")
+        ucumCode = en("A.m2.kg-1")
         is_a = [emmo.hasDimensionString.value("T0 L+2 M-1 I+1 Θ0 N0 J0")]
 
     class MagneticMomementPerUnitMass(emmo.ElectromagneticQuantity):
