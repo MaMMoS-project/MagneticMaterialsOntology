@@ -187,7 +187,7 @@ with onto:
     # energy densities
 
     class EnergyDensityUnit(emmo.SIDimensionalUnit):
-        """Unit of energy density."""
+        """Unit of energy density. Defined using SI base units."""
 
         prefLabel = en("EnergyDensityUnit")
         is_a = [emmo.hasDimensionString.value("T-2 L-1 M+1 I0 Θ0 N0 J0")]
@@ -210,7 +210,7 @@ with onto:
         ]
 
     class LineEnergyUnit(emmo.SIDimensionalUnit):
-        """Unit of energy per unit length."""
+        """Unit of energy per unit length. Defined using SI base units."""
 
         prefLabel = en("LineEnergyUnit")
         is_a = [emmo.hasDimensionString.value("T-2 L+1 M+1 I0 Θ0 N0 J0")]
@@ -238,7 +238,20 @@ with onto:
     add_altLabel(emmo.Magnetization, enUS("Magnetization"))
     add_altLabel(emmo.Magnetization, enGB("Magnetisation"))
 
-    class AmpereSquareMetrePerKilogram(emmo.MeasurementUnit):
+    class MassMagnetizationUnit(emmo.SIDimensionalUnit):
+        """Class of units of the magnetization per unit mass.
+        Defined using SI base units."""
+
+        prefLabel = en("MassMagnetizationUnit")
+        altLabel = [
+            enUS("MassMagnetizationUnit"),
+            enGB("MassMagnetisationUnit"),
+            enUS("SpecificMagnetizationUnit"),
+            enGB("SpecificMagnetisationUnit"),
+        ]
+        is_a = [emmo.hasDimensionString.value("T0 L+2 M-1 I+1 Θ0 N0 J0")]
+
+    class AmpereSquareMetrePerKilogram(MassMagnetizationUnit):
         """Unit of the magnetic moment per unit mass: Am²/kg."""
 
         prefLabel = en("AmpereSquareMetrePerKilogram")
@@ -248,7 +261,6 @@ with onto:
         ]
         unitSymbol = en("A⋅m²/kg")
         ucumCode = en("A.m2.kg-1")
-        is_a = [emmo.hasDimensionString.value("T0 L+2 M-1 I+1 Θ0 N0 J0")]
 
     class MagneticMomementPerUnitMass(emmo.ElectromagneticQuantity):
         """Magnetic moment per unit mass, sigma."""
