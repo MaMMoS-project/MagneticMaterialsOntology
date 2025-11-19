@@ -374,7 +374,6 @@ with onto:
         prefLabel = en("DemagnetizingFactor")
         altLabel = [
             enUS("DemagnetizingFactor"),
-            enUS("DemagnetizingFactor"),
             enGB("DemagnetisingFactor"),
             en("N, D"),
         ]
