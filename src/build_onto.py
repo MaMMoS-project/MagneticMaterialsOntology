@@ -937,7 +937,7 @@ with onto:
 
         prefLabel = en("MaximumEnergyProduct")
         altLabel = en("(BH)max")
-        is_a = [emmo.hasMeasurementUnit.some(emmo.JoulePerCubicMetre)]
+        is_a = [emmo.hasMeasurementUnit.some(EnergyDensityUnit)]
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Maximum_energy_product")
 
     # -----------------------------------------------------
