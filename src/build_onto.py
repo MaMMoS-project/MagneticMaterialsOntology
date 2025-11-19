@@ -241,8 +241,11 @@ with onto:
     class AmpereSquareMetrePerKilogram(emmo.MeasurementUnit):
         """Unit of the magnetic moment per unit mass: Am²/kg."""
 
-        prefLabel = enGB("AmpereSquareMetrePerKilogram")
-        altLabel = enUS("AmpereSquareMeterPerKilogram")
+        prefLabel = en("AmpereSquareMetrePerKilogram")
+        altLabel = [
+            enUS("AmpereSquareMeterPerKilogram"),
+            enGB("AmpereSquareMetrePerKilogram"),
+        ]
         is_a = [emmo.hasDimensionString.value("T0 L+2 M-1 I+1 Θ0 N0 J0")]
 
     class MagneticMomementPerUnitMass(emmo.ElectromagneticQuantity):
