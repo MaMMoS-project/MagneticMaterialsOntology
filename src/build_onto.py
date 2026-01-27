@@ -584,8 +584,6 @@ with onto:
             emmo.hasProperty.some(MagnetocrystallineAnisotropy),
             emmo.hasProperty.some(ExchangeStiffnessConstant),
             emmo.hasProperty.some(emmo.CurieTemperature | emmo.NeelTemperature),
-            # emmo.hasProperty.some(emmo.CurieTemperature),
-            # emmo.hasProperty.some(emmo.NeelTemperature),
         ]
 
     # -----------------------------------------------------
