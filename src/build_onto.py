@@ -276,7 +276,7 @@ with onto:
             enGB("MassMagnetisation"),
         ]
 
-        is_a = [emmo.hasMeasurementUnit.some(AmpereSquareMetrePerKilogram)]
+        is_a = [emmo.hasMeasurementUnit.some(MassMagnetizationUnit)]
 
     class SpontaneousMagnetization(emmo.ElectromagneticQuantity):
         """The spontaneous magnetization, Ms, of a ferromagnet is the result
