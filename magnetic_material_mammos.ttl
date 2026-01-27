@@ -36,7 +36,7 @@ Wilfried Hortschitz
 DISS-UWK
 email: wilfried.hortschitz@donau-uni.ac.at
 """@en ;
-    owl:imports <https://w3id.org/emmo> ;
+    owl:imports <https://w3id.org/emmo/1.0.2> ;
     owl:versionIRI <https://w3id.org/emmo/domain/0.0.4/magnetic_material> ;
     owl:versionInfo "0.0.4"@en .
 
