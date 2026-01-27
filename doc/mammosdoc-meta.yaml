@@ -1,6 +1,6 @@
 ---
 title:  'Magnetic Material Ontology'
-version: 0.0.3
+version: 0.0.4
 author:
 - name: Wilfried Hortschitz
   affiliation: UWK Krems, Austria
@@ -9,7 +9,7 @@ author:
 - name: Thomas Schrefl
   affiliation: UWK Krems, Austria
 institute: 'Magnetic Multiscale Modelling Suite (MaMMoS)'
-keywords: [EMMO, 'materials science', modelling, characterisation, materials, ontology]
+keywords: [EMMO, 'materials science', modelling, characterisation, materials, ontology, 'magnetic materials']
 abstract: |
   An EMMO-based ontology for magnetic materials.
   

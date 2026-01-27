@@ -7,7 +7,7 @@ from owlready2 import (
     Not,
 )
 
-__version__ = "0.0.3"  # Version of this ontology
+__version__ = "0.0.4"  # Version of this ontology
 
 
 # From https://github.com/emmo-repo/domain-atomistic/blob/master/domain-atomistic.py
@@ -16,9 +16,29 @@ def en(s):
     return locstr(s, lang="en")
 
 
+def enGB(s):
+    """Returns `s` as an British-English location string."""
+    return locstr(s, lang="en-GB")
+
+
+def enUS(s):
+    """Returns `s` as an American-English location string."""
+    return locstr(s, lang="en-US")
+
+
 def pl(s):
     """Returns `s` as a plain literal string."""
     return locstr(s, lang="")
+
+
+# Append a new altLabel to an EMMO entry: if the entry already
+# has an altLabel list, append the value; otherwise create altLabel
+# as a new list containing the value.
+def add_altLabel(entry, label):
+    if hasattr(entry, "altLabel"):
+        entry.altLabel.append(label)
+    else:
+        entry.altLabel = [label]
 
 
 # Load EMMO
@@ -28,10 +48,12 @@ world = World(filename="magneticmaterials.sqlite3")
 #     "data/emmo.ttl"
 # ).load()  # https://emmo-repo.github.io/versions/1.0.0-rc3/emmo.ttl
 
+# emmo = world.get_ontology(
+#     "data/emmo-inferred.ttl"
+# ).load()  # https://emmo-repo.github.io/versions/1.0.0-rc3/emmo-inferred.ttl
 emmo = world.get_ontology(
-    "data/emmo-inferred.ttl"
-).load()  # https://emmo-repo.github.io/versions/1.0.0-rc3/emmo-inferred.ttl
-
+    "data/emmo-inferred_v1p0p2.ttl"
+).load()  # https://emmo-repo.github.io/versions/1.0.2/emmo-inferred.ttl
 
 # Examples can be found on:
 # + https://github.com/emmo-repo/domain-atomistic/blob/master/domain-atomistic.py
@@ -164,44 +186,97 @@ with onto:
 
     # energy densities
 
+    class EnergyDensityUnit(emmo.SIDimensionalUnit):
+        """Unit of energy density. Defined using SI base units."""
+
+        prefLabel = en("EnergyDensityUnit")
+        is_a = [emmo.hasDimensionString.value("T-2 L-1 M+1 I0 Θ0 N0 J0")]
+
+    # Assert JoulePerCubicMetre as subclass of EnergyDensityUnit
+    emmo.JoulePerCubicMetre.is_a.append(EnergyDensityUnit)
+    add_altLabel(emmo.JoulePerCubicMetre, enUS("JoulePerCubicMeter"))
+    add_altLabel(emmo.JoulePerCubicMetre, enGB("JoulePerCubicMetre"))
+    # Assert MegaJoulePerCubicMetre as subclass of EnergyDensityUnit
+    emmo.MegaJoulePerCubicMetre.is_a.append(EnergyDensityUnit)
+    add_altLabel(emmo.MegaJoulePerCubicMetre, enGB("MegaJoulePerCubicMetre"))
+    add_altLabel(emmo.MegaJoulePerCubicMetre, enUS("MegaJoulePerCubicMeter"))
+
     class EnergyDensity(emmo.PhysicalQuantity):
         """Energy Density."""
 
         prefLabel = en("EnergyDensity")
         is_a = [
-            emmo.hasMeasurementUnit.some(emmo.JoulePerCubicMetre),
+            emmo.hasMeasurementUnit.some(EnergyDensityUnit),
         ]
+
+    class LineEnergyUnit(emmo.SIDimensionalUnit):
+        """Unit of energy per unit length. Defined using SI base units."""
+
+        prefLabel = en("LineEnergyUnit")
+        is_a = [emmo.hasDimensionString.value("T-2 L+1 M+1 I0 Θ0 N0 J0")]
+
+    # Assert JoulePerMetre as subclass of LineEnergyUnit
+    emmo.JoulePerMetre.is_a.append(LineEnergyUnit)
+    add_altLabel(emmo.JoulePerMetre, enUS("JoulePerMeter"))
+    add_altLabel(emmo.JoulePerMetre, enGB("JoulePerMetre"))
 
     class LineEnergy(emmo.PhysicalQuantity):
         """Energy per unit length."""
 
         prefLabel = en("LineEnergy")
+        altLabel = [en("EnergyPerUnitLength"), en("EnergyPerLength")]
         is_a = [
-            emmo.hasMeasurementUnit.some(emmo.JoulePerMetre),
+            emmo.hasMeasurementUnit.some(LineEnergyUnit),
         ]
 
     # intrinsic magnetic properties
 
     ## magnetization
 
-    emmo.Magnetization.altLabel = en("VolumeMagnetization")
+    add_altLabel(emmo.Magnetization, enUS("VolumeMagnetization"))
+    add_altLabel(emmo.Magnetization, enGB("VolumeMagnetisation"))
+    add_altLabel(emmo.Magnetization, enUS("Magnetization"))
+    add_altLabel(emmo.Magnetization, enGB("Magnetisation"))
 
-    class AmpereSquareMetrePerKilogram(emmo.MeasurementUnit):
+    class MassMagnetizationUnit(emmo.SIDimensionalUnit):
+        """Class of units of the magnetization per unit mass.
+        Defined using SI base units."""
+
+        prefLabel = en("MassMagnetizationUnit")
+        altLabel = [
+            enUS("MassMagnetizationUnit"),
+            enGB("MassMagnetisationUnit"),
+            enUS("SpecificMagnetizationUnit"),
+            enGB("SpecificMagnetisationUnit"),
+        ]
+        is_a = [emmo.hasDimensionString.value("T0 L+2 M-1 I+1 Θ0 N0 J0")]
+
+    class AmpereSquareMetrePerKilogram(MassMagnetizationUnit):
         """Unit of the magnetic moment per unit mass: Am²/kg."""
 
         prefLabel = en("AmpereSquareMetrePerKilogram")
-        is_a = [
-            emmo.hasDimensionString.value("T0 L+2 M-1 I+1 Θ0 N0 J0")
+        altLabel = [
+            enUS("AmpereSquareMeterPerKilogram"),
+            enGB("AmpereSquareMetrePerKilogram"),
         ]
+        unitSymbol = en("A⋅m²/kg")
+        ucumCode = en("A.m2.kg-1")
 
     class MagneticMomementPerUnitMass(emmo.ElectromagneticQuantity):
         """Magnetic moment per unit mass, sigma."""
 
-        comment = en("The magnetization is obtained by multiplying sigma with \
-                     the density")
+        comment = en(
+            "The magnetization is obtained by multiplying sigma with \
+                     the density"
+        )
         prefLabel = en("MagneticMomementPerUnitMass")
-        altLabel = pl("sigma, MassMagnetization, SpecificMagneticMoment")
-        is_a = [emmo.hasMeasurementUnit.some(AmpereSquareMetrePerKilogram)]
+        altLabel = [
+            pl("sigma, SpecificMagneticMoment"),
+            enUS("MassMagnetization"),
+            enGB("MassMagnetisation"),
+        ]
+
+        is_a = [emmo.hasMeasurementUnit.some(MassMagnetizationUnit)]
 
     class SpontaneousMagnetization(emmo.ElectromagneticQuantity):
         """The spontaneous magnetization, Ms, of a ferromagnet is the result
@@ -209,7 +284,11 @@ with onto:
         within a domain of a ferromagnet."""
 
         prefLabel = en("SpontaneousMagnetization")
-        altLabel = pl("Ms")
+        altLabel = [
+            enUS("SpontaneousMagnetization"),
+            enGB("SpontaneousMagnetisation"),
+            pl("Ms"),
+        ]
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)]
         IECEntry = pl(
             "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-02-41"
@@ -223,8 +302,12 @@ with onto:
         result of alignment of the magnetic moments of  individual atoms.
         Js exists within a domain of a ferromagnet."""
 
-        prefLabel = en("SpontaneousMagneticPolarisation")
-        altLabel = pl("Js")
+        prefLabel = en("SpontaneousMagneticPolarization")
+        altLabel = [
+            enUS("SpontaneousMagneticPolarization"),
+            enGB("SpontaneousMagneticPolarisation"),
+            pl("Js"),
+        ]
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFluxDensityUnit)]
 
     ## anisotropy
@@ -289,7 +372,11 @@ with onto:
             magnetization, and H is the internal field."
         )
         prefLabel = en("DemagnetizingFactor")
-        altLabel = en("N, D")
+        altLabel = [
+            enUS("DemagnetizingFactor"),
+            enGB("DemagnetisingFactor"),
+            en("N, D"),
+        ]
         is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
         IECEntry = pl(
             "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-63"
@@ -468,7 +555,8 @@ with onto:
         is_a = [
             emmo.hasProperty.exactly(
                 1,
-                UniaxialMagnetocrystallineAnisotropy | CubicMagnetocrystallineAnisotropy,
+                UniaxialMagnetocrystallineAnisotropy
+                | CubicMagnetocrystallineAnisotropy,
             )
         ]
 
@@ -495,8 +583,7 @@ with onto:
             emmo.hasProperty.some(SpontaneousMagneticPolarisation),
             emmo.hasProperty.some(MagnetocrystallineAnisotropy),
             emmo.hasProperty.some(ExchangeStiffnessConstant),
-            emmo.hasProperty.some(emmo.CurieTemperature),
-            emmo.hasProperty.some(emmo.NeelTemperature),
+            emmo.hasProperty.some(emmo.CurieTemperature | emmo.NeelTemperature),
         ]
 
     # -----------------------------------------------------
@@ -684,7 +771,7 @@ with onto:
         of the sample itself."""
 
         prefLabel = en("DemagnetizingField")
-        altLabel = en("Hd")
+        altLabel = [enUS("DemagnetizingField"), enGB("DemagnetisingField"), en("Hd")]
         wikidataReference = pl("https://www.wikidata.org/wiki/Q5255001")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Demagnetizing_field")
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)]
@@ -780,7 +867,12 @@ with onto:
         restored to zero in the hysteresis loop"""
 
         prefLabel = en("Remanence")
-        altLabel = en("Remanent magnetization, Mr")
+        altLabel = [
+            en("Remanent magnetization"),
+            en("Mr"),
+            enUS("Remanent magnetization"),
+            enGB("Remanent magnetisation"),
+        ]
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)]
         wikidataReference = pl("https://www.wikidata.org/wiki/Q4150950")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Remanence")
@@ -793,7 +885,11 @@ with onto:
         field is restored to zero in the hysteresis loop"""
 
         prefLabel = en("RemanentMagneticPolarization")
-        altLabel = en("Jr")
+        altLabel = [
+            enUS("RemanentMagneticPolarization"),
+            enGB("RemanentMagneticPolarisation"),
+            en("Jr"),
+        ]
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFluxDensityUnit)]
         IECEntry = pl(
             "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-02-39"
@@ -823,7 +919,7 @@ with onto:
         prefLabel = en("MassSusceptibility")
         altLabel = en("chi_m")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q104655916")
-        is_a = [emmo.hasMeasurementUnit.some(emmo.CubicMetrePerKilogram)]
+        is_a = [emmo.hasMeasurementUnit.some(emmo.VolumePerMassUnit)]
 
     class AbsolutePermeability(emmo.ElectromagneticQuantity):
         """Ratio of the change of magnetic flux and the internal
@@ -855,7 +951,7 @@ with onto:
 
         prefLabel = en("MaximumEnergyProduct")
         altLabel = en("(BH)max")
-        is_a = [emmo.hasMeasurementUnit.some(emmo.JoulePerCubicMetre)]
+        is_a = [emmo.hasMeasurementUnit.some(EnergyDensityUnit)]
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Maximum_energy_product")
 
     # -----------------------------------------------------
@@ -958,7 +1054,7 @@ with onto:
             emmo.hasSpatialPart.min(0, GrainboundaryPhase),
         ]
 
-    class Magnet(emmo.FunctionallyDefinedMaterial):
+    class Magnet(emmo.FunctionalMaterial):
         """Piece of matter made of one or more magnetic materials."""
 
         prefLabel = en("Magnet")
@@ -975,7 +1071,7 @@ with onto:
             emmo.hasProperty.min(0, XrayDiffractionData),
         ]
 
-    class BulkMagnet(Magnet, emmo.SizeDefinedMaterial):
+    class BulkMagnet(Magnet, emmo.MaterialBySize):
         """Piece of matter made of one or more magnetic material."""
 
         prefLabel = en("BulkMagnet")
@@ -1048,7 +1144,7 @@ with onto:
             emmo.hasProperty.exactly(1, emmo.PositionVector),
         ]
 
-    class ThinfilmMagnet(Magnet, emmo.SizeDefinedMaterial):
+    class ThinfilmMagnet(Magnet, emmo.MaterialBySize):
         """Piece of matter made of one or more magnetic material
         in form a thin film."""
 
@@ -1140,6 +1236,7 @@ onto.metadata.abstract.append(
 
 onto.metadata.title.append(en("Magnetic Material"))
 onto.metadata.creator.append(en("Wilfried Hortschitz"))
+onto.metadata.creator.append(en("Thomas Schrefl"))
 onto.metadata.contributor.append(en("DISS-UWK"))
 onto.metadata.versionInfo.append(en(__version__))
 onto.metadata.comment.append(

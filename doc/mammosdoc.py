@@ -4,6 +4,7 @@ A module for documenting ontologies.
 derived from ontodoc.py
 (https://github.com/emmo-repo/EMMOntoPy/blob/de542a34fa676d75938cea62a6fb28a8f1e97de9/ontopy/ontodoc.py)
 """
+
 # pylint: disable=fixme,too-many-lines,no-member
 import os
 import re
@@ -28,7 +29,7 @@ if TYPE_CHECKING:
 
 
 class OntoDoc:
-    """A class for helping documentating ontologies.
+    """A class for helping document ontologies.
 
     Parameters
     ----------
@@ -155,7 +156,7 @@ class OntoDoc:
             (r"\u2265", r"&ge;"),
             (r"\u226A", r"&x226A;"),
             (r"\u226B", r"&x226B;"),
-            (r'"Y$', r""),  # strange noice added by owlready2
+            (r'"Y$', r""),  # strange noise added by owlready2
         ],
     }
 
@@ -172,9 +173,7 @@ class OntoDoc:
 
     def get_default_template(self):
         """Returns default template."""
-        title = os.path.splitext(
-            os.path.basename(self.onto.base_iri.rstrip("/#"))
-        )[0]
+        title = os.path.splitext(os.path.basename(self.onto.base_iri.rstrip("/#")))[0]
         irilink = self.style.get("link", "{name}").format(
             iri=self.onto.base_iri,
             name=self.onto.base_iri,
@@ -221,13 +220,9 @@ class OntoDoc:
         figwidth_style = self.style.get("figwidth", "")
         figure_style = self.style.get("figure", "")
         figwidth = figwidth_style.format(width=width) if width else ""
-        return figure_style.format(
-            path=path, caption=caption, figwidth=figwidth
-        )
+        return figure_style.format(path=path, caption=caption, figwidth=figwidth)
 
-    def itemdoc(
-        self, item, header_level=3, show_disjoints=False
-    ):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements
+    def itemdoc(self, item, header_level=3, show_disjoints=False):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements
         """Returns documentation of `item`.
 
         Parameters
@@ -279,9 +274,7 @@ class OntoDoc:
         # Add warning about missing prefLabel
         if not hasattr(item, "prefLabel") or not item.prefLabel.first():
             doc.append(
-                annotation_style.format(
-                    key="Warning", value="Missing prefLabel"
-                )
+                annotation_style.format(key="Warning", value="Missing prefLabel")
             )
 
         # Add iri
@@ -299,9 +292,7 @@ class OntoDoc:
         else:
             annotations = item.get_annotations()
 
-        for key in sorted(
-            annotations.keys(), key=lambda key: order.get(key, key)
-        ):
+        for key in sorted(annotations.keys(), key=lambda key: order.get(key, key)):
             for value in annotations[key]:
                 value = str(value)
                 if self.url_regex.match(value):
@@ -331,8 +322,7 @@ class OntoDoc:
             ):
                 points.append(
                     point_style.format(
-                        point="is_a "
-                        + asstring(prop, link_style, ontology=onto),
+                        point="is_a " + asstring(prop, link_style, ontology=onto),
                         ontology=onto,
                     )
                 )
@@ -348,8 +338,7 @@ class OntoDoc:
         for entity in item.equivalent_to:
             points.append(
                 point_style.format(
-                    point="equivalent_to "
-                    + asstring(entity, link_style, ontology=onto)
+                    point="equivalent_to " + asstring(entity, link_style, ontology=onto)
                 )
             )
 
@@ -391,8 +380,7 @@ class OntoDoc:
         for domain in getattr(item, "domain", ()):
             points.append(
                 point_style.format(
-                    point="domain "
-                    + asstring(domain, link_style, ontology=onto)
+                    point="domain " + asstring(domain, link_style, ontology=onto)
                 )
             )
 
@@ -400,8 +388,7 @@ class OntoDoc:
         for restriction in getattr(item, "range", ()):
             points.append(
                 point_style.format(
-                    point="range "
-                    + asstring(restriction, link_style, ontology=onto)
+                    point="range " + asstring(restriction, link_style, ontology=onto)
                 )
             )
 
@@ -409,9 +396,7 @@ class OntoDoc:
         if points:
             value = points_style.format(points="".join(points), ontology=onto)
             doc.append(
-                annotation_style.format(
-                    key="Subclass of", value=value, ontology=onto
-                )
+                annotation_style.format(key="Subclass of", value=value, ontology=onto)
             )
 
         # Instances (individuals)
@@ -421,8 +406,8 @@ class OntoDoc:
             for instance in item.instances():
                 if isinstance(instance.is_instance_of, property):
                     warnings.warn(
-                        f'Ignoring instance "{instance}" which is both and '
-                        "indivudual and class. Ontodoc does not support "
+                        f'Ignoring instance "{instance}" which is both an '
+                        "individual and a class. OntoDoc does not support "
                         "punning at the present moment."
                     )
                     continue
@@ -434,9 +419,7 @@ class OntoDoc:
                         )
                     )
                 if points:
-                    value = points_style.format(
-                        points="".join(points), ontology=onto
-                    )
+                    value = points_style.format(points="".join(points), ontology=onto)
                     doc.append(
                         annotation_style.format(
                             key="Individuals", value=value, ontology=onto
@@ -476,9 +459,7 @@ def get_options(opts, **kwargs):
     res = AttributeDict(kwargs)
     for opt in opts:
         if "=" not in opt:
-            raise InvalidTemplateError(
-                f'Missing "=" in template option: {opt!r}'
-            )
+            raise InvalidTemplateError(f'Missing "=" in template option: {opt!r}')
         name, value = opt.split("=", 1)
         if name not in res:
             raise InvalidTemplateError(f"Invalid template option: {name!r}")
@@ -584,15 +565,15 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
         Whether to include imported entities.
     """
 
-    # FIXME - this class should be refractured:
-    #   * Instead of rescan the entire document for each pre-processer
-    #     directive, we should scan the source like by line and handle
-    #     each directive as they occour.
-    #   * The current implementation has a lot of dublicated code.
+    # FIXME - this class should be refactored:
+    #   * Instead of rescanning the entire document for each pre-processor
+    #     directive, we should scan the source line-by-line and handle
+    #     each directive as they occur.
+    #   * The current implementation has a lot of duplicated code.
     #   * Instead of modifying the source in-place, we should copy to a
     #     result list. This will make good error reporting much easier.
-    #   * Branch leaves are only looked up in the file witht the %BRANCH
-    #     directive, not in all included files as expedted.
+    #   * Branch leaves are only looked up in the file with the %BRANCH
+    #     directive, not in all included files as expected.
 
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -684,7 +665,8 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
                 opts = get_options(tokens[2:], level=1)
                 del self.lines[i]
                 self.lines[i:i] = self.ontodoc.get_header(
-                    name, int(opts.level)  # pylint: disable=no-member
+                    name,
+                    int(opts.level),  # pylint: disable=no-member
                 ).split("\n")
 
     def process_figures(self):
@@ -710,7 +692,8 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
                 opts = get_options(tokens[2:], header_level=3)
                 del self.lines[i]
                 self.lines[i:i] = self.ontodoc.itemdoc(
-                    name, int(opts.header_level)  # pylint: disable=no-member
+                    name,
+                    int(opts.header_level),  # pylint: disable=no-member
                 ).split("\n")
 
     def process_branches(self):
@@ -731,32 +714,25 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
                     namespaces="",
                     ontologies="",
                 )
-                leaves = (
-                    names if opts.terminated else ()
-                )  # pylint: disable=no-member
+                leaves = names if opts.terminated else ()  # pylint: disable=no-member
 
                 included_namespaces = (
-                    opts.namespaces.split(",")
-                    if opts.namespaces
-                    else ()  # pylint: disable=no-member
+                    opts.namespaces.split(",") if opts.namespaces else ()  # pylint: disable=no-member
                 )
                 included_ontologies = (
-                    opts.ontologies.split(",")
-                    if opts.ontologies
-                    else ()  # pylint: disable=no-member
+                    opts.ontologies.split(",") if opts.ontologies else ()  # pylint: disable=no-member
                 )
 
                 branch = filter_classes(
-                    onto.get_branch(
-                        name, leaves, opts.include_leaves
-                    ),  # pylint: disable=no-member
+                    onto.get_branch(name, leaves, opts.include_leaves),  # pylint: disable=no-member
                     included_namespaces=included_namespaces,
                     included_ontologies=included_ontologies,
                 )
 
                 del self.lines[i]
                 self.lines[i:i] = self.ontodoc.itemsdoc(
-                    branch, int(opts.header_level)  # pylint: disable=no-member
+                    branch,
+                    int(opts.header_level),  # pylint: disable=no-member
                 ).split("\n")
 
     def _make_branchfig(  # pylint: disable=too-many-arguments,too-many-locals, too-many-positional-arguments
@@ -775,7 +751,7 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
         included_namespaces: "Iterable[str]",
         included_ontologies: "Iterable[str]",
         addnodes=1,
-        parents=1
+        parents=1,
     ) -> "tuple[str, list[str], float]":
         """Help method for process_branchfig().
 
@@ -826,7 +802,7 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
 
         # Create graph
         graph = OntoGraph(onto, graph_attr={"rankdir": rankdir})
-        relations = relations.split(',')
+        relations = relations.split(",")
         graph.add_branch(
             root=name,
             leaves=leaves,
@@ -836,8 +812,8 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
             edgelabels=edgelabels,
             included_namespaces=included_namespaces,
             included_ontologies=included_ontologies,
-            addnodes=addnodes,         # tom: 14.12.24
-            include_parents=parents,   # tom: 14.12.14
+            addnodes=addnodes,  # TS: 14.12.24
+            include_parents=parents,  # TS: 14.12.24
         )
         if legend:
             graph.add_legend()
@@ -881,14 +857,10 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
                 )
 
                 included_namespaces = (
-                    opts.namespaces.split(",")
-                    if opts.namespaces
-                    else ()  # pylint: disable=no-member
+                    opts.namespaces.split(",") if opts.namespaces else ()  # pylint: disable=no-member
                 )
                 included_ontologies = (
-                    opts.ontologies.split(",")
-                    if opts.ontologies
-                    else ()  # pylint: disable=no-member
+                    opts.ontologies.split(",") if opts.ontologies else ()  # pylint: disable=no-member
                 )
 
                 filepath, _, width = self._make_branchfig(
@@ -920,9 +892,7 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
         """Process all %BRANCHDOC and  %BRANCHEAD directives."""
         onto = self.ontodoc.onto
         for i, line in reversed(list(enumerate(self.lines))):
-            if line.startswith("%BRANCHDOC ") or line.startswith(
-                "%BRANCHHEAD "
-            ):
+            if line.startswith("%BRANCHDOC ") or line.startswith("%BRANCHHEAD "):
                 with_branch = bool(line.startswith("%BRANCHDOC "))
                 tokens = shlex.split(line)
                 name = tokens[1]
@@ -949,14 +919,10 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
                 )
 
                 included_namespaces = (
-                    opts.namespaces.split(",")
-                    if opts.namespaces
-                    else ()  # pylint: disable=no-member
+                    opts.namespaces.split(",") if opts.namespaces else ()  # pylint: disable=no-member
                 )
                 included_ontologies = (
-                    opts.ontologies.split(",")
-                    if opts.ontologies
-                    else ()  # pylint: disable=no-member
+                    opts.ontologies.split(",") if opts.ontologies else ()  # pylint: disable=no-member
                 )
 
                 include_leaves = 1
@@ -979,9 +945,7 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
                 )
 
                 sec = []
-                sec.append(
-                    self.ontodoc.get_header(opts.title, int(opts.level))
-                )  # pylint: disable=no-member
+                sec.append(self.ontodoc.get_header(opts.title, int(opts.level)))  # pylint: disable=no-member
                 sec.append(
                     self.ontodoc.get_figure(
                         filepath,
@@ -997,9 +961,7 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
                         included_ontologies=included_ontologies,
                     )
                     sec.append(
-                        self.ontodoc.itemsdoc(
-                            branch, int(opts.level + 1)
-                        )  # pylint: disable=no-member
+                        self.ontodoc.itemsdoc(branch, int(opts.level + 1))  # pylint: disable=no-member
                     )
 
                 del self.lines[i]
@@ -1024,13 +986,12 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
                 elif token == "individuals":  # nosec
                     items = onto.individuals(imported=self.imported)
                 else:
-                    raise InvalidTemplateError(
-                        f"Invalid argument to %%ALL: {token}"
-                    )
+                    raise InvalidTemplateError(f"Invalid argument to %%ALL: {token}")
                 items = sorted(items, key=get_label)
                 del self.lines[i]
                 self.lines[i:i] = self.ontodoc.itemsdoc(
-                    items, int(opts.header_level)  # pylint: disable=no-member
+                    items,
+                    int(opts.header_level),  # pylint: disable=no-member
                 ).split("\n")
 
     def process_allfig(self):  # pylint: disable=too-many-locals
@@ -1061,27 +1022,17 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
                 if token == "classes":  # nosec
                     roots = onto.get_root_classes(imported=self.imported)
                 elif token in ("object_properties", "relations"):
-                    roots = onto.get_root_object_properties(
-                        imported=self.imported
-                    )
+                    roots = onto.get_root_object_properties(imported=self.imported)
                 elif token == "data_properties":  # nosec
-                    roots = onto.get_root_data_properties(
-                        imported=self.imported
-                    )
+                    roots = onto.get_root_data_properties(imported=self.imported)
                 else:
-                    raise InvalidTemplateError(
-                        f"Invalid argument to %%ALLFIG: {token}"
-                    )
+                    raise InvalidTemplateError(f"Invalid argument to %%ALLFIG: {token}")
 
                 included_namespaces = (
-                    opts.namespaces.split(",")
-                    if opts.namespaces
-                    else ()  # pylint: disable=no-member
+                    opts.namespaces.split(",") if opts.namespaces else ()  # pylint: disable=no-member
                 )
                 included_ontologies = (
-                    opts.ontologies.split(",")
-                    if opts.ontologies
-                    else ()  # pylint: disable=no-member
+                    opts.ontologies.split(",") if opts.ontologies else ()  # pylint: disable=no-member
                 )
 
                 sec = []
@@ -1105,9 +1056,7 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
                         opts.parents,
                     )
                     title = f"Taxonomy of {name}."
-                    sec.append(
-                        self.ontodoc.get_header(title, int(opts.level))
-                    )  # pylint: disable=no-member
+                    sec.append(self.ontodoc.get_header(title, int(opts.level)))  # pylint: disable=no-member
                     sec.extend(
                         self.ontodoc.get_figure(
                             filepath, caption=title, width=width
@@ -1137,9 +1086,7 @@ class DocPP:  # pylint: disable=too-many-instance-attributes
                     )
                     docpp.figdir = self.figdir
                 if opts.shift:  # pylint: disable=no-member
-                    docpp.shift_header_levels(
-                        int(opts.shift)
-                    )  # pylint: disable=no-member
+                    docpp.shift_header_levels(int(opts.shift))  # pylint: disable=no-member
                 docpp.process()
                 del self.lines[i]
                 self.lines[i:i] = docpp.lines
@@ -1287,9 +1234,7 @@ def append_pandoc_options(options, updates):
         key, sep, value = update.partition("=")
         curated_updates[key.lstrip("-")] = value if sep else None
         filter_out = set(
-            _
-            for _ in curated_updates
-            if _.startswith("no-") and _ not in no_options
+            _ for _ in curated_updates if _.startswith("no-") and _ not in no_options
         )
         _filter_out = set(f"--{_[3:]}" for _ in filter_out)
         new_options = [
@@ -1375,9 +1320,7 @@ def run_pandoc(  # pylint: disable=too-many-arguments
 
 def run_pandoc_pdf(latex_dir, pdf_engine, outfile, args, verbose=True):
     """Run pandoc for pdf generation."""
-    basename = os.path.join(
-        latex_dir, os.path.splitext(os.path.basename(outfile))[0]
-    )
+    basename = os.path.join(latex_dir, os.path.splitext(os.path.basename(outfile))[0])
 
     # Run pandoc
     texfile = basename + ".tex"
