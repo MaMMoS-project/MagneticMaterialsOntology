@@ -971,6 +971,36 @@ with onto:
         is_a = [emmo.hasMeasurementUnit.some(EnergyDensityUnit)]
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Maximum_energy_product")
 
+    class LoopSquarenessFactorInternal(
+        emmo.ElectromagneticQuantity, emmo.RatioQuantity
+    ):
+        """The internal loop squareness factor SF is defined as the ratio of
+        the internal KneeField Hk over the internal Coercivity Hc
+        (SF = KneeFieldInternal / CoercivityHcInternal)."""
+
+        prefLabel = en("LoopSquarenessFactorInternal")
+        altLabel = [
+            en("Loop Squareness Factor internal"),
+            en("Squareness Factor internal"),
+            en("SF_internal"),
+        ]
+        is_a = [emmo.hasUnit.some(emmo.DimensionlessUnit)]
+
+    class LoopSquarenessFactorExternal(
+        emmo.ElectromagneticQuantity, emmo.RatioQuantity
+    ):
+        """The external loop squareness factor is defined as the ratio of
+        the external KneeField H'k over the external Coercivity H'c
+        (SF' = KneeFieldExternal / CoercivityHcExternal)."""
+
+        prefLabel = en("LoopSquarenessFactorExternal")
+        altLabel = [
+            en("Loop Squareness Factor external"),
+            en("Squareness Factor external"),
+            en("SF_external"),
+        ]
+        is_a = [emmo.hasUnit.some(emmo.DimensionlessUnit)]
+
     # -----------------------------------------------------
 
     class MagneticHysteresisProperties(emmo.Property):
