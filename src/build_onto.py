@@ -988,7 +988,7 @@ with onto:
             en("Squareness Factor internal"),
             en("SF_internal"),
         ]
-        is_a = [emmo.hasUnit.some(emmo.DimensionlessUnit)]
+        is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
 
     class LoopSquarenessFactorExternal(
         emmo.ElectromagneticQuantity, emmo.RatioQuantity
@@ -1003,7 +1003,7 @@ with onto:
             en("Squareness Factor external"),
             en("SF_external"),
         ]
-        is_a = [emmo.hasUnit.some(emmo.DimensionlessUnit)]
+        is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
 
     # -----------------------------------------------------
 
