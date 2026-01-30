@@ -797,7 +797,24 @@ with onto:
         """
 
         prefLabel = en("CoercivityHc")
-        altLabel = en("Coercive field, Hc")
+        altLabel = [
+            en("Coercive field, Hc"),
+            en("Hc"),
+            en("CoercivityInternal"),
+            en("CoercivityHcInternal"),
+        ]
+        IECEntry = [
+            pl(
+                "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-02-35"
+            ),
+            pl(
+                "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-69"
+            ),
+            pl(
+                "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-02-36"
+            ),
+        ]
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q432635")
 
     class CoercivityBHc(emmo.Coercivity):
         """Defined as internal field on the B(H) loop where B = 0.
