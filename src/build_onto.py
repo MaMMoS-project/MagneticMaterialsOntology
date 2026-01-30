@@ -867,7 +867,11 @@ with onto:
         magnetization loop for which M = 0.9 Mr (J = 0.9 Jr)."""
 
         prefLabel = en("KneeField")
-        altLabel = en("maximum working field, Hk")
+        altLabel = [
+            en("maximum working field, Hk"),
+            en("Hk"),
+            en("KneeFieldInternal"),
+        ]
 
     class KneeFieldExternal(emmo.MagneticFieldStrength):
         """The maximum working field - also named knee field H_K,
