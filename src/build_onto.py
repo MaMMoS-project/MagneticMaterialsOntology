@@ -262,14 +262,14 @@ with onto:
         unitSymbol = en("A⋅m²/kg")
         ucumCode = en("A.m2.kg-1")
 
-    class MagneticMomementPerUnitMass(emmo.ElectromagneticQuantity):
+    class MagneticMomentPerUnitMass(emmo.ElectromagneticQuantity):
         """Magnetic moment per unit mass, sigma."""
 
         comment = en(
             "The magnetization is obtained by multiplying sigma with \
                      the density"
         )
-        prefLabel = en("MagneticMomementPerUnitMass")
+        prefLabel = en("MagneticMomentPerUnitMass")
         altLabel = [
             pl("sigma, SpecificMagneticMoment"),
             enUS("MassMagnetization"),
@@ -524,16 +524,16 @@ with onto:
         magnetization vector and the c axis.
         """
 
-        prefLabel = pl("UniaxialMagnetocrystallineAnisotropy")
+        prefLabel = en("UniaxialMagnetocrystallineAnisotropy")
         is_a = [
             emmo.hasProperty.exactly(1, MagnetocrystallineAnisotropyConstantK1),
-            emmo.hasProperty.min(0, MagnetocrystallineAnisotropyConstantK2c),
+            emmo.hasProperty.min(0, MagnetocrystallineAnisotropyConstantK2),
         ]
 
     class CubicMagnetocrystallineAnisotropy(MagneticAnisotropy):
         """Cubic crystals anisotropy."""
 
-        prefLabel = pl("CubicMagnetocrystallineAnisotropy")
+        prefLabel = en("CubicMagnetocrystallineAnisotropy")
         is_a = [
             emmo.hasProperty.exactly(1, MagnetocrystallineAnisotropyConstantK1c),
             emmo.hasProperty.min(0, MagnetocrystallineAnisotropyConstantK2c),
@@ -573,7 +573,7 @@ with onto:
         altLabel = en("A")
 
     # ----------------------------------------------------
-    class IntrinsicMagneticProperties(onto.Property):
+    class IntrinsicMagneticProperties(emmo.Property):
         """Intrinsic magnetic properties refer to atomic-scale magnetism and
         depend on the crystal structure."""
 
@@ -1298,10 +1298,10 @@ with onto:
             emmo.hasProperty.some(emmo.Thickness),
         ]
 
-    class StackingSquence(emmo.NominalProperty):
-        """Sequence of layer in a multilayer stack."""
+    class StackingSequence(emmo.NominalProperty):
+        """Sequence of layers in a multilayer stack."""
 
-        prefLabel = en("StackingSquence")
+        prefLabel = en("StackingSequence")
         is_a = [emmo.hasStringValue.some(emmo.String)]
 
     class MultilayerMagnet(emmo.SpatialTiling, Magnet):
@@ -1313,7 +1313,7 @@ with onto:
             emmo.hasSpatialTile.some(ThinfilmMagnet),
             emmo.hasSpatialTile.min(0, SpacerLayer),
             emmo.hasProperty.exactly(1, SampleGeometry),
-            emmo.hasProperty.exactly(1, StackingSquence),
+            emmo.hasProperty.exactly(1, StackingSequence),
             emmo.hasProperty.min(0, Magnetoresistance),
         ]
 
