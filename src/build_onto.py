@@ -1343,7 +1343,12 @@ onto.metadata.abstract.append(
 onto.metadata.title.append(en("Magnetic Material"))
 onto.metadata.creator.append(en("Wilfried Hortschitz"))
 onto.metadata.creator.append(en("Thomas Schrefl"))
+onto.metadata.creator.append(en("Santa Pile"))
 onto.metadata.contributor.append(en("DISS-UWK"))
+onto.metadata.contributor.append(en("William Rigaut"))
+onto.metadata.contributor.append(en("Andrea Petrocchi"))
+onto.metadata.contributor.append(en("Hans Fangohr"))
+onto.metadata.contributor.append(en("Jonas Winkler"))
 onto.metadata.versionInfo.append(en(__version__))
 onto.metadata.comment.append(
     en(
