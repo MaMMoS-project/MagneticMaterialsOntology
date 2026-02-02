@@ -1062,9 +1062,9 @@ with onto:
         """The essential practical characteristic of any ferromagnetic material
         is the irreversible nonlinear response of magnetization M to an imposed
         magnetic field H. This response is given by the hysteresis loop. The
-        charactertics of hystereis loop are known as hysteresis properties.
+        characteristics of hysteresis loop are known as hysteresis properties.
 
-        Instead of M(H), other quantities can be used to plot a hystereis loop.
+        Instead of M(H), other quantities can be used to plot a hysteresis loop.
 
         M(H): Magnetization as function of the internal field.
         M(H'): Magnetization as function of the external field.
