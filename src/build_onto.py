@@ -1067,6 +1067,9 @@ with onto:
             emmo.hasProperty.exactly(1, Remanence),
             emmo.hasProperty.min(0, RemanentMagneticPolarization),
             emmo.hasProperty.min(0, SaturationMagneticPolarization),
+            emmo.hasProperty.min(0, LoopSquarenessFactorInternal),
+            emmo.hasProperty.min(0, LoopSquarenessFactorExternal),
+            emmo.hasProperty.min(0, LoopSquareness),
             emmo.hasProperty.min(0, MaximumEnergyProduct),
         ]
 
