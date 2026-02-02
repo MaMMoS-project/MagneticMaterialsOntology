@@ -1005,6 +1005,35 @@ with onto:
         ]
         is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
 
+    class SaturationMagneticPolarization(emmo.ElectromagneticQuantity):
+        """The Saturation magnetic polarization Js is the maximum
+        obtainable magnetic polarization for a given substance
+        at a given temperature"""
+
+        prefLabel = en("SaturationMagneticPolarization")
+        altLabel = [
+            enUS("SaturationMagneticPolarization"),
+            enGB("SaturationMagneticPolarisation"),
+            en("Jsat"),
+        ]
+        is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFluxDensityUnit)]
+        IECEntry = pl(
+            "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-01-05"
+        )
+
+    class LoopSquareness(emmo.ElectromagneticQuantity, emmo.RatioQuantity):
+        """The external loop squareness is defined as the ratio of
+        the remanent polarisation over the saturation polarisation
+        (SS = RemanentMagneticPolarization / SaturationMagneticPolarization)."""
+
+        prefLabel = en("LoopSquareness")
+        altLabel = [
+            en("Loop Squareness "),
+            en("Squareness"),
+            en("SS"),
+        ]
+        is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
+
     # -----------------------------------------------------
 
     class MagneticHysteresisProperties(emmo.Property):
@@ -1037,6 +1066,7 @@ with onto:
             emmo.hasProperty.min(0, KneeFieldExternal),
             emmo.hasProperty.exactly(1, Remanence),
             emmo.hasProperty.min(0, RemanentMagneticPolarization),
+            emmo.hasProperty.min(0, SaturationMagneticPolarization),
             emmo.hasProperty.min(0, MaximumEnergyProduct),
         ]
 
