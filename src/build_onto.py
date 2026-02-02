@@ -298,7 +298,7 @@ with onto:
         )
 
     class SpontaneousMagneticPolarisation(emmo.ElectromagneticQuantity):
-        """She spontaneous magnetic polarisation, Js, of a ferromagnet is the
+        """The spontaneous magnetic polarisation, Js, of a ferromagnet is the
         result of alignment of the magnetic moments of  individual atoms.
         Js exists within a domain of a ferromagnet."""
 
@@ -368,7 +368,7 @@ with onto:
         """
 
         comment = pl(
-            "H = H' - DM, where D is the demagneting factor, M is the \
+            "H = H' - DM, where D is the demagnetizing factor, M is the \
             magnetization, and H is the internal field."
         )
         prefLabel = en("DemagnetizingFactor")
