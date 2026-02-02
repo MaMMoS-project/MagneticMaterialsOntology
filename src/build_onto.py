@@ -788,7 +788,7 @@ with onto:
     # Hysteresis properties
 
     class CoercivityHc(emmo.Coercivity):
-        """The internal magnetic held -Hc at which the macroscopic
+        """The internal magnetic field -Hc at which the macroscopic
         magnetization vanishes is the coercivity or coercive force.
 
         Although it is not an intrinsic property in our sense of the term,
@@ -828,7 +828,7 @@ with onto:
         altLabel = en("BHc")
 
     class CoercivityHcExternal(emmo.Coercivity):
-        """The external magnetic held -H'c at which the macroscopic
+        """The external magnetic field -H'c at which the macroscopic
         magnetization vanishes.
         The coercivity on M(H') loop, where H' is the external field."""
 
