@@ -1006,20 +1006,42 @@ with onto:
         is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
 
     class SaturationMagneticPolarization(emmo.ElectromagneticQuantity):
-        """The Saturation magnetic polarization Js is the maximum
+        """The Saturation magnetic polarization Jsat is the maximum
         obtainable magnetic polarization for a given substance
-        at a given temperature"""
+        at a given temperature. Jsat should be used instead Js to avoid
+        confusion with the symbol for the spontaneous polarization"""
 
         prefLabel = en("SaturationMagneticPolarization")
         altLabel = [
             enUS("SaturationMagneticPolarization"),
             enGB("SaturationMagneticPolarisation"),
             en("Jsat"),
+            en("Js"),
         ]
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFluxDensityUnit)]
         IECEntry = pl(
             "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-01-05"
         )
+
+    class SaturationMagnetization(emmo.ElectromagneticQuantity):
+        """The Saturation magnetization Msat is the maximum
+        obtainable magnetic magnetization for a given substance
+        at a given temperature. Msat should be used instead Ms to avoid
+        confusion with the symbol for the SpontaneousMagnetization"""
+
+        prefLabel = en("SaturationMagnetization")
+        altLabel = [
+            enUS("SaturationMagnetization"),
+            enGB("SaturationMagnetisation"),
+            en("Msat"),
+            en("Ms"),
+        ]
+        is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)]
+        IECEntry = pl(
+            "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=221-01-04"
+        )
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Saturation_(magnetic)")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q2630994")
 
     class LoopSquareness(emmo.ElectromagneticQuantity, emmo.RatioQuantity):
         """The external loop squareness is defined as the ratio of
