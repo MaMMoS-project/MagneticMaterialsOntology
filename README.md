@@ -31,7 +31,7 @@ compatibilities:
 Using
 -----
 
-You may view the ontology by browsing through the [html documentation](https://mammos-project.github.io/MagneticMaterialsOntology/doc/magnetic_material_mammos.html).
+You may view the ontology by browsing through the [html documentation](https://mammos-project.github.io/MagneticMaterialsOntology/doc/magnetic_materials_ontology_mammos.html).
 
 Alternatively you can use [Protégé](https://protege.stanford.edu/):
 * Install Protégé
