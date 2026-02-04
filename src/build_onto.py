@@ -1332,10 +1332,10 @@ onto.metadata.comment.append(
 
 onto.metadata.abstract.append(
     en(
-        "An EMMO-based ontology for magnetic materials."
+        "An EMMO-based ontology for magnetic materials.\ "
         "Created within the EU project MaMMoS. Grant number 101135546 \
         (HORIZON-CL4-2023-DIGITAL-EMERGING-01)."
-        "MagneticMaterial is released under the Creative Commons \
+        "The Magnetic Materials Ontology is released under the Creative Commons \
         Attribution 4.0 International license (CC BY 4.0)."
     )
 )
