@@ -1363,5 +1363,5 @@ onto.metadata.comment.append(
 
 # set version of ontology
 onto.set_version(str(__version__))
-onto.save("magnetic_material_mammos.ttl", overwrite=True)
+onto.save("magnetic_materials_ontology_mammos.ttl", overwrite=True)
 # world.save()
