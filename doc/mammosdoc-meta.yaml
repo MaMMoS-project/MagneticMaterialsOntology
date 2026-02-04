@@ -1,5 +1,5 @@
 ---
-title:  'Magnetic Material Ontology'
+title:  'Magnetic Materials Ontology'
 version: 0.0.4
 author:
 - name: Wilfried Hortschitz
@@ -13,9 +13,9 @@ keywords: [EMMO, 'materials science', modelling, characterisation, materials, on
 abstract: |
   An EMMO-based ontology for magnetic materials.
   
-  Created within the EU project Magnetic Multiscale Mdelling Suite (MaMMoS), 
+  Created within the EU project Magnetic Multiscale Modelling Suite (MaMMoS), 
   Grant number 101135546 (HORIZON-CL4-2023-DIGITAL-EMERGING-01).
-  MagneticMaterial is released under the Creative Commons Attribution 4.0
+  The Magnetic Materials Ontology is released under the Creative Commons Attribution 4.0
   International license (CC BY 4.0).  
   
   
