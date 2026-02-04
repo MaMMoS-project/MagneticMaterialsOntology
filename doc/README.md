@@ -8,14 +8,14 @@ We use `mammosdoc` which is a modified version of `ontodoc` from EMMOntoPy  as f
 * Run mammosdoc: 
 
 ```
-./mammosdoc --template=mammos.md --local --format=html ../magnetic_material_mammos.ttl magnetic_material_mammos.html  
+./mammosdoc --template=mammos.md --local --format=html ../magnetic_materials_ontology_mammos.ttl magnetic_materials_ontology_mammos.html  
 ```
 for creating the html file.
 
 ### Documentation
 
 The created documentation can be viewed here   
-[view html file](https://mammos-project.github.io/MagneticMaterialsOntology/doc/magnetic_material_mammos.html) .
+[view html file](https://mammos-project.github.io/MagneticMaterialsOntology/doc/magnetic_materials_ontology_mammos.html) .
 
 ### Change the content of the html file
 
@@ -75,7 +75,7 @@ Here is an example for plotting branches. To create on or more plots you can use
 * Run mammosdoc: 
 
 ```
-./mammosdoc --template=plots.md --local --format=html ../magnetic_material_mammos.ttl plots.html  
+./mammosdoc --template=plots.md --local --format=html ../magnetic_materials_ontology_mammos.ttl plots.html  
 ```
 will create a html file with the plots. The plots are also stored in the directory `genfigs` as scalable vector graphic (svg) file.
 
