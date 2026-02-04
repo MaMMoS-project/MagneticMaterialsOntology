@@ -82,7 +82,7 @@ with onto:
     # # Space group and lattice constants
 
     class SpaceGroup(emmo.NominalProperty):  # from define_ontology.py
-        """A spacegroup is the symmetry group off all symmetry operations
+        """A spacegroup is the symmetry group of all symmetry operations
         that apply to a crystal structure.
 
         The complete symmetry of a crystal, including the Bravais lattice and
@@ -100,7 +100,7 @@ with onto:
 
     class LatticeConstantA(emmo.Length):
         """The length of lattice vectors `a`, where lattice vectors
-        `a`, `b` and `c` defines the unit cell."""
+        `a`, `b` and `c` define the unit cell."""
 
         prefLabel = en("LatticeConstantA")
         altLabel = en("LatticeParameterA")
@@ -112,7 +112,7 @@ with onto:
 
     class LatticeConstantB(emmo.Length):
         """The length of lattice vectors `b`, where lattice vectors `a`, `b`
-        and `c` defines the unit cell."""
+        and `c` define the unit cell."""
 
         prefLabel = en("LatticeConstantB")
         altLabel = en("LatticeParameterB")
@@ -124,7 +124,7 @@ with onto:
 
     class LatticeConstantC(emmo.Length):
         """The length of lattice vectors `c`, where lattice vectors `a`, `b`
-        and `c` defines the unit cell."""
+        and `c` define the unit cell."""
 
         prefLabel = en("LatticeConstantC")
         altLabel = en("LatticeParameterC")
@@ -136,7 +136,7 @@ with onto:
 
     class LatticeConstantAlpha(emmo.Angle):
         """The angle between lattice vectors `b` and `c`, where lattice
-        vectors `a`, `b` and `c` defines the unit cell."""
+        vectors `a`, `b` and `c` define the unit cell."""
 
         prefLabel = en("LatticeConstantAlpha")
         altLabel = en("LatticeParameterAlpha")
@@ -144,7 +144,7 @@ with onto:
 
     class LatticeConstantBeta(emmo.Angle):
         """The angle between lattice vectors `a` and `c`, where lattice
-        vectors `a`, `b` and `c` defines the unit cell."""
+        vectors `a`, `b` and `c` define the unit cell."""
 
         prefLabel = en("LatticeConstantBeta")
         altLabel = en("LatticeParameterBeta")
@@ -152,7 +152,7 @@ with onto:
 
     class LatticeConstantGamma(emmo.Angle):
         """The angle between lattice vectors `a` and `b`, where lattice
-        vectors `a`, `b` and `c` defines the unit cell."""
+        vectors `a`, `b` and `c` define the unit cell."""
 
         prefLabel = en("LatticeConstantGamma")
         altLabel = en("LatticeParameterGamma")
@@ -331,7 +331,7 @@ with onto:
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Rectangular_cuboid")
 
     class GeometricalSize(emmo.Property):
-        """Spatial extension along the princial axes."""
+        """Spatial extension along the principal axes."""
 
         prefLabel = en("GeometricalSize")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Size")
@@ -953,7 +953,7 @@ with onto:
             "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-28"
         )
 
-    # RelativePermability already defined in emmo
+    # RelativePermeability already defined in emmo
 
     class MaximumEnergyProduct(emmo.ElectromagneticQuantity):
         """The value of the maximum energy product (BH)max is deduced from a
@@ -1008,7 +1008,7 @@ with onto:
     class SaturationMagneticPolarization(emmo.ElectromagneticQuantity):
         """The Saturation magnetic polarization Jsat is the maximum
         obtainable magnetic polarization for a given substance
-        at a given temperature. Jsat should be used instead Js to avoid
+        at a given temperature. Jsat should be used instead of Js to avoid
         confusion with the symbol for the spontaneous polarization"""
 
         prefLabel = en("SaturationMagneticPolarization")
@@ -1217,7 +1217,7 @@ with onto:
         ]
 
     class LocalXrayDiffractionData(XrayDiffractionData):
-        """Local X ray diffraction data."""
+        """Local X-ray diffraction data."""
 
         prefLabel = en("LocalXrayDiffractionData")
         is_a = [
