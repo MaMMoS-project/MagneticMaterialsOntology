@@ -5,7 +5,7 @@
 CHECK=emmocheck
 
 echo "remove previous files ..."
-rm -f magneticmaterials.sqlite3
+rm -f magnetic_materials_ontology_mammos.sqlite3
 rm -f magnetic_materials_ontology_mammos.ttl
 
 echo "building ontology ..."
@@ -23,3 +23,8 @@ cd doc
 python ./mammosdoc --template=mammos.md --local --format=html ../magnetic_materials_ontology_mammos.ttl magnetic_materials_ontology_mammos.html
 cd ..
 ls -ls doc/magnetic_materials_ontology_mammos.html
+
+
+# convert the generated .ttl to a invered .ttl file
+echo "generating infered ontology ..."
+ontoconvert magnetic_materials_ontology_mammos.ttl magnetic_materials_ontology_mammos_infered.ttl --reasoner --infer
