@@ -8,7 +8,7 @@ version = "0.1.0"
 
 [tasks]
 build = "python src/build_onto.py"
-check = "emmocheck magnetic_material_mammos.ttl"
+check = "emmocheck magnetic_materials_ontology_mammos.ttl"
 init_dot = "dot -c"  # needed on Mac M2 before graphviz can be used
 docs = {cmd = "python mammosdoc --template=mammos.md --local --format=html ../magnetic_material_mammos.ttl magnetic_material_mammos.html", cwd = "doc", depends-on = ['init_dot']}
 clean = "rm -f demo.sqlite3 magnetic_material_mammos.ttl doc/magnetic_material_mammos.html"
