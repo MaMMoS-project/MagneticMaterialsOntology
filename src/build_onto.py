@@ -943,7 +943,7 @@ with onto:
         is_a = [emmo.hasMeasurementUnit.some(emmo.VolumePerMassUnit)]
 
     class AbsolutePermeability(emmo.ElectromagneticQuantity):
-        """Ratio of the change of magnetic flux and the internal
+        """Ratio of the change of magnetic flux density and the internal
         field: B = mu H."""
 
         prefLabel = en("AbsolutePermeability")
