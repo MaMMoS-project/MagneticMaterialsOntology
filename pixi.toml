@@ -15,7 +15,7 @@ clean = "rm -f demo.sqlite3 magnetic_material_mammos.ttl doc/magnetic_material_m
 reason = "ontoconvert magnetic_material_mammos.ttl magnetic_material_mammos.ttl --reasoner --infer"
 
 # convenience target: run all steps subsequently
-all = { depends-on = ["clean", "build", "check", "docs"] }
+all = { depends-on = ["clean", "build", "reason", "check", "docs"] }
 
 
 [dependencies]
