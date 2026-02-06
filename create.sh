@@ -12,6 +12,9 @@ echo "building ontology ..."
 python src/build_onto.py
 ls -ls magnetic_material_mammos.ttl
 
+echo "reason ontology ..."
+ontoconvert magnetic_material_mammos.ttl magnetic_material_mammos.ttl --reasoner --infer
+
 echo "checking ontology ..."
 $CHECK magnetic_material_mammos.ttl
 
