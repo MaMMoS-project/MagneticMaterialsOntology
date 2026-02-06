@@ -1,0 +1,29 @@
+name: Create a release on GitHub
+
+on:
+  push:
+    tags:
+      - "v*.*.*"  # i.e. v0.0.4, v1.2.45
+
+jobs:
+
+  build-ontology:
+    uses: ./.github/workflows/build-ontology.yaml
+
+  github-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: build-ontology
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@v4
+    - name: Download ontology ttl file
+      uses: actions/download-artifact@v4
+      with:
+        name: ontology-ttl
+    - name: Create release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          magnetic-materials.ttl
+          magnetic-materials-dependencies.ttl

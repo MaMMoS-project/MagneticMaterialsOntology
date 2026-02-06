@@ -1,4 +1,12 @@
+# ontology turtle file
+magnetic-materials.ttl
+
+# ontology pages
+doc/magnetic-materials.html
 
 # pixi environments
 .pixi
 *.egg-info
+
+# python
+__pycache__
