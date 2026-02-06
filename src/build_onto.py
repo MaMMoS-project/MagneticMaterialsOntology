@@ -573,7 +573,7 @@ with onto:
         altLabel = en("A")
 
     # ----------------------------------------------------
-    class IntrinsicMagneticProperties(onto.Property):
+    class IntrinsicMagneticProperties(emmo.Property):
         """Intrinsic magnetic properties refer to atomic-scale magnetism and
         depend on the crystal structure."""
 
