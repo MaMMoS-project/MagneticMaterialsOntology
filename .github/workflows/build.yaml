@@ -25,6 +25,9 @@ jobs:
     - name: pixi run build 
       run: |
         pixi run build
+    - name: pixi run reason
+      run: |
+        pixi run reason
     - name: pixi run check
       run: |
         pixi run check
