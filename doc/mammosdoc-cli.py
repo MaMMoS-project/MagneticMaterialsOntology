@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 `ontodoc` CLI tool.
 derived from ontodoc
