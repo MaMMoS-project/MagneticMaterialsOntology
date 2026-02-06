@@ -527,7 +527,7 @@ with onto:
         prefLabel = pl("UniaxialMagnetocrystallineAnisotropy")
         is_a = [
             emmo.hasProperty.exactly(1, MagnetocrystallineAnisotropyConstantK1),
-            emmo.hasProperty.min(0, MagnetocrystallineAnisotropyConstantK2c),
+            emmo.hasProperty.min(0, MagnetocrystallineAnisotropyConstantK2),
         ]
 
     class CubicMagnetocrystallineAnisotropy(MagneticAnisotropy):
