@@ -1226,18 +1226,25 @@ onto.metadata.comment.append(
 
 onto.metadata.abstract.append(
     en(
-        "An EMMO-based ontology for magnetic materials."
-        "Created within the EU project MaMMoS. Grant number 101135546 \
-        (HORIZON-CL4-2023-DIGITAL-EMERGING-01)."
-        "MagneticMaterial is released under the Creative Commons \
-        Attribution 4.0 International license (CC BY 4.0)."
+        "An EMMO-based domain-ontology for magnetic materials."
+        "Created within the EU project MaMMoS."
+        "Grant number 101135546 (HORIZON-CL4-2023-DIGITAL-EMERGING-01)."
+        "The Magnetic Materials Ontology is released under the Creative Commons "
+        "Attribution 4.0 International license (CC BY 4.0)."
     )
 )
 
-onto.metadata.title.append(en("Magnetic Material"))
+onto.metadata.title.append(en("Magnetic Materials Ontology"))
 onto.metadata.creator.append(en("Wilfried Hortschitz"))
 onto.metadata.creator.append(en("Thomas Schrefl"))
-onto.metadata.contributor.append(en("DISS-UWK"))
+onto.metadata.creator.append(en("Santa Pile"))
+onto.metadata.contributor.append(en("William Rigaut"))
+onto.metadata.contributor.append(en("Andrea Petrocchi"))
+onto.metadata.contributor.append(en("Martin Lang"))
+onto.metadata.contributor.append(en("Sam Holt"))
+onto.metadata.contributor.append(en("Swapneel Amit Pathak"))
+onto.metadata.contributor.append(en("Hans Fangohr"))
+onto.metadata.contributor.append(en("Jonas Winkler"))
 onto.metadata.versionInfo.append(en(__version__))
 onto.metadata.comment.append(
     en(
