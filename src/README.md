@@ -15,7 +15,7 @@ clone the MagneticMaterialsOntology
 git clone git@github.com:MaMMoS-project/MagneticMaterialsOntology.git
 ```
 
-### Dependences
+### Dependencies
 
 to create the documentation you need
 
