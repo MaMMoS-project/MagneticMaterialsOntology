@@ -2,6 +2,8 @@ name: Build and check ontology
 
 on:
   push:
+    branches:
+      - main
   pull_request:
 
 jobs:
