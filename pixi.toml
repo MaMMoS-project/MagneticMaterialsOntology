@@ -18,7 +18,7 @@ check = "emmocheck magnetic_material_mammos.ttl"
 reason = "ontoconvert magnetic_material_mammos.ttl magnetic_material_mammos.ttl --reasoner --infer"
 
 # run all steps subsequently
-all = { depends-on = ["clean", "build", "check", "docs"] }
+all = { depends-on = ["clean", "build", "reason", "check", "docs"] }
 
 [target.osx-arm64.tasks]
 init_dot = "dot -c"  # needed on Mac M2 before graphviz can be used
