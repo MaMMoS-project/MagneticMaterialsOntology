@@ -5,14 +5,14 @@
 CHECK=emmocheck
 
 echo "remove previous files ..."
-rm -f magnetic_materials_ontology_mammos.sqlite3
-rm -f magnetic_materials_ontology_mammos.ttl
+rm -f magnetic_materials.sqlite3
+rm -f magnetic_materials.ttl
 
 echo "building ontology ..."
 python src/build_onto.py
-ls -ls magnetic_materials_ontology_mammos.ttl
+ls -ls magnetic_materials.ttl
 echo "checking ontology ..."
-$CHECK magnetic_materials_ontology_mammos.ttl
+$CHECK magnetic_materials.ttl
 
 
 # on ARM Mac, this seems required once to build documentation
@@ -20,6 +20,6 @@ doc -c
 
 echo "building documentation ..."
 cd doc
-python ./mammosdoc --template=mammos.md --local --format=html ../magnetic_materials_ontology_mammos.ttl magnetic_materials_ontology_mammos.html
+python ./mammosdoc --template=mammos.md --local --format=html ../magnetic_materials.ttl magnetic_materials.html
 cd ..
-ls -ls doc/magnetic_materials_ontology_mammos.html
+ls -ls doc/magnetic_materials.html

@@ -8,10 +8,10 @@ version = "0.1.0"
 
 [tasks]
 build = "python src/build_onto.py"
-check = "emmocheck magnetic_materials_ontology_mammos.ttl"
+check = "emmocheck magnetic-materials.ttl"
 init_dot = "dot -c"  # needed on Mac M2 before graphviz can be used
-docs = {cmd = "python mammosdoc --template=mammos.md --local --format=html ../magnetic_materials_ontology_mammos.ttl magnetic_materials_ontology_mammos.html", cwd = "doc", depends-on = ['init_dot']}
-clean = "rm -f demo.sqlite3 magnetic_material_mammos.ttl doc/magnetic_material_mammos.html"
+docs = {cmd = "python mammosdoc --template=mammos.md --local --format=html ../magnetic-materials.ttl magnetic-materials.html", cwd = "doc", depends-on = ['init_dot']}
+clean = "rm -f demo.sqlite3 magnetic-materials.ttl doc/magnetic-materials.html"
 
 # convenience target: run all steps subsequently
 all = { depends-on = ["clean", "build", "check", "docs"] }
