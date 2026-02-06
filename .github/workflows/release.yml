@@ -1,0 +1,25 @@
+name: Create a release on GitHub
+
+on:
+  push:
+    tags:
+      - "v*.*.*"  # i.e. v0.0.4, v1.2.45
+
+jobs:
+
+  build:
+    uses: ./.github/workflows/build.yaml
+
+  github-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@v4
+    - name: Create release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
