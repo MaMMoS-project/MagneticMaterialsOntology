@@ -1135,6 +1135,49 @@ with onto:
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Saturation_(magnetic)")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q2630994")
 
+    class LoopSquarenessFactorInternal(
+        emmo.ElectromagneticQuantity, emmo.RatioQuantity
+    ):
+        """The internal loop squareness factor SF is defined as the ratio of
+        the internal KneeField Hk over the internal Coercivity Hc
+        (SF = KneeFieldInternal / CoercivityHcInternal)."""
+
+        prefLabel = en("LoopSquarenessFactorInternal")
+        altLabel = [
+            en("Loop Squareness Factor internal"),
+            en("Squareness Factor internal"),
+            en("SF_internal"),
+        ]
+        is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
+
+    class LoopSquarenessFactorExternal(
+        emmo.ElectromagneticQuantity, emmo.RatioQuantity
+    ):
+        """The external loop squareness factor is defined as the ratio of
+        the external KneeField H'k over the external Coercivity H'c
+        (SF' = KneeFieldExternal / CoercivityHcExternal)."""
+
+        prefLabel = en("LoopSquarenessFactorExternal")
+        altLabel = [
+            en("Loop Squareness Factor external"),
+            en("Squareness Factor external"),
+            en("SF_external"),
+        ]
+        is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
+
+    class LoopSquareness(emmo.ElectromagneticQuantity, emmo.RatioQuantity):
+        """The external loop squareness is defined as the ratio of
+        the remanent polarisation over the saturation polarisation
+        (SS = RemanentMagneticPolarization / SaturationMagneticPolarization)."""
+
+        prefLabel = en("LoopSquareness")
+        altLabel = [
+            en("Loop Squareness "),
+            en("Squareness"),
+            en("SS"),
+        ]
+        is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
+
     # -----------------------------------------------------
 
     class MagneticHysteresisProperties(emmo.Property):
@@ -1168,6 +1211,9 @@ with onto:
             emmo.hasProperty.exactly(1, Remanence),
             emmo.hasProperty.min(0, RemanentMagneticPolarization),
             emmo.hasProperty.min(0, SaturationMagneticPolarization),
+            emmo.hasProperty.min(0, LoopSquarenessFactorInternal),
+            emmo.hasProperty.min(0, LoopSquarenessFactorExternal),
+            emmo.hasProperty.min(0, LoopSquareness),
             emmo.hasProperty.min(0, MaximumEnergyProduct),
         ]
 
