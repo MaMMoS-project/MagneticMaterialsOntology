@@ -18,6 +18,8 @@ jobs:
       run: pixi run clean
     - name: Build ontology
       run: pixi run build
+    - name: Run ontology reasoner
+      run: pixi run reason
     - name: Check ontology
       run: pixi run check
     - name: Build documentation
