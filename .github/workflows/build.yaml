@@ -20,3 +20,5 @@ jobs:
       run: pixi run build
     - name: Check ontology
       run: pixi run check
+    - name: Build docs
+      run: pixi run docs
