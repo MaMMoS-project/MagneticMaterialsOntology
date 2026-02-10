@@ -1428,7 +1428,7 @@ with onto:
             emmo.hasProperty.exactly(1, emmo.PositionVector),
         ]
 
-    class ThinfilmMagnet(Magnet, emmo.MaterialBySize):
+    class ThinFilmMagnet(Magnet, emmo.MaterialBySize):
         """Piece of matter made of one or more magnetic material
         in form a thin film."""
 
