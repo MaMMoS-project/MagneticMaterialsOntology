@@ -41,26 +41,13 @@ def add_altLabel(entry, label):
         entry.altLabel = [label]
 
 
-# Load EMMO
+# Load specific version of EMMO
 world = World(filename="magneticmaterials.sqlite3")
-
-# emmo = world.get_ontology(
-#     "data/emmo.ttl"
-# ).load()  # https://emmo-repo.github.io/versions/1.0.0-rc3/emmo.ttl
-
-# emmo = world.get_ontology(
-#     "data/emmo-inferred.ttl"
-# ).load()  # https://emmo-repo.github.io/versions/1.0.0-rc3/emmo-inferred.ttl
 emmo = world.get_ontology(
-    "data/emmo-inferred_v1p0p2.ttl"
-).load()  # https://emmo-repo.github.io/versions/1.0.2/emmo-inferred.ttl
-
-# Examples can be found on:
-# + https://github.com/emmo-repo/domain-atomistic/blob/master/domain-atomistic.py
-# + https://github.com/emmo-repo/EMMOntoPy/blob/master/demo/vertical/define_ontology.py
+    "https://emmo-repo.github.io/versions/1.0.3/emmo-inferred.ttl"
+).load()
 
 # Create a new ontology with out extensions that imports EMMO
-# TODO: Change the IRI to the correct one
 onto = world.get_ontology("https://w3id.org/emmo/domain/magnetic_material#")
 onto.imported_ontologies.append(emmo)
 
