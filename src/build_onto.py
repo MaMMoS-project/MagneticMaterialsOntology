@@ -881,7 +881,7 @@ with onto:
         altLabel = [
             en("KneeFieldInternal"),
             en("MaximumWorkingField"),
-            en("Hk"),
+            pl("Hk"),
         ]
 
     class KneeFieldExternal(emmo.MagneticFieldStrength):
