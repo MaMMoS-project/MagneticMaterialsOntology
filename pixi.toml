@@ -15,10 +15,11 @@ description = "An EMMO-based ontology for magnetic materials."
 clean = "rm -f magneticmaterials.sqlite3 magnetic_material_mammos.ttl doc/magnetic_material_mammos.html"
 build = "python src/build_onto.py"
 check = "emmocheck magnetic_material_mammos.ttl"
+reason = "ontoconvert magnetic_material_mammos.ttl magnetic_material_mammos.ttl --reasoner --infer"
 docs = { cmd = "python mammosdoc --template=mammos.md --local --format=html ../magnetic_material_mammos.ttl magnetic_material_mammos.html", cwd = "doc" }
 
 # run all steps subsequently
-all = { depends-on = ["clean", "build", "check", "docs"] }
+all = { depends-on = ["clean", "build", "reason", "check", "docs"] }
 
 [target.osx-arm64.tasks]
 init_dot = "dot -c"  # needed on Mac M2 before graphviz can be used
@@ -28,6 +29,7 @@ docs = { cmd = "python mammosdoc --template=mammos.md --local --format=html ../m
 python = "3.13.*"
 graphviz = ">=12.0.0,<13"
 pandoc = "==3.1.3"
+openjdk = ">=25.0.1,<26"
 
 [pypi-dependencies]
 emmontopy = "==0.8.1"
