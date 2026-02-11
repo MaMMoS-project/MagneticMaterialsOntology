@@ -1115,6 +1115,22 @@ with onto:
             emmo.hasProperty.min(0, Magnetoresistance),
         ]
 
+    # -----------------------------------------------------
+
+    class BinderCumulant(emmo.PhysicalQuantity):
+        """A statistical physical quantity (fourth-order cumulant) used in finite-size
+        scaling analysis of phase transitions, defined as U4 = 1 − <m^4>/(3 <m^2>^2).
+        """
+
+        comment = pl(
+            'Binder, K. (1981). "Finite size scaling analysis of ising model block '
+            'distribution functions". Zeitschrift für Physik B: '
+            'Condensed Matter. 43 (2): 119–140. https://doi.org/10.1007%2Fbf01293604'
+        )
+        prefLabel = en("BinderCumulant")
+        altLabel = [en("U_L"), en("BinderParameter")]
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Binder_parameter")
+
 
 onto.sync_attributes(
     name_policy="uuid", class_docstring="elucidation", name_prefix="EMMO_"
