@@ -69,7 +69,7 @@ with onto:
     # # Space group and lattice constants
 
     class SpaceGroup(emmo.NominalProperty):  # from define_ontology.py
-        """A spacegroup is the symmetry group off all symmetry operations
+        """A spacegroup is the symmetry group of all symmetry operations
         that apply to a crystal structure.
 
         The complete symmetry of a crystal, including the Bravais lattice and
@@ -87,7 +87,7 @@ with onto:
 
     class LatticeConstantA(emmo.Length):
         """The length of lattice vectors `a`, where lattice vectors
-        `a`, `b` and `c` defines the unit cell."""
+        `a`, `b` and `c` define the unit cell."""
 
         prefLabel = en("LatticeConstantA")
         altLabel = en("LatticeParameterA")
@@ -99,7 +99,7 @@ with onto:
 
     class LatticeConstantB(emmo.Length):
         """The length of lattice vectors `b`, where lattice vectors `a`, `b`
-        and `c` defines the unit cell."""
+        and `c` define the unit cell."""
 
         prefLabel = en("LatticeConstantB")
         altLabel = en("LatticeParameterB")
@@ -111,7 +111,7 @@ with onto:
 
     class LatticeConstantC(emmo.Length):
         """The length of lattice vectors `c`, where lattice vectors `a`, `b`
-        and `c` defines the unit cell."""
+        and `c` define the unit cell."""
 
         prefLabel = en("LatticeConstantC")
         altLabel = en("LatticeParameterC")
@@ -123,7 +123,7 @@ with onto:
 
     class LatticeConstantAlpha(emmo.Angle):
         """The angle between lattice vectors `b` and `c`, where lattice
-        vectors `a`, `b` and `c` defines the unit cell."""
+        vectors `a`, `b` and `c` define the unit cell."""
 
         prefLabel = en("LatticeConstantAlpha")
         altLabel = en("LatticeParameterAlpha")
@@ -131,7 +131,7 @@ with onto:
 
     class LatticeConstantBeta(emmo.Angle):
         """The angle between lattice vectors `a` and `c`, where lattice
-        vectors `a`, `b` and `c` defines the unit cell."""
+        vectors `a`, `b` and `c` define the unit cell."""
 
         prefLabel = en("LatticeConstantBeta")
         altLabel = en("LatticeParameterBeta")
@@ -139,7 +139,7 @@ with onto:
 
     class LatticeConstantGamma(emmo.Angle):
         """The angle between lattice vectors `a` and `b`, where lattice
-        vectors `a`, `b` and `c` defines the unit cell."""
+        vectors `a`, `b` and `c` define the unit cell."""
 
         prefLabel = en("LatticeConstantGamma")
         altLabel = en("LatticeParameterGamma")
@@ -249,14 +249,14 @@ with onto:
         unitSymbol = en("A⋅m²/kg")
         ucumCode = en("A.m2.kg-1")
 
-    class MagneticMomementPerUnitMass(emmo.ElectromagneticQuantity):
+    class MagneticMomentPerUnitMass(emmo.ElectromagneticQuantity):
         """Magnetic moment per unit mass, sigma."""
 
         comment = en(
             "The magnetization is obtained by multiplying sigma with \
                      the density"
         )
-        prefLabel = en("MagneticMomementPerUnitMass")
+        prefLabel = en("MagneticMomentPerUnitMass")
         altLabel = [
             en("SpecificMagneticMoment"),
             enUS("MassMagnetization"),
@@ -286,7 +286,7 @@ with onto:
         )
 
     class SpontaneousMagneticPolarisation(emmo.ElectromagneticQuantity):
-        """She spontaneous magnetic polarisation, Js, of a ferromagnet is the
+        """The spontaneous magnetic polarisation, Js, of a ferromagnet is the
         result of alignment of the magnetic moments of  individual atoms.
         Js exists within a domain of a ferromagnet."""
 
@@ -319,7 +319,7 @@ with onto:
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Rectangular_cuboid")
 
     class GeometricalSize(emmo.Property):
-        """Spatial extension along the princial axes."""
+        """Spatial extension along the principal axes."""
 
         prefLabel = en("GeometricalSize")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Size")
@@ -356,7 +356,7 @@ with onto:
         """
 
         comment = pl(
-            "H = H' - DM, where D is the demagneting factor, M is the \
+            "H = H' - DM, where D is the demagnetizing factor, M is the \
             magnetization, and H is the internal field."
         )
         prefLabel = en("DemagnetizingFactor")
@@ -786,7 +786,7 @@ with onto:
     # Hysteresis properties
 
     class CoercivityHc(emmo.Coercivity):
-        """The internal magnetic held -Hc at which the macroscopic
+        """The internal magnetic field -Hc at which the macroscopic
         magnetization vanishes is the coercivity or coercive force.
 
         Although it is not an intrinsic property in our sense of the term,
@@ -826,7 +826,7 @@ with onto:
         altLabel = pl("BHc")
 
     class CoercivityHcExternal(emmo.Coercivity):
-        """The external magnetic held -H'c at which the macroscopic
+        """The external magnetic field -H'c at which the macroscopic
         magnetization vanishes.
         The coercivity on M(H') loop, where H' is the external field."""
 
@@ -1014,9 +1014,9 @@ with onto:
         """The essential practical characteristic of any ferromagnetic material
         is the irreversible nonlinear response of magnetization M to an imposed
         magnetic field H. This response is given by the hysteresis loop. The
-        charactertics of hystereis loop are known as hysteresis properties.
+        characteristics of hysteresis loop are known as hysteresis properties.
 
-        Instead of M(H), other quantities can be used to plot a hystereis loop.
+        Instead of M(H), other quantities can be used to plot a hysteresis loop.
 
         M(H): Magnetization as function of the internal field.
         M(H'): Magnetization as function of the external field.
@@ -1169,7 +1169,7 @@ with onto:
         ]
 
     class LocalXrayDiffractionData(XrayDiffractionData):
-        """Local X ray diffraction data."""
+        """Local X-ray diffraction data."""
 
         prefLabel = en("LocalXrayDiffractionData")
         is_a = [
@@ -1250,10 +1250,10 @@ with onto:
             emmo.hasProperty.some(emmo.Thickness),
         ]
 
-    class StackingSquence(emmo.NominalProperty):
-        """Sequence of layer in a multilayer stack."""
+    class StackingSequence(emmo.NominalProperty):
+        """Sequence of layers in a multilayer stack."""
 
-        prefLabel = en("StackingSquence")
+        prefLabel = en("StackingSequence")
         is_a = [emmo.hasStringValue.some(emmo.String)]
 
     class MultilayerMagnet(emmo.SpatialTiling, Magnet):
@@ -1265,7 +1265,7 @@ with onto:
             emmo.hasSpatialTile.some(ThinFilmMagnet),
             emmo.hasSpatialTile.min(0, SpacerLayer),
             emmo.hasProperty.exactly(1, SampleGeometry),
-            emmo.hasProperty.exactly(1, StackingSquence),
+            emmo.hasProperty.exactly(1, StackingSequence),
             emmo.hasProperty.min(0, Magnetoresistance),
         ]
 
