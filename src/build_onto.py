@@ -611,6 +611,133 @@ with onto:
             emmo.hasProperty.exactly(1, XrdCounts),
         ]
 
+    class Xrd2dImage(emmo.Property, emmo.Matrix):
+        """2D array containing all pixel intensities from a 2D XRD camera.
+        This is the raw XRD data from which 1D spectra are obtained."""
+
+        prefLabel = en("Xrd2dImage")
+        altLabel = [
+            en("Xrd2DImage"),
+            en("XRD2dImage"),
+            en("XRD2DImage"),
+        ]
+        is_a = [
+            emmo.hasMeasurementUnit.some(emmo.CountingUnit),
+        ]
+
+    ### EDX (Energy-Dispersive X-ray Spectroscopy)
+
+    class EdxEnergy(emmo.Vector):
+        """The energy values at which the counts are measured during
+        Energy-Dispersive X-ray spectroscopy."""
+
+        prefLabel = en("EdxEnergy")
+        altLabel = en("EDXEnergy")
+        is_a = [
+            emmo.hasMeasurementUnit.some(emmo.ElectronVolt),
+        ]
+
+    class EdxCounts(emmo.Vector):
+        """Counts as a function of energy obtained from Energy-Dispersive
+        X-ray spectroscopy."""
+
+        prefLabel = en("EdxCounts")
+        altLabel = en("EDXCounts")
+        is_a = [
+            emmo.hasMeasurementUnit.some(emmo.CountingUnit),
+        ]
+
+    class EdxData(emmo.Property, emmo.Matrix):
+        """Counts as a function of energy obtained from Energy-Dispersive
+        X-ray spectroscopy."""
+
+        prefLabel = en("EdxData")
+        altLabel = [
+            en("EDXData"),
+            en("EnergyDispersiveXraySpectroscopyData")
+        ]
+        is_a = [
+            emmo.hasProperty.exactly(1, EdxEnergy),
+            emmo.hasProperty.exactly(1, EdxCounts),
+        ]
+
+    ### MOKE (Magneto-Optic Kerr Effect)
+
+    class MokeAppliedField(emmo.Vector):
+        """The applied magnetic field values during MOKE measurement."""
+
+        prefLabel = en("MokeAppliedField")
+        altLabel = en("MOKEAppliedField")
+        is_a = [
+            emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit),
+        ]
+
+    class MokeKerrSignal(emmo.Vector):
+        """The Kerr signal (rotation or ellipticity) as a function of
+        applied field obtained from MOKE measurement."""
+
+        prefLabel = en("MokeKerrSignal")
+        altLabel = [
+            en("MOKEKerrSignal"),
+            en("KerrSignal"),
+        ]
+        is_a = [
+            emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit),
+        ]
+
+    class MokeData(emmo.Property, emmo.Matrix):
+        """Kerr signal as a function of applied magnetic field obtained
+        from Magneto-Optic Kerr Effect measurement."""
+
+        prefLabel = en("MokeData")
+        altLabel = [
+            en("MOKEData"),
+            en("MagnetoOpticKerrEffectData"),
+        ]
+        wikipediaReference = pl(
+            "https://en.wikipedia.org/wiki/Magneto-optic_Kerr_effect"
+        )
+        IECEntry = pl(
+            "https://www.electropedia.org/iev/iev.nsf/display?openform&ievref=121-12-97"
+        )
+        is_a = [
+            emmo.hasProperty.exactly(1, MokeAppliedField),
+            emmo.hasProperty.exactly(1, MokeKerrSignal),
+        ]
+
+    ### Profilometry
+
+    class ProfilDistance(emmo.Vector):
+        """The distance values along the scan direction during
+        profilometry measurement."""
+
+        prefLabel = en("ProfilDistance")
+        altLabel = en("PROFILDistance")
+        is_a = [
+            emmo.hasMeasurementUnit.some(emmo.LengthUnit),
+        ]
+
+    class ProfilTotalProfile(emmo.Vector):
+        """The height profile as a function of distance obtained from
+        profilometry measurement."""
+
+        prefLabel = en("ProfilTotalProfile")
+        altLabel = en("PROFILTotalProfile")
+        is_a = [
+            emmo.hasMeasurementUnit.some(emmo.LengthUnit),
+        ]
+
+    class ProfilometryData(emmo.Property, emmo.Matrix):
+        """Height profile as a function of distance obtained from
+        profilometry measurement."""
+
+        prefLabel = en("ProfilometryData")
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Profilometer")
+        is_a = [
+            emmo.hasProperty.exactly(1, ProfilDistance),
+            emmo.hasProperty.exactly(1, ProfilTotalProfile),
+        ]
+
     ### magnetic materials
 
     ### Grains and granular structure
@@ -1202,6 +1329,82 @@ with onto:
             emmo.hasProperty.exactly(1, emmo.PositionVector),
         ]
 
+    class LocalAtomPercent(emmo.RatioQuantity):
+        """Local atomic percentage obtained from EDX quantification."""
+
+        prefLabel = en("LocalAtomPercent")
+        altLabel = [en("LocalAtomicPercent"), en("at.%")]
+        is_a = [
+            emmo.hasMeasurementUnit.some(emmo.Percent),
+            emmo.hasProperty.exactly(1, emmo.PositionVector),
+        ]
+
+    class LocalMassPercent(emmo.RatioQuantity):
+        """Local mass percentage obtained from EDX quantification."""
+
+        prefLabel = en("LocalMassPercent")
+        altLabel = [en("LocalWeightPercent"), en("wt.%")]
+        is_a = [
+            emmo.hasMeasurementUnit.some(emmo.Percent),
+            emmo.hasProperty.exactly(1, emmo.PositionVector),
+        ]
+
+    class LocalAnnealingTemperature(emmo.ThermodynamicTemperature):
+        """Local annealing temperature from heat treatment such as
+        Rapid Thermal Annealing (RTA)."""
+
+        prefLabel = en("LocalAnnealingTemperature")
+        is_a = [
+            emmo.hasProperty.exactly(1, emmo.PositionVector),
+        ]
+
+    class LocalAnnealingTime(emmo.Duration):
+        """Local annealing time (duration) from heat treatment such as
+        Rapid Thermal Annealing (RTA)."""
+
+        prefLabel = en("LocalAnnealingTime")
+        altLabel = en("LocalAnnealingDuration")
+        is_a = [
+            emmo.hasProperty.exactly(1, emmo.PositionVector),
+        ]
+
+    class LocalPhaseFraction(emmo.RatioQuantity):
+        """Local phase fraction obtained from XRD analysis, typically
+        expressed in weight percent."""
+
+        prefLabel = en("LocalPhaseFraction")
+        altLabel = en("LocalPhaseContent")
+        is_a = [
+            emmo.hasMeasurementUnit.some(emmo.Percent),
+            emmo.hasProperty.exactly(1, emmo.PositionVector),
+        ]
+
+    class LocalEdxData(EdxData):
+        """Local EDX data measured at a specific position."""
+
+        prefLabel = en("LocalEdxData")
+        altLabel = en("LocalEXDData")
+        is_a = [
+            emmo.hasProperty.exactly(1, emmo.PositionVector),
+        ]
+
+    class LocalMokeData(MokeData):
+        """Local MOKE data measured at a specific position."""
+
+        prefLabel = en("LocalMokeData")
+        altLabel = en("LocalMOKEData")
+        is_a = [
+            emmo.hasProperty.exactly(1, emmo.PositionVector),
+        ]
+
+    class LocalProfilometryData(ProfilometryData):
+        """Local profilometry data measured at a specific position."""
+
+        prefLabel = en("LocalProfilometryData")
+        is_a = [
+            emmo.hasProperty.exactly(1, emmo.PositionVector),
+        ]
+
     class ThinFilmMagnet(Magnet, emmo.MaterialBySize):
         """Piece of matter made of one or more magnetic material
         in form a thin film."""
@@ -1216,6 +1419,16 @@ with onto:
             emmo.hasProperty.min(0, LocalXrayDiffractionData),
             emmo.hasProperty.min(0, LocalLatticeConstantA),
             emmo.hasProperty.min(0, LocalLatticeConstantC),
+            # New properties from issue #20
+            emmo.hasProperty.min(0, LocalAtomPercent),
+            emmo.hasProperty.min(0, LocalMassPercent),
+            emmo.hasProperty.min(0, LocalAnnealingTemperature),
+            emmo.hasProperty.min(0, LocalAnnealingTime),
+            emmo.hasProperty.min(0, LocalPhaseFraction),
+            emmo.hasProperty.min(0, LocalEdxData),
+            emmo.hasProperty.min(0, LocalMokeData),
+            emmo.hasProperty.min(0, LocalProfilometryData),
+            emmo.hasProperty.min(0, Xrd2dImage),
         ]
 
     # Magnetic multilayers
