@@ -16,6 +16,7 @@ clean = "rm -f magneticmaterials.sqlite3 magnetic_material_mammos.ttl doc/magnet
 build = "python src/build_onto.py"
 check = "emmocheck magnetic_material_mammos.ttl"
 reason = "ontoconvert magnetic_material_mammos.ttl magnetic_material_mammos.ttl --reasoner --infer"
+docs = { cmd = "python mammosdoc --template=mammos.md --local --format=html ../magnetic_material_mammos.ttl magnetic_material_mammos.html", cwd = "doc" }
 
 # run all steps subsequently
 all = { depends-on = ["clean", "build", "reason", "check", "docs"] }
