@@ -1,0 +1,117 @@
+@prefix : <https://w3id.org/emmo/domain/magnetic-materials#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <https://w3id.org/emmo/domain/magnetic-materials#> .
+
+<https://w3id.org/emmo/domain/magnetic-materials/contributors> rdf:type owl:Ontology ;
+    owl:versionIRI <https://w3id.org/emmo/domain/magnetic-materials/0.0.4/contributors> ;
+    dcterms:abstract "People and organisations who has contributed to the development of the magnetic materials domain ontology."@en ;
+    dcterms:license "https://creativecommons.org/licenses/by/4.0/legalcode" ;
+    dcterms:title "Contributors"@en ;
+    owl:versionInfo "0.0.4" ;
+    foaf:mbox <mailto:emmo@emmc.eu> .
+
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+# Organisations
+
+###  https://mammos-project.github.io/
+<https://mammos-project.github.io/> rdf:type owl:NamedIndividual ;
+                                    rdfs:comment "EU project grant number 101135546 (HORIZON-CL4-2023-DIGITAL-EMERGING-01)" ;
+                                    skos:prefLabel "MaMMoS" ;
+                                    foaf:homepage "https://mammos-project.github.io/index.html" ;
+                                    foaf:logo <https://raw.githubusercontent.com/MaMMoS-project/MaMMoS-project.github.io/refs/heads/main/source/_static/mammos-logo.png> ;
+                                    foaf:name "MAgnetic Multiscale MOdelling Suite (MaMMoS)" .
+
+
+# People
+
+###  https://orcid.org/0000-0003-2950-642X
+<https://orcid.org/0000-0003-2950-642X> rdf:type owl:NamedIndividual ;
+                                        skos:prefLabel "WilfriedHortschitz" ;
+                                        foaf:name "Wilfried Hortschitz" ;
+                                        foaf:workplaceHomepage "https://www.donau-uni.ac.at" .
+
+
+###  https://orcid.org/0000-0001-7854-847X
+<https://orcid.org/0000-0001-7854-847X> rdf:type owl:NamedIndividual ;
+                                        skos:prefLabel "SantaPile" ;
+                                        foaf:name "Santa Pile" ;
+                                        foaf:workplaceHomepage "https://www.donau-uni.ac.at" .
+
+
+###  https://orcid.org/0000-0003-4598-6275
+<https://orcid.org/0000-0003-4598-6275> rdf:type owl:NamedIndividual ;
+                                        skos:prefLabel "MartinDobiasch" ;
+                                        foaf:name "Martin Dobiasch" ;
+                                        foaf:workplaceHomepage "https://www.donau-uni.ac.at" .
+
+
+###  https://orcid.org/0000-0002-0871-0520
+<https://orcid.org/0000-0002-0871-0520> rdf:type owl:NamedIndividual ;
+                                        skos:prefLabel "ThomasSchrefl" ;
+                                        foaf:name "Thomas Schrefl" ;
+                                        foaf:workplaceHomepage "https://www.donau-uni.ac.at" .
+
+
+###  https://orcid.org/0000-0001-5494-7193
+<https://orcid.org/0000-0001-5494-7193> rdf:type owl:NamedIndividual ;
+                                        skos:prefLabel "HansFangohr" ;
+                                        foaf:name "Hans Fangohr" ;
+                                        foaf:workplaceHomepage "https://www.mpsd.mpg.de" .
+
+
+###  https://orcid.org/0009-0005-1867-6732
+<https://orcid.org/0009-0005-1867-6732> rdf:type owl:NamedIndividual ;
+                                        skos:prefLabel "AndreaPetrocchi" ;
+                                        foaf:name "Andrea Petrocchi" ;
+                                        foaf:workplaceHomepage "https://www.mpsd.mpg.de" .
+
+
+###  https://orcid.org/0000-0003-3323-8958
+<https://orcid.org/0000-0003-3323-8958> rdf:type owl:NamedIndividual ;
+                                        skos:prefLabel "SamuelHolt" ;
+                                        foaf:name "SamuelHolt" ;
+                                        foaf:workplaceHomepage "https://www.mpsd.mpg.de" .
+
+
+###  https://orcid.org/0000-0003-3840-955X
+<https://orcid.org/0000-0003-3840-955X> rdf:type owl:NamedIndividual ;
+                                        skos:prefLabel "SwapneelAmitPathak" ;
+                                        foaf:name "Swapneel Amit Pathak" ;
+                                        foaf:workplaceHomepage "https://www.mpsd.mpg.de" .
+
+
+###  https://orcid.org/0000-0001-7104-7867
+<https://orcid.org/0000-0001-7104-7867> rdf:type owl:NamedIndividual ;
+                                        skos:prefLabel "MartinLang" ;
+                                        foaf:name "Martin Lang" ;
+                                        foaf:workplaceHomepage "https://www.mpsd.mpg.de" .
+
+
+###  https://orcid.org/0009-0000-7815-5916
+<https://orcid.org/0009-0000-7815-5916> rdf:type owl:NamedIndividual ;
+                                        skos:prefLabel "JonasWinkler" ;
+                                        foaf:name "Jonas Winkler" ;
+                                        foaf:workplaceHomepage "https://www.ifw-dresden.de/" .
+
+
+###  https://orcid.org/0009-0000-9775-7955
+<https://orcid.org/0009-0000-9775-7955> rdf:type owl:NamedIndividual ;
+                                        skos:prefLabel "WilliamRigaut" ;
+                                        foaf:name "William Rigaut" ;
+                                        foaf:workplaceHomepage "https://www.cnrs.fr" .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
