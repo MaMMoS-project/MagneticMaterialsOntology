@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=false, version=2" prefer="public" xml:base="">
+        <uri name="https://w3id.org/emmo/domain/magnetic-materials/0.0.4/magnetic-materials" uri="magnetic-materials.ttl"/>
+        <uri name="https://w3id.org/emmo/domain/magnetic-materials/0.0.4/dependencies" uri="magnetic-materials-dependencies.ttl"/>
+        <uri name="https://w3id.org/emmo/domain/magnetic-materials/0.0.4/contributors" uri="contributors.ttl"/>
+    </group>
+</catalog>
