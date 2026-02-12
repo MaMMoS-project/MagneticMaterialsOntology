@@ -15,7 +15,7 @@ description = "An EMMO-based ontology for magnetic materials."
 clean = "rm -f magnetic-materials.sqlite3 magnetic-materials.ttl doc/magnetic-materials.html"
 build = "python src/build_onto.py"
 check = "emmocheck magnetic-materials.ttl"
-reason = "ontoconvert magnetic-materials.ttl magnetic-materials.ttl --reasoner --infer"
+reason = "ontoconvert magnetic-materials.ttl magnetic-materials.ttl --reasoner --infer --catalog-file"
 docs = { cmd = "python mammosdoc-cli.py --template=mammos.md --local --format=html ../magnetic-materials.ttl magnetic-materials.html", cwd = "doc" }
 
 # run all steps subsequently
