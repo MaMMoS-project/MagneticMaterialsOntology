@@ -1144,8 +1144,7 @@ with onto:
 
         prefLabel = en("LoopSquarenessFactorInternal")
         altLabel = [
-            en("Loop Squareness Factor internal"),
-            en("Squareness Factor internal"),
+            en("SquarenessFactorInternal"),
             en("SF_internal"),
         ]
         is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
@@ -1159,8 +1158,7 @@ with onto:
 
         prefLabel = en("LoopSquarenessFactorExternal")
         altLabel = [
-            en("Loop Squareness Factor external"),
-            en("Squareness Factor external"),
+            en("SquarenessFactorExternal"),
             en("SF_external"),
         ]
         is_a = [emmo.hasMeasurementUnit.some(emmo.DimensionlessUnit)]
@@ -1172,7 +1170,6 @@ with onto:
 
         prefLabel = en("LoopSquareness")
         altLabel = [
-            en("Loop Squareness "),
             en("Squareness"),
             en("SS"),
         ]
