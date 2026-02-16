@@ -2,13 +2,13 @@
 
 ### Generating html documentation
 
-We use `mammosdoc` which is a modified version of `ontodoc` from EMMOntoPy  as follows
+We use the Python script `mammosdoc-cli.py` which is a modified version of `ontodoc` from EMMOntoPy as follows
 
 * Change to the directory `MagneticMaterialsOntology/doc`
 * Run mammosdoc: 
 
 ```
-./mammosdoc --template=mammos.md --local --format=html ../magnetic_material_mammos.ttl magnetic_material_mammos.html  
+python mammosdoc-cli.py --template=mammos.md --local --format=html ../magnetic_material_mammos.ttl magnetic_material_mammos.html  
 ```
 for creating the html file.
 
@@ -75,7 +75,7 @@ Here is an example for plotting branches. To create on or more plots you can use
 * Run mammosdoc: 
 
 ```
-./mammosdoc --template=plots.md --local --format=html ../magnetic_material_mammos.ttl plots.html  
+python mammosdoc-cli.py --template=plots.md --local --format=html ../magnetic_material_mammos.ttl plots.html  
 ```
 will create a html file with the plots. The plots are also stored in the directory `genfigs` as scalable vector graphic (svg) file.
 
