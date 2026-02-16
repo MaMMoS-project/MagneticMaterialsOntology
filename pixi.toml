@@ -12,18 +12,18 @@ authors = [
 description = "An EMMO-based ontology for magnetic materials."
 
 [tasks]
-clean = "rm -f magneticmaterials.sqlite3 magnetic_material_mammos.ttl doc/magnetic_material_mammos.html"
+clean = "rm -f magnetic-materials.sqlite3 magnetic-materials.ttl doc/magnetic-materials.html"
 build = "python src/build_onto.py"
-check = "emmocheck magnetic_material_mammos.ttl"
-reason = "ontoconvert magnetic_material_mammos.ttl magnetic_material_mammos.ttl --reasoner --infer"
-docs = { cmd = "python mammosdoc-cli.py --template=mammos.md --local --format=html ../magnetic_material_mammos.ttl magnetic_material_mammos.html", cwd = "doc" }
+check = "emmocheck magnetic-materials.ttl"
+reason = "ontoconvert magnetic-materials.ttl magnetic-materials.ttl --reasoner --infer"
+docs = { cmd = "python mammosdoc-cli.py --template=mammos.md --local --format=html ../magnetic-materials.ttl magnetic-materials.html", cwd = "doc" }
 
 # run all steps subsequently
 all = { depends-on = ["clean", "build", "reason", "check", "docs"] }
 
 [target.osx-arm64.tasks]
 init_dot = "dot -c"  # needed on Mac M2 before graphviz can be used
-docs = { cmd = "python mammosdoc-cli.py --template=mammos.md --local --format=html ../magnetic_material_mammos.ttl magnetic_material_mammos.html", cwd = "doc", depends-on = ['init_dot'] }
+docs = { cmd = "python mammosdoc-cli.py --template=mammos.md --local --format=html ../magnetic-materials.ttl magnetic-materials.html", cwd = "doc", depends-on = ['init_dot'] }
 
 [dependencies]
 python = "3.13.*"
