@@ -7,7 +7,7 @@ from owlready2 import (
     Not,
 )
 
-__version__ = "0.0.4"  # Version of this ontology
+version = "0.0.4"
 
 
 # From https://github.com/emmo-repo/domain-atomistic/blob/master/domain-atomistic.py
@@ -1559,7 +1559,7 @@ onto.metadata.contributor.append(en("Sam Holt"))
 onto.metadata.contributor.append(en("Swapneel Amit Pathak"))
 onto.metadata.contributor.append(en("Hans Fangohr"))
 onto.metadata.contributor.append(en("Jonas Winkler"))
-onto.metadata.versionInfo.append(en(__version__))
+onto.metadata.versionInfo.append(version)
 onto.metadata.comment.append(
     en(
         "Contacts:\n"
@@ -1570,6 +1570,6 @@ onto.metadata.comment.append(
 )
 
 # set version of ontology
-onto.set_version(str(__version__))
+onto.set_version(version=version)
 onto.save("magnetic-materials.ttl", overwrite=True)
 # world.save()
