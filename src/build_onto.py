@@ -44,7 +44,7 @@ def add_altLabel(entry, label):
 # Load specific version of EMMO
 world = World(filename="magnetic-materials.sqlite3")
 emmo = world.get_ontology(
-    "https://emmo-repo.github.io/versions/1.0.3/emmo-inferred.ttl"
+    "https://w3id.org/emmo/1.0.3/inferred"
 ).load()
 
 # Create a new ontology with out extensions that imports EMMO

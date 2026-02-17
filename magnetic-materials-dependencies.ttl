@@ -4,4 +4,4 @@
 <https://w3id.org/emmo/domain/magnetic-materials/depencencies> rdf:type owl:Ontology ;
     owl:versionIRI <https://w3id.org/emmo/domain/magnetic-materials/0.0.4/dependencies> ;
     owl:imports
-        <https://w3id.org/emmo/1.0.3> .
+        <https://w3id.org/emmo/1.0.3/inferred> .
