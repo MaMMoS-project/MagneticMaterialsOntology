@@ -1548,7 +1548,7 @@ onto.metadata.abstract.append(
     )
 )
 
-onto.metadata.title.append(en("Magnetic Materials Ontology"))
+onto.metadata.title.append(en("Magnetic Materials Ontology (MagMO)"))
 onto.metadata.creator.append(en("Wilfried Hortschitz"))
 onto.metadata.creator.append(en("Thomas Schrefl"))
 onto.metadata.creator.append(en("Santa Pile"))
