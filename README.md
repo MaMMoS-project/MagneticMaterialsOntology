@@ -1,4 +1,4 @@
-# MagneticMaterialsOntology
+# Magnetic Materials Ontology (MagMO)
 
 Ontology for magnetic materials
 ===============================
