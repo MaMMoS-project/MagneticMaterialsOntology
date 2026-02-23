@@ -23,9 +23,9 @@ Imported ontologies
 This ontology builds on top of [EMMO](https://github.com/emmo-repo/EMMO) [^1]. See the following table for version
 compatibilities:
 
-| Imported Ontologies  | Version             |      |
-| -------------------- | --------------------| --------- |
-| [EMMO](https://github.com/emmo-repo/EMMO)  | 1.0.2 inferred | https://emmo-repo.github.io/versions/1.0.2/emmo-inferred.ttl |
+| Imported Ontologies                       | Version        |                                      |
+|-------------------------------------------|----------------|--------------------------------------|
+| [EMMO](https://github.com/emmo-repo/EMMO) | 1.0.3 inferred | https://w3id.org/emmo/1.0.3/emmo.ttl |
 
 
 Using
