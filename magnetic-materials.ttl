@@ -619,7 +619,7 @@ ns1:Zebi rdfs:subClassOf ns1:EMMO_ac9e518d_b403_4d8b_97e2_06f9d40bac01 .
     dcterms:creator "Santa Pile"@en,
         "Thomas Schrefl"@en,
         "Wilfried Hortschitz"@en ;
-    dcterms:title "Magnetic Materials Ontology"@en ;
+    dcterms:title "Magnetic Materials Ontology (MagMO)"@en ;
     rdfs:comment "Created within the EU project MaMMoS. Grant number 101135546     (HORIZON-CL4-2023-DIGITAL-EMERGING-01)."^^xsd:string,
         """Contacts:
 Wilfried Hortschitz
