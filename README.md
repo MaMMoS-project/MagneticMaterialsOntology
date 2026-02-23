@@ -25,7 +25,7 @@ compatibilities:
 
 | Imported Ontologies                       | Version        |                                      |
 |-------------------------------------------|----------------|--------------------------------------|
-| [EMMO](https://github.com/emmo-repo/EMMO) | 1.0.3 inferred | https://w3id.org/emmo/1.0.3/emmo.ttl |
+| [EMMO](https://github.com/emmo-repo/EMMO) | 1.0.3 inferred | https://w3id.org/emmo/1.0.3/inferred |
 
 
 Using
