@@ -634,7 +634,7 @@ with onto:
         prefLabel = en("EdxEnergy")
         altLabel = en("EDXEnergy")
         is_a = [
-            emmo.hasMeasurementUnit.some(emmo.ElectronVolt),
+            emmo.hasMeasurementUnit.some(emmo.EnergyUnit),
         ]
 
     class EdxCounts(emmo.Vector):
