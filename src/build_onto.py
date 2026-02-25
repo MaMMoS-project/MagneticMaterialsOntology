@@ -583,7 +583,7 @@ with onto:
         prefLabel = en("XrdTwoThetaAngles")
         altLabel = en("XRDTwoThetaAngles")
         is_a = [
-            emmo.hasMeasurementUnit.some(emmo.Degree),
+            emmo.hasProperty.some(emmo.Angle),
         ]
 
     class XrdCounts(emmo.Vector):
