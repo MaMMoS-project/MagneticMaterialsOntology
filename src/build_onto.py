@@ -42,7 +42,7 @@ def add_altLabel(entry, label):
 
 
 # Load specific version of EMMO
-world = World(filename="magnetic-materials.sqlite3")
+world = World()
 emmo = world.get_ontology(
     "https://w3id.org/emmo/1.0.3/inferred"
 ).load()
