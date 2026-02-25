@@ -1562,5 +1562,11 @@ onto.metadata.comment.append(
 
 # set version of ontology
 onto.set_version(version=version)
-onto.save("magnetic-materials.ttl", overwrite=True)
+onto.save(
+    "magnetic-materials.ttl",
+    overwrite=True,
+    namespaces={
+        "emmo": "https://w3id.org/emmo#",
+    }
+)
 # world.save()
