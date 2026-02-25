@@ -229,21 +229,19 @@ with onto:
         """Class of units of the magnetization per unit mass.
         Defined using SI base units."""
 
-        prefLabel = en("MassMagnetizationUnit")
+        prefLabel = enUS("MassMagnetizationUnit")
         altLabel = [
-            enUS("MassMagnetizationUnit"),
             enGB("MassMagnetisationUnit"),
             enUS("SpecificMagnetizationUnit"),
             enGB("SpecificMagnetisationUnit"),
         ]
         is_a = [emmo.hasDimensionString.value("T0 L+2 M-1 I+1 Θ0 N0 J0")]
 
-    class AmpereSquareMetrePerKilogram(MassMagnetizationUnit):
+    class AmpereSquareMeterPerKilogram(MassMagnetizationUnit):
         """Unit of the magnetic moment per unit mass: Am²/kg."""
 
-        prefLabel = en("AmpereSquareMetrePerKilogram")
+        prefLabel = enUS("AmpereSquareMeterPerKilogram")
         altLabel = [
-            enUS("AmpereSquareMeterPerKilogram"),
             enGB("AmpereSquareMetrePerKilogram"),
         ]
         unitSymbol = en("A⋅m²/kg")
@@ -271,9 +269,8 @@ with onto:
         of alignment of the magnetic moments of individual atoms. Ms exists
         within a domain of a ferromagnet."""
 
-        prefLabel = en("SpontaneousMagnetization")
+        prefLabel = enUS("SpontaneousMagnetization")
         altLabel = [
-            enUS("SpontaneousMagnetization"),
             enGB("SpontaneousMagnetisation"),
             pl("Ms"),
         ]
@@ -285,14 +282,13 @@ with onto:
             "https://en.wikipedia.org/wiki/Spontaneous_magnetization"
         )
 
-    class SpontaneousMagneticPolarisation(emmo.ElectromagneticQuantity):
-        """The spontaneous magnetic polarisation, Js, of a ferromagnet is the
+    class SpontaneousMagneticPolarization(emmo.ElectromagneticQuantity):
+        """The spontaneous magnetic polarization, Js, of a ferromagnet is the
         result of alignment of the magnetic moments of  individual atoms.
         Js exists within a domain of a ferromagnet."""
 
-        prefLabel = en("SpontaneousMagneticPolarization")
+        prefLabel = enUS("SpontaneousMagneticPolarization")
         altLabel = [
-            enUS("SpontaneousMagneticPolarization"),
             enGB("SpontaneousMagneticPolarisation"),
             pl("Js"),
         ]
@@ -359,9 +355,8 @@ with onto:
             "H = H' - DM, where D is the demagnetizing factor, M is the \
             magnetization, and H is the internal field."
         )
-        prefLabel = en("DemagnetizingFactor")
+        prefLabel = enUS("DemagnetizingFactor")
         altLabel = [
-            enUS("DemagnetizingFactor"),
             enGB("DemagnetisingFactor"),
             pl("N"),
             pl("D"),
@@ -569,7 +564,7 @@ with onto:
         prefLabel = en("IntrinsicMagneticProperties")
         is_a = [
             emmo.hasProperty.some(SpontaneousMagnetization),
-            emmo.hasProperty.some(SpontaneousMagneticPolarisation),
+            emmo.hasProperty.some(SpontaneousMagneticPolarization),
             emmo.hasProperty.some(MagnetocrystallineAnisotropy),
             emmo.hasProperty.some(ExchangeStiffnessConstant),
             emmo.hasProperty.some(emmo.CurieTemperature | emmo.NeelTemperature),
@@ -756,7 +751,7 @@ with onto:
         another, disregarding distance."""
 
         prefLabel = en("CrystallographicOrientation")
-        altLabel = pl("CrystalOrientation")
+        altLabel = en("CrystalOrientation")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q11799166")
         is_a = [emmo.hasProperty.exactly(1, EulerAngles)]
 
@@ -891,9 +886,8 @@ with onto:
         """The magnetic field produced by the magnetization distribution
         of the sample itself."""
 
-        prefLabel = en("DemagnetizingField")
+        prefLabel = enUS("DemagnetizingField")
         altLabel = [
-            enUS("DemagnetizingField"),
             enGB("DemagnetisingField"),
             pl("Hd"),
         ]
@@ -1029,9 +1023,8 @@ with onto:
         """The remanent magnetic polarization Jr which remains when the applied
         field is restored to zero in the hysteresis loop"""
 
-        prefLabel = en("RemanentMagneticPolarization")
+        prefLabel = enUS("RemanentMagneticPolarization")
         altLabel = [
-            enUS("RemanentMagneticPolarization"),
             enGB("RemanentMagneticPolarisation"),
             pl("Jr"),
         ]
@@ -1060,7 +1053,7 @@ with onto:
         """Ratio of the change of the magnetic moment per unit mass and
         the internal field: sigma = chi_m H."""
 
-        comment = en("magnetic susceptibility per mass density")
+        comment = en("MagneticSusceptibilityPerMassDensity")
         prefLabel = en("MassSusceptibility")
         altLabel = pl("chi_m")
         wikidataReference = pl("https://www.wikidata.org/wiki/Q104655916")
@@ -1103,9 +1096,8 @@ with onto:
         at a given temperature. Jsat should be used instead of Js to avoid
         confusion with the symbol for the spontaneous polarization"""
 
-        prefLabel = en("SaturationMagneticPolarization")
+        prefLabel = enUS("SaturationMagneticPolarization")
         altLabel = [
-            enUS("SaturationMagneticPolarization"),
             enGB("SaturationMagneticPolarisation"),
             en("Jsat"),
             en("Js"),
@@ -1121,9 +1113,8 @@ with onto:
         at a given temperature. Msat should be used instead Ms to avoid
         confusion with the symbol for the SpontaneousMagnetization"""
 
-        prefLabel = en("SaturationMagnetization")
+        prefLabel = enUS("SaturationMagnetization")
         altLabel = [
-            enUS("SaturationMagnetization"),
             enGB("SaturationMagnetisation"),
             en("Msat"),
             en("Ms"),
@@ -1426,7 +1417,7 @@ with onto:
         """Local EDX data measured at a specific position."""
 
         prefLabel = en("LocalEdxData")
-        altLabel = en("LocalEXDData")
+        altLabel = en("LocalEDXData")
         is_a = [
             emmo.hasProperty.exactly(1, emmo.PositionVector),
         ]
