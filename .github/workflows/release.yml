@@ -8,7 +8,7 @@ on:
 jobs:
 
   build-ontology:
-    uses: ./.github/workflows/build-ontology.yaml
+    uses: ./.github/workflows/build-ontology.yml
 
   github-release:
     name: Create Release
