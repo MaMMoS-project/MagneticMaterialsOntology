@@ -1100,7 +1100,6 @@ with onto:
         altLabel = [
             enGB("SaturationMagneticPolarisation"),
             en("Jsat"),
-            en("Js"),
         ]
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFluxDensityUnit)]
         IECEntry = pl(
@@ -1117,7 +1116,6 @@ with onto:
         altLabel = [
             enGB("SaturationMagnetisation"),
             en("Msat"),
-            en("Ms"),
         ]
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFieldStrengthUnit)]
         IECEntry = pl(
