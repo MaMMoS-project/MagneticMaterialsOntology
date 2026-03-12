@@ -43,9 +43,7 @@ def add_altLabel(entry, label):
 
 # Load specific version of EMMO
 world = World()
-emmo = world.get_ontology(
-    "https://w3id.org/emmo/1.0.3/inferred"
-).load()
+emmo = world.get_ontology("https://w3id.org/emmo/1.0.3/inferred").load()
 
 # Create a new ontology with out extensions that imports EMMO
 onto = world.get_ontology("https://w3id.org/emmo/domain/magnetic-materials#")
@@ -215,6 +213,85 @@ with onto:
         is_a = [
             emmo.hasMeasurementUnit.some(LineEnergyUnit),
         ]
+
+    # Micromagnetic energy terms
+
+    class ExchangeEnergy(EnergyDensity):
+        """The exchange energy density in the micromagnetic model. It arises
+        from the quantum mechanical exchange interaction between neighbouring
+        magnetic moments and penalizes spatial variations in the magnetization
+        direction."""
+
+        prefLabel = en("ExchangeEnergy")
+        altLabel = [en("MicromagneticExchangeEnergy"), pl("E_ex")]
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Micromagnetics")
+
+    class ZeemanEnergy(EnergyDensity):
+        """The Zeeman energy density represents the interaction energy between
+        the magnetization and an externally applied magnetic field. It is
+        defined as the volume integral of -mu_0 M · H_ext."""
+
+        prefLabel = en("ZeemanEnergy")
+        altLabel = [en("ExternalFieldEnergy"), pl("E_Zeeman")]
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Zeeman_energy")
+        wikidataReference = pl("https://www.wikidata.org/wiki/Q3358974")
+
+    class MagnetostaticEnergy(EnergyDensity):
+        """The magnetostatic energy density, also known as demagnetizing
+        energy or stray field energy. It arises from the interaction of
+        the magnetization with its own demagnetizing field."""
+
+        prefLabel = en("MagnetostaticEnergy")
+        altLabel = [
+            enUS("DemagnetizingEnergy"),
+            enGB("DemagnetisingEnergy"),
+            en("StrayFieldEnergy"),
+            pl("E_demag"),
+        ]
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Demagnetizing_field")
+
+    class AnisotropyEnergy(EnergyDensity):
+        """The anisotropy energy density in the micromagnetic model. It
+        represents the energy cost of rotating the magnetization away from
+        preferred crystallographic directions (easy axes)."""
+
+        prefLabel = en("AnisotropyEnergy")
+        altLabel = [en("MagneticAnisotropyEnergy"), pl("E_ani")]
+        wikipediaReference = pl(
+            "https://en.wikipedia.org/wiki/Magnetocrystalline_anisotropy"
+        )
+
+    class DMIEnergy(EnergyDensity):
+        """The Dzyaloshinskii–Moriya interaction (DMI) energy density. This
+        antisymmetric exchange interaction arises from spin-orbit coupling
+        in systems lacking inversion symmetry and favors non-collinear
+        spin arrangements such as chiral domain walls and skyrmions."""
+
+        prefLabel = en("DMIEnergy")
+        altLabel = [
+            en("DzyaloshinskiiMoriyaInteractionEnergy"),
+            en("DzyaloshinskiiMoriyaEnergy"),
+            pl("E_DMI"),
+        ]
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Micromagnetics")
+
+    class MagnetoelasticEnergy(EnergyDensity):
+        """The magnetoelastic energy density, also known as magnetostrictive
+        energy. It describes the coupling between the magnetization and
+        mechanical strain in the material."""
+
+        prefLabel = en("MagnetoelasticEnergy")
+        altLabel = [en("MagnetostrictiveEnergy"), pl("E_mel")]
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Micromagnetics")
+
+    class TotalMicromagneticEnergy(EnergyDensity):
+        """The total energy density in the micromagnetic model, typically
+        the sum of exchange, anisotropy, Zeeman, magnetostatic, and
+        possibly DMI and magnetoelastic energy contributions."""
+
+        prefLabel = en("TotalMicromagneticEnergy")
+        altLabel = [en("TotalEnergy"), pl("E_total")]
+        wikipediaReference = pl("https://en.wikipedia.org/wiki/Micromagnetics")
 
     # intrinsic magnetic properties
 
@@ -647,10 +724,7 @@ with onto:
         X-ray spectroscopy."""
 
         prefLabel = en("EdxData")
-        altLabel = [
-            en("EDXData"),
-            en("EnergyDispersiveXraySpectroscopyData")
-        ]
+        altLabel = [en("EDXData"), en("EnergyDispersiveXraySpectroscopyData")]
         is_a = [
             emmo.hasProperty.exactly(1, EdxEnergy),
             emmo.hasProperty.exactly(1, EdxCounts),
@@ -1565,6 +1639,6 @@ onto.save(
     overwrite=True,
     namespaces={
         "emmo": "https://w3id.org/emmo#",
-    }
+    },
 )
 # world.save()
