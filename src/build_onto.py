@@ -9,6 +9,12 @@ from owlready2 import (
 
 version = "0.0.4"
 
+# Default annotation language policy:
+# - Use English (@en) as default for labels and textual annotations.
+# - Use enGB/enUS only for regional spelling variants, typically as altLabel.
+# - Keep exactly one prefLabel per entity and use altLabel for alternatives,
+#   consistent with EMMO governance naming conventions.
+
 # Reuse by specialization (subclassing) of imported ontology classes.
 # Define a domain subclass (specialization) of emmo:Material in an ontology
 # that imports EMMO, e.g. class NonMagneticMaterial(emmo.Material).
