@@ -9,6 +9,10 @@ from owlready2 import (
 
 version = "0.0.4"
 
+# Reuse by specialization (subclassing) of imported ontology classes.
+# Define a domain subclass (specialization) of emmo:Material in an ontology
+# that imports EMMO, e.g. class NonMagneticMaterial(emmo.Material).
+
 
 # From https://github.com/emmo-repo/domain-atomistic/blob/master/domain-atomistic.py
 def en(s):
@@ -43,13 +47,23 @@ def add_altLabel(entry, label):
 
 # Load specific version of EMMO
 world = World()
-emmo = world.get_ontology(
-    "https://w3id.org/emmo/1.0.3/inferred"
-).load()
+emmo = world.get_ontology("https://w3id.org/emmo/1.0.3/inferred").load()
 
 # Create a new ontology with out extensions that imports EMMO
 onto = world.get_ontology("https://w3id.org/emmo/domain/magnetic-materials#")
 onto.imported_ontologies.append(emmo)
+
+# Reused/adapted concepts from domain-crystallography (grouped for provenance):
+# - Space group and unit-cell descriptors:
+#   SpaceGroup, LatticeConstantA, LatticeConstantB, LatticeConstantC,
+#   LatticeConstantAlpha, LatticeConstantBeta, LatticeConstantGamma,
+#   CellVolume, CrystalStructure.
+#
+# Future checks:
+# - Crystallography source used for comparison:
+#   https://github.com/emmo-repo/domain-crystallography/blob/master/crystallography.ttl
+# - EMMO releases:
+#   https://github.com/emmo-repo/EMMO/releases
 
 # Add new classes and object/data properties needed by the use case
 with onto:
@@ -647,10 +661,7 @@ with onto:
         X-ray spectroscopy."""
 
         prefLabel = en("EdxData")
-        altLabel = [
-            en("EDXData"),
-            en("EnergyDispersiveXraySpectroscopyData")
-        ]
+        altLabel = [en("EDXData"), en("EnergyDispersiveXraySpectroscopyData")]
         is_a = [
             emmo.hasProperty.exactly(1, EdxEnergy),
             emmo.hasProperty.exactly(1, EdxCounts),
@@ -1565,6 +1576,6 @@ onto.save(
     overwrite=True,
     namespaces={
         "emmo": "https://w3id.org/emmo#",
-    }
+    },
 )
 # world.save()
