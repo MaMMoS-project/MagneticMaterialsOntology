@@ -1528,10 +1528,10 @@ with onto:
         comment = pl(
             'Binder, K. (1981). "Finite size scaling analysis of ising model block '
             'distribution functions". Zeitschrift für Physik B: '
-            'Condensed Matter. 43 (2): 119–140. https://doi.org/10.1007%2Fbf01293604'
+            'Condensed Matter. 43 (2): 119–140. https://doi.org/10.1007/bf01293604'
         )
         prefLabel = en("BinderCumulant")
-        altLabel = [en("U_L"), en("BinderParameter")]
+        altLabel = [pl("U_L"), en("BinderParameter")]
         wikidataReference = pl("https://www.wikidata.org/wiki/Q4913987")
         wikipediaReference = pl("https://en.wikipedia.org/wiki/Binder_parameter")
 
