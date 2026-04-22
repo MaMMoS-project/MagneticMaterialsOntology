@@ -28,6 +28,37 @@ compatibilities:
 | [EMMO](https://github.com/emmo-repo/EMMO) | 1.0.3 inferred | https://w3id.org/emmo/1.0.3/inferred |
 
 
+Update ontology version
+-----------------------
+
+This repository contains the development of the [EMMO-based repository](https://github.com/emmo-repo/domain-magnetic-materials).
+
+This section shows how to update the ontology to a new version `X.Y.Z` and how to push changes to the EMMO-based repository.
+
+### Update all necessary files in the development repo
+
+1. Let us assume all changes are already merged into branch `main`
+2. Update the version string in [`src/build_onto.py`_](https://github.com/MaMMoS-project/MagneticMaterialsOntology/blob/main/src/build_onto.py)
+3. Update the [`pixi.toml`](https://github.com/MaMMoS-project/MagneticMaterialsOntology/blob/main/pixi.toml)
+4. Update the [`README.md`](https://github.com/MaMMoS-project/MagneticMaterialsOntology/blob/main/README.md) if the EMMO version has changed.
+5. Update the [catalog](https://github.com/MaMMoS-project/MagneticMaterialsOntology/blob/main/catalog-v001.xml) with the new version number.
+6. Update the [contributors turtle file](https://github.com/MaMMoS-project/MagneticMaterialsOntology/blob/main/catalog-v001.xml) with the new version number.
+7. Update the [dependencies turtle file](https://github.com/MaMMoS-project/MagneticMaterialsOntology/blob/main/magnetic-materials-dependencies.ttl) with the new version number and the dependencies if necessary.
+8. Create and push the tag `vX.Y.Z`
+
+### Push the new version onto the EMMO-based repository
+Domain ontology repository: https://github.com/emmo-repo/domain-magnetic-materials
+1. Start a development branch `X.Y.Z` (See the [EMMO Branching model](https://github.com/emmo-repo/.github/wiki/DomainOntologiesBestPractices#branching-model)).
+2. Download the turtle files from the [MagneticMaterialsOntology Releases](https://github.com/MaMMoS-project/MagneticMaterialsOntology/releases) and put them in the `domain-magnetic-materials` repository (overwriting the previous files).
+3. Revert namespace changes (work in progress to automate this step).
+4. Revert deletion of `dcterms`, `vann`, `bibo` information (work in progress to automate this step).
+5. adapt `imports`, `versionIRI`, `versionInfo`.
+6. cleanup (work in progress to automate this step).
+7. Push all changes to branch `X.Y.Z`.
+8. Merge branch `X.Y.Z` to main and delete it.
+9. Do a manual GitHub Release.
+
+
 Using
 -----
 
