@@ -2,7 +2,7 @@
 channels = ["conda-forge"]
 platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
 name = "MagneticMaterialsOntology"
-version = "0.0.4"
+version = "0.0.5"
 authors = [
   "Thomas Schrefl, DISS-UWK",
   "Wilfried Hortschitz, DISS-UWK",

@@ -7,7 +7,7 @@ from owlready2 import (
     Not,
 )
 
-version = "0.0.4"
+version = "0.0.5"
 
 
 # From https://github.com/emmo-repo/domain-atomistic/blob/master/domain-atomistic.py
