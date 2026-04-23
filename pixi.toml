@@ -26,10 +26,10 @@ init_dot = "dot -c"  # needed on Mac M2 before graphviz can be used
 docs = { cmd = "python mammosdoc-cli.py --template=mammos.md --local --format=html ../magnetic-materials.ttl magnetic-materials.html", cwd = "doc", depends-on = ['init_dot'] }
 
 [dependencies]
-emmontopy = "==0.10.1"
-openjdk = ">=25.0.1,<26"
-python = "3.13.*"
-python-graphviz = "*"
-pandoc = "==3.1.3"
+emmontopy = ">=0.10.1,<0.11"
+openjdk = ">=25.0.2,<26"
+python = ">=3.14.4,<3.15"
+python-graphviz = ">=0.21,<0.22"
+pandoc = ">=3.9.0.2,<4"
 
 [pypi-dependencies]
