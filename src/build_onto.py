@@ -9,6 +9,16 @@ from owlready2 import (
 
 version = "0.0.5"
 
+# Default annotation language policy:
+# - Use English (@en) as default for labels and textual annotations.
+# - Use enGB/enUS only for regional spelling variants, typically as altLabel.
+# - Keep exactly one prefLabel per entity and use altLabel for alternatives,
+#   consistent with EMMO governance naming conventions.
+
+# Reuse by specialization (subclassing) of imported ontology classes.
+# Define a domain subclass (specialization) of emmo:Material in an ontology
+# that imports EMMO, e.g. class NonMagneticMaterial(emmo.Material).
+
 
 # From https://github.com/emmo-repo/domain-atomistic/blob/master/domain-atomistic.py
 def en(s):
@@ -43,13 +53,23 @@ def add_altLabel(entry, label):
 
 # Load specific version of EMMO
 world = World()
-emmo = world.get_ontology(
-    "https://w3id.org/emmo/1.0.3/inferred"
-).load()
+emmo = world.get_ontology("https://w3id.org/emmo/1.0.3/inferred").load()
 
-# Create a new ontology with out extensions that imports EMMO
+# Create a new ontology without extensions that imports EMMO
 onto = world.get_ontology("https://w3id.org/emmo/domain/magnetic-materials#")
 onto.imported_ontologies.append(emmo)
+
+# Reused/adapted concepts from domain-crystallography (grouped for provenance):
+# - Space group and unit-cell descriptors:
+#   SpaceGroup, LatticeConstantA, LatticeConstantB, LatticeConstantC,
+#   LatticeConstantAlpha, LatticeConstantBeta, LatticeConstantGamma,
+#   CellVolume, CrystalStructure.
+#
+# Future checks:
+# - Crystallography source used for comparison:
+#   https://github.com/emmo-repo/domain-crystallography/blob/master/crystallography.ttl
+# - EMMO releases:
+#   https://github.com/emmo-repo/EMMO/releases
 
 # Add new classes and object/data properties needed by the use case
 with onto:
@@ -66,7 +86,7 @@ with onto:
 
     # Crystal structure
 
-    # # Space group and lattice constants
+    ## Space group and lattice constants
 
     class SpaceGroup(emmo.NominalProperty):  # from define_ontology.py
         """A spacegroup is the symmetry group of all symmetry operations
@@ -171,7 +191,7 @@ with onto:
 
     # -----------------------------------------------------
 
-    # energy densities
+    # Energy densities
 
     class EnergyDensityUnit(emmo.SIDimensionalUnit):
         """Unit of energy density. Defined using SI base units."""
@@ -216,9 +236,9 @@ with onto:
             emmo.hasMeasurementUnit.some(LineEnergyUnit),
         ]
 
-    # intrinsic magnetic properties
+    # Intrinsic magnetic properties
 
-    ## magnetization
+    ## Magnetization
 
     add_altLabel(emmo.Magnetization, enUS("VolumeMagnetization"))
     add_altLabel(emmo.Magnetization, enGB("VolumeMagnetisation"))
@@ -294,7 +314,7 @@ with onto:
         ]
         is_a = [emmo.hasMeasurementUnit.some(emmo.MagneticFluxDensityUnit)]
 
-    ## anisotropy
+    ## Anisotropy
 
     class MagneticAnisotropy(emmo.Property):
         """Magnetic anisotropy means that the magnetic properties depend on
@@ -393,7 +413,7 @@ with onto:
             emmo.hasProperty.exactly(1, ShapeAnisotropyConstant),
         ]
 
-    ## magnetocrystalline anisotropy
+    ## Magnetocrystalline anisotropy
 
     class MagnetocrystallineAnisotropyEnergy(EnergyDensity):
         """The magnetocrystalline anisotropy energy density."""
@@ -647,10 +667,7 @@ with onto:
         X-ray spectroscopy."""
 
         prefLabel = en("EdxData")
-        altLabel = [
-            en("EDXData"),
-            en("EnergyDispersiveXraySpectroscopyData")
-        ]
+        altLabel = [en("EDXData"), en("EnergyDispersiveXraySpectroscopyData")]
         is_a = [
             emmo.hasProperty.exactly(1, EdxEnergy),
             emmo.hasProperty.exactly(1, EdxCounts),
@@ -733,7 +750,7 @@ with onto:
             emmo.hasProperty.exactly(1, ProfilTotalProfile),
         ]
 
-    ### magnetic materials
+    ### Magnetic materials
 
     ### Grains and granular structure
 
@@ -1295,7 +1312,7 @@ with onto:
             emmo.hasProperty.exactly(1, DemagnetizingFactor),
         ]
 
-    # local properties
+    # Local properties
 
     class Reflectivity(emmo.Property):
         """Capacity of an object to reflect light."""
@@ -1579,13 +1596,13 @@ onto.metadata.comment.append(
     )
 )
 
-# set version of ontology
+# Set version of ontology
 onto.set_version(version=version)
 onto.save(
     "magnetic-materials.ttl",
     overwrite=True,
     namespaces={
         "emmo": "https://w3id.org/emmo#",
-    }
+    },
 )
 # world.save()
