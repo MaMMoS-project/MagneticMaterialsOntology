@@ -1,6 +1,9 @@
 # Magnetic Materials Ontology (MagMO)
 
-The development of the magnetic materials ontology was moved to the repository https://github.com/emmo-repo/domain-magnetic-materials.
+> [!CAUTION]
+> The development of the magnetic materials ontology was moved to the repository https://github.com/emmo-repo/domain-magnetic-materials.
+>
+> The ontology contained in this repository is old and outdated.
 
 Attributions and credits
 ------------------------
